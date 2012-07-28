@@ -1,0 +1,13 @@
+{% extends 'layout/layout.html.twig'%}
+
+{%block title%} Оп баракелде! | Вы молодец! {%endblock%}
+
+{%block content%}
+<div id="container">
+    <div id="wrapper">
+         <div id="thankyou"><center><h1>Спасибо!</h1> <br/> <h2>Вы внесли свой вклад в развитие словаря!</h2><br/><br/>
+       <h1> <a href="{{asset('/add')}}" >Добавить еще</a></h1></center>
+         </div>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,5 @@
+<IfModule mod_php5.c>
+php_value magic_quotes_gpc Off
+php_value register_globals Off
+</IfModule>
+AddDefaultCharset UTF-8

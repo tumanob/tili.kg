@@ -1,0 +1,54 @@
+{% extends 'layout/layout.html.twig'%}
+
+{%block title%}Русско-Кыргызский словарь и Кыргызско-Русский словарь онлайн - Онлайн сөздүк | Tili.kg {%endblock%}
+
+{%block scripts%}
+    {{parent()}}
+    <script type="text/javascript" src="{{asset('/assets/js/picture.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/assets/js/tags.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/assets/js/index.js')}}"></script>
+
+{%endblock%}
+
+{%block content%}
+    <div id="float_chars_block">
+    	<span title="Ctrl+Alt+н">ң</span>
+    	<span title="Ctrl+Alt+о">ө</span>
+    	<span title="Ctrl+Alt+у">ү</span>
+    	<div style="clear:both"></div>
+	</div>
+
+    <div id="content" style="">
+        <p id="dic_content" >
+            <img src="assets/images/kt-dict.jpg" alt="Онлайн словарь" style="margin:40px 0 10px 160px;" />
+        </p>
+
+        <div id="not-found">
+            <img src="{{asset('/assets/images/noword-man.gif')}}" alt="Слово не найдено" />
+            <div>
+                Если вы знаете как переводится  <span>слово</span><br />
+                вы можете помочь расширить наш словарь<br />
+
+                <a class="addword" href="{{asset('/add')}}">&nbsp;</a>
+            </div>
+        </div>
+
+    </div>
+    <div id="navigation">
+		<div class="searchblock" style="height: 120px;">
+            <label for="keyword">Введите слово для перевода</label>
+			<div class="searchformdict">
+                <form action="http://tili.kg" method="get">
+                     <input name="keyword" type="text" class="stxt" id="keyword" value="Введите слово" onfocus="javascript: if(this.value == 'Введите слово') this.value = '';" onblur="javascript: if(this.value == '') { this.value = 'Введите слово';}">
+                     <input type="submit" class="sbtn" value=" " onclick="showWord(document.getElementById('keyword').value);  return false;">
+                </form>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+         <br/>
+    	<div id="result" style="overflow: auto;"></div>
+    </div>
+
+
+
+{% endblock %}

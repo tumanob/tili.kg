@@ -1,0 +1,16 @@
+<div class="tags-area">
+    <div class="tags">
+        <span rel="{{item.id}}" class="tag-add">Добавить категорию</span>
+        {% for tag in tags %}
+            {% if tag.keyword_id == item.id%}
+                <span class="tag">
+                    {% if tag.parent_tag %}{{tag.parent_tag}}::{% endif %}{{tag.tag}}
+                {% if user.ID == tag.user_id%}
+                    <span class="remove-tag" rel="{{tag.id}}::{{item.id}}">[x]</span><br />
+                {% endif %}
+                </span>
+            {% endif %}
+        {% endfor %}
+        <div class="clear"></div>
+    </div>
+</div>

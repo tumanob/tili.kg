@@ -1,0 +1,22 @@
+{% extends 'layout/layout.html.twig'%}
+
+{%block title%}Кыргызко-Русский словарь Юдахина, Русско-Кыргызский словарь Юдахина, Русско-кыргызский словарь Компьютерных терминов, Словари от А до Я | Tili.kg{%endblock%}
+
+
+{%block content%}
+
+<div id="container">
+<div id="wrapper">
+<div id="" style="">
+
+    <br/>
+    {% for item in result %}
+            <div class="dict-block"><a href="{{asset('/')}}d{{item.id}}/">{{item.name}}</a></div>
+    {% endfor %}
+
+
+</div>
+</div>
+
+</div>
+{% endblock %}

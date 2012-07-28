@@ -1,0 +1,106 @@
+{% extends 'layout/layout.html.twig'%}
+
+{%block title%} {{result['0']['keyword']}} - Слово из  {{result['0']['name']}} {%endblock%}
+{% block styles%}
+        {{parent()}}
+        <style type="text/css">
+            .picture-area {
+                float: right;
+                width: 210px;
+            }
+        </style>
+{%endblock%}
+{%block scripts%}
+    {{parent()}}
+    <script type="text/javascript" src="{{asset('/assets/js/picture.js')}}"></script>
+    <script type="text/javascript" src="{{asset('/assets/js/tags.js')}}"></script>
+    <script>
+
+        $(document).ready(function () {
+            // Tooltips
+           $(".tip_trigger").hover(function(){
+               tip = $(this).find('.tip');
+               tip.show(); //Показать подсказку
+           }, function() {
+               tip.hide(); //Скрыть подсказку
+           }).mousemove(function(e) {
+               var mousex = e.pageX - 200; //Получаем координаты по оси X
+               var mousey = e.pageY + 20; // Получаем координаты по оси Y
+               var tipWidth = tip.width(); //Вычисляем длину подсказки
+               var tipHeight = tip.height(); // Вычисляем ширину подсказки
+            //Определяем дистанцию от правого края окна браузера до блока, содержащего подсказку
+            var tipVisX = $(window).width() - (mousex + tipWidth);
+               // Определяем дистанцию от ниждего края окна браузера до блока, содержащего подсказку
+               var tipVisY = $(window).height() - (mousey + tipHeight);
+
+               if ( tipVisX < 20 ) { //Если ширина подсказки превышает расстояние от правого края окна браузера до курсора,
+                   mousex = e.pageX - tipWidth - 20; // то распологаем область с подсказкой по другую сторону от курсора
+               } if ( tipVisY < 20 ) { // Если высота подсказки превышает расстояние от нижнего края окна браузера до курсора,
+                   mousey = e.pageY - tipHeight - 20;  // то распологаем область с подсказкой над курсором
+
+               }
+               //Непосредственно присваиваем найденные координаты области, содержащей подсказку
+
+                 tip.css({  top: mousey, left: mousex });
+
+           });
+        });
+    </script>
+
+{%endblock%}
+{%block content%}
+<div id="container">
+<div id="wrapper">
+<div id="" style="">
+    <div class="letter1">
+        {% for item in alphabet %}
+               <a href="{{asset('/')}}d{{id}}/{{item.letter}}">{{item.letter}}</a>
+        {% endfor %}
+        </div>
+    <br/>
+        <div class="letter2">
+        {% for item in alphabet2 %}
+                    <a href="{{asset('/')}}d{{id}}/{{item.letter}}">{{item.letter}}</a>
+            {% endfor %}
+        </div>
+<br/>
+    <br/>
+    <div class="dcontent">
+    {% for item in result %}
+        <div class="gddictname">
+            <h1 class="gdword">{{item.keyword}}</h1>
+            {{item.name}}
+            <div class="clear"></div>
+        </div>
+        {% include 'partial/tags.html.twig' with {'item': item, 'user': user, 'tags': tags} %}
+        {% include 'partial/add-tag.html.twig' with {'item': item, 'user': user, 'tags': tags} %}
+        <div class="gdarticle">
+            {% include 'partial/pictures.html.twig' with {'pictures': pictures} %}
+            <input type="hidden" id="keyword" value="{{item.keyword}}" />
+            {{item.value|raw}}
+            <div id="disqus_thread"></div>
+                           <script type="text/javascript">
+                               /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                               var disqus_shortname = 'tilikg'; // required: replace example with your forum shortname
+
+                               /* * * DON'T EDIT BELOW THIS LINE * * */
+                               (function() {
+                                   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                   dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                               })();
+                           </script>
+                           <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                           <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+        </div>
+
+    {% endfor %}
+    </div>
+
+</div>
+</div>
+
+</div>
+
+{% endblock %}

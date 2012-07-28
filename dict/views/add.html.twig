@@ -1,0 +1,86 @@
+{% extends 'layout/layout.html.twig'%}
+
+{%block scripts%}
+    {{parent()}}
+    <script type="text/javascript" src="{{asset('/assets/js/add.js')}}"></script>
+{% endblock%}
+
+{%block title%} Добавить свое слово {%endblock%}
+
+{%block content%}
+<div id="container">
+    <div id="wrapper">
+        <h2>Добавить слово в Пользовательский словарь</h2>
+        <br />
+
+        {%if violations%}
+            <ul class="error_holder">
+                {%for violation in violations%}
+                <li>{{violation.message}}</li>
+                {%endfor%}
+            </ul>
+        {%endif%}
+
+        <form action="/dict/added" id="new_form" method="post">
+            <table>
+                <tbody>
+                <tr>
+                    <th width="85">
+                        Слово:
+                    </th>
+                    <td>
+                        <input required="required" id="submission_word" name="submission[word]" size="30" type="text" value="{{data.word}}" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Словарь:
+                    </th>
+                    <td>
+                        <br />
+                        <label>
+                            <input name="submission[dict]" type="radio" value="4" />
+                            {{dicts[4]}}
+                        </label>
+                        <br />
+                        <label>
+                            <input name="submission[dict]" type="radio" value="5" />
+                            {{dicts[5]}}
+                        </label>
+                        <br />
+                        <span class="small">Выберите словарь куда хотите добавить слово</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Перевод:
+                    </th>
+                    <td>
+                        <textarea required="required" cols="40" id="body_definition" name="submission[translation]" rows="7">{{data.translation}}</textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td>
+                        <div id="submit">
+                            <span class="small">Рахмат :) </span><br />
+                            <a class="addword" id="submit-link"></a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div id="draft">
+                &nbsp;
+            </div>
+        </form>
+
+
+    </div>
+
+</div>
+
+        {% endblock %}

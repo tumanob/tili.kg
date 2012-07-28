@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+
+    RewriteEngine On
+    #RewriteBase /path/to/app
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# supress php errors
+php_flag display_startup_errors on
+php_flag display_errors on
+php_flag html_errors on

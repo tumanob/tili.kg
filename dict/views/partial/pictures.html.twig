@@ -1,0 +1,39 @@
+<div class="picture-area">
+    <input type="button" class="add-pic" id="image-search-add-with-results" value="Добавить картинку" />
+
+    <div class="pics">
+        {% for pic in pictures %}
+        <div class="img-wrap">
+            {% if user.ID == pic.user_id%}
+            <span class="delete-image" rel="{{pic.id}}">[x]</span><br />
+            {% endif %}
+            <a href="{{pic.image}}">
+                <img src="{{pic.thumbnail}}" alt="{{pic.word}}" />
+            </a>
+        </div>
+        {% else %}
+        <div class="add-pic-div">
+            <!--   <img src="{{asset('/assets/images/no-image.gif')}}" /> -->
+            <br />
+            <input type="button" class="add-pic" value="Добавить картинку" />
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="add-picture" style="display: none;">
+        <div>
+            {% if user.ID > 0 %}
+            <label>
+                Введите слово или ссылку:
+                <input type="text" id="image-search" /><input type="button" id="image-search-button" value="Искать в Google" />
+            </label><br />
+            {% else %}
+            Для добавления картинок вам надо <a href="/wp-login.php?redirect_to=/dict/">войти на сайт</a>
+            {% endif %}
+        </div>
+        <div id="image-search-results">
+
+        </div>
+        <a href="#" id="image-search-next">еще - дагы</a>
+    </div>
+</div>

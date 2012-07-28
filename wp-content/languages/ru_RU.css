@@ -1,0 +1,28 @@
+/* Recent Comments */
+
+#dashboard_recent_comments .subsubsub {
+	white-space: normal;
+}
+
+/* Bulk Edit */
+
+.inline-edit-row fieldset label span.title {
+	width: auto; /* default 5em */
+	min-width: 5em;
+}
+
+/* Press This */
+
+.press-this .posting {
+	margin-right: 255px; /* default 228px + 27px */
+}
+
+.press-this #side-info-column {
+	width: 245px; /* default 218px + 27px */
+}
+
+/* Tools */
+
+.pressthis a {
+	width: 143px; /* default 113px + 30px */
+}

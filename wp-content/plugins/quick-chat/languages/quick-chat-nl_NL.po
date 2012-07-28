@@ -1,0 +1,349 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quick Chat 2.40\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-10-12 23:58+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Marko <marko [at] techytalk.info>\n"
+"Language-Team: AiKoiN & Rene\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat\n"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:93
+msgid "Guest_"
+msgstr "Gast_"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:767
+msgid "You must select at least one message"
+msgstr "Je moet minimaal één bericht selecteren."
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:768
+msgid "Are you sure you want to permanently delete selected messages?"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:769
+#, fuzzy
+msgid "You must select at least one user"
+msgstr "Je moet minimaal één bericht selecteren."
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:770
+msgid "Are you sure you want to add selected users to your Quick Chat admin options IP blocklist?"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:771
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1180
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1242
+msgid "Reply to"
+msgstr "Beantwoord"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:772
+msgid "Already taken!"
+msgstr "Reeds ingebruik"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:773
+msgid "Not allowed!"
+msgstr "Niet toegestaan"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:774
+msgid "Illegal characters!"
+msgstr "verkeerde tekens"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:775
+msgid "Profanity!"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:776
+msgid "Select language:"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:777
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1254
+msgid "Translate"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:785
+msgid "Checking..."
+msgstr "controleren..."
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:811
+msgid "Donating or getting help"
+msgstr "Doneren of hulp krijgen"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:812
+msgid "General options"
+msgstr "Algemene opties"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:813
+msgid "Filter options"
+msgstr "Filter opties"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:814
+msgid "Security options"
+msgstr "Veiligheidsopties"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:815
+msgid "Appearance options"
+msgstr "Weergave opties"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:817
+msgid "Debug mode (enable only when debugging):"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:818
+msgid "Incoming message sound notification on by default:"
+msgstr "Geluidssignaal standaard aan bij inkomende berichten:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:819
+msgid "Chat name prefix for guest users:"
+msgstr "Standaard chat naam voor gast gebruikers:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:820
+msgid "Maximum number of digits for random guests chat user name suffix:"
+msgstr "Maximaal aantal getallen voor het achtervoegsel van de gebruikersnaam van willekeurige gasten:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:821
+#, fuzzy
+msgid "Keep total number of messages inside every chat room automatically around this value (enter \"0\" to disable this feature):"
+msgstr "Bewaar aantal berichten (alle ruimtes gecombineerd) automatisch rond deze waarde (voer \"0\"  in om uit te schakelen):"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:822
+msgid "Timeout for refreshing list of online users (seconds):"
+msgstr "Verversen van online user lijst in seconden:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:823
+#, fuzzy
+msgid "Timeout for refreshing list of messages (seconds):"
+msgstr "Verversen van online user lijst in seconden:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:825
+msgid "Convert URLs to hyperlinks:"
+msgstr "converteer URL naar Hyperlinksi:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:826
+msgid "Filter bad words contained inside other words:"
+msgstr "Filter verboden woorden of delen daarvan:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:827
+msgid "Disallow using special characters inside chat user names (including special locale characters):"
+msgstr "Niet toestaan van speciale tekens in gebruikersnamen (ook de lokale speciale tekens):"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:828
+msgid "Bad words list (comma separated):"
+msgstr "Verboden woorden lijst (afgescheiden met een komma):"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:830
+#, fuzzy
+msgid "Only logged in users can participate in chat:"
+msgstr "Alleen ingelogde gebruikers kunnen chat gebruiken:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:831
+msgid "Protect registered users user names from being used by other users:"
+msgstr "Bescherm gebruik van gebruikersnamen van geregistreerde gebruikers  door andere gebruikers:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:832
+msgid "Restricted chat user names list (comma separated):"
+msgstr "Verboden woorden lijst (gescheiden met een komma):"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:833
+msgid "Deny chat access to the following IP addresses (comma separated):"
+msgstr "Verbied toegang tot chat voor de volgende IP adressen (gescheiden met een komma):"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:835
+#, fuzzy
+msgid "Hide Quick Chat sidebar widget on pages where same chat room is embedded using shortcode:"
+msgstr "Verberg het Quick Chat sidebar widget op pagina's waar Quick Chat ingevoegd is in het bericht:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:836
+msgid "Hide \"Powered by Quick Chat\" link (big thanks for not hiding it):"
+msgstr "Verberg de \"Powered by Quick Chat\" link (bedankt voor het NIET verbergen!):"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:837
+msgid "Manual timestamp offset when displaying messages (+/- hours):"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:838
+msgid "Bing Translator AppID (40 character key to enable translation features, get one for free <a href=\"http://www.bing.com/developers/appids.aspx\" target=\"_blank\">here</a>):"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:839
+msgid "Advertisement code for your AdSense or other ads placed between chat user name input box and message text input box:"
+msgstr "advertentie code voor je AdSense of andere advertenties tussen de gebruikersnaam en het invoer veld:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:841
+msgid "Donate using PayPal (sincere thank you for your help):"
+msgstr "Doneer met PayPal (hartelijk bedankt voor je hulp):"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:842
+msgid "Quick Chat version:"
+msgstr "Versie van Quick Chat:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:843
+msgid "Quick Chat FAQ:"
+msgstr "Quick Chat veel gestelde vragen:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:844
+msgid "Quick Chat changelog:"
+msgstr "Quick Chat veranderingen log:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:845
+msgid "Quick Chat support page:"
+msgstr "Quick Chat support pagina:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:850
+msgid "options page"
+msgstr "opties pagina"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:856
+msgid "If you find Quick Chat useful you can donate to help it's development. Also you can get help with Quick Chat:"
+msgstr "Als je Quick Chat handig vindt kun je doneren om de ontwikkeling te ondersteunen:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:862
+msgid "Here you can control all general options:"
+msgstr "Hier kun je alle algemene opties instellen:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:868
+msgid "Here you can control Quick Chat message and chat user names filter:"
+msgstr "Hier kun je het Quick Chat boodschap en chat naam filter instellen:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:874
+msgid "In this section you can control security options:"
+msgstr "In deze sectie kun je de veiligheidsopties instellen:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:880
+msgid "Here are the Quick Chat appearance options:"
+msgstr "Hier zijn de Quick Chat weergave opties:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:896
+msgid "FAQ"
+msgstr "Veel gestelde vragen"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:906
+msgid "Changelog"
+msgstr "Veranderingen logboek"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:911
+msgid "Quick Chat at TechyTalk.info"
+msgstr "Quick Chat op TechyTalk.info"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1323
+msgid "Add this user's IP address to your IP block list"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1323
+msgid "Ban"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1330
+msgid "Select/deselect all messages toggle"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1330
+#, fuzzy
+msgid "Toggle"
+msgstr "Alles selecteren"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1333
+msgid "Delete selected messages"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1333
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1338
+msgid "Enable/disable auto scroll when new message arrives"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1338
+msgid "Scroll"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1342
+msgid "Enable/disable sound notification when new message arrives"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1342
+msgid "Sound"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1348
+msgid "Your IP address is banned from chat."
+msgstr "Uw IP-adres is geblokkeerd van deze chat."
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1350
+msgid "You must login if you want to participate in chat."
+msgstr "Je moet inloggen als je mee wilt chatten."
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1363
+msgid "Send"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1372
+msgid "Powered by Quick Chat"
+msgstr "Mede mogelijk gemaakt door Quick Chat"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1392
+msgid "Quick Chat is quick and elegant WordPress chat plugin that does not waste your bandwidth."
+msgstr "Quick Chat is een snelle en elegante WordPress chat plugin welke je bandbreedte niet verwaarloosd."
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1402
+msgid "Title"
+msgstr "Titel"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1407
+#, fuzzy
+msgid "Chat room name:"
+msgstr "Chat kamer"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1412
+#, fuzzy
+msgid "Message container height:"
+msgstr "Berichtenvenster hoogte in pixels:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1418
+#, fuzzy
+msgid "Include gravatars:"
+msgstr "Gebruikerslijst bijvoegen:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1424
+msgid "Gravatars size:"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1430
+msgid "Include user list:"
+msgstr "Gebruikerslijst bijvoegen:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1436
+msgid "User list position:"
+msgstr "Gebruikerslijst positie:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1445
+#, fuzzy
+msgid "Include send button:"
+msgstr "Gebruikerslijst bijvoegen:"
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1451
+msgid "Visible to logged in users:"
+msgstr ""
+
+#: /home/marko/Documents/public_html/wordpress/wp-content/plugins/quick-chat/quick-chat.php:1457
+msgid "Visible to guest users:"
+msgstr ""
+
+#~ msgid "Keep first and last letter of filtered word:"
+#~ msgstr "Behoud eerste en laatste karakter van een gefilterd woord:"
+#~ msgid "Allow guest users to choose their chat user names:"
+#~ msgstr "Sta gasten toe om hun chat naam zelf te kiezen:"
+#~ msgid "Allow logged in users to choose their chat user names:"
+#~ msgstr "Sta ingelogde gebruikers toe om hun chat naam zelf te kiezen:"
+#~ msgid "Timeout after user is considered gone from chat (seconds):"
+#~ msgstr "chat timeout van gebruiker in seconden:"
+

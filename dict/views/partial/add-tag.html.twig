@@ -1,0 +1,35 @@
+<div id="add-tag-dialog" style="display: none;">
+    {% if user.ID > 0 %}
+    <div id="tag-available">
+        <ul>
+            {% for tag in alltags %}
+            <li class="tag-item">
+                <span class="tag-parent-item{% if tag.tags | length > 0 %} tag-inactive{%endif%}" rel="{{tag.id}}">
+                    {% if tag.tags | length > 0 %}
+                    <b>+ </b>
+                    {% endif %}
+                    {{tag.tag}}
+                </span>
+                <div class="clear"></div>
+                {% if tag.tags | length > 0 %}
+                <ul class="tag-child-list">
+                    {% for t in tag.tags %}
+                    <li><span class="tag-child-item" rel="{{t.id}}">{{t.tag}}</span></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div>
+        Выбранные категории
+    </div>
+    <div id="tag-chosen-ones">
+
+    </div>
+    {% else %}
+    Для добавления тегов к словам вам нужно <a href="/wp-login.php?redirect_to=/dict/">войти</a>
+    {% endif %}
+</div>

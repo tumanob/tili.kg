@@ -1,0 +1,78 @@
+{% extends 'layout/layout.html.twig'%}
+
+{%block title%} {{title}}  {%endblock%}
+
+{%block content%}
+
+<div id="" style="">
+    <center><h2>{{name}}</h2></center>
+
+    <br/>
+    <div class="letter1">
+    {% for item in alphabet %}
+           <a href="{{asset('/')}}d{{id}}/{{item.letter}}">{{item.letter}}</a>
+    {% endfor %}
+    </div>
+    <br/>
+    <div class="letter2">
+    {% for item in alphabet2 %}
+                <a href="{{asset('/')}}d{{id}}/{{item.letter}}">{{item.letter}}</a>
+        {% endfor %}
+    </div>
+    <br/>
+    <br/>
+    {% if pagination %}
+        <div class="pagination" style="text-align: center;">
+            {% for item in pagination %}
+                {% if pagination|length > 0 %}
+                  <b><a href="{{app.request.uri}}/../p{{item.value}}"> {{item.value}} </a> </b>
+                {% else %}
+                     <b><a href="{{app.request.uri}}p{{item.value}}"> {{item.value}} </a> </b>
+
+                {%endif%}
+
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <br/>
+        {% if result %}
+            {% for item in result %}
+                <div class="keywords">
+                    <a href="{{asset('/')}}d{{id}}/show/{{item.keyword}}">{{item.keyword}}</a>
+                    {{item.value|raw}}
+                </div>
+            {% endfor %}
+    {% endif%}
+
+    <div style="clear:both;">&nbsp;</div>
+    <br/><br/><br/>
+        {% if pagination > 0 %}
+            <div class="pagination" style="text-align: center;">
+                {% for item in pagination %}
+                    {% if pagination|length > 0 %}
+                      <b><a href="{{app.request.uri}}/../p{{item.value}}"> {{item.value}} </a> </b>
+                     {% else %}
+                         <b><a href="{{app.request.uri}}p{{item.value}}"> {{item.value}} </a> </b>
+
+                    {%endif%}
+
+                {% endfor %}
+            </div>
+        {% endif %}
+    <br/>
+    <div class="letter1">
+        {% for item in alphabet %}
+               <a href="{{asset('/')}}d{{id}}/{{item.letter}}">{{item.letter}}</a>
+        {% endfor %}
+    </div>
+    <br/>
+        <div class="letter2">
+        {% for item in alphabet2 %}
+                    <a href="{{asset('/')}}d{{id}}/{{item.letter}}">{{item.letter}}</a>
+            {% endfor %}
+        </div>
+   <br/>
+
+</div>
+{% endblock %}

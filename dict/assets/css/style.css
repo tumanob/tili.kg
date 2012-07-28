@@ -1,0 +1,157 @@
+@import url("../../../wp-content/themes/TiLi/style.css");
+
+
+#thankyou {
+    background: transparent url('../../assets/images/spasibo.png') no-repeat;
+    height: 400px;
+    padding: 100px 0 0 400px;
+}
+
+#not-found {
+    margin-left: 15px;
+    display: none;
+}
+#not-found div {
+    float: right;
+    margin-top: 60px;
+    font-size: 16px;
+}
+#not-found span {
+    font-weight: bold;
+}
+.addword {
+    background: no-repeat url("../../assets/images/button-addtrans.gif");
+    width: 163px;
+    height: 26px;
+    display: block;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+#not-found .addword {
+    margin-left: 85px;
+}
+
+.img-result {
+    float: left;
+    margin: 10px;
+    height: 120px;
+    width: 120px;
+}
+
+.img-wrap {
+    float: left;
+    margin: 2px;
+    height: 120px;
+    overflow: hidden;
+}
+
+#image-search-next {
+    text-align: center; margin-left: 252px; font-size: 22px; display: none;
+}
+#image-search-add-with-results {display: none;}
+.delete-image, .add-pic {cursor: pointer;  }
+
+.add-pic {
+	display: block;
+	margin: 2px;
+	padding: 5px;
+	height: 34px;
+	width: 110px;
+	color: transparent;
+	border: none;
+	background: no-repeat url("../../assets/images/add-image.gif");
+}
+span.delete-image {
+    vertical-align: top;
+}
+.tag-add {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #0066cc;
+}
+.tag-parent-item, .tag-child-item, .remove-tag {
+    cursor: pointer;
+}
+.tag-child-list {display: none; padding-left: 10px;}
+
+#add-tag-dialog span, span.tag {
+    color: #000000;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #CAD8F3;
+    background: #DEE7F8;
+    padding: 1px 5px 2px;
+    margin-right: 10px;
+    display: block;
+    float: left;
+    margin-bottom: 5px;
+}
+#add-tag-dialog span.tag-inactive {
+    border: 1px solid #838a9f;
+    background: #DEE7F8;
+    color: black;
+}
+#tag-chosen-ones {
+    border: 1px solid black;
+    border-radius: 5px 5px 5px 5px;
+    min-height: 20px;
+    padding: 5px;
+}
+#tag-chosen-ones a {
+    background: url('../images/close.gif') no-repeat;
+    margin: 5px 0 0 5px;
+    float: right;
+    display: block;
+    width: 7px;
+    height: 7px;
+    font-size: 1px;
+}
+.tag-item {
+    float: left;
+    width: 165px;
+}
+
+.disqcom{
+    float: right;
+    padding: 5px;
+    margin-bottom: 30px;
+    margin-top: -20px;
+    border: 1px solid #BBBDBF;
+    font-size: 10px;
+
+}
+
+.tag-add, span.tag {
+    float: left; display: block; margin-right: 10px;
+}
+.tags {margin-top: 5px;}
+.glossary-entry {
+    float:left;
+    margin: 15px;
+    width: 165px;
+    height: 155px;
+    border: 1px solid #CAD8F3;;
+    border-radius: 5px;
+    padding: 10px;
+    overflow: hidden;
+}
+.glossary-entry .image {text-align: center; margin: 0 auto;}
+.glossary-entry h2 {font-size: 14px; text-align: center; }
+#glossary {
+    margin: 0 auto;
+    width: 750px;
+}
+.word-value {
+    height: 75px;
+    line-height: 15px;
+    overflow: hidden;
+}
+.word-entry {
+    height: 202px;
+}
+#disqus_thread{
+    width: 610px;
+    margin-top: 50px;
+}

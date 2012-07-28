@@ -1,0 +1,74 @@
+
+/*html {background:#17272d url(../images/pbd-body.jpg) 0 0 repeat-x;}*/
+html {background:#17272d; }
+
+body.login {border-top-color:#dff4fc;}	/* Top bar background color */
+.login p#backtoblog a:link, .login p#backtoblog a:visited {color:#17272d;}	/* Link effects in top bar */
+.login p#backtoblog a:hover, .login p#backtoblog a:active {color:#17272d;text-decoration:underline;}	/* Rollover link effects in top bar */
+
+
+h1 a {
+background: url(images/logo.png) no-repeat top center;
+width: 326px;
+height: 67px;
+text-indent: -9999px;
+overflow: hidden;
+padding-bottom: 35px;
+display: block;
+}
+
+
+body {
+font: 12px Arial, Helvetica, sans-serif;
+color: #2B2B2B;
+background: url(images/bg.gif) repeat-x top;
+}
+
+form {
+margin-left: 8px;
+padding: 26px 24px 46px;
+font-weight: normal;
+-moz-border-radius: 3px;
+-khtml-border-radius: 3px;
+-webkit-border-radius: 3px;
+border-radius: 3px;
+background: transparent;
+border: 0px solid #E5E5E5;
+-moz-box-shadow: none;
+-webkit-box-shadow: none;
+-khtml-box-shadow: none;
+box-shadow: none;
+}
+
+#login {
+width: 400px;
+margin: 0em auto;
+}
+
+input.button-primary, button.button-primary, a.button-primary{
+border-color: #CCC;
+font-weight: bold;
+color: black;
+background: white;
+text-shadow: none;
+}
+
+
+a.button-primar:hover,input.button-primary:hover, button.button-primary:hover
+{
+border-color: #CCC;
+font-weight: bold;
+color: black;
+background: #e3e8ec;
+text-shadow: none;
+}
+
+
+.login #nav a, .login #backtoblog a{color:black !important;}
+
+#nav {
+text-shadow: rgba(255, 255, 255, 1) 0 1px 0;
+margin: 0 0 0 16px;
+padding: 16px 16px 0;
+font-size: 23px;
+}
