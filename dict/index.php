@@ -698,7 +698,8 @@ $app->error(function (\Exception $e, $code) {
 
         if ($id && count($tags) == 0) {
             $words = $app['db']->fetchAll(
-                'SELECT k.*, d.id as dictid FROM dict_tags_keys tk
+                'SELECT k.*, d.id as dictid, d.name as dictname
+                FROM dict_tags_keys tk
                 INNER JOIN dict_kw k ON tk.key_id = k.id
                 INNER JOIN dict_d d ON k.dictid = d.id
                 WHERE tk.tag_id = ?',
