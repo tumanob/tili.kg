@@ -677,6 +677,55 @@ $app->error(function (\Exception $e, $code) {
     return new Response($message, $code);
 });
 
+    $app->get('/api/glossary/{id}', function($id) use (&$app) {
+        $id = (int)$id;
+        $breadcrumbs = array(array('text' => 'Глоссарий', 'link' => '/dict/glossary/'));
+
+        if ($id) {
+            $tags = $app['db']->fetchAll('SELECT * FROM dict_tags WHERE parent = ?', array($id));
+            $tag = $app['db']->fetchAssoc('SELECT * FROM dict_tags WHERE id = ?', array($id));
+            if ($tag['parent']) {
+                $tag2 = $app['db']->fetchAssoc('SELECT * FROM dict_tags WHERE id = ?', array($tag['parent']));
+                $breadcrumbs[] = array('text' => $tag2['tag'], 'link' => '/dict/glossary/'.$tag2['id'].'/'.$tag2['tag']);
+            }
+            $breadcrumbs[] = array('text' => $tag['tag'], 'link' => '/dict/glossary/'.$tag['id'].'/'.$tag['tag']);
+        } else {
+            $tags = $app['db']->fetchAll('SELECT * FROM dict_tags WHERE parent IS NULL');
+        }
+
+        $words = array();
+        $pics = array();
+
+        if ($id && count($tags) == 0) {
+            $words = $app['db']->fetchAll(
+                'SELECT k.*, d.id as dictid FROM dict_tags_keys tk
+                INNER JOIN dict_kw k ON tk.key_id = k.id
+                INNER JOIN dict_d d ON k.dictid = d.id
+                WHERE tk.tag_id = ?',
+                array($id)
+            );
+
+            if (count($words)) {
+                $keywords = array_map(function($item) {
+                    return $item['keyword'];
+                }, $words);
+                $pics = $app['db']->executeQuery('SELECT * FROM dict_pics WHERE word IN (?)', array($keywords), array(\Doctrine\DBAL\Connection::PARAM_STR_ARRAY))->fetchAll();
+            }
+        }
+        foreach ($words as $k => $v) {
+            $words[$k]['value'] = str_replace('&nbsp;', '', mb_substr($v['value'],0,250));
+        }
+
+        return json_encode(
+            array(
+                'tags' => $tags,
+                'words' => $words,
+                'pics' => $pics,
+                'breadcrumbs' => $breadcrumbs
+            )
+        );
+    });
+
 $app->get('/api/word/{word}', function($word) use (&$app) {
     $list = $app['db']->fetchAll(
         "SELECT keyword, value, name as dictname
