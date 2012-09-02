@@ -53,6 +53,8 @@ add_action('admin_menu', 'eFrontWPI_admin_actions');
 add_filter('authenticate', 'eFrontWPI_authenticate', 1, 3);
 
 add_action('wp_logout', 'eFrontWPI_logout');
+add_action('wp_authenticate', 'eFrontWPI_capture_login');
+add_action('wp_login', 'eFrontWPI_on_login');
 
 //Authenticate function
 
@@ -60,6 +62,24 @@ function eFrontWPI_logout()
 {
     eFrontWPI_delete_cookie();
     return;
+}
+
+function eFrontWPI_capture_login($username, $password) {
+    global $efront_user_username, $efront_user_password;
+    $efront_user_username = $username;
+    $efront_user_password = $password ? $password : $_POST['pwd'];
+}
+function eFrontWPI_on_login($username) {
+    global $efront_user_username, $efront_user_password;
+    if ($username == $efront_user_username) {
+        $user = get_user_by('login', $username);
+        if ($user->user_login == $username)
+            eFrontWPI_update_user($user, $efront_user_username, $efront_user_password);
+    }
+}
+
+function eFrontWPI_update_user($user, $username, $password) {
+    eFrontWPI_perform_action("update_user&login=" . $username . "&password=" . $password . "&name=" . ($user->first_name) . "&surname=" . ($user->last_name) . "&email=" . ($user->user_email) . "&languages=english");
 }
 
 function eFrontWPI_authenticate($user, $username, $password)
