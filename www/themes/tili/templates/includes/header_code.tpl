@@ -5,9 +5,11 @@
   {$T_CONFIGURATION.site_name}
   </a>
  </div>
+{if not $T_CURRENT_USER->user.login}
     <div class="login">
         <a href="http://tili.kg/wp-login.php?redirect_to={$smarty.server.REQUEST_URI|escape:'url'}">Войти</a> | <a href="http://tili.kg/wp-login.php?action=register">Регистрация</a>
     </div>
+{/if}
  {if $smarty.session.s_login}
  <div id = "logout_link" >
   {if $T_THEME_SETTINGS->options.sidebar_interface}
