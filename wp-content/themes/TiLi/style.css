@@ -204,13 +204,34 @@ img.aligncenter { display: block; margin: 0 auto; }
     border-bottom: 1px solid #d8dbdd;
 }
 
-#text-3, #text-5 {
+#text-3, #text-5,#text-7 {
     float: left;
     border-right: 1px solid #d8dbdd;
 }
 
-#text-4, #text-6 {
+#text-4, #text-6, #text-8 {
     float: right;
+}
+
+#text-7{
+	height: 500px;
+	
+}
+
+#text-8{
+	padding-left: 0;
+}
+
+#text-7 .widgettitle{
+font-size:0px;
+line-height:0px;
+
+}
+
+
+#text-8 .widgettitle{
+	
+	color: red;	
 }
 
 #text-3 {
