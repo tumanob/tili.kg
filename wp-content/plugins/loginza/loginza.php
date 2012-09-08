@@ -443,6 +443,10 @@ function loginza_token_request () {
 	  		// авторизируем нового пользователя
   			wp_set_auth_cookie($wpuid, true, false);
   			wp_set_current_user($wpuid);
+
+            $user = get_user_by('id', $wpuid);
+
+            eFrontWPI_DoLogin($user, $user->user_login, $user->user_password);
   			
   			// если был установлен временный email
   			/*if (@$is_temporary_email) {

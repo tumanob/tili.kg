@@ -116,7 +116,7 @@ class LoginzaWpUser {
 			 */
 			update_usermeta($wp_id, 'loginza_json_profile', json_encode($profile));
 		}
-		  
+
 		return $wp_id;
 	}
 	static function setIdentity ($wp_id, $profile) {
