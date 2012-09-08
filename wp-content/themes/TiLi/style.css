@@ -226,8 +226,12 @@ img.aligncenter { display: block; margin: 0 auto; }
 
 
 
-.home #text-8 .textwidget{
-	padding-left: 0;
+#text-8{
+	 background-image: url(images/help.png);
+}
+
+#text-5 {
+   
 }
 
 #text-7 .widgettitle{
