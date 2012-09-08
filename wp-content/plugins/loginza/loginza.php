@@ -438,25 +438,31 @@ function loginza_token_request () {
 			}
 	  	}
 	  	
-	  	// если пользователь вошел или зарегистрирован
-	  	if ($wpuid) {
-	  		// авторизируем нового пользователя
-  			wp_set_auth_cookie($wpuid, true, false);
-  			wp_set_current_user($wpuid);
-
-            $user = get_user_by('id', $wpuid);
-
-            eFrontWPI_DoLogin($user, $user->user_login, $user->user_password);
-  			
-  			// если был установлен временный email
-  			/*if (@$is_temporary_email) {
-  				// редирект на страницу логина с ошибкой дубликата email
-				wp_safe_redirect(get_option('siteurl').'/wp-admin/profile.php?loginza_message=email');
-				die();
-  			}*/
-  		}
 	}
-	
+    // если пользователь вошел или зарегистрирован
+    if ($wpuid) {
+        // авторизируем нового пользователя
+        wp_set_auth_cookie($wpuid, true, false);
+        wp_set_current_user($wpuid);
+
+        $user = get_user_by('id', $wpuid);
+
+//        if ($user->user_login == 'tili-kg-1') {
+//            var_dump($user);die;
+//        }
+
+        eFrontWPI_perform_action("create_user&login=" . $user->user_login . "&password=" . $user->user_password . "&name=" . ($user->first_name) . "&surname=" . ($user->last_name) . "&email=" . ($user->user_email) . "&languages=english");
+        eFrontWPI_update_user($user, $user->user_login, $user->user_password);
+        eFrontWPI_DoLogin($user, $user->user_login, $user->user_password);
+
+        // если был установлен временный email
+        /*if (@$is_temporary_email) {
+                    // редирект на страницу логина с ошибкой дубликата email
+                  wp_safe_redirect(get_option('siteurl').'/wp-admin/profile.php?loginza_message=email');
+                  die();
+                }*/
+    }
+
 	if (!empty($_GET['loginza_return'])) {
 		$return_to = $_GET['loginza_return'];
 	} else {

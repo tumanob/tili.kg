@@ -183,7 +183,7 @@ function eFrontWPI_perform_action($action)
             return $result;
         } //We check other errors this outside of this function.//new WP_Error('eFrontWPI_status_error', __('eFront Plugin: Warning performing action, received an error ?action='.$action.'&token='.$token.'<br><br>result: '.$result)); }
         //echo "after status error";
-        if (strpos($result, '<message>Invalid token</message>') == true) {
+        if (strpos($result, '<message>Invalid token') == true) {
             //echo "inside invalid token";
             $token = eFrontWPI_get_token($token);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -200,7 +200,7 @@ function eFrontWPI_perform_action($action)
             if (strpos($result, '<status>error</status>') == true) {
                 return new WP_Error('eFrontWPI_status_error', __('eFront Plugin: Warning performing action, received an error.'));
             } //$db->log_error('eFront Plugin: Warning performing action.<br><br>action: '.$this_config['path'].'?action='.$action.'&token='.$this_config['token'].'<br><br>result: '.$result); }
-            if (strpos($result, '<message>Invalid token</message>') == true) {
+            if (strpos($result, '<message>Invalid token') == true) {
                 return new WP_Error('eFrontWPI_token_error', __('eFront Plugin: Bad Token'));
             }
         }
@@ -259,7 +259,7 @@ function eFrontWPI_get_token()
     }
     curl_close($ch);
 
-    update_option("eFrontWPI_token", $token); //Save our 30 min token to Wordpress, in case its useful
+//    update_option("eFrontWPI_token", $token); //Save our 30 min token to Wordpress, in case its useful
 
     return $token;
 }
