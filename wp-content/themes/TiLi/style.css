@@ -213,12 +213,12 @@ img.aligncenter { display: block; margin: 0 auto; }
     float: right;
 }
 
-#text-7{
-	height: 500px;
+.home #wrapper #text-7{
+	height: 400px;
 	
 }
 
-#text-8{
+#text-8 .textwidget{
 	padding-left: 0;
 }
 
