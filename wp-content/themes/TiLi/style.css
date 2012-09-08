@@ -69,7 +69,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 .login { position: absolute; top: 10px; right: 22px; color: #777; font-family: SegoeScript; }
 .login a { color: #777; margin: 0 5px; }
 
-.sbuttons { width: 420px; margin: 0 auto 10px; overflow: hidden; _zoom: 1; }
+.sbuttons { width: 420px; margin: 40px auto 10px; overflow: hidden; _zoom: 1; }
 .sbuttons .sbut { float: left; }
 .dict .sbuttons { float: right; margin: 0; }
 
@@ -154,16 +154,22 @@ img.aligncenter { display: block; margin: 0 auto; }
 /* Wrapper
 --------------------------- */
 .home #wrapper .widget {
-    width: 429px;
-    height: 230px;
-    padding: 25px;
+    width: 295px;
+    height: 250px;
+    padding: 10px;
     /*font-family: Segoe Script;*/
     background-repeat: no-repeat;
     background-position: 20px 75px;
     position: relative;
     text-shadow: 1px 1px 0 #fff;
+	float:left;
 }
 
+.home #wrapper .widget .widgettitle
+{
+	text-align: center;
+	
+}
 .home #wrapper .textwidget {
     padding-left: 165px;
 }
@@ -200,25 +206,27 @@ img.aligncenter { display: block; margin: 0 auto; }
     margin-bottom: 5px;
 }
 
-#text-3, #text-4 {
-    border-bottom: 1px solid #d8dbdd;
+/*   start of main widgets      */
+
+
+#text-3, #text-4,#text-5 {
+     border-bottom: 1px solid #d8dbdd; 
 }
 
-#text-3, #text-5,#text-7 {
-    float: left;
+#text-3, #text-4,#text-6, #text-7  {
+    
     border-right: 1px solid #d8dbdd;
 }
 
-#text-4, #text-6, #text-8 {
-    float: right;
+
+
+.home #wrapper #text-6,.home #wrapper #text-7,.home #wrapper #text-8{
+	height: 350px;	
 }
 
-.home #wrapper #text-7{
-	height: 400px;
-	
-}
 
-#text-8 .textwidget{
+
+.home #text-8 .textwidget{
 	padding-left: 0;
 }
 
@@ -257,11 +265,17 @@ line-height:0px;
 }
 
 #text-6 h2 { color: #ffae00; }
-
+/*
 #text-3 { border-top-left-radius: 20px; -moz-border-topleft-radius: 20px; border-topleft-radius: 20px; }
 #text-4 { border-top-right-radius: 20px; -moz-border-topright-radius: 20px; border-topright-radius: 20px; }
-#text-5 { border-bottom-left-radius: 20px; -moz-border-bottomleft-radius: 20px; border-bottomleft-radius: 20px; }
-#text-6 { border-bottom-right-radius: 20px; -moz-border-bottomright-radius: 20px; border-bottomright-radius: 20px; }
+*/
+/* #text-5 { border-bottom-left-radius: 20px; -moz-border-bottomleft-radius: 20px; border-bottomleft-radius: 20px; }
+ #text-6 { border-bottom-right-radius: 20px; -moz-border-bottomright-radius: 20px; border-bottomright-radius: 20px; }
+*/
+
+
+/*   end of main widgets      */
+
 
 .share {
     display: none;
@@ -639,4 +653,11 @@ p {
     position: absolute;
     right: -15px;
     top: 1px;
+}
+
+
+
+/*   twitter changes */
+.timeline-header{
+	display:none;
 }
