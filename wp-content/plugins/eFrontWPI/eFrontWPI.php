@@ -267,6 +267,7 @@ function eFrontWPI_get_token()
 function eFrontWPI_delete_cookie()
 {
     global $eFrontWPI_options;
+    eFrontWPI_perform_action('logout');
     setcookie("cookie_login", "", time() - 3600000, '/', @$eFrontWPI_options['domain']);
     setcookie("cookie_password", "", time() - 3600000, '/', @$eFrontWPI_options['domain']);
     setcookie("PHPSESSID", "", time() - 3600000); //Kill the session id also, or eFront doesn't logout, sigh.
