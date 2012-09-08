@@ -69,7 +69,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 .login { position: absolute; top: 10px; right: 22px; color: #777; font-family: SegoeScript; }
 .login a { color: #777; margin: 0 5px; }
 
-.sbuttons { width: 420px; margin: 40px auto 10px; overflow: hidden; _zoom: 1; }
+.sbuttons { width: 420px; margin: 0 auto 10px; overflow: hidden; _zoom: 1; }
 .sbuttons .sbut { float: left; }
 .dict .sbuttons { float: right; margin: 0; }
 
@@ -188,7 +188,7 @@ img.aligncenter { display: block; margin: 0 auto; }
     margin-right: 30px;
 }
 
-.home #wrapper .widget a {
+.home #wrapper .widget a.homewidget {
 	outline: none;
     position: absolute;
     left: 0;
@@ -213,33 +213,38 @@ img.aligncenter { display: block; margin: 0 auto; }
      border-bottom: 1px solid #d8dbdd; 
 }
 
-#text-3, #text-4,#text-6, #text-7  {
+#text-3, #text-4,#text-6, #text-7,#twitter-3  {
     
     border-right: 1px solid #d8dbdd;
 }
 
 
 
-.home #wrapper #text-6,.home #wrapper #text-7,.home #wrapper #text-8{
+.home #wrapper #text-6,.home #wrapper #text-7,.home #wrapper #text-8,.home #wrapper #twitter-3{
 	height: 350px;	
 }
 
 
 
-#text-8{
-	 background-image: url(images/help.png);
+.home #text-8 .textwidget{
+	padding-left: 0;
+	font-size: 14px;
 }
-
+/*
 #text-5 {
-   
+    background-image: url(images/course.png);
 }
-
+*/
 #text-7 .widgettitle{
 font-size:0px;
 line-height:0px;
 
 }
-
+#twitter-3 .widgettitle
+{
+	color: blueViolet;
+	
+}
 
 #text-8 .widgettitle{
 	
