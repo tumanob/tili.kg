@@ -49,7 +49,13 @@
        </div>
 		<div id="footer-menu"><?php wp_nav_menu( array( 'theme_location' => 'menufooter' ) ); ?></div>
 		<p class="copyright">&copy; Все права защищены. Информацию без разрешения не красть</p>
-	</div>
+
+    </div>
+    <p class="soros">
+        <a href="http://tili.kg/thanks"><img height="36" src="/soroskg.png"></a>
+        Сайт создан при содействии  Правовой программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан».
+    </p>
+
 </div>
 <?php wp_footer();?>
 

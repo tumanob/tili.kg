@@ -1,7 +1,8 @@
 <?php get_header(); ?>
 	<div id="wrapper">
 		<div class="catlist">
-			<?php wp_nav_menu(array('menu'=>'categories')); ?>
+			<h1><?php echo single_cat_title(); ?></h1>
+			<?php //wp_nav_menu(array('menu'=>'categories')); ?>
 		</div>
 		<div class="posts">
 		<?php if(have_posts()) : while(have_posts()) : the_post(); ?>

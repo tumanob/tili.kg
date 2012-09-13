@@ -396,7 +396,11 @@ line-height:0px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     padding: 5px;
-    color: #C4C4C4;
+   
+}
+
+.catlist h1{
+ color:#1596D2;
 }
 
 .catlist ul li, #mainmenu a {
@@ -669,4 +673,18 @@ p {
 /*   twitter changes */
 .timeline-header{
 	display:none;
+}
+
+.soros
+{
+    float: left;
+    width: 690px;
+    margin: 6px 20% ;
+
+}
+.soros a
+{
+display: block;
+float: left;
+margin: 0 10px;
 }
