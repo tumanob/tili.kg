@@ -64,7 +64,7 @@ function eFrontWPI_logout()
     return;
 }
 
-function eFrontWPI_capture_login($username, $password) {
+function eFrontWPI_capture_login($username, $password = null) {
     global $efront_user_username, $efront_user_password;
     $efront_user_username = $username;
     $efront_user_password = $password ? $password : $_POST['pwd'];
