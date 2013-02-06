@@ -717,14 +717,16 @@ $app->error(function (\Exception $e, $code) {
             $words[$k]['value'] = str_replace('&nbsp;', '', mb_substr($v['value'],0,250));
         }
 
-        return json_encode(
+        $r = new Response(json_encode(
             array(
                 'tags' => $tags,
                 'words' => $words,
                 'pics' => $pics,
                 'breadcrumbs' => $breadcrumbs
             )
-        );
+        ));
+        $r->headers->add(array('Content-type' => 'application/json'));
+        return $r;
     });
 
 $app->get('/api/word/{word}', function($word) use (&$app) {
@@ -741,7 +743,7 @@ $app->get('/api/word/{word}', function($word) use (&$app) {
         $list[$k]['dictname'] = strip_tags($list[$k]['dictname']);
     }
 
-    return json_encode($list);
+    return new Response(json_encode($list), 200, array('Content-type' => 'application/json'));
 });
 
 $app->get('/api/search/{word}', function($word) use (&$app) {
@@ -759,7 +761,7 @@ $app->get('/api/search/{word}', function($word) use (&$app) {
         $list[$k]['dictname'] = strip_tags($list[$k]['dictname']);
     }
 
-    return json_encode($list);
+    return new Response(json_encode($list), 200, array('Content-type' => 'application/json'));
 })->convert('word', $wordFilter);
 
 
