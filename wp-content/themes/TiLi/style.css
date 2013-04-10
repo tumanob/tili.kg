@@ -358,6 +358,8 @@ line-height:0px;
     margin: 0 auto;
     position: relative;
     padding-top: 10px;
+	height: 33px;
+	
 }
 
 .category .post {
@@ -678,13 +680,11 @@ p {
 .soros
 {
     float: left;
-    width: 690px;
-    margin: 6px 20% ;
-
+    width: 350px;
+	margin-left: 100px;
 }
 .soros a
 {
 display: block;
 float: left;
-margin: 0 10px;
 }
