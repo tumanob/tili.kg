@@ -688,3 +688,10 @@ p {
 display: block;
 float: left;
 }
+
+.copyrightdict
+{
+	text-align: center;
+	font-size: 19px;
+	line-height: 22px;
+}
