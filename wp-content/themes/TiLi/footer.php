@@ -67,6 +67,7 @@
 	</div>
 
 </div>
+
 <?php wp_footer();?>
 
 <!-- Yandex.Metrika counter -->

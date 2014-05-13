@@ -214,8 +214,9 @@ $app->get('/dlist/', function () use ($app)
 $app->get('/d{id}/', function ($id) use ($app){
         $id = (int)$id;
 
-        $result = $app['db']->fetchAll("SELECT name FROM `dict_d` WHERE `id`= ?", array($id));
+        $result = $app['db']->fetchAll("SELECT name, copyright FROM `dict_d` WHERE `id`= ?", array($id));
         $name = $result[0]['name'];
+		$copyright = $result[0]['copyright'];
         $result ='';
 
         $result = $app['db']->fetchAll(
@@ -244,6 +245,7 @@ $app->get('/d{id}/', function ($id) use ($app){
 
         return $app['twig']->render('dict.html.twig', array(
             'name' => $name,
+			'copyright'=>$copyright,
             'id' => $id,
             'alphabet' => $alphabet,
             'alphabet2'=> $alphabet2,
