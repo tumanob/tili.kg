@@ -257,8 +257,9 @@ $app->get('/d{id}/', function ($id) use ($app){
 
 $app->get('/d{id}/{let}/', function ($id, $let) use ($app){
         $id = (int)$id;
-        $result = $app['db']->fetchAll("SELECT name FROM `dict_d` WHERE `id`= ?", array($id));
+        $result = $app['db']->fetchAll("SELECT name, copyright FROM `dict_d` WHERE `id`= ?", array($id));
         $name = $result[0]['name'];
+		$copyright = $result[0]['copyright'];
 
         $result = $app['db']->fetchAll(
         "SELECT keyword, id, dictid,SUBSTRING(value,1,120)as value FROM dict_kw WHERE `keyword` LIKE ? AND `dictid`= ? ORDER BY keyword",
@@ -297,6 +298,7 @@ $app->get('/d{id}/{let}/', function ($id, $let) use ($app){
             'dict.html.twig',
             array(
                  'name' => $name,
+				 'copyright'=>$copyright,
                  'id' => $id,
                  'alphabet' => $alphabet,
                  'alphabet2' => $alphabet2,
@@ -312,9 +314,10 @@ $app->get('/d{id}/{let}/p{pageid}', function ($id, $let, $pageid) use ($app){
     $id = (int)$id;
     $pageid = (int)$pageid;
 
-    $sql = "SELECT name FROM `dict_d` WHERE `id`= ?";
+    $sql = "SELECT name, copyright FROM `dict_d` WHERE `id`= ?";
     $result = $app['db']->fetchAll($sql, array($id));
     $name = $result[0]['name'];
+	$copyright = $result[0]['copyright'];
 
     $result = $app['db']->fetchAll(
         "SELECT keyword,id,dictid,SUBSTRING(value,1,120)as value FROM dict_kw WHERE `keyword` LIKE ? AND `dictid` = ?",
@@ -354,6 +357,7 @@ $app->get('/d{id}/{let}/p{pageid}', function ($id, $let, $pageid) use ($app){
         'dict.html.twig',
         array(
             'name' => $name,
+			 'copyright'=>$copyright,
             'id' => $id,
             'alphabet' => $alphabet,
             'alphabet2' => $alphabet2,
