@@ -19,6 +19,7 @@
 	</div>
 
     <div id="content" style="">
+		
         <p id="dic_content" >
             <img src="assets/images/kt-dict.jpg" alt="Онлайн словарь" style="margin:40px 0 10px 160px;" />
         </p>
@@ -40,11 +41,15 @@
 			<div class="searchformdict">
                 <form action="http://tili.kg" method="get">
                      <input name="keyword" type="text" class="stxt" id="keyword" value="Введите слово" onfocus="javascript: if(this.value == 'Введите слово') this.value = '';" onblur="javascript: if(this.value == '') { this.value = 'Введите слово';}">
-                     <input type="submit" class="sbtn" value=" " onclick="showWord(document.getElementById('keyword').value);  return false;">
+                     <input type="submit" class="sbtn" value=" " onclick="showWord(document.getElementById('keyword').value); 
+  return false;">
                 </form>
+			     
             </div>
             <div style="clear: both;"></div>
+			
         </div>
+	
          <br/>
     	<div id="result" style="overflow: auto;">
 		<h3>О словаре</h3>
