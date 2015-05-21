@@ -53,7 +53,7 @@
     </div>
     <div class="soros">
         <a href="http://tili.kg/thanks"><img height="60" src="/soroskg.png"></a>
-        Сайт создан при содействии  Правовой программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан».
+        Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан».
 	</div>
 	<div class="hoster">
 		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="300" height="75"	id="20050.swf" align="middle">

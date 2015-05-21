@@ -126,7 +126,8 @@ $(document).ready(function () {
             clearTimeout(timer);
             timer = setTimeout(findWord, 1500);
         }
-    });
+		
+		   });
 
     $("#keyword").focus();
 
