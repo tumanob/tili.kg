@@ -1,26 +1,25 @@
 === Twitter Widget Pro ===
-Contributors: aaroncampbell
+Contributors: aaroncampbell, PeteMall, range, saracannon
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9993090
 Tags: twitter, widget, feed
 Requires at least: 3.0
-Tested up to: 3.4.1
-Stable tag: 2.3.9
+Tested up to: 3.6
+Stable tag: 2.6.0
 
 A widget that properly handles twitter feeds, including parsing @username, #hashtags, and URLs into links.
 
 == Description ==
 
-A widget that properly handles twitter feeds, including @username, #hashtag, and
-link parsing.  It supports displaying profiles images, and even lets you control
-whether to display the time and date of a tweet or how log ago it happened
-(about 5 hours ago, etc).
+A widget that properly handles twitter feeds, including parsing @username, #hashtag, and URLs into links.  It supports displaying profiles images, and even lets you control whether to display the time and date of a tweet or how log ago it happened (about 5 hours ago, etc).
 
-<a href="http://bluedogwebservices.com/wordpress-plugin/twitter-widget-pro/">Twitter Widget Pro</a>
-Brought to you by <a href="http://bluedogwebservices.com/" title="WordPress Development">BlueDog Web Services</a>
+<a href="http://ran.ge/wordpress-plugin/twitter-widget-pro/">Twitter Widget Pro</a>
+Brought to you by <a href="http://ran.ge/" title="WordPress Development">Ran.ge</a>
 
 == Installation ==
 
-1. Use automatic installer.
+1. Use automatic installer to install and active the plugin.
+1. You should see a notice appear in your admin that links you to the settings page.
+1. Follow the instructions to setup your Twitter app and authenticate your account (an unfortunate step made necessary by Twitter's API changes).
 1. In WordPress admin go to 'Appearance' -> 'Widgets' and add "Twitter Widget Pro" to one of your widget-ready areas of your site
 
 == Frequently Asked Questions ==
@@ -42,6 +41,8 @@ page.  The simplest form of this would be `[twitter-widget username="yourTwitter
 The simplest form of this would be `[twitter-widget username="yourTwitterUsername"]`
 However, there are more things you can control.
 
+* username - A Twitter username to pull a feed of Tweets from.  The user needs to be authenticated.
+* list - A Twitter list id owned by one of the users you've authenticated.
 * before_widget - This is inserted before the widget.
 * after_widget - This is inserted after the widget, and is often used to close tags opened in before_widget
 * before_title - This is inserted before the title and defults to <h2>
@@ -130,37 +131,75 @@ Aparently the database queries required to display the friends feed was causing 
 
 == Upgrade Notice ==
 
-= 2.3.9 =
-Display dates based on your WordPress timezone setting
+= 2.6.0 =
+Fix lists and add ability to remove accounts, as well as plenty of minor bug fixes.
 
-= 2.3.8 =
-Fix issue with mixed content warning on HTTPS pages
+= 2.5.4 =
+Minor fix for a strict PHP notice
 
-= 2.3.7 =
-Adds an option to clear update locks, which may fix the updating issue some people are having
+= 2.5.3 =
+Another SSL verification fix and add Twitter List support to shortcodes
 
-= 2.3.6 =
-Small fix for "invalid argument supplied for foreach" error that some people are getting
+= 2.5.2 =
+Fixes hashtag links, ignoring of retweets, and SSL verification
 
-= 2.3.5 =
-Added HTTP & HTTPS API setting and fixed support forum links
+= 2.5.1 =
+Fix potential conflict with other oAuth plugins
 
-= 2.3.4 =
-Fixed the conflict with Jetpack!  Also a new Arabic translation
-
-= 2.3.3 =
-Fixed issue with updates getting stuck, and add data-lang support for Twitter intents
-
-= 2.3.2 =
-Fixes some strings that were not translatable
-
-= 2.3.1 =
-Fixes an issue with the intents and follow settings not being saved
-
-= 2.3.0 =
-Fewer "could not connect to Twitter" messages, new links (reply, retweet, favorite), new follow button, and avatar fixes
+= 2.5.0 =
+Upgrade to the new Twitter API and add support for lists
 
 == Changelog ==
+
+= 2.6.0 =
+* Add ability to remove accounts
+* Fix bug that made lists not work
+* Work around PHP bug in json_decode() - https://bugs.php.net/bug.php?id=45989
+* Fix some strict standards warnings
+
+= 2.5.4 =
+* Minor fix for a strict PHP notice
+
+= 2.5.3 =
+* Don't force verification of Twitter's SSL certificate
+* Add support for Twitter Lists in shortcodes
+
+= 2.5.2 =
+* Don't force verification of Twitter's SSL certificate
+* Fix empty admin notice
+* Fix bug with retweets not being ignored
+* Fix hashtag links
+
+= 2.5.1 =
+* Rename OAuthUtil class to twpOAuthUtil
+* Don't use 'account/verify_credentials' as it has a very low limit
+
+= 2.5.0 =
+* Use the new Twitter API with oAuth
+* Adds support for lists
+* No longer supports non-https Twitter requests (Twitter API requirement)
+
+= 2.4.1 =
+* Make sure hashtags are parsed UTF-8
+* Add German translation
+
+= 2.4.0 =
+* Better linking of URLs, especially handling of punctuation at end of URLs
+* Support for extended characters in hashtags
+* Allow externally linked images to serve via ssl
+* More efficient regex for link parsing
+* Link FTP links
+* Link E-Mail addresses
+* Complete conversion to Range plugin framework from Xavisys framework
+* Added place to check API usage
+
+= 2.3.11 =
+* Fix issue with "Include Retweets" not unchecking
+
+= 2.3.10 =
+* Update feeds and links to Ran.ge
+* Move assets to assets dir
+* Pull in some Range branding to replace Xavisys branding
 
 = 2.3.9 =
 * Display dates based on your WordPress timezone setting

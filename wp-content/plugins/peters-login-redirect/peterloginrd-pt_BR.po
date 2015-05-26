@@ -1,0 +1,382 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Peter's Login Redirect v2.8.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-27 13:19-0800\n"
+"PO-Revision-Date: 2014-11-27 13:19-0800\n"
+"Last-Translator: comglobal <alvaro@localhost.com>\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ peterloginrd
+#: wplogin_redirect.php:570
+msgid "Register"
+msgstr "Registrar"
+
+# @ peterloginrd
+#: wplogin_redirect.php:574
+msgid "Site Admin"
+msgstr "Administrador"
+
+# @ peterloginrd
+#: wplogin_redirect.php:696
+msgid "ERROR: Non-existent username submitted "
+msgstr "ERRO: Usuário inexistente"
+
+# @ peterloginrd
+#: wplogin_redirect.php:706
+msgid "ERROR: Non-existent role submitted "
+msgstr "ERRO: Papel inexistente"
+
+# @ peterloginrd
+#: wplogin_redirect.php:717
+msgid "ERROR: Non-existent level submitted "
+msgstr "ERRO: Nível inexistente"
+
+# @ peterloginrd
+#: wplogin_redirect.php:734
+#, php-format
+msgid "ERROR: Empty %s submitted "
+msgstr "ERRO: %s vazio"
+
+# @ peterloginrd
+#: wplogin_redirect.php:763 wplogin_redirect.php:825
+#, php-format
+msgid "ERROR: Non-local or invalid URL submitted for %s %s"
+msgstr "ERRO: Endereço inválido ou externo para %s %s"
+
+# @ peterloginrd
+#: wplogin_redirect.php:789
+#, php-format
+msgid "ERROR: Unknown error adding %s-specific redirect for %s %s"
+msgstr ""
+"ERRO: Erro desconhecido ao adicionar redirecionamento %s-específico para %s "
+"%s"
+
+# @ peterloginrd
+#: wplogin_redirect.php:796
+#, php-format
+msgid "Successfully added %s-specific redirect rule for %s"
+msgstr "Sucesso ao adicionar regra de redirecionamento %s-específica para %s"
+
+# @ peterloginrd
+#: wplogin_redirect.php:854
+#, php-format
+msgid "ERROR: Unknown error editing %s-specific redirect for %s %s"
+msgstr ""
+"ERRO: Erro desconhecido ao editar redirecionamento %s-específico para %s %s"
+
+# @ peterloginrd
+#: wplogin_redirect.php:861
+#, php-format
+msgid "Successfully edited %s-specific redirect rule for %s"
+msgstr "Sucesso ao editar regra de redirecionamento %s-específica para %s"
+
+# @ peterloginrd
+#: wplogin_redirect.php:889
+#, php-format
+msgid "ERROR: Unknown error deleting %s-specific redirect for %s %s"
+msgstr ""
+"ERRO: Erro desconhecido ao excluir redirecionamento %s-específico para %s %s"
+
+# @ peterloginrd
+#: wplogin_redirect.php:895
+#, php-format
+msgid "Successfully deleted %s-specific redirect rule for %s"
+msgstr "Sucesso ao excluir regra de redirecionamento %s-específico para %s "
+
+# @ peterloginrd
+#: wplogin_redirect.php:930
+msgid ""
+"ERROR: Unknown database problem removing URL for &#34;all other users&#34; "
+msgstr ""
+"ERRO: Problema desconhecido de banco de dados ao remover a URL para &#34;"
+"todos os outros usuários&#34; "
+
+# @ peterloginrd
+#: wplogin_redirect.php:934
+msgid "Successfully removed URL for &#34;all other users&#34; "
+msgstr "Sucesso ao remover a URL para &#34;todos os outros usuários&#34; "
+
+# @ peterloginrd
+#: wplogin_redirect.php:945 wplogin_redirect.php:1014
+msgid "ERROR: Non-local or invalid URL submitted "
+msgstr "ERRO: A URL enviada é externa ou inválida"
+
+# @ peterloginrd
+#: wplogin_redirect.php:958
+msgid ""
+"ERROR: Unknown database problem updating URL for &#34;all other users&#34; "
+msgstr ""
+"ERRO: Erro desconhecido de banco de dados ao atualizar a URL para &#34;todos "
+"os outros usuários&#34; "
+
+# @ peterloginrd
+#: wplogin_redirect.php:962
+msgid "Successfully updated URL for &#34;all other users&#34;"
+msgstr "Sucesso ao atualizar a URL para &#34;todos os outros usuários&#34;"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1001
+msgid ""
+"ERROR: Unknown database problem removing URL for &#34;post-registration&#34; "
+msgstr ""
+"ERRO: Problema desconhecido de banco de dados ao remover a URL para &#34;pós-"
+"registro&#34; "
+
+# @ peterloginrd
+#: wplogin_redirect.php:1004
+msgid "Successfully removed URL for &#34;post-registration&#34; "
+msgstr "Sucesso ao remover a URL para &#34;pós-registro&#34; "
+
+# @ peterloginrd
+#: wplogin_redirect.php:1027
+msgid ""
+"ERROR: Unknown database problem updating URL for &#34;post-registration&#34; "
+msgstr ""
+"ERRO: Problema desconhecido de banco de dados ao atualizar a URL para &#34;"
+"pós-registro&#34; "
+
+# @ peterloginrd
+#: wplogin_redirect.php:1031
+msgid "Successfully updated URL for &#34;post-registration&#34;"
+msgstr "Sucesso ao atualizar a URL para &#34;pós-registro&#34; "
+
+# @ peterloginrd
+#: wplogin_redirect.php:1057
+msgid "Successfully updated plugin settings"
+msgstr "Sucesso ao atualizar as configurações do plugin"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1206 wplogin_redirect.php:1224
+#: wplogin_redirect.php:1241
+msgid "Login URL"
+msgstr "URL de Login"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1207 wplogin_redirect.php:1225
+#: wplogin_redirect.php:1242
+msgid "Logout URL"
+msgstr "URL de Logout"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1209 wplogin_redirect.php:1227
+#: wplogin_redirect.php:1245
+msgid "Edit"
+msgstr "Editar"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1209 wplogin_redirect.php:1227
+#: wplogin_redirect.php:1245 wplogin_redirect.php:1353
+#: wplogin_redirect.php:1361
+msgid "Delete"
+msgstr "Excluir"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1268
+msgid "Manage redirect rules"
+msgstr "Administrar regras de redirecionamento"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1270
+msgid ""
+"Define custom URLs to which different users, users with specific roles, "
+"users with specific levels, and all other users will be redirected upon "
+"login."
+msgstr ""
+"Definir URLs personalizados para usuários diferentes, usuários com papéis "
+"específicos, usuários com níveis específicos e para onde todos os outros "
+"usuários serão redirecionados após o login."
+
+# @ peterloginrd
+#: wplogin_redirect.php:1271
+msgid "Define a custom URL to which all users will be redirected upon logout"
+msgstr ""
+"Definir um URL personalizado para onde todos os usuários serão "
+"redirecionados após o logout"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1272
+msgid ""
+"Note that you can use the syntax <strong>[variable]username[/variable]</"
+"strong> in your URLs so that the system will build a dynamic URL upon each "
+"login, replacing that text with the users username."
+msgstr ""
+"Observe que você pode utilizar a sintaxe <strong>[variable]usuário[/variable]"
+"</strong> em suas URLs para que o sistema construa uma URL dinâmica a cada "
+"login, substituindo esse texto pelo nome de usuário real."
+
+# @ peterloginrd
+#: wplogin_redirect.php:1274
+msgid "Specific users"
+msgstr "Usuários específicos"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1285 wplogin_redirect.php:1307
+#: wplogin_redirect.php:1337
+msgid "Add:"
+msgstr "Adicionar:"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1287
+msgid "Select a username"
+msgstr "Selecione um nome de usuário"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1290 wplogin_redirect.php:1312
+#: wplogin_redirect.php:1343 wplogin_redirect.php:1351
+#: wplogin_redirect.php:1360
+msgid "URL:"
+msgstr "URL:"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1291 wplogin_redirect.php:1313
+#: wplogin_redirect.php:1344 wplogin_redirect.php:1352
+msgid "Logout URL:"
+msgstr "URL de Logout:"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1293
+msgid "Add username rule"
+msgstr "Adicione regra de usuário"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1296
+msgid "Specific roles"
+msgstr "Papéis específicos"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1309
+msgid "Select a role"
+msgstr "Selecione um papel"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1315
+msgid "Add role rule"
+msgstr "Adicione uma regra para papel"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1318
+msgid "Specific levels"
+msgstr "Níveis específicos"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1327
+msgid "Order"
+msgstr "Ordem"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1339
+msgid "Select a level"
+msgstr "Selecione um nível"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1342
+msgid "Order:"
+msgstr "Ordem:"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1346
+msgid "Add level rule"
+msgstr "Adicione uma regra de nível"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1349
+msgid "All other users"
+msgstr "Todos os outros usuários"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1353 wplogin_redirect.php:1361
+#: wplogin_redirect.php:1438
+msgid "Update"
+msgstr "Atualizar"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1358
+msgid "Post-registration"
+msgstr "Pós-registro"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1366
+msgid "Customize plugin settings"
+msgstr "Personalizar as configurações do plugin"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1371
+msgid "Redirect restrictions"
+msgstr "Restrições de redirecionamento"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1375
+msgid "Any http or https URL"
+msgstr "Qualquer URL http ou https"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1376
+msgid "Any URL"
+msgstr "Qualquer URL"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1377
+msgid "Any URL on the same domain"
+msgstr "Qualquer URL no mesmo domínio"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1383
+msgid ""
+"Allow a POST or GET &#34;redirect_to&#34; variable to take redirect "
+"precedence"
+msgstr ""
+"Permitir que uma variável POST ou GET &#34;redirect_to&#34; tenha "
+"preferência no redirecionamento"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1387 wplogin_redirect.php:1398
+#: wplogin_redirect.php:1410
+msgid "Yes"
+msgstr "Sim"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1388 wplogin_redirect.php:1399
+#: wplogin_redirect.php:1411
+msgid "No"
+msgstr "Não"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1394
+msgid ""
+"Allow a POST or GET &#34;redirect_to&#34; logout variable to take redirect "
+"precedence"
+msgstr ""
+"Permitir que uma variável de logout POST ou GET &#34;redirect_to&#34; tenha "
+"preferência no redirecionamento"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1406
+#, php-format
+msgid ""
+"Use external redirect file. Set this to &#34;Yes&#34; if you are using a "
+"plugin such as Gigya that bypasses the regular WordPress redirect process "
+"(and allows only one fixed redirect URL). Then, set the redirect URL in the "
+"other plugin to %s"
+msgstr ""
+"Usar um arquivo externo de redirecionamento. Defina isso para &#34;Sim&#34; "
+"se estiver usando um plugin como o Gigya que ignora o processo de "
+"redirecionamento normal do WordPress (e permite somente uma URL fixa de "
+"redirecionamento). Então, configure a URL de redirecionamento no outro "
+"plugin para %s"
+
+# @ peterloginrd
+#: wplogin_redirect.php:1417
+msgid "Permission level required to edit redirect URLs"
+msgstr "Nível de permissão requerido para editar URLs de redirecionamento"

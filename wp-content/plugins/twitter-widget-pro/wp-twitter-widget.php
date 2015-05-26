@@ -3,9 +3,9 @@
  * Plugin Name: Twitter Widget Pro
  * Plugin URI: http://bluedogwebservices.com/wordpress-plugin/twitter-widget-pro/
  * Description: A widget that properly handles twitter feeds, including @username, #hashtag, and link parsing.  It can even display profile images for the users.  Requires PHP5.
- * Version: 2.3.9
+ * Version: 2.6.0
  * Author: Aaron D. Campbell
- * Author URI: http://bluedogwebservices.com/
+ * Author URI: http://ran.ge/
  * License: GPLv2 or later
  * Text Domain: twitter-widget-pro
  */
@@ -29,8 +29,8 @@
 */
 
 require_once( 'tlc-transients.php' );
-require_once( 'xavisys-plugin-framework.php' );
-define( 'TWP_VERSION', '2.3.9' );
+require_once( 'range-plugin-framework.php' );
+define( 'TWP_VERSION', '2.6.0' );
 
 /**
  * WP_Widget_Twitter_Pro is the class that handles the main widget.
@@ -61,11 +61,59 @@ class WP_Widget_Twitter_Pro extends WP_Widget {
 	public function form( $instance ) {
 		$instance = $this->_getInstanceSettings( $instance );
 		$wpTwitterWidget = wpTwitterWidget::getInstance();
+		$users = $wpTwitterWidget->get_users_list( true );
+		$lists = $wpTwitterWidget->get_lists();
+
 ?>
 			<p>
 				<label for="<?php echo $this->get_field_id( 'username' ); ?>"><?php _e( 'Twitter username:', $this->_slug ); ?></label>
-				<input class="widefat" id="<?php echo $this->get_field_id( 'username' ); ?>" name="<?php echo $this->get_field_name( 'username' ); ?>" type="text" value="<?php esc_attr_e( $instance['username'] ); ?>" />
+				<select id="<?php echo $this->get_field_id( 'username' ); ?>" name="<?php echo $this->get_field_name( 'username' ); ?>">
+					<option></option>
+					<?php
+					$selected = false;
+					foreach ( $users as $u ) {
+						?>
+						<option value="<?php echo esc_attr( strtolower( $u['screen_name'] ) ); ?>"<?php $s = selected( strtolower( $u['screen_name'] ), strtolower( $instance['username'] ) ) ?>><?php echo esc_html( $u['screen_name'] ); ?></option>
+						<?php
+						if ( ! empty( $s ) )
+							$selected = true;
+					}
+					?>
+				</select>
 			</p>
+			<p>
+				<label for="<?php echo $this->get_field_id( 'list' ); ?>"><?php _e( 'Twitter list:', $this->_slug ); ?></label>
+				<select id="<?php echo $this->get_field_id( 'list' ); ?>" name="<?php echo $this->get_field_name( 'list' ); ?>">
+					<option></option>
+					<?php
+					foreach ( $lists as $user => $user_lists ) {
+						echo '<optgroup label="' . esc_attr( $user ) . '">';
+						foreach ( $user_lists as $list_id => $list_name ) {
+							?>
+							<option value="<?php echo esc_attr( $user . '::' . $list_id ); ?>"<?php $s = selected( $user . '::' . $list_id, strtolower( $instance['list'] ) ) ?>><?php echo esc_html( $list_name ); ?></option>
+							<?php
+						}
+						echo '</optgroup>';
+					}
+					?>
+				</select>
+			</p>
+			<?php
+			if ( ! $selected && ! empty( $instance['username'] ) ) {
+				$query_args = array(
+					'action' => 'authorize',
+					'screen_name' => $instance['username'],
+				);
+				$authorize_user_url = wp_nonce_url( add_query_arg( $query_args, $wpTwitterWidget->get_options_url() ), 'authorize' );
+				?>
+			<p>
+				<a href="<?php echo esc_url( $authorize_user_url ); ?>" style="color:red;">
+					<?php _e( 'You need to authorize this account.', $this->_slug ); ?>
+				</a>
+			</p>
+				<?php
+			}
+			?>
 			<p>
 				<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Give the feed a title ( optional ):', $this->_slug ); ?></label>
 				<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php esc_attr_e( $instance['title'] ); ?>" />
@@ -91,14 +139,17 @@ class WP_Widget_Twitter_Pro extends WP_Widget {
 				</select>
 			</p>
 			<p>
+				<input type="hidden" value="false" name="<?php echo $this->get_field_name( 'showretweets' ); ?>" />
 				<input class="checkbox" type="checkbox" value="true" id="<?php echo $this->get_field_id( 'showretweets' ); ?>" name="<?php echo $this->get_field_name( 'showretweets' ); ?>"<?php checked( $instance['showretweets'], 'true' ); ?> />
 				<label for="<?php echo $this->get_field_id( 'showretweets' ); ?>"><?php _e( 'Include retweets', $this->_slug ); ?></label>
 			</p>
 			<p>
+				<input type="hidden" value="false" name="<?php echo $this->get_field_name( 'hidereplies' ); ?>" />
 				<input class="checkbox" type="checkbox" value="true" id="<?php echo $this->get_field_id( 'hidereplies' ); ?>" name="<?php echo $this->get_field_name( 'hidereplies' ); ?>"<?php checked( $instance['hidereplies'], 'true' ); ?> />
 				<label for="<?php echo $this->get_field_id( 'hidereplies' ); ?>"><?php _e( 'Hide @replies', $this->_slug ); ?></label>
 			</p>
 			<p>
+				<input type="hidden" value="false" name="<?php echo $this->get_field_name( 'hidefrom' ); ?>" />
 				<input class="checkbox" type="checkbox" value="true" id="<?php echo $this->get_field_id( 'hidefrom' ); ?>" name="<?php echo $this->get_field_name( 'hidefrom' ); ?>"<?php checked( $instance['hidefrom'], 'true' ); ?> />
 				<label for="<?php echo $this->get_field_id( 'hidefrom' ); ?>"><?php _e( 'Hide sending applications', $this->_slug ); ?></label>
 			</p>
@@ -117,10 +168,6 @@ class WP_Widget_Twitter_Pro extends WP_Widget {
 				<input class="widefat" id="<?php echo $this->get_field_id( 'errmsg' ); ?>" name="<?php echo $this->get_field_name( 'errmsg' ); ?>" type="text" value="<?php esc_attr_e( $instance['errmsg'] ); ?>" />
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id( 'fetchTimeOut' ); ?>"><?php _e( 'Number of seconds to wait for a response from Twitter ( default 2 ):', $this->_slug ); ?></label>
-				<input class="widefat" id="<?php echo $this->get_field_id( 'fetchTimeOut' ); ?>" name="<?php echo $this->get_field_name( 'fetchTimeOut' ); ?>" type="text" value="<?php esc_attr_e( $instance['fetchTimeOut'] ); ?>" />
-			</p>
-			<p>
 				<label for="<?php echo $this->get_field_id( 'showts' ); ?>"><?php _e( 'Show date/time of Tweet ( rather than 2 ____ ago ):', $this->_slug ); ?></label>
 				<select id="<?php echo $this->get_field_id( 'showts' ); ?>" name="<?php echo $this->get_field_name( 'showts' ); ?>">
 					<option value="0" <?php selected( $instance['showts'], '0' ); ?>><?php _e( 'Always', $this->_slug );?></option>
@@ -133,18 +180,28 @@ class WP_Widget_Twitter_Pro extends WP_Widget {
 				</select>
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id( 'dateFormat' ); ?>"><?php echo sprintf( __( 'Format to dispaly the date in, uses <a href="%s">PHP date()</a> format:', $this->_slug ), 'http://php.net/date' ); ?></label>
+				<label for="<?php echo $this->get_field_id( 'dateFormat' ); ?>"><?php echo sprintf( __( 'Format to display the date in, uses <a href="%s">PHP date()</a> format:', $this->_slug ), 'http://php.net/date' ); ?></label>
 				<input class="widefat" id="<?php echo $this->get_field_id( 'dateFormat' ); ?>" name="<?php echo $this->get_field_name( 'dateFormat' ); ?>" type="text" value="<?php esc_attr_e( $instance['dateFormat'] ); ?>" />
 			</p>
 			<p>
+				<input type="hidden" value="false" name="<?php echo $this->get_field_name( 'targetBlank' ); ?>" />
 				<input class="checkbox" type="checkbox" value="true" id="<?php echo $this->get_field_id( 'targetBlank' ); ?>" name="<?php echo $this->get_field_name( 'targetBlank' ); ?>"<?php checked( $instance['targetBlank'], 'true' ); ?> />
 				<label for="<?php echo $this->get_field_id( 'targetBlank' ); ?>"><?php _e( 'Open links in a new window', $this->_slug ); ?></label>
 			</p>
 			<p>
+				<input type="hidden" value="false" name="<?php echo $this->get_field_name( 'showXavisysLink' ); ?>" />
 				<input class="checkbox" type="checkbox" value="true" id="<?php echo $this->get_field_id( 'showXavisysLink' ); ?>" name="<?php echo $this->get_field_name( 'showXavisysLink' ); ?>"<?php checked( $instance['showXavisysLink'], 'true' ); ?> />
 				<label for="<?php echo $this->get_field_id( 'showXavisysLink' ); ?>"><?php _e( 'Show Link to Twitter Widget Pro', $this->_slug ); ?></label>
 			</p>
-			<p><?php echo $wpTwitterWidget->getSupportForumLink(); ?></p>
+			<p><?php echo $wpTwitterWidget->get_support_forum_link(); ?></p>
+			<script type="text/javascript">
+				jQuery( '#<?php echo $this->get_field_id( 'username' ) ?>' ).on( 'change', function() {
+					jQuery('#<?php echo $this->get_field_id( 'list' ) ?>' ).val(0);
+				});
+				jQuery( '#<?php echo $this->get_field_id( 'list' ) ?>' ).on( 'change', function() {
+					jQuery('#<?php echo $this->get_field_id( 'username' ) ?>' ).val(0);
+				});
+			</script>
 <?php
 		return;
 	}
@@ -182,8 +239,11 @@ class WP_Widget_Twitter_Pro extends WP_Widget {
  * includes filters that modify tweet content for things like linked usernames.
  * It also helps us avoid name collisions.
  */
-class wpTwitterWidget extends XavisysPlugin {
-	private $_api_url;
+class wpTwitterWidget extends RangePlugin {
+	/**
+	 * @var wpTwitter
+	 */
+	private $_wp_twitter_oauth;
 
 	/**
 	 * @var wpTwitterWidget - Static property to hold our singleton instance
@@ -191,6 +251,8 @@ class wpTwitterWidget extends XavisysPlugin {
 	static $instance = false;
 
 	protected function _init() {
+		require_once( 'lib/wp-twitter.php' );
+
 		$this->_hook = 'twitterWidgetPro';
 		$this->_file = plugin_basename( __FILE__ );
 		$this->_pageTitle = __( 'Twitter Widget Pro', $this->_slug );
@@ -213,6 +275,7 @@ class wpTwitterWidget extends XavisysPlugin {
 		add_filter( 'widget_twitter_content', array( $this, 'linkHashtags' ) );
 		add_filter( 'widget_twitter_content', 'convert_chars' );
 		add_filter( $this->_slug .'-opt-twp', array( $this, 'filterSettings' ) );
+		add_filter( $this->_slug .'-opt-twp-authed-users', array( $this, 'authed_users_option' ) );
 		add_shortcode( 'twitter-widget', array( $this, 'handleShortcodes' ) );
 
 		$twp_version = get_option( 'twp_version' );
@@ -220,10 +283,15 @@ class wpTwitterWidget extends XavisysPlugin {
 			update_option( 'twp_version', TWP_VERSION );
 	}
 
-	protected function _postSettingsInit() {
-		if ( ! in_array( $this->_settings['twp']['http_vs_https'], array( 'http', 'https' ) ) )
-			$this->_settings['twp']['http_vs_https'] = 'https';
-		$this->_api_url = $this->_settings['twp']['http_vs_https'] . '://api.twitter.com/1/';
+	protected function _post_settings_init() {
+		$oauth_settings = array(
+			'consumer-key'    => $this->_settings['twp']['consumer-key'],
+			'consumer-secret' => $this->_settings['twp']['consumer-secret'],
+		);
+		$this->_wp_twitter_oauth = new wpTwitter( $oauth_settings );
+
+		// We want to fill 'twp-authed-users' but not overwrite them when saving
+		$this->_settings['twp-authed-users'] = apply_filters($this->_slug.'-opt-twp-authed-users', get_option('twp-authed-users'));
 	}
 
 	/**
@@ -253,62 +321,309 @@ class wpTwitterWidget extends XavisysPlugin {
 			wp_safe_redirect( add_query_arg( $redirect_args, remove_query_arg( array( 'action', '_wpnonce' ) ) ) );
 			exit;
 		}
-	}
 
-	public function show_messages() {
-		if ( ! empty( $_GET['message'] ) && 'clear-locks' == $_GET['message'] ) {
-			if ( empty( $_GET['locks_cleared'] ) || 0 == $_GET['locks_cleared'] )
-				$msg = __( 'There were no locks to clear!', $this->_slug );
-			else
-				$msg = sprintf( _n( 'Successfully cleared %d lock.', 'Successfully cleared %d locks.', $_GET['locks_cleared'], $this->_slug ), $_GET['locks_cleared'] );
-			echo "<div class='updated'>" . esc_html( $msg ) . '</div>';
+		if ( 'remove' == $_GET['action'] ) {
+			check_admin_referer( 'remove-' . $_GET['screen_name'] );
+
+			$redirect_args = array(
+				'message'    => 'removed',
+				'removed' => '',
+			);
+			unset( $this->_settings['twp-authed-users'][strtolower($_GET['screen_name'])] );
+			if ( update_option( 'twp-authed-users', $this->_settings['twp-authed-users'] ) );
+				$redirect_args['removed'] = $_GET['screen_name'];
+
+			wp_safe_redirect( add_query_arg( $redirect_args, $this->get_options_url() ) );
+			exit;
+		}
+		if ( 'authorize' == $_GET['action'] ) {
+			check_admin_referer( 'authorize' );
+			$auth_redirect = add_query_arg( array( 'action' => 'authorized' ), $this->get_options_url() );
+			$token = $this->_wp_twitter_oauth->getRequestToken( $auth_redirect );
+			if ( is_wp_error( $token ) ) {
+				$this->_error = $token;
+				return;
+			}
+			update_option( '_twp_request_token_'.$token['nonce'], $token );
+			$screen_name = empty( $_GET['screen_name'] )? '':$_GET['screen_name'];
+			wp_redirect( $this->_wp_twitter_oauth->get_authorize_url( $screen_name ) );
+			exit;
+		}
+		if ( 'authorized' == $_GET['action'] ) {
+			$redirect_args = array(
+				'message'    => strtolower( $_GET['action'] ),
+				'authorized' => '',
+			);
+			if ( empty( $_GET['oauth_verifier'] ) || empty( $_GET['nonce'] ) )
+				wp_safe_redirect( add_query_arg( $redirect_args, $this->get_options_url() ) );
+
+			$this->_wp_twitter_oauth->set_token( get_option( '_twp_request_token_'.$_GET['nonce'] ) );
+			delete_option( '_twp_request_token_'.$_GET['nonce'] );
+
+			$token = $this->_wp_twitter_oauth->get_access_token( $_GET['oauth_verifier'] );
+			if ( ! is_wp_error( $token ) ) {
+				$this->_settings['twp-authed-users'][strtolower($token['screen_name'])] = $token;
+				update_option( 'twp-authed-users', $this->_settings['twp-authed-users'] );
+
+				$redirect_args['authorized'] = $token['screen_name'];
+			}
+			wp_safe_redirect( add_query_arg( $redirect_args, $this->get_options_url() ) );
+			exit;
 		}
 	}
 
-	public function addOptionsMetaBoxes() {
-		add_meta_box( $this->_slug . '-general-settings', __( 'General Settings', $this->_slug ), array( $this, 'generalSettingsMetaBox' ), 'xavisys-' . $this->_slug, 'main' );
-		add_meta_box( $this->_slug . '-defaults', __( 'Defaults', $this->_slug ), array( $this, 'defaultSettingsMetaBox' ), 'xavisys-' . $this->_slug, 'main' );
+	public function show_messages() {
+		if ( ! empty( $_GET['message'] ) ) {
+			if ( 'clear-locks' == $_GET['message'] ) {
+				if ( empty( $_GET['locks_cleared'] ) || 0 == $_GET['locks_cleared'] )
+					$msg = __( 'There were no locks to clear!', $this->_slug );
+				else
+					$msg = sprintf( _n( 'Successfully cleared %d lock.', 'Successfully cleared %d locks.', $_GET['locks_cleared'], $this->_slug ), $_GET['locks_cleared'] );
+			} elseif ( 'authorized' == $_GET['message'] ) {
+				if ( ! empty( $_GET['authorized'] ) )
+					$msg = sprintf( __( 'Successfully authorized @%s', $this->_slug ), $_GET['authorized'] );
+				else
+					$msg = __( 'There was a problem authorizing your account.', $this->_slug );
+			} elseif ( 'removed' == $_GET['message'] ) {
+				if ( ! empty( $_GET['removed'] ) )
+					$msg = sprintf( __( 'Successfully removed @%s', $this->_slug ), $_GET['removed'] );
+				else
+					$msg = __( 'There was a problem removing your account.', $this->_slug );
+			}
+			if ( ! empty( $msg ) )
+				echo "<div class='updated'><p>" . esc_html( $msg ) . '</p></div>';
+		}
+
+		if ( ! empty( $this->_error ) && is_wp_error( $this->_error ) ) {
+			$msg = '<p>' . implode( '</p><p>', $this->_error->get_error_messages() ) . '</p>';
+			echo '<div class="error">' . $msg . '</div>';
+		}
+
+		if ( empty( $this->_settings['twp']['consumer-key'] ) || empty( $this->_settings['twp']['consumer-secret'] ) ) {
+			$msg = sprintf( __( 'You need to <a href="%s">set up your Twitter app keys</a>.', $this->_slug ), $this->get_options_url() );
+			echo '<div class="error"><p>' . $msg . '</p></div>';
+		}
+
+		if ( empty( $this->_settings['twp-authed-users'] ) ) {
+			$msg = sprintf( __( 'You need to <a href="%s">authorize your Twitter accounts</a>.', $this->_slug ), $this->get_options_url() );
+			echo '<div class="error"><p>' . $msg . '</p></div>';
+		}
 	}
 
-	public function generalSettingsMetaBox() {
+	public function add_options_meta_boxes() {
+		add_meta_box( $this->_slug . '-oauth', __( 'Authenticated Twitter Accounts', $this->_slug ), array( $this, 'oauth_meta_box' ), 'range-' . $this->_slug, 'main' );
+		add_meta_box( $this->_slug . '-general-settings', __( 'General Settings', $this->_slug ), array( $this, 'general_settings_meta_box' ), 'range-' . $this->_slug, 'main' );
+		add_meta_box( $this->_slug . '-defaults', __( 'Default Settings for Shortcodes', $this->_slug ), array( $this, 'default_settings_meta_box' ), 'range-' . $this->_slug, 'main' );
+	}
+
+	public function oauth_meta_box() {
+		$authorize_url = wp_nonce_url( add_query_arg( array( 'action' => 'authorize' ) ), 'authorize' );
+
+		?>
+		<table class="widefat">
+			<thead>
+				<tr valign="top">
+					<th scope="row">
+						<?php _e( 'Username', $this->_slug );?>
+					</th>
+					<th scope="row">
+						<?php _e( 'Lists Rate Usage', $this->_slug );?>
+					</th>
+					<th scope="row">
+						<?php _e( 'Statuses Rate Usage', $this->_slug );?>
+					</th>
+				</tr>
+			</thead>
+		<?php
+		foreach ( $this->_settings['twp-authed-users'] as $u ) {
+			$this->_wp_twitter_oauth->set_token( $u );
+			$rates = $this->_wp_twitter_oauth->send_authed_request( 'application/rate_limit_status', 'GET', array( 'resources' => 'statuses,lists' ) );
+			$style = $auth_link = '';
+			if ( is_wp_error( $rates ) ) {
+				$query_args = array(
+					'action' => 'authorize',
+					'screen_name' => $u['screen_name'],
+				);
+				$authorize_user_url = wp_nonce_url( add_query_arg( $query_args ), 'authorize' );
+				$style = 'color:red;';
+				$auth_link = ' - <a href="' . esc_url( $authorize_user_url ) . '">' . __( 'Reauthorize', $this->_slug ) . '</a>';
+			}
+			$query_args = array(
+				'action' => 'remove',
+				'screen_name' => $u['screen_name'],
+			);
+			$remove_user_url = wp_nonce_url( add_query_arg( $query_args ), 'remove-' . $u['screen_name'] );
+			?>
+				<tr valign="top">
+					<th scope="row" style="<?php echo esc_attr( $style ); ?>">
+						<strong>@<?php echo esc_html( $u['screen_name'] ) . $auth_link;?></strong>
+						<br /><a href="<?php echo esc_url( $remove_user_url ) ?>"><?php _e( 'Remove', $this->_slug ) ?></a>
+					</th>
+					<?php
+					if ( ! is_wp_error( $rates ) ) {
+						$display_rates = array(
+							__( 'Lists', $this->_slug ) => $rates->resources->lists->{'/lists/statuses'},
+							__( 'Statuses', $this->_slug ) => $rates->resources->statuses->{'/statuses/user_timeline'},
+						);
+						foreach ( $display_rates as $title => $rate ) {
+						?>
+						<td>
+							<strong><?php echo esc_html( $title ); ?></strong>
+							<p>
+								<?php echo sprintf( __( 'Used: %d', $this->_slug ), $rate->limit - $rate->remaining ); ?><br />
+								<?php echo sprintf( __( 'Remaining: %d', $this->_slug ), $rate->remaining ); ?><br />
+								<?php
+								$minutes = ceil( ( $rate->reset - gmdate( 'U' ) ) / 60 );
+								echo sprintf( _n( 'Limits reset in: %d minutes', 'Limits reset in: %d minutes', $minutes, $this->_slug ), $minutes );
+								?><br />
+								<small><?php _e( 'This is overall usage, not just usage from Twitter Widget Pro', $this->_slug ); ?></small>
+							</p>
+						</td>
+						<?php
+						}
+					} else {
+						?>
+						<td>
+							<p><?php _e( 'There was an error checking your rate limit.', $this->_slug ); ?></p>
+						</td>
+						<td>
+							<p><?php _e( 'There was an error checking your rate limit.', $this->_slug ); ?></p>
+						</td>
+						<?php
+					}
+					?>
+				</tr>
+				<?php
+			}
+		?>
+		</table>
+		<?php
+		if ( empty( $this->_settings['twp']['consumer-key'] ) || empty( $this->_settings['twp']['consumer-secret'] ) ) {
+		?>
+		<p>
+			<strong><?php _e( 'You need to fill in the Consumer key and Consumer secret before you can authorize accounts.', $this->_slug ) ?></strong>
+		</p>
+		<?php
+		} else {
+		?>
+		<p>
+			<a href="<?php echo esc_url( $authorize_url );?>" class="button button-large button-primary"><?php _e( 'Authorize New Account', $this->_slug ); ?></a>
+		</p>
+		<?php
+		}
+	}
+	public function general_settings_meta_box() {
 		$clear_locks_url = wp_nonce_url( add_query_arg( array( 'action' => 'clear-locks' ) ), 'clear-locks' );
 		?>
 				<table class="form-table">
 					<tr valign="top">
 						<th scope="row">
-							<?php _e( "HTTP vs HTTPS:", $this->_slug );?>
+							<label for="twp_consumer_key"><?php _e( 'Consumer key', $this->_slug );?></label>
 						</th>
 						<td>
-							<input class="checkbox" type="radio" value="https" id="twp_http_vs_https_https" name="twp[http_vs_https]"<?php checked( $this->_settings['twp']['http_vs_https'], 'https' ); ?> />
-							<label for="twp_http_vs_https_https"><?php _e( 'Use Twitter API via HTTPS', $this->_slug ); ?></label>
-							<br />
-							<input class="checkbox" type="radio" value="http" id="twp_http_vs_https_http" name="twp[http_vs_https]"<?php checked( $this->_settings['twp']['http_vs_https'], 'http' ); ?> />
-							<label for="twp_http_vs_https_http"><?php _e( 'Use Twitter API via HTTP', $this->_slug ); ?></label>
-							<br />
-							<small><?php _e( "Some servers seem to have issues connecting via HTTPS.  If you're experiencing issues with your feed not updating, try setting this to HTTP.", $this->_slug ); ?></small>
+							<input id="twp_consumer_key" name="twp[consumer-key]" type="text" class="regular-text code" value="<?php esc_attr_e( $this->_settings['twp']['consumer-key'] ); ?>" size="40" />
 						</td>
 					</tr>
+					<tr valign="top">
+						<th scope="row">
+							<label for="twp_consumer_secret"><?php _e( 'Consumer secret', $this->_slug );?></label>
+						</th>
+						<td>
+							<input id="twp_consumer_secret" name="twp[consumer-secret]" type="text" class="regular-text code" value="<?php esc_attr_e( $this->_settings['twp']['consumer-secret'] ); ?>" size="40" />
+						</td>
+					</tr>
+					<?php
+					if ( empty( $this->_settings['twp']['consumer-key'] ) || empty( $this->_settings['twp']['consumer-secret'] ) ) {
+					?>
+					<tr valign="top">
+						<th scope="row">&nbsp;</th>
+						<td>
+							<strong><?php _e( 'Directions to get the Consumer Key and Consumer Secret', $this->_slug ) ?></strong>
+							<ol>
+								<li><a href="https://dev.twitter.com/apps/new"><?php _e( 'Add a new Twitter application', $this->_slug ) ?></a></li>
+								<li><?php _e( "Fill in Name, Description, Website, and Callback URL (don't leave any blank) with anything you want" ) ?></a></li>
+								<li><?php _e( "Agree to rules, fill out captcha, and submit your application" ) ?></a></li>
+								<li><?php _e( "Copy the Consumer key and Consumer secret into the fields above" ) ?></a></li>
+								<li><?php _e( "Click the Update Options button at the bottom of this page" ) ?></a></li>
+							</ol>
+						</td>
+					</tr>
+					<?php
+					}
+					?>
 					<tr>
 						<th scope="row">
-							<?php _e( "Clear Update Locks:", $this->_slug );?>
+							<?php _e( "Clear Update Locks", $this->_slug );?>
 						</th>
 						<td>
 							<a href="<?php echo esc_url( $clear_locks_url ); ?>"><?php _e( 'Clear Update Locks', $this->_slug ); ?></a><br />
-							<small><?php _e( "A small perecntage of servers seem to have issues where an update lock isn't getting cleared.  If you're experiencing issues with your feed not updating, try clearing the update locks.", $this->_slug ); ?></small>
+							<small><?php _e( "A small percentage of servers seem to have issues where an update lock isn't getting cleared.  If you're experiencing issues with your feed not updating, try clearing the update locks.", $this->_slug ); ?></small>
 						</td>
 					</tr>
 				</table>
 		<?php
 	}
-	public function defaultSettingsMetaBox() {
+	public function default_settings_meta_box() {
+		$users = $this->get_users_list( true );
+		$lists = $this->get_lists();
 		?>
+				<p><?php _e( 'These settings are the default for the shortcodes and all of them can be overridden by specifying a different value in the shortcode itself.  All settings for widgets are locate in the individual widget.', $this->_slug ) ?></p>
 				<table class="form-table">
 					<tr valign="top">
 						<th scope="row">
 							<label for="twp_username"><?php _e( 'Twitter username:', $this->_slug ); ?></label>
 						</th>
 						<td>
-							<input id="twp_username" name="twp[username]" type="text" class="regular-text code" value="<?php esc_attr_e( $this->_settings['twp']['username'] ); ?>" size="40" />
+							<select id="twp_username" name="twp[username]">
+								<option></option>
+								<?php
+								$selected = false;
+								foreach ( $users as $u ) {
+									?>
+									<option value="<?php echo esc_attr( strtolower( $u['screen_name'] ) ); ?>"<?php $s = selected( strtolower( $u['screen_name'] ), strtolower( $this->_settings['twp']['username'] ) ) ?>><?php echo esc_html( $u['screen_name'] ); ?></option>
+									<?php
+									if ( ! empty( $s ) )
+										$selected = true;
+								}
+								?>
+							</select>
+							<?php
+							if ( ! $selected && ! empty( $this->_settings['twp']['username'] ) ) {
+								$query_args = array(
+									'action' => 'authorize',
+									'screen_name' => $this->_settings['twp']['username'],
+								);
+								$authorize_user_url = wp_nonce_url( add_query_arg( $query_args, $this->get_options_url() ), 'authorize' );
+								?>
+							<p>
+								<a href="<?php echo esc_url( $authorize_user_url ); ?>" style="color:red;">
+									<?php _e( 'You need to authorize this account.', $this->_slug ); ?>
+								</a>
+							</p>
+								<?php
+							}
+							?>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row">
+							<label for="twp_list"><?php _e( 'Twitter list:', $this->_slug ); ?></label>
+						</th>
+						<td>
+							<select id="twp_list" name="twp[list]">
+								<option></option>
+								<?php
+								foreach ( $lists as $user => $user_lists ) {
+									echo '<optgroup label="' . esc_attr( $user ) . '">';
+									foreach ( $user_lists as $list_id => $list_name ) {
+										?>
+										<option value="<?php echo esc_attr( $user . '::' . $list_id ); ?>"<?php $s = selected( $user . '::' . $list_id, strtolower( $this->_settings['twp']['list'] ) ) ?>><?php echo esc_html( $list_name ); ?></option>
+										<?php
+									}
+									echo '</optgroup>';
+								}
+								?>
+							</select>
 						</td>
 					</tr>
 					<tr valign="top">
@@ -357,14 +672,6 @@ class wpTwitterWidget extends XavisysPlugin {
 					</tr>
 					<tr valign="top">
 						<th scope="row">
-							<label for="twp_fetchTimeOut"><?php _e( 'Number of seconds to wait for a response from Twitter ( default 2 ):', $this->_slug ); ?></label>
-						</th>
-						<td>
-							<input id="twp_fetchTimeOut" name="twp[fetchTimeOut]" type="text" class="regular-text code" value="<?php esc_attr_e( $this->_settings['twp']['fetchTimeOut'] ); ?>" size="40" />
-						</td>
-					</tr>
-					<tr valign="top">
-						<th scope="row">
 							<label for="twp_showts"><?php _e( 'Show date/time of Tweet ( rather than 2 ____ ago ):', $this->_slug ); ?></label>
 						</th>
 						<td>
@@ -381,7 +688,7 @@ class wpTwitterWidget extends XavisysPlugin {
 					</tr>
 					<tr valign="top">
 						<th scope="row">
-							<label for="twp_dateFormat"><?php echo sprintf( __( 'Format to dispaly the date in, uses <a href="%s">PHP date()</a> format:', $this->_slug ), 'http://php.net/date' ); ?></label>
+							<label for="twp_dateFormat"><?php echo sprintf( __( 'Format to display the date in, uses <a href="%s">PHP date()</a> format:', $this->_slug ), 'http://php.net/date' ); ?></label>
 						</th>
 						<td>
 							<input id="twp_dateFormat" name="twp[dateFormat]" type="text" class="regular-text code" value="<?php esc_attr_e( $this->_settings['twp']['dateFormat'] ); ?>" size="40" />
@@ -392,12 +699,15 @@ class wpTwitterWidget extends XavisysPlugin {
 							<?php _e( "Other Setting:", $this->_slug );?>
 						</th>
 						<td>
+							<input type="hidden" value="false" name="twp[showretweets]" />
 							<input class="checkbox" type="checkbox" value="true" id="twp_showretweets" name="twp[showretweets]"<?php checked( $this->_settings['twp']['showretweets'], 'true' ); ?> />
 							<label for="twp_showretweets"><?php _e( 'Include retweets', $this->_slug ); ?></label>
 							<br />
+							<input type="hidden" value="false" name="twp[hidereplies]" />
 							<input class="checkbox" type="checkbox" value="true" id="twp_hidereplies" name="twp[hidereplies]"<?php checked( $this->_settings['twp']['hidereplies'], 'true' ); ?> />
 							<label for="twp_hidereplies"><?php _e( 'Hide @replies', $this->_slug ); ?></label>
 							<br />
+							<input type="hidden" value="false" name="twp[hidefrom]" />
 							<input class="checkbox" type="checkbox" value="true" id="twp_hidefrom" name="twp[hidefrom]"<?php checked( $this->_settings['twp']['hidefrom'], 'true' ); ?> />
 							<label for="twp_hidefrom"><?php _e( 'Hide sending applications', $this->_slug ); ?></label>
 							<br />
@@ -409,9 +719,11 @@ class wpTwitterWidget extends XavisysPlugin {
 							<input class="checkbox" type="checkbox" value="true" id="twp_showfollow" name="twp[showfollow]"<?php checked( $this->_settings['twp']['showfollow'], 'true' ); ?> />
 							<label for="twp_showfollow"><?php _e( 'Show Follow Link', $this->_slug ); ?></label>
 							<br />
+							<input type="hidden" value="false" name="twp[targetBlank]" />
 							<input class="checkbox" type="checkbox" value="true" id="twp_targetBlank" name="twp[targetBlank]"<?php checked( $this->_settings['twp']['targetBlank'], 'true' ); ?> />
 							<label for="twp_targetBlank"><?php _e( 'Open links in a new window', $this->_slug ); ?></label>
 							<br />
+							<input type="hidden" value="false" name="twp[showXavisysLink" />
 							<input class="checkbox" type="checkbox" value="true" id="twp_showXavisysLink" name="twp[showXavisysLink]"<?php checked( $this->_settings['twp']['showXavisysLink'], 'true' ); ?> />
 							<label for="twp_showXavisysLink"><?php _e( 'Show Link to Twitter Widget Pro', $this->_slug ); ?></label>
 						</td>
@@ -440,25 +752,25 @@ class wpTwitterWidget extends XavisysPlugin {
 	}
 
 	/**
-	 * Replace #hashtag with a link to search.twitter.com for that hashtag
+	 * Replace #hashtag with a link to twitter.com for that hashtag
 	 *
 	 * @param string $text - Tweet text
 	 * @return string - Tweet text with #hashtags linked
 	 */
 	public function linkHashtags( $text ) {
-		$text = preg_replace_callback('/(^|\s)(#\w*)/i', array($this, '_linkHashtagsCallback'), $text);
+		$text = preg_replace_callback('/(^|\s)(#[\w\x{00C0}-\x{00D6}\x{00D8}-\x{00F6}\x{00F8}-\x{00FF}]+)/iu', array($this, '_linkHashtagsCallback'), $text);
 		return $text;
 	}
 
 	/**
-	 * Replace #hashtag with a link to search.twitter.com for that hashtag
+	 * Replace #hashtag with a link to twitter.com for that hashtag
 	 *
 	 * @param array $matches - Tweet text
 	 * @return string - Tweet text with #hashtags linked
 	 */
 	private function _linkHashtagsCallback( $matches ) {
 		$linkAttrs = array(
-			'href'	=> 'http://search.twitter.com/search?q=' . urlencode( $matches[2] ),
+			'href'	=> 'http://twitter.com/search?q=' . urlencode( $matches[2] ),
 			'class'	=> 'twitter-hashtag'
 		);
 		return $matches[1] . $this->_buildLink( $matches[2], $linkAttrs );
@@ -471,30 +783,62 @@ class wpTwitterWidget extends XavisysPlugin {
 	 * @return string - Tweet text with URLs repalced with links
 	 */
 	public function linkUrls( $text ) {
-		/**
-		 * match protocol://address/path/file.extension?some=variable&another=asf%
-		 * $1 is a possible space, this keeps us from linking href="[link]" etc
-		 * $2 is the whole URL
-		 * $3 is protocol://
-		 * $4 is the URL without the protocol://
-		 * $5 is the URL parameters
-		 */
-		$text = preg_replace_callback("/(^|\s)(([a-zA-Z]+:\/\/)([a-z][a-z0-9_\..-]*[a-z]{2,6})([a-zA-Z0-9~\/*-?&%]*))/i", array($this, '_linkUrlsCallback'), $text);
+		$text = " {$text} "; // Pad with whitespace to simplify the regexes
 
-		/**
-		 * match www.something.domain/path/file.extension?some=variable&another=asf%
-		 * $1 is a possible space, this keeps us from linking href="[link]" etc
-		 * $2 is the whole URL that was matched.  The protocol is missing, so we assume http://
-		 * $3 is www.
-		 * $4 is the URL matched without the www.
-		 * $5 is the URL parameters
-		 */
-		$text = preg_replace_callback("/(^|\s)(www\.([a-z][a-z0-9_\..-]*[a-z]{2,6})([a-zA-Z0-9~\/*-?&%]*))/i", array($this, '_linkUrlsCallback'), $text);
+		$url_clickable = '~
+			([\\s(<.,;:!?])                                        # 1: Leading whitespace, or punctuation
+			(                                                      # 2: URL
+				[\\w]{1,20}+://                                # Scheme and hier-part prefix
+				(?=\S{1,2000}\s)                               # Limit to URLs less than about 2000 characters long
+				[\\w\\x80-\\xff#%\\~/@\\[\\]*(+=&$-]*+         # Non-punctuation URL character
+				(?:                                            # Unroll the Loop: Only allow puctuation URL character if followed by a non-punctuation URL character
+					[\'.,;:!?)]                            # Punctuation URL character
+					[\\w\\x80-\\xff#%\\~/@\\[\\]*(+=&$-]++ # Non-punctuation URL character
+				)*
+			)
+			(\)?)                                                  # 3: Trailing closing parenthesis (for parethesis balancing post processing)
+		~xS';
+		// The regex is a non-anchored pattern and does not have a single fixed starting character.
+		// Tell PCRE to spend more time optimizing since, when used on a page load, it will probably be used several times.
+
+		$text = preg_replace_callback( $url_clickable, array($this, '_make_url_clickable_cb'), $text );
+
+		$text = preg_replace_callback( '#([\s>])((www|ftp)\.[\w\\x80-\\xff\#$%&~/.\-;:=,?@\[\]+]+)#is', array($this, '_make_web_ftp_clickable_cb' ), $text );
+		$text = preg_replace_callback( '#([\s>])([.0-9a-z_+-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})#i', array($this, '_make_email_clickable_cb' ), $text );
+
+		$text = substr( $text, 1, -1 ); // Remove our whitespace padding.
 
 		return $text;
 	}
 
-	private function _linkUrlsCallback ( $matches ) {
+	function _make_web_ftp_clickable_cb($matches) {
+		$ret = '';
+		$dest = $matches[2];
+		$dest = 'http://' . $dest;
+		$dest = esc_url($dest);
+		if ( empty($dest) )
+			return $matches[0];
+
+		// removed trailing [.,;:)] from URL
+		if ( in_array( substr($dest, -1), array('.', ',', ';', ':', ')') ) === true ) {
+			$ret = substr($dest, -1);
+			$dest = substr($dest, 0, strlen($dest)-1);
+		}
+		$linkAttrs = array(
+			'href'	=> $dest
+		);
+		return $matches[1] . $this->_buildLink( $dest, $linkAttrs ) . $ret;
+	}
+
+	private function _make_email_clickable_cb( $matches ) {
+		$email = $matches[2] . '@' . $matches[3];
+		$linkAttrs = array(
+			'href'	=> 'mailto:' . $email
+		);
+		return $matches[1] . $this->_buildLink( $email, $linkAttrs );
+	}
+
+	private function _make_url_clickable_cb ( $matches ) {
 		$linkAttrs = array(
 			'href'	=> $matches[2]
 		);
@@ -509,10 +853,9 @@ class wpTwitterWidget extends XavisysPlugin {
 		$attributes = array_filter( wp_parse_args( $attributes ), array( $this, '_notEmpty' ) );
 		$attributes = apply_filters( 'widget_twitter_link_attributes', $attributes );
 		$attributes = wp_parse_args( $attributes );
-		if ( strtolower( 'www' == substr( $attributes['href'], 0, 3 ) ) )
-			$attributes['href'] = 'http://' . $attributes['href'];
 
 		$text = apply_filters( 'widget_twitter_link_text', $text );
+		$noFilter = apply_filters( 'widget_twitter_link_nofilter', $noFilter );
 		$link = '<a';
 		foreach ( $attributes as $name => $value ) {
 			$link .= ' ' . esc_attr( $name ) . '="' . esc_attr( $value ) . '"';
@@ -559,12 +902,12 @@ class wpTwitterWidget extends XavisysPlugin {
 		$widgetContent = $args['before_widget'] . '<div>';
 
 		if ( empty( $args['title'] ) )
-			$args['title'] = "Twitter: {$args['username']}";
+			$args['title'] = sprintf( __( 'Twitter: %s', $this->_slug ), $args['username'] );
 
 		$args['title'] = apply_filters( 'twitter-widget-title', $args['title'], $args );
 		$args['title'] = "<span class='twitterwidget twitterwidget-title'>{$args['title']}</span>";
 		$widgetContent .= $args['before_title'] . $args['title'] . $args['after_title'];
-		if ( !empty( $tweets[0] ) && !empty( $args['avatar'] ) ) {
+		if ( !empty( $tweets[0] ) && is_object( $tweets[0] ) && !empty( $args['avatar'] ) ) {
 			$widgetContent .= '<div class="twitter-avatar">';
 			$widgetContent .= $this->_getProfileImage( $tweets[0]->user, $args );
 			$widgetContent .= '</div>';
@@ -637,7 +980,7 @@ class wpTwitterWidget extends XavisysPlugin {
 		}
 
 		$widgetContent .= '</ul>';
-		if ( 'true' == $args['showfollow'] ) {
+		if ( 'true' == $args['showfollow'] && ! empty( $args['username'] ) ) {
 			$widgetContent .= '<div class="follow-button">';
 			$linkText = "@{$args['username']}";
 			$linkAttrs = array(
@@ -654,10 +997,10 @@ class wpTwitterWidget extends XavisysPlugin {
 		}
 
 		if ( 'true' == $args['showXavisysLink'] ) {
-			$widgetContent .= '<div class="xavisys-link"><span class="xavisys-link-text">';
+			$widgetContent .= '<div class="range-link"><span class="range-link-text">';
 			$linkAttrs = array(
 				'href'	=> 'http://bluedogwebservices.com/wordpress-plugin/twitter-widget-pro/',
-				'title'	=> __( 'Brought to you by BlueDog Web Services - A WordPress development company', $this->_slug )
+				'title'	=> __( 'Brought to you by Range - A WordPress design and development company', $this->_slug )
 			);
 			$widgetContent .= __( 'Powered by', $this->_slug );
 			$widgetContent .= $this->_buildLink( 'WordPress Twitter Widget Pro', $linkAttrs );
@@ -707,9 +1050,10 @@ class wpTwitterWidget extends XavisysPlugin {
 	 * @return array - Array of objects
 	 */
 	private function _getTweets( $widgetOptions ) {
-		$key = 'twp_' . md5( $this->_getFeedUrl( $widgetOptions ) );
+		$key = 'twp_' . md5( maybe_serialize( $this->_get_feed_request_settings( $widgetOptions ) ) );
 		return tlc_transient( $key )
 			->expires_in( 300 ) // cache for 5 minutes
+			->extend_on_fail( 120 ) // On a failed call, don't try again for 2 minutes
 			->updates_with( array( $this, 'parseFeed' ), array( $widgetOptions ) )
 			->get();
 	}
@@ -721,43 +1065,42 @@ class wpTwitterWidget extends XavisysPlugin {
 	 * @return array
 	 */
 	public function parseFeed( $widgetOptions ) {
-		$feedUrl = $this->_getFeedUrl( $widgetOptions );
-		$resp = wp_remote_request( $feedUrl, array( 'timeout' => $widgetOptions['fetchTimeOut'] ) );
+		$parameters = $this->_get_feed_request_settings( $widgetOptions );
+		$response = array();
 
-		if ( !is_wp_error( $resp ) && $resp['response']['code'] >= 200 && $resp['response']['code'] < 300 ) {
-			$decodedResponse = json_decode( $resp['body'] );
-			if ( empty( $decodedResponse ) || ! is_array( $decodedResponse ) ) {
+		if ( ! empty( $parameters['screen_name'] ) ) {
+			if ( empty( $this->_settings['twp-authed-users'][strtolower( $parameters['screen_name'] )] ) ) {
 				if ( empty( $widgetOptions['errmsg'] ) )
-					$widgetOptions['errmsg'] = __( 'Invalid Twitter Response.', $this->_slug );
-			} elseif( !empty( $decodedResponse->error ) ) {
-				if ( empty( $widgetOptions['errmsg'] ) )
-					$widgetOptions['errmsg'] = $decodedResponse->error;
+					$widgetOptions['errmsg'] = __( 'Account needs to be authorized', $this->_slug );
 			} else {
-				return $decodedResponse;
+				$this->_wp_twitter_oauth->set_token( $this->_settings['twp-authed-users'][strtolower( $parameters['screen_name'] )] );
+				$response = $this->_wp_twitter_oauth->send_authed_request( 'statuses/user_timeline', 'GET', $parameters );
+				if ( ! is_wp_error( $response ) )
+					return $response;
 			}
-		} else {
-			// Failed to fetch url;
-			if ( empty( $widgetOptions['errmsg'] ) )
-				$widgetOptions['errmsg'] = __( 'Could not connect to Twitter', $this->_slug );
+		} elseif ( ! empty( $parameters['list_id'] ) ) {
+			$list_info = explode( '::', $widgetOptions['list'] );
+			$user = array_shift( $list_info );
+			$this->_wp_twitter_oauth->set_token( $this->_settings['twp-authed-users'][strtolower( $user )] );
+
+			$response = $this->_wp_twitter_oauth->send_authed_request( 'lists/statuses', 'GET', $parameters );
+			if ( ! is_wp_error( $response ) )
+				return $response;
 		}
-		do_action( 'widget_twitter_parsefeed_error', $resp, $feedUrl, $widgetOptions );
+
+		if ( empty( $widgetOptions['errmsg'] ) )
+			$widgetOptions['errmsg'] = __( 'Invalid Twitter Response.', $this->_slug );
+		do_action( 'widget_twitter_parsefeed_error', $response, $parameters, $widgetOptions );
 		throw new Exception( $widgetOptions['errmsg'] );
 	}
 
 	/**
-	 * Gets the URL for the desired feed.
+	 * Gets the parameters for the desired feed.
 	 *
 	 * @param array $widgetOptions - settings needed such as username, feet type, etc
-	 * @param string[optional] $type - 'rss' or 'json'
-	 * @param bool[optional] $count - If true, it adds the count parameter to the URL
-	 * @return string - Twitter feed URL
+	 * @return array - Parameters ready to pass to a Twitter request
 	 */
-	private function _getFeedUrl( $widgetOptions, $type = 'json', $count = true ) {
-		if ( !in_array( $type, array( 'rss', 'json' ) ) )
-			$type = 'json';
-
-		$req = $this->_api_url . "statuses/user_timeline.{$type}";
-
+	private function _get_feed_request_settings( $widgetOptions ) {
 		/**
 		 * user_id
 		 * screen_name *
@@ -772,17 +1115,25 @@ class wpTwitterWidget extends XavisysPlugin {
 		 * contributor_details
 		 */
 
-		$req = add_query_arg( array( 'screen_name' => $widgetOptions['username'] ), $req );
-		if ( $count )
-			$req = add_query_arg( array( 'count' => $widgetOptions['items'] ), $req );
+		$parameters = array(
+			'count'       => $widgetOptions['items'],
+		);
+
+		if ( ! empty( $widgetOptions['username'] ) ) {
+			$parameters['screen_name'] = $widgetOptions['username'];
+		} elseif ( ! empty( $widgetOptions['list'] ) ) {
+			$list_info = explode( '::', $widgetOptions['list'] );
+			$parameters['list_id'] = array_pop( $list_info );
+		}
 
 		if ( 'true' == $widgetOptions['hidereplies'] )
-			$req = add_query_arg( array( 'exclude_replies' => 'true' ), $req );
+			$parameters['exclude_replies'] = 'true';
 
-		if ( 'true' == $widgetOptions['showretweets'] )
-			$req = add_query_arg( array( 'include_rts' => 'true' ), $req );
+		if ( 'true' != $widgetOptions['showretweets'] )
+			$parameters['include_rts'] = 'false';
 
-		return $req;
+		return $parameters;
+
 	}
 
 	/**
@@ -844,9 +1195,8 @@ class wpTwitterWidget extends XavisysPlugin {
 			'href'  => "http://twitter.com/{$user->screen_name}",
 			'title' => $user->name
 		);
-		$img = $this->_api_url . 'users/profile_image';
-		$img = add_query_arg( array( 'screen_name' => $user->screen_name ), $img );
-		$img = add_query_arg( array( 'size' => $args['avatar'] ), $img );
+		$replace = ( 'original' == $args['avatar'] )? '.':"_{$args['avatar']}.";
+		$img = str_replace( '_normal.', $replace, $user->profile_image_url_https );
 
 		return $this->_buildLink( "<img alt='{$user->name}' src='{$img}' />", $linkAttrs, true );
 	}
@@ -866,8 +1216,8 @@ class wpTwitterWidget extends XavisysPlugin {
 			'after_title'     => '</h2>',
 			'title'           => '',
 			'errmsg'          => '',
-			'fetchTimeOut'    => '2',
 			'username'        => '',
+			'list'            => '',
 			'hidereplies'     => 'false',
 			'showretweets'    => 'true',
 			'hidefrom'        => 'false',
@@ -885,10 +1235,6 @@ class wpTwitterWidget extends XavisysPlugin {
 		 * Attribute names are strtolower'd, so we need to fix them to match
 		 * the names used through the rest of the plugin
 		 */
-		if ( array_key_exists( 'fetchtimeout', $attr ) ) {
-			$attr['fetchTimeOut'] = $attr['fetchtimeout'];
-			unset( $attr['fetchtimeout'] );
-		}
 		if ( array_key_exists( 'showxavisyslink', $attr ) ) {
 			$attr['showXavisysLink'] = $attr['showxavisyslink'];
 			unset( $attr['showxavisyslink'] );
@@ -935,12 +1281,20 @@ class wpTwitterWidget extends XavisysPlugin {
 		return $this->display( $attr );
 	}
 
+	public function authed_users_option( $settings ) {
+		if ( ! is_array( $settings ) )
+			return array();
+		return $settings;
+	}
+
 	public function filterSettings( $settings ) {
 		$defaultArgs = array(
+			'consumer-key'    => '',
+			'consumer-secret' => '',
 			'title'           => '',
 			'errmsg'          => '',
-			'fetchTimeOut'    => '2',
 			'username'        => '',
+			'list'            => '',
 			'http_vs_https'   => 'https',
 			'hidereplies'     => 'false',
 			'showretweets'    => 'true',
@@ -973,6 +1327,40 @@ class wpTwitterWidget extends XavisysPlugin {
 
 	public function getSettings( $settings ) {
 		return $this->fixAvatar( wp_parse_args( $settings, $this->_settings['twp'] ) );
+	}
+
+	public function get_users_list( $authed = false ) {
+		$users = $this->_settings['twp-authed-users'];
+		if ( $authed ) {
+			if ( ! empty( $this->_authed_users ) )
+				return $this->_authed_users;
+			foreach ( $users as $key => $u ) {
+				$this->_wp_twitter_oauth->set_token( $u );
+				$rates = $this->_wp_twitter_oauth->send_authed_request( 'application/rate_limit_status', 'GET', array( 'resources' => 'statuses,lists' ) );
+				if ( is_wp_error( $rates ) )
+					unset( $users[$key] );
+			}
+			$this->_authed_users = $users;
+		}
+		return $users;
+	}
+
+	public function get_lists() {
+		if ( ! empty( $this->_lists ) )
+			return $this->_lists;
+		$this->_lists =  array();
+		foreach ( $this->_settings['twp-authed-users'] as $key => $u ) {
+			$this->_wp_twitter_oauth->set_token( $u );
+			$user_lists = $this->_wp_twitter_oauth->send_authed_request( 'lists/list', 'GET', array( 'resources' => 'statuses,lists' ) );
+
+			if ( ! empty( $user_lists ) && ! is_wp_error( $user_lists ) ) {
+				$this->_lists[$key] = array();
+				foreach ( $user_lists as $l ) {
+					$this->_lists[$key][$l->id] = $l->name;
+				}
+			}
+		}
+		return $this->_lists;
 	}
 }
 // Instantiate our class

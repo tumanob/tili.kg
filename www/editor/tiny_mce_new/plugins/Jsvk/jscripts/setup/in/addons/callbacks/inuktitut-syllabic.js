@@ -1,1 +1,0 @@
-VirtualKeyboard.Langs.IKU.charProcessor;
