@@ -1,0 +1,2141 @@
+# Translation of the WordPress plugin WP-Filebase 0.1.3.0 by Fabian Schlieper.
+# Copyright (C) 2010 Fabian Schlieper
+# This file is distributed under the same license as the WP-Filebase package.
+# Fabian Schlieper <fabian@fabi.me>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-Filebase 0.1.3.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-filebase\n"
+"POT-Creation-Date: 2010-01-18 23:16+0000\n"
+"PO-Revision-Date: 2011-11-20 21:20+0100\n"
+"Last-Translator: Fabian Schlieper <fabian@fabi.me>\n"
+"Language-Team: Fabian Schlieper <fabian@fabi.me>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+
+#: editor_plugin.php:37
+#: editor_plugin.php:256
+msgid "Uncategorized Files"
+msgstr ""
+
+#: editor_plugin.php:42
+#, php-format
+msgid "You did not upload a file. <a href=\"%s\" target=\"_parent\">Click here to add one.</a>"
+msgstr ""
+
+#: editor_plugin.php:219
+msgid "Enter link text:"
+msgstr ""
+
+#: editor_plugin.php:244
+msgid "Single file"
+msgstr ""
+
+#: editor_plugin.php:245
+msgid "File URL"
+msgstr ""
+
+#: editor_plugin.php:246
+msgid "File list"
+msgstr ""
+
+msgid "Category list"
+msgstr ""
+
+#: editor_plugin.php:255
+msgid "All Categories"
+msgstr ""
+
+#: editor_plugin.php:257
+msgid "Attachments"
+msgstr ""
+
+#: editor_plugin.php:266
+#, php-format
+msgid "You did not create a category. <a href=\"%s\" target=\"_parent\">Click here to create one.</a>"
+msgstr ""
+
+#: editor_plugin.php:273
+msgid "Select Template"
+msgstr ""
+
+#: editor_plugin.php:274
+msgid "Default Template"
+msgstr ""
+
+#: editor_plugin.php:281
+#: lib/wp-filebase_admin_gui_manage.lib.php:472
+#: lib/wp-filebase_admin_gui_manage.lib.php:481
+msgid "Add Template"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:9
+msgid "One entry per line. Seperate the title and a short tag (not longer than 8 characters) with '|'.<br />All lines beginning with '*' are selected by default."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:10
+msgid "One entry per line."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:11
+msgid "Limits the maximum tranfer rate for downloads. 0 = unlimited"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:12
+msgid "Limits the maximum data traffic. 0 = unlimited"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:15
+msgid "Upload Path"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:19
+msgid "Show attached files"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:19
+msgid "If enabled, all associated files are listed below an article"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:20
+msgid "Default sorting"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:20
+msgid "The file property lists are sorted by"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:21
+msgid "Sorting direction"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:21
+msgid "The sorting direction of file lists"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:23
+msgid "Bit rate limit for guests"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:24
+msgid "Bit rate limit for registered users"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:25
+msgid "Daily traffic limit"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:26
+msgid "Monthly traffic limit"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:27
+msgid "Traffic limit exceeded! Please try again later."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:27
+msgid "Traffic exceeded message"
+msgstr ""
+
+#. daily limits
+msgid "Daily user download limits"
+msgstr ""
+
+msgid "If enabled, unregistered users cannot download any files. You can set different limits for each user role below."
+msgstr ""
+
+msgid "downloads per day"
+msgstr ""
+
+msgid "Daily limit for %s"
+msgstr ""
+
+msgid "You can only download %d files per day."
+msgstr ""
+
+msgid "Daily limit exceeded message"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:28
+msgid "This file is currently offline."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:28
+msgid "File offline message"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:30
+msgid "Disable download permalinks"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:30
+msgid "Enable this if you have problems with permalinks."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:31
+msgid "Download URL base"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:31
+#, php-format
+msgid "The url prefix for file download links. Example: <code>%s</code> (Only used when Permalinks are enabled.)"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:33
+msgid "Post ID of the file browser"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:33
+msgid "Specify the ID of the post or page where the file browser should be placed. If you want to disable this feature leave the field blank."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:34
+msgid "Category drop down list"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:34
+msgid "Use category drop down list in the file browser instead of listing like files."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:36
+msgid "Always force download"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:36
+msgid "If enabled files that can be viewed in the browser (like images, PDF documents or videos) can only be downloaded (no streaming)."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:37
+msgid "Ignore downloads by admins"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:38
+msgid "Hide inaccessible files and categories"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:38
+msgid "If enabled files tagged <i>For members only</i> will not be listed for guests or users whith insufficient rights."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:39
+msgid "You are not allowed to access this file!"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:39
+msgid "Inaccessible file message"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:39
+msgid "This message will be displayed if users try to download a file they cannot access"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:40
+msgid "Redirect to login"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:40
+msgid "Guests trying to download inaccessible files are redirected to the login page if this option is enabled."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:40
+msgid "Parse template tags in RSS feeds"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:40
+msgid "If enabled WP-Filebase content tags are parsed in RSS feeds."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:42
+msgid "Allow script upload"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:42
+msgid "If you enable this, scripts like PHP or CGI can be uploaded. <b>WARNING:</b> Enabling script uploads is a <b>security risk</b>!"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:44
+msgid "Accept empty referers"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:44
+msgid "If enabled, direct-link-protected files can be downloaded when the referer is empty (i.e. user entered file url in address bar or browser does not send referers)"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:45
+msgid "Allowed referers"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:45
+msgid "Sites with matching URLs can link to files directly."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:47
+msgid "Decimal file size prefixes"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:47
+msgid "Enable this if you want decimal prefixes (1 MB = 1000 KB = 1 000 000 B) instead of binary (1 MiB = 1024 KiB = 1 048 576 B)"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:50
+#: lib/wp-filebase_form_file.php:80
+msgid "Platforms"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:51
+msgid "Licenses"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:52
+#: lib/wp-filebase_form_file.php:84
+msgid "Requirements"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:52
+msgid "You can optionally add |<i>URL</i> to each line to link to the required software/file."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:88
+msgid "Default File Template"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:88
+msgid "The template for attachments"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:103
+msgid "Category Template"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:103
+msgid "The template for category lists (used in the file browser)"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:113
+msgid "Download JavaScript"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:113
+msgid "Here you can enter JavaScript Code which is executed when a user clicks on file download link. The following variables can be used: <i>file_id</i>: the ID of the file, <i>file_url</i>: the clicked download url"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:129
+msgid "The category URL"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:130
+msgid "Category path (e.g cat1/cat2/)"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:131
+msgid "Just the category folder name, not the path"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:133
+msgid "Name of the parent categories (empty if none)"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:134
+msgid "Number of files in the category"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:136
+msgid "The minimum user level to view this category (-1 = guest, 0 = Subscriber ...)"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:138
+msgid "The category ID"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:139
+#: lib/wp-filebase_admin.lib.php:174
+msgid "A unique ID number to identify elements within a template"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:142
+#: lib/wp-filebase_admin.lib.php:181
+msgid "Name of the file"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:143
+#: lib/wp-filebase_admin.lib.php:182
+msgid "Formatted file size"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:144
+#: lib/wp-filebase_admin.lib.php:183
+msgid "Formatted file date"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:145
+msgid "Name of the thumbnail file"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:148
+#: lib/wp-filebase_admin.lib.php:186
+msgid "File version"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:150
+msgid "Supported languages"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:151
+msgid "Supported platforms (operating systems)"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:152
+msgid "Requirements to use this file"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:153
+#: lib/wp-filebase_admin.lib.php:188
+#: lib/wp-filebase_form_file.php:66
+msgid "License"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:154
+#: lib/wp-filebase_admin.lib.php:189
+msgid "The minimum user level to download this file (-1 = guest, 0 = Subscriber ...)"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:155
+msgid "1 if file is offline, otherwise 0"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:156
+msgid "1 if direct linking is allowed, otherwise 0"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:157
+msgid "The category name"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:159
+#: lib/wp-filebase_admin.lib.php:193
+msgid "ID of the post/page this file belongs to"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:160
+#: lib/wp-filebase_admin.lib.php:194
+msgid "User ID of the owner"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:161
+#: lib/wp-filebase_admin.lib.php:195
+msgid "How many times this file has been downloaded."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:164
+msgid "IP Address of the last downloader"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:165
+#: lib/wp-filebase_admin.lib.php:196
+msgid "Time of the last download"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:167
+msgid "Download URL"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:168
+msgid "URL of the post/page this file belongs to"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:169
+msgid "URL of the thumbnail or icon"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:170
+msgid "Category path and file name (e.g cat1/cat2/file.ext)"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:172
+msgid "The file ID"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:185
+msgid "Short description"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:190
+msgid "Offline > Online"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:191
+msgid "Direct linking > redirect to post"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:202
+msgid "Add template variable:"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:236
+msgid "You must enter a category name or a folder name."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:245
+msgid "The category folder name contains invalid characters."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:290
+#, php-format
+msgid "The directory %s already exists!"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:313
+msgid "Unable to move category icon!"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:352
+#, php-format
+msgid "The file extension of the file <b>%s</b> is forbidden!"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:388
+#, php-format
+msgid "File %s already exists. You have to delete it first!"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:392
+#, php-format
+msgid "Unable to move file %s! Is the upload directory writeable?"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:394
+msgid "No file was uploaded."
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:448
+msgid "Could not get user id!"
+msgstr ""
+
+#: lib/wp-filebase_admin.lib.php:549
+#, php-format
+msgid "File <b>%s</b> is not writable!"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:62
+#, php-format
+msgid "Manage Categories (<a href=\"%s\">add new</a>)"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:121
+msgid "Files"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:146
+msgid "<strong>Note:</strong><br />Deleting a category does not delete the files in that category. Instead, files that were assigned to the deleted category are set to the parent category."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:185
+msgid "File updated."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:185
+msgid "File added."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:201
+#, php-format
+msgid "Manage Files (<a href=\"%s\">add new</a>)"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:209
+#: lib/wp-filebase_admin_gui_manage.lib.php:211
+msgid "Search Files"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:269
+msgid "Filename"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:270
+msgid "Size"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:273
+msgid "Hits"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:274
+msgid "Last download"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:362
+msgid "Nothing changed!"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:365
+#, php-format
+msgid "Changed %d items."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:369
+#, php-format
+msgid "Added %d files."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:374
+msgid "Filebase successfully synced."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:377
+msgid "Complete file sync"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:377
+msgid "Checks files for changes, so more reliable but might take much longer. Do this if you uploaded/changed files with FTP."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:390
+#, php-format
+msgid "%s is not writable!"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:418
+msgid "Update File"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:419
+msgid "Restore Default"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:452
+msgid "Edit Templates"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:466
+msgid "Submit Template Changes"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:475
+msgid "Template Tag (a single word to describe the template):"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:477
+msgid "Template Code:"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:497
+#, php-format
+msgid "The upload directory <code>%s</code> does not exists. It could not be created automatically because the directory <code>%s</code> is not writable. Please create <code>%s</code> and make it writable for the webserver by executing the following FTP command: <code>%s</code>"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:499
+#, php-format
+msgid "The upload directory <code>%s</code> is not writable. Please make it writable for PHP by executing the follwing FTP command: <code>%s</code>"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:506
+msgid "Manage Files"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:506
+msgid "View uploaded files and edit them"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:507
+msgid "Manage Categories"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:507
+msgid "Manage existing categories and add new ones."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:508
+msgid "Sync Filebase"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:508
+msgid "Synchronises the database with the file system. Use this to add FTP-uploaded files."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:509
+msgid "Edit Stylesheet"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:509
+msgid "Edit the CSS for the file template"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:510
+msgid "Manage Templates"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:510
+msgid "Edit custom file list templates"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:511
+msgid "Donate &amp; Feature Request"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:511
+msgid "If you like this plugin and want to support my work, please donate. You can also post your ideas making the plugin better."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:520
+msgid "Traffic"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:528
+msgid "Today"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_manage.lib.php:537
+msgid "This Month"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_options.lib.php:25
+msgid "Settings reseted."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_options.lib.php:49
+#, php-format
+msgid "/%s/ added to rejected URIs list of WP Super Cache."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_options.lib.php:52
+msgid "WARNING: Script upload enabled!"
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_options.lib.php:64
+msgid "File template successfully parsed."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_options.lib.php:66
+#: lib/wp-filebase_admin_gui_options.lib.php:80
+#, php-format
+msgid "Could not parse template: error (%s) in line %s."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_options.lib.php:78
+msgid "Category template successfully parsed."
+msgstr ""
+
+#: lib/wp-filebase_admin_gui_options.lib.php:109
+msgid "Settings updated."
+msgstr ""
+
+#: lib/wp-filebase_download.lib.php:298
+msgid "Could not read file!"
+msgstr ""
+
+#: lib/wp-filebase_form_cat.php:34
+msgid "Category Folder"
+msgstr ""
+
+#: lib/wp-filebase_form_cat.php:50
+msgid "Category Icon"
+msgstr ""
+
+#: lib/wp-filebase_form_cat.php:59
+#: lib/wp-filebase_form_file.php:112
+msgid "For members only"
+msgstr ""
+
+#: lib/wp-filebase_form_cat.php:62
+#: lib/wp-filebase_form_file.php:115
+#, php-format
+msgid "Minimum user level: (see %s)"
+msgstr ""
+
+#: lib/wp-filebase_form_cat.php:67
+msgid "Apply permission to all child files"
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:9
+msgid "Edit File"
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:9
+msgid "Upload File"
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:15
+msgid "Simple Form"
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:15
+msgid "Extended Form"
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:22
+msgid "Choose File"
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:24
+#, php-format
+msgid "Maximum file size: %s"
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:32
+msgid "You can optionally upload a thumbnail here. If the file is a valid image, a thumbnail is generated automatically."
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:38
+msgid "The following fields are optional."
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:75
+msgid "Download Counter"
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:94
+#: lib/wp-filebase_form_file.php:96
+msgid "Direct linking"
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:97
+msgid "Allow direct linking"
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:98
+msgid "Redirect to post"
+msgstr ""
+
+#: lib/wp-filebase_form_file.php:109
+msgid "Offline"
+msgstr ""
+
+#: lib/wp-filebase_widget.lib.php:87
+msgid "Limit:"
+msgstr ""
+
+#: lib/wp-filebase_widget.lib.php:92
+msgid "Template:"
+msgstr ""
+
+#. Description of an extension
+msgid "A powerful download manager supporting file categories, thumbnails, traffic/bit rate limits and more."
+msgstr ""
+
+#. Template
+msgid "Version"
+msgstr ""
+
+msgid "Languages"
+msgstr ""
+
+msgid "Author"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Category:"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Details"
+msgstr ""
+
+#. Option Categories
+msgid "Common"
+msgstr ""
+
+msgid "Display"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Form Presets"
+msgstr ""
+
+msgid "Limits"
+msgstr ""
+
+msgid "Security"
+msgstr ""
+
+msgid "Templates and Scripts"
+msgstr ""
+
+msgid "Lists the latest or most popular files"
+msgstr ""
+
+msgid "Simple listing of file categories"
+msgstr ""
+
+msgid "Before you can use this widget, please set a Post ID for the file browser in WP-Filebase settings."
+msgstr ""
+
+msgid "If you like WP-Filebase I would appreciate a small donation to support my work. You can additionally add an idea to make WP-Filebase even better. Just click the button below. Thank you!"
+msgstr ""
+
+msgid "Custom field '%s' removed!"
+msgstr ""
+
+msgid "Custom field '%s' added."
+msgstr ""
+
+msgid "Search Integration"
+msgstr ""
+
+msgid "Searches in attached files and lists the associated posts and pages when searching the site."
+msgstr ""
+
+msgid "Restore Default Settings"
+msgstr ""
+
+msgid "Attachment Position"
+msgstr ""
+
+msgid "After the Content"
+msgstr ""
+
+msgid "Before the Content"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Category Name"
+msgstr ""
+
+msgid "Category ID"
+msgstr ""
+
+msgid "Number of files per page"
+msgstr ""
+
+msgid "Relative path of the file"
+msgstr ""
+
+msgid "Length of the file list per page. Set to 0 to disable the limit."
+msgstr ""
+
+msgid "File browser category sorting"
+msgstr ""
+
+msgid "The category property categories in the file browser are sorted by"
+msgstr ""
+
+msgid "Name of the Category folder"
+msgstr ""
+
+msgid "Relative path of the category folder"
+msgstr ""
+
+msgid "File browser file sorting"
+msgstr ""
+
+msgid "The file property files in the file browser are sorted by"
+msgstr ""
+
+msgid "Send HTTP-Range header"
+msgstr ""
+
+msgid "Allows users to pause downloads and continue later. In addition download managers can use multiple connections at the same time."
+msgstr ""
+
+msgid "Disable HTTP Caching"
+msgstr ""
+
+msgid "Enable this if you have problems with downloads while using Wordpress with a cache plugin."
+msgstr ""
+
+msgid "With custom fields you can add even more file properties."
+msgstr ""
+
+msgid "Redirect to referring page after login"
+msgstr ""
+
+msgid "Users are redirected to the page where they clicked on the download link after logging in."
+msgstr ""
+
+msgid "Protect upload path"
+msgstr ""
+
+msgid "This prevents direct access to files in the upload directory."
+msgstr ""
+
+msgid "Hide download links"
+msgstr ""
+
+msgid "File download links wont be displayed in the browser's status bar. You should enable '%s' to make it even harder to find out the URL."
+msgstr ""
+
+msgid "Auto-detect thumbnails"
+msgstr ""
+
+msgid "Images are considered as thumbnails for files with the same name when syncing. (e.g `file.jpg` &lt;=&gt; `file.zip`)"
+msgstr ""
+
+msgid "Automatic Sync"
+msgstr ""
+
+msgid "Schedules a cronjob to hourly synchronize the filesystem and the database."
+msgstr ""
+
+msgid "Extension Blacklist"
+msgstr ""
+
+msgid "Files with an extension in this list are skipped while synchronisation. (seperate with comma)"
+msgstr ""
+
+msgid "Disable ID3 tag detection"
+msgstr ""
+
+msgid "This disables all meta file info reading. Use this option if you have issues adding large files."
+msgstr ""
+
+msgid "Search ID3 Tags"
+msgstr ""
+
+msgid "Search in file meta data, like ID3 for MP3 files, EXIF for JPEG... (this option does not increase significantly server load since all data is cached in a MySQL table)"
+msgstr ""
+
+msgid "Add WP-Filebase to admin menu bar"
+msgstr ""
+
+msgid "Display some quick actions for file management in the admin menu bar."
+msgstr ""
+
+msgid "Statistics"
+msgstr ""
+
+msgid "Number of Files"
+msgstr ""
+
+msgid "Number of Categories"
+msgstr ""
+
+msgid "Total Downloads"
+msgstr ""
+
+msgid "Total File Size"
+msgstr ""
+
+msgid "Convert old Tags"
+msgstr ""
+
+msgid "Convert tags from versions earlier than 0.2.0"
+msgstr ""
+
+msgid "Add File"
+msgstr ""
+
+msgid "Redirect download to URL"
+msgstr ""
+
+msgid "Copy file into Filebase (sideload)"
+msgstr ""
+
+msgid "Limit file access by selecting one or more user roles."
+msgstr ""
+
+msgid "Select multiple roles by holding the CTRL/COMMAND key."
+msgstr ""
+
+msgid "Access Permission"
+msgstr ""
+
+msgid "Everyone"
+msgstr ""
+
+msgid "Add Category"
+msgstr ""
+
+msgid "Exclude from file browser"
+msgstr ""
+
+msgid "Templates used for single embedded files or file lists."
+msgstr ""
+
+msgid "For some files there are more tags available. You find a list of all tags below the form when editing a file."
+msgstr ""
+
+msgid "Reset all Templates to default"
+msgstr ""
+
+msgid "These templates can be used for categories."
+msgstr ""
+
+msgid "A list-template consists of header, footer and file template. It can optionally have a category template to list sub-categories."
+msgstr ""
+
+msgid "Header"
+msgstr ""
+
+msgid "Footer"
+msgstr ""
+
+msgid "File Template"
+msgstr ""
+
+msgid "Parent Category ID"
+msgstr ""
+
+msgid "Number of files directly in the category"
+msgstr ""
+
+msgid "Number of all files in the category and all sub-categories"
+msgstr ""
+
+msgid "Attach existing file"
+msgstr ""
+
+msgid "Select File"
+msgstr ""
+
+msgid "Select the categories containing the files you would like to list."
+msgstr ""
+
+msgid "Include all Categories"
+msgstr ""
+
+msgid "Files per page:"
+msgstr ""
+
+msgid "Set to 0 to use the default limit (%d), -1 will disable pagination."
+msgstr ""
+
+msgid "File Tree View"
+msgstr ""
+
+msgid "List selected Categories"
+msgstr ""
+
+msgid "Select the root category of the tree view file browser:"
+msgstr ""
+
+msgid "The File has been uploaded successfully."
+msgstr ""
+
+msgid "New Category created."
+msgstr ""
+
+msgid "Selectable by Uploader"
+msgstr ""
+
+msgid "Upload to Root"
+msgstr ""
+
+msgid "You can enter a URL to redirect users."
+msgstr ""
+
+msgid "Ask your webhoster to increase this limit, it is set in %s."
+msgstr ""
+
+msgid "Inherit Permissions"
+msgstr ""
+
+msgid "Explicitly set permissions"
+msgstr ""
+
+msgid "Limit category access by selecting one or more user roles."
+msgstr ""
+
+msgid "This will recursively update permissions of all existing child categories and files. Note that permissions of new files in this category are inherited automatically, without having checked this checkbox."
+msgstr ""
+
+msgid "Owner"
+msgstr "Besitzer"
+
+msgid "Searching for new files..."
+msgstr "Suche nach neuen Datein"
+
+msgid "Category (ID %d) of file %s does not exist!"
+msgstr ""
+
+msgid "Checking for file changes..."
+msgstr "Suche nach Datei Änderungen"
+
+msgid "%d Files found, %d new."
+msgstr "%d Dateien gefunden, %d Neue"
+
+msgid "Frontend upload is disabled in security settings!"
+msgstr ""
+
+msgid "Enable file context menu"
+msgstr "Kontext Datei Menü einschalten"
+
+msgid "Disable file context menu"
+msgstr "Kontext Datei Menü ausschalten"
+
+msgid "Change Order"
+msgstr "Sortierung ändern"
+
+msgid "Category order"
+msgstr "Sortierung nach Kategorie "
+
+msgid "None (order of IDs in shortcode)"
+msgstr "Nichts ()"
+
+msgid "Never show this again."
+msgstr "Zeige diese Meldung nicht mehr."
+
+msgid "Keywords used for search:"
+msgstr "Für die Suche benutzte Schlüsselwörter"
+
+msgid "The following tags can be used in templates. For example, if you want to display the Artist of a MP3 File, put %s inside the template code."
+msgstr "Die nachfolgenden Tags können in Templates genuzt werden. Wenn du zum Beispiel den Artist einer MP3 Datei anzeigen möchtest, schreibe %s in den Template code"
+
+msgid "Please enter a template tag."
+msgstr "Bitte gib ein Template Tag ein"
+
+msgid "This will reset all File, Category and List Templates! Are your sure?"
+msgstr "Dies wird alle Dateien, Kategorien und Templates zurücksetzen. Bist du dir sicher?"
+
+msgid "Secondary Categories"
+msgstr "Sekundäre Kategorien"
+
+msgid "Enable front end uploads"
+msgstr ""
+
+msgid "Global option to allow file uploads from widgets and embedded file forms"
+msgstr ""
+
+msgid "Frontend upload is disabled in security settings!"
+msgstr ""
+
+msgid "Attachments in post lists"
+msgstr ""
+
+msgid "Attach files to posts in archives, index and search result."
+msgstr ""
+
+msgid "The maximum side of the image is scaled to this value."
+msgstr "Die maximale Seitenlänge des Bildes ist skaliert auf folgenden Wert"
+
+msgid "File Date Format"
+msgstr "Datums Format der Datei"
+
+msgid "How to get started with %s?"
+msgstr "Wie man mit %s startet"
+
+msgid "Create a Category"
+msgstr "Erstelle Kategorie"
+
+msgid "Add a file. There are different ways:"
+msgstr "Datei hinzufügen. Hierzu gibt es verschiedene Möglichkeiten"
+
+msgid "<a href="%s">Use the normal File Upload Form.</a> You you can either upload a file from you local harddisk or you can provide a URL to a file that will be sideloaded to your blog."
+msgstr "<a href="%s">Nutze die normale Datei hochlade Form.</a> Du kannst entweder von deiner lokalen Festplatte hochladen oder du stellst die URL zu der Datei zur Verfügung ,,,,####################################################################################### "
+
+msgid "Use FTP: Use your favorite FTP Client to upload any directories/files to <code>%s</code>. Afterwards <a href="%s">sync the filebase</a> to add the newly uploaded files to the database."
+msgstr ""
+
+msgid "Goto <a href="%s">WP-Filebase Settings -> Filebrowser</a> and set the Page ID to get a nice AJAX Tree View of all your files."
+msgstr ""
+
+msgid "WP-Filebase adds a new button to the visual editor. When creating or editing posts/pages, use the Editor Plugin %s to insert single files, file lists and other stuff into your content."
+msgstr ""
+
+msgid "Take a look at the <a href="%s">Widgets</a>. WP-Filebase adds three widgets for file listing, category listing and user uploads."
+msgstr ""
+
+msgid "<a href="%s">Manage the Templates</a> (for advanced users): You can modify any file- or category template to fit your Wordpress theme."
+msgstr ""
+
+msgid "Never show this again."
+msgstr "Zeige diese Meldung nicht erneut"
+
+msgid "Cron sync is disabled (using WP´s internal cron system)."
+msgstr "Cron sync ist ausgeschaltet (benutze WP´s integriertes cron system)"
+
+msgid "<a href="%s">URL</a> for external cron service."
+msgstr "<a href="%s">URL</a> für einen externen Cron Service"
+
+msgid "Rescan Files"
+msgstr "Dateien erneut Scannen"
+
+msgid "Updates thumbnails, re-indexes PDFs. Use this after upgrading to WP-Filebase Pro."
+msgstr ""
+
+msgid "Reset Permissions"
+msgstr "Genehmigungen zurücksetzen"
+
+msgid "Sets all category and file permissions to <i>Everyone</i>. Also disables the <i>Private Files</i> option in security settings. Use this if files are not visible for non-admin users."
+msgstr ""
+
+msgid "Fix File Pages"
+msgstr ""
+
+msgid "Run this after a Database Import. Checks for missing File Pages and wrong post types."
+msgstr ""
+
+msgid "Categories"
+msgstr "Kategorien"
+
+msgid "Batch Upload"
+msgstr ""
+
+msgid "Uploader: Drop files here - or - Select Files"
+msgstr "Uploader: Dateien hier rein ziehen - oder - Datei Aussuchen"
+
+msgid "You are using the multi-file uploader. Problems? Try the <a href="%1$s">browser uploader</a> instead."
+msgstr ""
+
+msgid "Secondary Categories"
+msgstr "Sekundäre Kategorien"
+
+msgid "Visual Editor"
+msgstr "Visueller Editor"
+
+msgid "File Password"
+msgstr "Datei Passwort"
+
+msgid "Custom Field 1|cf1\nCustom Field 2|cf2"
+msgstr ""
+
+msgid "Completely Uninstall WP-Filebase"
+msgstr ""
+
+msgid "Manage Custom Fields"
+msgstr ""
+
+msgid "Redirect to file page"
+msgstr ""
+
+msgid "Attach to Post"
+msgstr "An Beitrag anhängen"
+
+msgid "Redirect to file page"
+msgstr ""
+
+msgid "Upload Permission"
+msgstr "Genehmigung hochladen"
+
+msgid "Set which users are allowed to upload to this category."
+msgstr "Wähle hier, welche Nutzer in dieser Kategorie hochladen dürfen"
+
+msgid "Everyone who can upload"
+msgstr "Jeder, der hochladen kann"
+
+msgid "Search User Name"
+msgstr "Suche nach Nutzer Namen"
+
+msgid "Custom Sort Order"
+msgstr ""
+
+msgid "List is loaded dynamically using AJAX, so pagination is not required. Elements are automatically loaded when scrolling to the end of the list (like Facebook timeline)."
+msgstr ""
+
+msgid "Templates used for Filepages."
+msgstr ""
+
+msgid "Remote Syncs"
+msgstr ""
+
+msgid "New Remote Sync"
+msgstr ""
+
+msgid "Remote Sync Service:"
+msgstr ""
+
+msgid "An identifier or short description"
+msgstr ""
+
+msgid "Embeddable Forms"
+msgstr ""
+
+msgid "Front end upload disabled!"
+msgstr ""
+
+msgid "Embedded forms will not work unless you enable front end uploads in <a href=\"%s\">Security Settings</a>"
+msgstr ""
+
+msgid "Overwrite"
+msgstr "Überschreiben"
+
+msgid "Permissions"
+msgstr "Genehmigungen"
+
+msgid "Upload Approval"
+msgstr ""
+
+msgid "New Embedable Form"
+msgstr ""
+
+msgid "A single word to describe the form."
+msgstr "Einfaches Wort zur Formbeschreibung"
+
+msgid "Upload to category:"
+msgstr "Zur Kategorie hochladen"
+
+msgid "Overwrite existing files"
+msgstr "Überschreibe die existierenden Dateien"
+
+msgid "Attach uploaded files to post or page the form is embedded in"
+msgstr "Hänge hochgeladene Dateien an einen Beitrag oder Seite indem die Form eingebettet ist"
+
+msgid "Use advanced Drag & Drop Uploader"
+msgstr "Nutze den Verbesserten Drag & Drop Uploader"
+
+msgid "Show extended input fields like Title, Version, Description etc."
+msgstr ""
+
+msgid "Notify Admins whenever a file is uploaded"
+msgstr "Benachrichtige die Admins wenn eine Datei hochgeladen wurde"
+
+msgid "More email notifications"
+msgstr "Mehr E-Mail Benachrichtigungen"
+
+msgid "Enter additional email addresses that will be notified on upload. Seperate by comma <code>,</code> ."
+msgstr ""
+
+msgid "Make sure the roles checked here are also selected in <a href="%s">Frontend Upload Permissions</a>"
+msgstr ""
+
+msgid "Uploaded files must been approved"
+msgstr ""
+
+msgid "Path where all files are stored. Relative to WordPress\' root directory."
+msgstr ""
+
+msgid "File Date Format"
+msgstr ""
+
+msgid "Date/Time formatting for files."
+msgstr ""
+
+msgid "<a href="http://codex.wordpress.org/Formatting_Date_and_Time">Documentation on date and time formatting</a>."
+msgstr ""
+
+msgid "The maximum side of the image is scaled to this value."
+msgstr ""
+
+msgid "Attachments in post lists"
+msgstr ""
+
+msgid "Attach files to posts in archives, index and search result."
+msgstr ""
+
+msgid "Search Result Template"
+msgstr ""
+
+msgid "Set the List Template used for Search Results when using the Search Widget"
+msgstr ""
+
+msgid "Note that the selected page should <b>not have any sub-pages</b>!"
+msgstr ""
+
+msgid "Files before Categories"
+msgstr ""
+
+msgid "Files will appear above categories in the file browser."
+msgstr ""
+
+msgid "Late script loading"
+msgstr ""
+
+msgid "Scripts will be included in content, not in header. Enable if your AJAX tree view does not work properly."
+msgstr ""
+
+msgid "Small Icon Size"
+msgstr ""
+
+msgid "Icon size (height) for categories and files. Set to 0 to show icons in full size."
+msgstr ""
+
+msgid "Initially Expanded"
+msgstr ""
+
+msgid "The File Browser will be fully expanded when page is loaded. Do not enabled if you have many files!"
+msgstr ""
+
+msgid "Category ZIP Files"
+msgstr ""
+
+msgid "Allows users to download whole categories in a compressed zip file. Use template variable <code>%s</code>."
+msgstr ""
+
+msgid "Use fpassthru"
+msgstr ""
+
+msgid "Downloads will be serverd using the native PHP function fpassthru. Enable this when you are experiencing trouble with large files. Note that bandwidth throttle is not available for this method."
+msgstr ""
+
+msgid "File Page Proxy"
+msgstr ""
+
+msgid "Redirects users to a page with file details. See <a href="%s">Filepage Template</a>"
+msgstr ""
+
+msgid "File Page Download Countdown"
+msgstr ""
+
+msgid "Time the user has to wait until the download automatically starts on a file page. Use <code>%dl_countdown%</code> in Filepage Template to display the time. Set to 0 to disable this feature."
+msgstr ""
+
+msgid "File Page URL slug"
+msgstr ""
+
+msgid "The url prefix for Filepage links. Example: <code>%s</code> (Only used when Permalinks are enabled.)"
+msgstr ""
+
+msgid "Comments on File Page"
+msgstr ""
+
+msgid "If users are able to leave comments on Filepages. After changing you must run the <a href="%s">Rescan Files</a> tool."
+msgstr ""
+
+msgid "Content Keywords"
+msgstr ""
+
+msgid "Put keywords in File Pages content to make them searchable by plugins."
+msgstr ""
+
+msgid "Default Author"
+msgstr ""
+
+msgid "This author will be used as form default and when adding files with FTP"
+msgstr ""
+
+msgid "Default User Roles"
+msgstr ""
+
+msgid "These roles are selected by default and will be used for files added with FTP"
+msgstr ""
+
+msgid "Default Category"
+msgstr ""
+
+msgid "Preset Category in the file form"
+msgstr ""
+
+msgid "Default File Direct Linking"
+msgstr ""
+
+msgid "Private Files"
+msgstr "Private Dateien"
+
+msgid "Access to files is only permitted to owner and administrators."
+msgstr ""
+
+msgid "Upload Files"
+msgstr "Hochgeladene Dateien"
+
+msgid "Roles and Users allowed to upload files in Admin Dashboard"
+msgstr ""
+
+msgid "Edit File Details"
+msgstr ""
+
+msgid "Roles and Users allowed to edit file details of files uploaded by others"
+msgstr ""
+
+msgid "Delete Files"
+msgstr "Dateien Löschen"
+
+msgid "Roles and Users allowed to delete files uploaded by others"
+msgstr ""
+
+msgid "Create Categories"
+msgstr ""
+
+msgid "Delete Categories"
+msgstr ""
+
+msgid "Frontend Upload"
+msgstr ""
+
+msgid "Roles and Users allowed to upload files with the Upload Widget or Embedded Forms"
+msgstr ""
+
+msgid "Manage Remote Syncs"
+msgstr ""
+
+msgid "Manage Forms"
+msgstr ""
+
+msgid "Remove Missing Files"
+msgstr ""
+
+msgid "Missing files are removed from the database during sync"
+msgstr ""
+
+msgid "Upload Notifications"
+msgstr ""
+
+msgid "Notifies all blog admins whenever a file is uploaded by a non-admin user."
+msgstr ""
+
+msgid "Thumbnail Path"
+msgstr "Thumbnail Pfad"
+
+msgid "Thumbnails can be stored at a different path than the actual files. Leave empty to use the default upload path."
+msgstr ""
+
+msgid "Use path instead of ID in Shortcode"
+msgstr ""
+
+msgid "Files and Categories are identified by paths and not by their IDs in the generated Shortcodes"
+msgstr ""
+
+msgid "Disable Name Formatting"
+msgstr ""
+
+msgid "This will disable automatic formatting/uppercasing file names when they are used as title (e.g. when syncing)"
+msgstr ""
+
+msgid "Ghostscript Path"
+msgstr ""
+
+msgid "Path to Ghostscript executable used for PDF thumbnails. If ghostscript is not installed, PDF thumbnails will not be created."
+msgstr ""
+
+msgid "Generate PDF thumbnails"
+msgstr ""
+
+msgid "Thumbnail of first page"
+msgstr ""
+
+msgid "Extract PDF Title"
+msgstr ""
+
+msgid "Using the pattern below, Titles of PDF documents will be searched and used as file_display_name"
+msgstr ""
+
+msgid "PDF Title Pattern"
+msgstr ""
+
+msgid "Regular expression to find the title in the PDF Document."
+msgstr ""
+
+msgid "You are not allowd to add files to the category <b>%s</b>!"
+msgstr ""
+
+msgid "Thumbnail is not a valid image!."
+msgstr ""
+
+msgid "Could not get file information from %s!"
+msgstr ""
+
+msgid "Only HTTP links are supported."
+msgstr ""
+
+msgid "Category added."
+msgstr ""
+
+msgid "Could not move thumnail %s to %s."
+msgstr ""
+
+msgid "%d Thumbnails moved."
+msgstr ""
+
+msgid "Ghostscript executable detected at <code>%s</code>"
+msgstr ""
+
+msgid "Ghostscript executable not detected! Please ask your hosting provider about ghostscript installation."
+msgstr ""
+
+msgid "Ghostscript executable not found at <code>%s</code>."
+msgstr ""
+
+msgid "Ghostscript at <code>%s</code> does not work properly!"
+msgstr ""
+
+msgid "Ghostscript version %s is installed, which is too old to work correctly. Please upgrade to a more recent version (at least %s) or ask your hosting provider to do so. <strong>This is only required for PDF Indexing, please ignore this warning if you do not use this feature!</strong>"
+msgstr ""
+
+msgid "File Page Settings changed. You have to run the Rescan Tool now!"
+msgstr ""
+
+msgid "Manage attachments"
+msgstr ""
+
+msgid "Manage Categories (<a href=\"%s\">add new</a>)"
+msgstr ""
+
+msgid "Custom CSS does only work if upload path is relative to WordPress path. It is currently set to <code>%s</code>, so <b>custom CSS will not work!</b>"
+msgstr ""
+
+msgid "Form Tag:"
+msgstr ""
+
+msgid "Use advanced Drag &amp; Drop Uploader"
+msgstr ""
+
+msgid "Embedded forms will not work unless you enable front end uploads in <a href=\"%s\">Security Settings</a>"
+msgstr ""
+
+msgid "You do not have the permission to edit this file!"
+msgstr ""
+
+msgid "Manage Files (<a href=\"%s\">add new</a>)"
+msgstr ""
+
+msgid "WP-Filebase content tags must be converted"
+msgstr ""
+
+msgid "File Browser post or page not set! Some features like search will not work. <a href=\"%s\">Click here to set the File Browser Post ID.</a>"
+msgstr ""
+
+msgid "File Browser"
+msgstr ""
+
+msgid "The config file %s is not writable or could not be created. Please create the file and make it writable for the webserver."
+msgstr ""
+
+msgid "Like WP-Filebase?"
+msgstr ""
+
+msgid "Downloads"
+msgstr ""
+
+msgid "Last cron sync on %1$s at %2$s."
+msgstr ""
+
+msgid "Cron sync is disabled (using WPÂ´s internal cron system)."
+msgstr ""
+
+msgid "Cron sync is disabled."
+msgstr ""
+
+msgid "Preset Sync"
+msgstr ""
+
+msgid "Same as sync but with additional meta data presets applied to each file that is added during sync."
+msgstr ""
+
+msgid "This will reset all file/category permissions. Protected files will be available for EVERYONE. Continue?"
+msgstr ""
+
+msgid "Convert tags from versions earlier than %s."
+msgstr ""
+
+msgid "Add multiple URLs"
+msgstr ""
+
+msgid "Add multiple remote files at once."
+msgstr ""
+
+msgid "Forced thumbnail update"
+msgstr ""
+
+msgid "Sync Now"
+msgstr ""
+
+msgid "Select the service you would like to sync with."
+msgstr ""
+
+msgid "Sync"
+msgstr ""
+
+msgid "Warning: The Filebrowser page <b>%s</b> has at least one subpage <b>%s</b>. This will cause unexpected behavior, since all requests to the subpages are redirected to the File Browser Page. Please choose a Page that does not have any subpages for File Browser."
+msgstr ""
+
+msgid "File Pages"
+msgstr ""
+
+msgid "PDF"
+msgstr ""
+
+msgid "All settings (except default file and category template) will be set to default values. Continue?"
+msgstr ""
+
+msgid "Type missing!"
+msgstr ""
+
+msgid "Templates"
+msgstr ""
+
+msgid "File List"
+msgstr ""
+
+msgid "File Page"
+msgstr ""
+
+msgid "Notification E-Mails"
+msgstr ""
+
+msgid "AJAX List"
+msgstr ""
+
+msgid "AJAX loader CSS class"
+msgstr ""
+
+msgid "DEPRECATED"
+msgstr ""
+
+msgid "Menu Root Category"
+msgstr ""
+
+msgid "Upload Presets"
+msgstr ""
+
+msgid "Don't publish uploaded files (set offline)"
+msgstr ""
+
+msgid "Inherit from Cat."
+msgstr ""
+
+msgid "Direct Linking"
+msgstr ""
+
+msgid "File Version"
+msgstr ""
+
+msgid "Icon of %s"
+msgstr ""
+
+msgid "<a href=\"%s\" title=\"Wordpress Download Manager Plugin\" style=\"color:inherit;font-size:inherit;\">Downloads served by WP-Filebase</a>"
+msgstr ""
+
+msgid "Link to Dropbox File Preview Page"
+msgstr ""
+
+msgid "You are not allowed to upload to this category!"
+msgstr ""
+
+msgid "New file upload"
+msgstr ""
+
+msgid "This file is password protected. To download it please enter your password below:"
+msgstr ""
+
+msgid "%d File(s) deleted."
+msgstr ""
+
+msgid "%d File(s) rescanned."
+msgstr ""
+
+msgid "%d File(s) were set offline."
+msgstr ""
+
+msgid "%d File(s) were set online."
+msgstr ""
+
+msgid "FTP Host"
+msgstr ""
+
+msgid "FTP Port"
+msgstr ""
+
+msgid "FTP User"
+msgstr ""
+
+msgid "FTP Password"
+msgstr ""
+
+msgid "Secure SSL FTP"
+msgstr ""
+
+msgid "FTP Passive Mode"
+msgstr ""
+
+msgid "HTTP Url (optional)"
+msgstr ""
+
+msgid "Number of files in the category and all child categories"
+msgstr ""
+
+msgid "Variable to check if the %s is accessible (boolean 0/1)"
+msgstr ""
+
+msgid "Download URL encoded for use in query strings"
+msgstr ""
+
+msgid "URL to Details Page (see template '%s')"
+msgstr ""
+
+msgid "List of secondary categories"
+msgstr ""
+
+msgid "URL of the category icon (if any)"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "User Name of the owner"
+msgstr ""
+
+msgid "Lowercase file extension (e.g. '%s')"
+msgstr ""
+
+msgid "File content type (e.g. '%s')"
+msgstr ""
+
+msgid "ID of the current post or page"
+msgstr ""
+
+msgid "Plugin root URL (%s)"
+msgstr ""
+
+msgid "Offline &gt; Online"
+msgstr ""
+
+msgid "Direct linking &gt; redirect to post"
+msgstr ""
+
+msgid "Custom Category Order"
+msgstr ""
+
+msgid "The minimum user level to access (-1 = guest, 0 = Subscriber ...)"
+msgstr ""
+
+msgid "You did not create a category. <a href=\"%s\" target=\"_parent\">Click here to create one.</a>"
+msgstr ""
+
+msgid "Add New"
+msgstr ""
+
+msgid "File %s uploaded."
+msgstr ""
+
+msgid "Drop files here - or -"
+msgstr ""
+
+msgid "%d files <i>%s</i>"
+msgstr ""
+
+msgid "You license key is expired. Please <a href=\"%s\">contact support</a>"
+msgstr ""
+
+msgid "Your license key is already used. Please free a license slot by <a href=\"%s\">disabling another site</a>. Note: If you have changed the site domain please switch back to the old domain and disable WP-Filebase Pro, then re-enable it on the new domain."
+msgstr ""
+
+msgid "Something went wrong with activation. Please <a href=\"%s\">contact support</a>. (%s)"
+msgstr ""
+
+msgid "Activate WP-Filebase"
+msgstr ""
+
+msgid "The license key you entered is invalid!"
+msgstr ""
+
+msgid "Remote Sync <b>%s</b> on service <b>%s</b> with account <b>%s</b>."
+msgstr ""
+
+msgid "Updating URIs..."
+msgstr ""
+
+msgid "Removing local files that have been remotely deleted..."
+msgstr ""
+
+msgid "Remote Sync Settings"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Don't generate thumbnails and scan files for ID3 tags. This will make sync much faster, since files are not temporarily downloaded."
+msgstr ""
+
+msgid "Remote Path"
+msgstr ""
+
+msgid "AWS access Key"
+msgstr ""
+
+msgid "AWS access Secret"
+msgstr ""
+
+msgid "Secure HTTPS Downloads"
+msgstr ""
+
+msgid "Strip AWSAccessKeyId query parameter"
+msgstr ""
+
+msgid "Link Lifetime"
+msgstr ""
+
+msgid "Virtual-hosted-style URIs"
+msgstr ""
+
+msgid "CloudFront Domain"
+msgstr ""
+
+msgid "Path where all files are stored. Relative to WordPress' root directory."
+msgstr ""
+
+msgid "Thumbnails can be stored at a different path than the actual files. Leave empty to use the default upload path. The directory specified here CANNOT be inside the upload path!"
+msgstr ""
+
+msgid "Disable wp-filebase.css"
+msgstr ""
+
+msgid "If you don't need default WP-Filebase styling. Improves site performance."
+msgstr ""
+
+msgid "File Page Permalink with Front Base"
+msgstr ""
+
+msgid "Should the permastruct be prepended with the front base. (enabled-> /%s/, disabled->/blog/%s/)</a>"
+msgstr ""
+
+msgid "No files available."
+msgstr ""
+
+msgid "Empty Message"
+msgstr ""
+
+msgid "Message that will be displayed if file browser is empty."
+msgstr ""
+
+msgid "Folder Icon"
+msgstr ""
+
+msgid "Choose the default category icon and file browser icon. You can put custom icons in <code>%s</code>."
+msgstr ""
+
+msgid "Small Icon Size'), 'desc' => __('Icon size (height) for categories and files. Set to 0 to show icons in full size."
+msgstr ""
+
+msgid "Access to category denied!"
+msgstr ""
+
+msgid "Inaccessible category message"
+msgstr ""
+
+msgid "This message will be displayed if users try to access a category without permission."
+msgstr ""
+
+msgid "Destroy session when downloading"
+msgstr ""
+
+msgid "Should be enabled to allow users to download multiple files at the same time. This does not interfere WordPress user sessions, but can cause trouble with other plugins using the global $_SESSION."
+msgstr ""
+
+msgid "Notifies all blog users whenever a file they can access is uploaded."
+msgstr ""
+
+msgid "Search Result File List Template"
+msgstr ""
+
+msgid "Search Results Type"
+msgstr ""
+
+msgid "The way search results are displayed when using the WordPress Search"
+msgstr ""
+
+msgid "Show File Pages"
+msgstr ""
+
+msgid "Scan Files via RPC Calls"
+msgstr ""
+
+msgid "EXPERIMENTAL. This can improve stability of sync but requires more time for each file beeing scanned."
+msgstr ""
+
+msgid "Fake MD5 Hashes"
+msgstr ""
+
+msgid "This dramatically speeds up sync, since no real MD5 checksum of the files is calculated but only a hash of modification time and file size."
+msgstr ""
+
+msgid "Remove WP-Filebase Footer credits"
+msgstr ""
+
+msgid "This disables the footer credits only displayed on <a href=\"%s\">File Browser Page</a>. Why should you keep the credits? Every backlink helps WP-Filebase to get more popular, popularity motivates the developer to continue work on the plugin."
+msgstr ""
+
+msgid "Footer credits Style"
+msgstr ""
+
+msgid "Set custom CSS style for WP-Filebase footer credits"
+msgstr ""
+
+msgid "Default File Direct Linking'), 'type' => 'select', 'desc' => __('"
+msgstr ""
+
+msgid "Append another %s to set the default value."
+msgstr ""
+
+msgid "Maximum downloads"
+msgstr ""
+
+msgid "Archive lister"
+msgstr ""
+
+msgid "Uploaded files are scanned for archives"
+msgstr ""
+
+msgid "Starting sync. Memory usage: %s - Limit: %s"
+msgstr ""
+
+msgid "A Batch sync is already in progress. Continuing..."
+msgstr ""
+
+msgid "Batch progress invalid. Aborted. Please try again."
+msgstr ""
+
+msgid "Sync Time: %01.2f s, Memory Peak: %s"
+msgstr ""
+
+msgid "%d Files could not be found."
+msgstr ""
+
+msgid "The corresponding entries have been removed from the database."
+msgstr ""
+
+msgid "Remove entries from database"
+msgstr ""
+
+msgid "%d Category Folders could not be found."
+msgstr ""
+
+msgid "WebDAV URL"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Allows users to create file categories from the front end."
+msgstr ""
+
+msgid "Add File Category"
+msgstr ""
+
+msgid "File Categories"
+msgstr ""
+
+msgid "Listing of files with custom sorting"
+msgstr ""
+
+msgid "Attach file to current post/page"
+msgstr ""
+
+msgid "Enter link text. Prepend * to open link in a new tab."
+msgstr ""
+
+msgid "Embed Upload Form"
+msgstr ""
+
+msgid "Files attached to <i>%s</i>"
+msgstr ""
+
+msgid "Filter files by search keyword/tag:"
+msgstr ""
+
+msgid "For AJAX lists this is the number of preloaded items."
+msgstr ""
+
+msgid "Display Page Navigation"
+msgstr ""
+
+msgid "Group by Categories"
+msgstr ""
+
+msgid "Private Browser: Only display files owned by the logged in User."
+msgstr ""
+
+msgid "Expanded Browser: All Category are initially opened so all files are displayed."
+msgstr ""
+
+msgid "Scan remote file (disable for large files)"
+msgstr ""
+
+msgid "File Info Tags (ID3 Tags)"
+msgstr ""
+
+msgid "No sync in progress. Done!"
+msgstr ""
+
+
