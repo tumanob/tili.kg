@@ -52,7 +52,7 @@
 
     </div>
     <div class="soros">
-        <a href="http://tili.kg/thanks"><img height="60" src="/soroskg.png"></a>
+        <a href="http://tili.kg/thanks"><img height="60" src="/banners/soroskg.png"></a>
         Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан».
 	</div>
 	<div class="hoster">
