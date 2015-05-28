@@ -35,35 +35,62 @@
 	</div>
 	<div id="float_chars_icon"><img src="<?php bloginfo('template_url'); ?>/images/character.gif" border="0"/></div>
 <div id="site">
-	<div id="header">
-		<h1><a href="<?php bloginfo('url'); ?>"><img src="<?php bloginfo('template_url'); ?>/images/logo.png" width="234" height="91" alt="KG TiLi" /></a></h1>
-		<div class="social">
-			<a href="http://www.facebook.com/tili.kg" class="facebook" target="_blank"></a>
-			<a href="http://twitter.com/#!/TiliKg" class="twitter" target="_blank"></a>
-			<a href="https://plus.google.com/105455951727263535900" class="gplus" target="_blank"></a>
-		</div>
-		<div class="searchform">
-		<form action="<?php bloginfo('url'); ?>" method="get">
-			 <input name="" type="text" class="stxt" id="stxt" value="Введите слово" onFocus="javascript: if(this.value == 'Введите слово') this.value = '';" onBlur="javascript: if(this.value == '') { this.value = 'Введите слово';}" />
-			 <input type="submit" class="sbtn" value=" " onClick="location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;" />
-		</form>
-		</div>
-        <?php
-        if ( is_user_logged_in() ) {?>
-                    <div class="login">
-                    			Добро пожаловать <?php global $current_user;
-                    			                    get_currentuserinfo();
-                                                    echo "<b>".$current_user->user_login . "</b>\n";
-                ?>
-                        | <a href="/wp-login.php?action=logout">Выйти</a>
-            </div>
-          <?php }
-        else {?>
+	<div id="header" class="row">
+		<div class="logoimg col-xs-12 col-md-4">
+            <h1><a href="<?php bloginfo('url'); ?>"><img src="<?php bloginfo('template_url'); ?>/images/logo.png" width="234" height="91" alt="KG TiLi" /></a></h1>
             <div class="login">
-            			<a href="http://tili.kg/wp-login.php">Войти</a> | <a href="http://tili.kg/wp-login.php?action=register">Регистрация</a>
-            		</div>
-        <?php }
-        ?>
+             <?php
+             if ( is_user_logged_in() ) {?>
+                  	Добро пожаловать <?php global $current_user;
+                     get_currentuserinfo();
+                     echo "<b>".$current_user->user_login . "</b>\n";
+                     ?>
+                     | <a href="/wp-login.php?action=logout">Выйти</a>
+
+               <?php }
+             else {?>
+                 	<a href="http://tili.kg/wp-login.php">Войти</a> | <a href="http://tili.kg/wp-login.php?action=register">Регистрация</a>
+             <?php }
+             ?>
+             </div>
+        </div>
+        <div class="searchform col-xs-12 col-md-8">
+            <form action="<?php bloginfo('url'); ?>" method="get">
+                 <input name="" type="text" class="stxt" id="stxt" value="Введите слово для поиска в словаре" onFocus="javascript: if(this.value == 'Введите слово для поиска в словаре') this.value = '';" onBlur="javascript: if(this.value == '') { this.value = 'Введите слово для поиска в словаре';}" />
+                 <input type="submit" class="sbtn" value="Перевод" onClick="location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;"/>
+            </form>
+            <div id="topmenu">
+         					<nav class="navbar navbar-default" role="navigation" style="margin-top:0px;">
+         					<div class="container-fluid">
+         						<!-- Brand and toggle get grouped for better mobile display -->
+         						<div class="navbar-header">
+         							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+         								<span class="sr-only"><?php _e('Toggle navigation', 'china-theme'); ?></span>
+         								<span class="icon-bar"></span>
+         								<span class="icon-bar"></span>
+         								<span class="icon-bar"></span>
+         							</button>
+
+         						</div>
+
+         								<?php
+         										wp_nav_menu( array(
+         												'menu'              => 'primary',
+         												'theme_location'    => 'primary',
+         												'depth'             => 2,
+         												'container'         => 'div',
+         												'container_class'   => 'collapse navbar-collapse',
+         								'container_id'      => 'bs-example-navbar-collapse-1',
+         												'menu_class'        => 'nav navbar-nav',
+         												'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
+         												'walker'            => new wp_bootstrap_navwalker())
+         										);
+         								?>
+
+         						</div>
+         				</nav>
+         </div>
+        </div>
 
 
 

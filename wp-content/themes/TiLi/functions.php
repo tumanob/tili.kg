@@ -27,7 +27,7 @@ show_admin_bar( false );
 if ( function_exists('register_sidebar') ) {
      register_sidebar(array(
           'name' => 'Homepage',
-          'before_widget' => '<div id="%1$s" class="widget %2$s">',
+          'before_widget' => '<div id="%1$s" class="widget homewidget %2$s col-xs-12 col-md-4 col-sm-6">',
           'after_widget' => '</div>',
           'before_title' => '<h2 class="widgettitle">',
           'after_title' => '</h2>',
@@ -37,6 +37,12 @@ if ( function_exists('register_sidebar') ) {
 //     Add thumbnail support
 add_theme_support('post-thumbnails');
 add_image_size( 'thumb', 200, 200, true ); // Thumbnail
+
+// This theme uses wp_nav_menu() in two locations.
+		register_nav_menus( array(
+			'primary'   => __( 'Top primary menu', 'china-theme' )
+		) );
+
 
 function custom_login() {
 echo '<link rel="stylesheet" type="text/css" href="'.get_bloginfo('template_directory').'/login.css" />';

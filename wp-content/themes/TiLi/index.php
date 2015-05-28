@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-	<div id="wrapper">
+	<div id="wrapper" class="homepage-wrapper">
 		<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Homepage') ) : ?>
 		<?php endif; ?>
 	</div>

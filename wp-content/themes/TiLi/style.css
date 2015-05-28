@@ -44,7 +44,7 @@ img.alignright { float: right; margin-left: 10px; }
 img.aligncenter { display: block; margin: 0 auto; }
 
 #site {
-    width: 960px;
+    max-width: 990px;
     margin: 0 auto;
     position: relative;
     min-height: 100%;
@@ -59,14 +59,16 @@ img.aligncenter { display: block; margin: 0 auto; }
 /* Header
 --------------------------- */
 #header {
-    height: 155px;
+    min-height: 155px;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 .dict #header {
     height: 170px;
 }
 
-.login { position: absolute; top: 10px; right: 22px; color: #777; font-family: SegoeScript; }
+.login { /*position: absolute; top: 10px; right: 22px; */ color: #777;  }
 .login a { color: #777; margin: 0 5px; }
 
 .sbuttons { width: 420px; margin: 0 auto 10px; overflow: hidden; _zoom: 1; }
@@ -74,17 +76,28 @@ img.aligncenter { display: block; margin: 0 auto; }
 .dict .sbuttons { float: right; margin: 0; }
 
 #header h1 a {
-    position: absolute;
+    /*position: absolute;
     top: 17px;
-    left: 0;
+    left: 0;*/
     outline: none;
 }
 
 .searchform {
+
+
+/*
     position: absolute;
     left: 315px;
-    top: 45px;
+    top: 45px;*/
 }
+
+.searchform form{
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    background: white;
+    height: 50px;
+}
+
 
 .searchform input,.searchformdict input {
     float: left;
@@ -92,28 +105,40 @@ img.aligncenter { display: block; margin: 0 auto; }
 }
 
 .searchform .stxt {
-    background: url(images/stxt.gif) no-repeat;
-    width: 317px;
+   /* background: url(images/stxt.gif) no-repeat;*/
+    width: 100%; /*317px;*/
     padding: 12px 0 13px 10px;
     color: #888;
     font-size: 20px;
+    background: white;
+    border-radius: 10px;
 }
 
 .searchformdict .stxt {
-    background: url(images/stxt.gif) no-repeat;
-    width: 217px;
+    /*background: url(images/stxt.gif) no-repeat;*/
+    width: 100%; /*217px;*/
     padding: 12px 0 13px 10px;
     color: #888;
     font-size: 20px;
+    background: white;
+    border-radius: 10px;
 }
 
 .searchform .stxt:focus,searchformdict .stxt:focus { outline: none; }
 
 .searchform .sbtn, .searchformdict .sbtn{
-    background: url(images/sbtn.gif) no-repeat;
+    /*background: url(images/sbtn.gif) no-repeat;*/
     width: 103px;
-    height: 49px;
+    height: 46px;
     cursor: pointer;
+    float:right;
+    margin-top: -47px;
+    background: #D4DADF;
+    border-radius: 10px;
+    margin-right: 1px;
+    color:rgb(70, 93, 109);
+    z-index: 100000;
+    font-size: 1.6em;
 }
 
 .social {
@@ -154,10 +179,10 @@ img.aligncenter { display: block; margin: 0 auto; }
 /* Wrapper
 --------------------------- */
 .home #wrapper .widget {
-    width: 295px;
+   /* width: 295px;
     height: 250px;
-    padding: 10px;
-    /*font-family: Segoe Script;*/
+    padding: 10px;*/
+    min-height: 250px;
     background-repeat: no-repeat;
     background-position: 20px 75px;
     position: relative;
@@ -210,12 +235,12 @@ img.aligncenter { display: block; margin: 0 auto; }
 
 
 #text-3, #text-4,#text-5 {
-     border-bottom: 1px solid #d8dbdd; 
+     /*border-bottom: 1px solid #d8dbdd; */
 }
 
 #text-3, #text-4,#text-6, #text-7,#twitter-3  {
     
-    border-right: 1px solid #d8dbdd;
+  /*  border-right: 1px solid #d8dbdd;*/
 }
 
 
@@ -363,15 +388,23 @@ line-height:0px;
 }
 
 .category .post {
-    float: left;
-    width: 429px;
-    padding: 20px;
-    height: 230px;
+    /*float: left;
+    width: 429px;*/
+    padding: 20px 20px 0 20px;
+    min-height: 290px;
 }
+
+
+
 
 .category .post h2 {
     margin: 0;
     line-height: 26px;
+}
+
+.category .post a.btn{
+    text-decoration: none;
+    font-size: 16px;
 }
 
 .category .post img {
@@ -403,6 +436,9 @@ line-height:0px;
 
 .catlist h1{
  color:#1596D2;
+ margin-top: 0px;
+ margin-bottom: 0px;
+
 }
 
 .catlist ul li, #mainmenu a {
@@ -695,3 +731,46 @@ float: left;
 	font-size: 19px;
 	line-height: 22px;
 }
+
+
+/* bootstrap changes*/
+
+
+#header .logoimg
+{
+    height: 120px;
+}
+
+#header .logoimg, #header .searchform, #header .login
+{
+    padding:10px;
+}
+
+
+#header .logoimg h1{ margin:0;}
+
+
+.navbar-nav>li{
+    font-size: 18px;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus
+{
+    color: white;
+    background-color: #42AADA;
+}
+
+.navbar-default .navbar-nav>.active>a:hover{ background-color: #2EA92E; color: white;}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+    color: white;
+    background-color: #D445D8;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover
+{
+    color: white;
+    background-color: #D445D8;
+}
+
+#topmenu{  margin: 10px 0; }
