@@ -4,7 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name='loginza-verification' content='c087f9ee270d394785e1e56953635ffe' />
     <title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
-    <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
     <?php wp_head(); ?>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jquery.caret.js"></script>
