@@ -36,7 +36,7 @@
 	<div id="float_chars_icon"><img src="<?php bloginfo('template_url'); ?>/images/character.gif" border="0"/></div>
 <div id="site">
 	<div id="header" class="row">
-		<div class="logoimg col-xs-12 col-md-4">
+		<div class="logoimg col-xs-12 col-sm-6 col-md-4">
             <h1><a href="<?php bloginfo('url'); ?>"><img src="<?php bloginfo('template_url'); ?>/images/logo.png" width="234" height="91" alt="KG TiLi" /></a></h1>
             <div class="login">
              <?php

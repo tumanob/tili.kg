@@ -17,7 +17,7 @@ html, body {
 }
 
 body {
-    font: 13px Arial, Helvetica, sans-serif;
+    font: 15px Arial, Helvetica, sans-serif;
     color: #000;/*#2b2b2b;*/
     background: url(images/bg.gif) repeat-x top;
 }
@@ -65,7 +65,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 }
 
 .dict #header {
-    height: 170px;
+    min-height: 170px;
 }
 
 .login { /*position: absolute; top: 10px; right: 22px; */ color: #777;  }
@@ -73,7 +73,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 
 .sbuttons { width: 420px; margin: 0 auto 10px; overflow: hidden; _zoom: 1; }
 .sbuttons .sbut { float: left; }
-.dict .sbuttons { float: right; margin: 0; }
+.dict .sbuttons {  margin: 0; }
 
 #header h1 a {
     /*position: absolute;
@@ -96,6 +96,10 @@ img.aligncenter { display: block; margin: 0 auto; }
     border-radius: 10px;
     background: white;
     height: 50px;
+}
+
+.dict .searchform form{
+    height: 60px;
 }
 
 
@@ -326,18 +330,23 @@ line-height:0px;
 }
 
 .post { margin-bottom: 20px; }
-.post h2 {
+
+.post  .sub{ padding-left: 15px;}
+.post h1 {
    /* font-family: Segoe Script;*/
-    font-size: 17px;
+    font-size: 22px;
     margin-bottom: 5px;
     text-shadow: 1px 1px 0 #fff;
+    padding-left: 15px;
 }
 
-.post h2 a {
+.post h2 {  font-size: 17px; }
+
+.post h1 a {
     text-decoration: none;
 }
 
-.post h2 a:hover {
+.post h1 a:hover {
     text-decoration: underline;
 }
 
@@ -375,16 +384,28 @@ line-height:0px;
     margin-top: -40px;
     height: 140px;
     font: 11px;/* Segoe Script;*/
+    max-width: 990px;
+    margin: 0 auto;
+    position: relative;
+
 }
 
 #footer .inner {
     border-top: 1px solid #d8dbdd;
-    width: 960px;
+    max-width: 960px;
     margin: 0 auto;
     position: relative;
     padding-top: 10px;
-	height: 33px;
+	min-height: 50px;
+    margin-bottom: 20px;
+
 	
+}
+
+#footer .partners
+{
+    margin-bottom: 20px;
+    max-width: 990px;
 }
 
 .category .post {
@@ -422,9 +443,9 @@ line-height:0px;
 }
 
 #mainmenu {
-    position: absolute;
-    top: 125px;
-    left: 0;
+  /*  position: absolute;
+    top: 125px;*/
+  /*  left: 0;*/
     width: 100%;
 }
 
@@ -450,7 +471,7 @@ line-height:0px;
 }
 
 #navigation label {
-    font-size: 25px;
+    font-size: 25px; /* dict*/
    /* font-family: Segoe Script;*/
     display: block;
     margin-bottom: 30px;
@@ -526,9 +547,9 @@ line-height:0px;
 }
 
 input#keyword {
-    width: 95%;
+   /* width: 95%;
     height: 35px;
-    font: 35px bold;
+    font: 35px bold;*/
 
 }
 
@@ -630,7 +651,7 @@ p {
 
 #footer-menu li { display: inline; margin-left: 15px; }
 
-.copyright { float: left; }
+.copyright {  }
 #footer-menu { float: right; }
 
 .linklove, .error404 .sbuttons { display: none; }
@@ -656,13 +677,13 @@ p {
 
 #comments { clear: both; }
 
-#header .android { position: absolute; right: 200px; top: 39px; }
+/*#header .android { position: absolute; right: 200px; top: 39px; }
 
 #header .iosapp { position: absolute; right: 360px; top: 39px; }
 
 #header .iosapp  img, #header .android img {height: 45px;}
-
-.netkg{float: right; margin-left: 10px;}
+*/
+.netkg{}
 
 
 
@@ -702,10 +723,10 @@ p {
 
 .addword-menu{
 
-    float: right;
-    position: absolute;
+   float: right;
+   /*  position: absolute;
     right: -15px;
-    top: 1px;
+    top: 1px;*/
 }
 
 
@@ -776,3 +797,55 @@ float: left;
 }
 
 #topmenu{  margin: 10px 0; }
+
+
+
+.btn.btn-download{
+background: none;
+/*padding: 12px;*/
+border: 2px solid #5bc0de;
+color: #5bc0de;
+border-radius: 10px;
+
+}
+
+.btn.btn-download .btn-primary
+{
+	background:#5bc0de;
+	border: 1px solid #5bc0de;
+}
+
+.btn.btn-download:hover {
+border: 2px solid #2EA92E;
+color: #2EA92E;
+}
+
+.btn.btn-download:hover .btn-primary {
+    background:#5bc0de;
+
+}
+
+
+
+.btn-download span.downloadicon
+{
+	float: left;
+	width: 36px;
+ 	margin-right: 15px;
+  font-size: 36px;
+}
+
+.btn-download .btn-default
+{
+
+	background: none !important;
+  border: 0px !important;
+ box-shadow: none !important;
+font-size: 24px;
+margin: 0px;
+padding: 0px;
+
+}
+
+
+.apps{  margin: 20px 0;}

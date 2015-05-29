@@ -11,42 +11,63 @@
 {%endblock%}
 
 {%block content%}
-    <div id="float_chars_block">
+    <div class="content-header">
+        <div class="000searchblock" style="height: 120px;">
+                <h1>Введите слово для перевода</h1>
+    			<div class="searchform dict col-xs-12 col-md-6 col-sm-12">
+                    <form action="http://tili.kg" method="get">
+                         <input name="keyword" type="text" class="stxt" id="keyword" value="Введите слово" onfocus="javascript: if(this.value == 'Введите слово') this.value = '';" onblur="javascript: if(this.value == '') { this.value = 'Введите слово';}">
+
+                         <input type="submit" class="sbtn" value="Перевод" onclick="showWord(document.getElementById('keyword').value);
+                          return false;">
+                        <div id="float_chars_block">
+                              	<span title="Ctrl+Alt+н">ң</span>
+                             	<span title="Ctrl+Alt+о">ө</span>
+                                <span title="Ctrl+Alt+у">ү</span>
+                                <div style="clear:both"></div>
+                        </div>
+                    </form>
+
+                 </div>
+        </div>
+
+    </div>
+    <div class="sidebar" >
+
+
+
+    </div>
+    <div class="content-text">
+        <div id="content" style="">
+
+
+                <p id="dic_content" >
+                    <img src="assets/images/kt-dict.jpg" alt="Онлайн словарь" style="margin:40px 0 10px 160px;" />
+                </p>
+
+                <div id="not-found">
+                    <img src="{{asset('/assets/images/noword-man.gif')}}" alt="Слово не найдено" />
+                    <div>
+                        Если вы знаете как переводится  <span>слово</span><br />
+                        вы можете помочь расширить наш словарь<br />
+
+                        <a class="addword" href="{{asset('/add')}}">&nbsp;</a>
+                    </div>
+                </div>
+
+            </div>
+
+    </div>
+    <div id="float_chars_block2">
     	<span title="Ctrl+Alt+н">ң</span>
     	<span title="Ctrl+Alt+о">ө</span>
     	<span title="Ctrl+Alt+у">ү</span>
     	<div style="clear:both"></div>
 	</div>
 
-    <div id="content" style="">
-		
-        <p id="dic_content" >
-            <img src="assets/images/kt-dict.jpg" alt="Онлайн словарь" style="margin:40px 0 10px 160px;" />
-        </p>
 
-        <div id="not-found">
-            <img src="{{asset('/assets/images/noword-man.gif')}}" alt="Слово не найдено" />
-            <div>
-                Если вы знаете как переводится  <span>слово</span><br />
-                вы можете помочь расширить наш словарь<br />
 
-                <a class="addword" href="{{asset('/add')}}">&nbsp;</a>
-            </div>
-        </div>
 
-    </div>
-    <div id="navigation">
-		<div class="searchblock" style="height: 120px;">
-            <label for="keyword">Введите слово для перевода</label>
-			<div class="searchformdict">
-                <form action="http://tili.kg" method="get">
-                     <input name="keyword" type="text" class="stxt" id="keyword" value="Введите слово" onfocus="javascript: if(this.value == 'Введите слово') this.value = '';" onblur="javascript: if(this.value == '') { this.value = 'Введите слово';}">
-                     <input type="submit" class="sbtn" value=" " onclick="showWord(document.getElementById('keyword').value); 
-  return false;">
-                </form>
-			     
-            </div>
-            <div style="clear: both;"></div>
 			
         </div>
 	
