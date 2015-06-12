@@ -95,20 +95,10 @@ function showWord(id) {
 
 $(document).ready(function () {
     // Setup the ajax indicator
-    $("body").append('<div id="ajaxBusy" style=""><p><img src="views/images/loading.gif"><center>Работаю...</center></p> </div>');
+    $(".searchform").append('<div id="ajaxBusy" style=""><p><img src="views/images/loading.gif"><center>Ищу слова</center></p> </div>');
 
     $('#ajaxBusy').css({
-        display:"none",
-        left: "50%",
-        top:"20%",
-        margin:" -100px 0 0 -250px",
-        paddingLeft:"0px",
-        paddingRight:"0px",
-        paddingTop:"0px",
-        paddingBottom:"0px",
-        position:"fixed",
-        /*right:"3px",*/
-        width:"auto"
+        display:"none"
 
     });
 
@@ -129,7 +119,7 @@ $(document).ready(function () {
 		
 		   });
 
-    $("#keyword").focus();
+   // $("#keyword").focus();
 
     var hash = window.location.hash;
     if (hash) {
@@ -149,5 +139,24 @@ $(document).ready(function () {
         }
     });
 
+    $('#keyword').focusout(function(){
+       // setTimeout($('#result').delay(10000), 2000);
+      $('#result').delay(400).hide(200); // hide podskazka
+    });
+    $('#keyword').focusin(function(){
+
+      $('#result').show(); // hide podskazka
+        });
+
     $(window).trigger("hashchange");
+
+    $(window).bind('scroll', function () {
+        if ($(window).scrollTop() > 150) {
+            $('#mainmenu').addClass('fixed');
+        } else {
+            $('#mainmenu').removeClass('fixed');
+        }
+    });
+
+
 });
