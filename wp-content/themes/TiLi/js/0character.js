@@ -2,10 +2,11 @@ var input_element_focus = false;
 var range = {start:0, end:0};
 var bufVal = '';
 var bufReplace = '';
+jQuery.noConflict();
 
 jQuery(document).ready(function() {
     var $FCB = jQuery('#float_chars_block');
-    //var $FCI = jQuery('#float_chars_icon');
+    var $FCI = jQuery('#float_chars_block'); //jQuery('#float_chars_icon');
 
     function setCharacter(character) {
         if (!input_element_focus)return false;
@@ -16,11 +17,11 @@ jQuery(document).ready(function() {
             jQuery(input_element_focus).val(value);
         }
         if(value.length>0){
-         var startText = value.substr(0, range.start);
-         var endText = value.substr(range.end, value.length);
-         newText = startText + character + endText;
+        	var startText = value.substr(0, range.start);
+        	var endText = value.substr(range.end, value.length);
+        	newText = startText + character + endText;
         }else{
-         newText = character;
+        	newText = character;
         }
         jQuery(input_element_focus).val(newText);
 
@@ -29,10 +30,13 @@ jQuery(document).ready(function() {
     }
     jQuery(document).click(function(e){
         var $clicked=jQuery(e.target);
-        if($clicked.attr('id')=='float_chars_block' || $clicked.closest('#float_chars_block').size()>0){
+
+        if(e.target.tagName.toLowerCase()=='input' || e.target.tagName.toLowerCase()=='textarea' && ($clicked.attr('id')=='float_chars_icon' || $clicked.attr('id')=='float_chars_block' ||
+                $clicked.parents('#float_chars_icon:first').size()>0 || $clicked.parents('#float_chars_block:first').size()>0
+                )){
             return false;
         }else{
-            $FCB.hide();
+            $FCI.hide();
         }
     });
 
@@ -47,14 +51,12 @@ jQuery(document).ready(function() {
         }else{
             bufReplace = '';
         }
-
-
         range = jQuery(input_element_focus).caretPos();
-        //if($FCB.is(':visible'))$FCB.hide();
+        $FCB.hide();
         var cur_offset = jQuery(this).offset();
-        var pos = {left:cur_offset.left, top:cur_offset.top-30};
-      //  if(!$FCB.is(':visible'))$FCB.css(pos).show();
-          if(!$FCB.is(':visible'))$FCB.show();
+        var pos = {left:cur_offset.left + jQuery(this).width() + 4, top:cur_offset.top};
+        //$FCI.css(pos).show();
+        $FCI.show();
     })
     .bind('mousedown', function() {
         bufVal = jQuery.trim(this.value);
@@ -64,12 +66,29 @@ jQuery(document).ready(function() {
         return false;
     }).bind('keyup', showEventDetails);
 
-
+    $FCI.click(function() {
+        var cur_offset = jQuery(this).offset();
+        var pos = {left:cur_offset.left, top:cur_offset.top};
+        if ($FCB.is(':visible')) {
+            $FCB.animate(pos);
+        } else {
+          //  $FCB.css(pos).fadeIn();
+            $FCB.fadeIn();
+        }
+        setTimeout(function() {
+            $FCI.hide();
+        }, 50);
+        return false;
+    });
     jQuery('span', $FCB).click(function() {
-
+        /*$FCB.hide();
+        setTimeout(function() {
+            $FCI.show();
+        }, 150);*/
         var character = jQuery(this).text();
         setCharacter(character);
     });
+    //jQuery.event.add(document, 'keyup', showEventDetails);
 
     function showEventDetails(event) {
         switch (event.keyCode) {

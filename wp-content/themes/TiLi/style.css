@@ -56,7 +56,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 }
 
 .home {
-    font-family: SegoeScript;
+    /*font-family: SegoeScript;*/
 }
 
 /* Header
@@ -102,7 +102,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 }
 
 .dict .searchform form{
-    height: 60px;
+  /*  height: 60px;*/
 }
 
 
@@ -185,7 +185,7 @@ img.aligncenter { display: block; margin: 0 auto; }
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 1px 5px grey;
-      padding: 20px 0 0 21px;
+      padding: 20px 10px 0 10px;
 }
 
 /* Wrapper
@@ -205,7 +205,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 .home #wrapper .widget .widgettitle
 {
 	text-align: center;
-	
+
 }
 .home #wrapper .textwidget {
     padding-left: 165px;
@@ -251,14 +251,14 @@ img.aligncenter { display: block; margin: 0 auto; }
 }
 
 #text-3, #text-4,#text-6, #text-7,#twitter-3  {
-    
+
   /*  border-right: 1px solid #d8dbdd;*/
 }
 
 
 
 .home #wrapper #text-6,.home #wrapper #text-7,.home #wrapper #text-8,.home #wrapper #twitter-3{
-	height: 350px;	
+	height: 350px;
 }
 
 
@@ -280,12 +280,12 @@ line-height:0px;
 #twitter-3 .widgettitle
 {
 	color: blueViolet;
-	
+
 }
 
 #text-8 .widgettitle{
-	
-	color: red;	
+
+	color: red;
 }
 
 #text-3 {
@@ -407,7 +407,7 @@ line-height:0px;
 	min-height: 50px;
     margin-bottom: 20px;
 
-	
+
 }
 
 #footer .partners
@@ -465,7 +465,7 @@ line-height:0px;
     border-radius: 5px;
     padding: 5px;
     border: 1px solid #00bbf8;
-   
+
 }
 
 #mainmenu
@@ -686,7 +686,7 @@ p {
 #respond input { padding: 3px; }
 
 #float_chars_block, #float_chars_icon{position:absolute;left:0;top:0;display:none;z-index: 9999;}
-#float_chars_block {background-color: #FFFFFF;border: 1px solid #888888;display: none;left: 0;padding: 8px;position: absolute;top: 0;width: 92px;z-index: 9999;}
+#float_chars_block {background-color: #FFFFFF;border: 1px solid #CCC;display: none;left: 0;  padding: 4px 10px; position: absolute;top: 0;width: 92px;z-index: 9999;}
 #float_chars_block span {border: 1px solid #CCCCCC;cursor: pointer;display: block;float: left;margin: 2px;padding: 4px;}
 #float_chars_block .close {color: #C00000;cursor: pointer;font-weight: bold;height: 6px;position: absolute;right: 1px;top: -1px;width: 6px;}
 
@@ -898,7 +898,7 @@ padding: 0px;
 
 
 #float_chars_block{
-    left: 56%;
+    left: 20px;
     top: 59px;
     z-index: 1000000000;
 
@@ -912,4 +912,9 @@ padding: 0px;
        /* margin: -100px 0 0 -250px; */
     position: absolute;
         width:auto;
+}
+
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+  padding: 0px;
 }

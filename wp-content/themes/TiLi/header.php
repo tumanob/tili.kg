@@ -23,17 +23,6 @@
 </head>
 
 <body <?php body_class(); ?>>
-	<div id="float_chars_block">
-	    <div class="close">x</div>
-    	<span title="Ctrl+Alt+Shift+н">Ң</span>
-    	<span title="Ctrl+Alt+н">ң</span>
-    	<span title="Ctrl+Alt+Shift+о">Ө</span>
-    	<span title="Ctrl+Alt+о">ө</span>
-    	<span title="Ctrl+Alt+Shift+у">Ү</span>
-    	<span title="Ctrl+Alt+у">ү</span>
-    	<div style="clear:both"></div>
-	</div>
-	<div id="float_chars_icon"><img src="<?php bloginfo('template_url'); ?>/images/character.gif" border="0"/></div>
 <div id="site">
 	<div id="header" class="row">
 		<div class="logoimg col-xs-12 col-sm-6 col-md-4">
@@ -55,6 +44,15 @@
              </div>
         </div>
         <div class="searchform col-xs-12 col-md-8">
+          <div id="float_chars_block">
+            <!--  <div class="close">x</div> -->
+              <span title="Ctrl+Alt+н">ң</span>
+              <span title="Ctrl+Alt+о">ө</span>
+              <span title="Ctrl+Alt+у">ү</span>
+              <div style="clear:both"></div>
+          </div>
+          <div id="float_chars_icon"><img src="<?php bloginfo('template_url'); ?>/images/character.gif" border="0"/></div>
+
             <form action="<?php bloginfo('url'); ?>" method="get">
                  <input name="" type="text" class="stxt" id="stxt" value="Введите слово для поиска в словаре" onFocus="javascript: if(this.value == 'Введите слово для поиска в словаре') this.value = '';" onBlur="javascript: if(this.value == '') { this.value = 'Введите слово для поиска в словаре';}" />
                  <input type="submit" class="sbtn" value="Перевод" onClick="location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;"/>

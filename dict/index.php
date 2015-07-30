@@ -4,6 +4,18 @@ require_once ('silex.phar');
 require_once('../config.php');
 require "../wp-load.php";
 
+//use Symfony\Component\Routing\RouteCollection;
+//use Symfony\Component\Routing\Route;
+/*
+$collection = new RouteCollection();
+$collection->add('_dict', new Route('/dict/show/{dictword}', array(
+    '_controller' => 'AppBundle:Demo:hello',
+), array(
+    'dictword' => '.+',
+)));
+
+return $collection;
+*/
 $app = new Silex\Application();
 $app['debug'] = true;
 
@@ -374,6 +386,7 @@ $app->get('/d{id}/{let}/p{pageid}', function ($id, $let, $pageid) use ($app){
 
 $app->get('/d{id}/show/{word}', function ($id, $word) use ($app) {
     $id = (int)$id;
+    //echo $word; // show parameters
 
     $list = $app['db']->fetchAll(
         "SELECT dict_kw.id, keyword, name, value FROM dict_kw INNER JOIN dict_d ON dict_kw.dictid = dict_d.id WHERE keyword LIKE ? AND `dictid`= ?",
@@ -387,7 +400,7 @@ $app->get('/d{id}/show/{word}', function ($id, $word) use ($app) {
 
     $tags = array();
     if (count($ids)) {
-        $sql = 'SELECT tk.key_id AS keyword_id, t.id, t.tag, t2.tag as parent_tag, tk.user_id
+         $sql = 'SELECT tk.key_id AS keyword_id, t.id, t.tag, t2.tag as parent_tag, tk.user_id
             FROM dict_tags_keys tk
             LEFT JOIN dict_tags t ON tk.tag_id = t.id
             LEFT JOIN dict_tags t2 ON t.parent = t2.id
@@ -451,7 +464,7 @@ $app->get('/d{id}/show/{word}', function ($id, $word) use ($app) {
             'tags' => $tags,
             'alltags' => $tagTree
         ));
-})->convert('word', $wordFilter);
+})->assert('word', '.+')->convert('word', $wordFilter);
 
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -676,7 +689,7 @@ $app->error(function (\Exception $e, $code) {
             $message = 'Баракча табылган жок! Страница не найдена';
             break;
         default:
-            $message = 'Упс! Бирдемке иштебей калды окшойт :) '.
+            $message = 'Упс! Бирдемке иштебей калды окшойт :) / произошла ошибка перейдите на <a href="/dict/">главную страницу словаря и повторите поиск!</a>  '.
                        '<div style="display:none">'.$e->getMessage().'</div>';
     }
 
@@ -888,4 +901,3 @@ function hilights($texttochange)
 }
 
 $app->run();
-
