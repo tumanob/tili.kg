@@ -4,20 +4,35 @@
 <div id="footer">
 	<div class="inner row">
 
-        <div class="copyright  col-xs-12 col-md-6 col-sm-6">&copy; Все права защищены. Информацию без разрешения не красть</div>
-                  <div class=" col-xs-6 col-md-4 col-sm-6">
-                      <div class="sbut">
-                          <div class="fb-like" data-href="http://tili.kg/" data-send="false" data-layout="button_count" data-width="170" data-show-faces="false" data-font="verdana"></div>
-                      </div>
-                      <div class="sbut">
-                          <div class="g-plusone" data-size="medium"></div>
-                      </div>
-                      <div class="sbut">
-                          <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Tweet</a>
-                          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                      </div>
+                  <div class="copyright  col-xs-4 col-md-2 col-sm-3">
+                    <h3>TILI.KG</h3>
+                    &copy; Все права защищены. <br/>
+                    <div class="sbut">
+                        <div class="fb-like" data-href="http://tili.kg/" data-send="false" data-layout="button_count" data-width="170" data-show-faces="false" data-font="verdana"></div>
+                    </div>
+                    <div class="sbut">
+                        <div class="g-plusone" data-size="medium"></div>
+                    </div>
+                    <div class="sbut">
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </div>
                   </div>
-                   <div class="netkg col-xs-6 col-md-2 col-sm-6">
+                  <div class="col-xs-8 col-md-4 col-sm-4">
+                      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="300" height="75"	id="20050.swf" align="middle">
+                      <param name="allowScriptAccess" value="sameDomain">
+                      <param name="movie"
+                      value="http://tili.kg/banners/20050.swf">
+                      <param name="quality" value="high">
+                      <param name="bgcolor" value="#ffffff">
+                      <embed src="http://tili.kg/banners/20050.swf" quality="high" bgcolor="#ffffff" width="300" height="75" name="20050.swf" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+                      </object>
+                  </div>
+                  <div class="col-xs-8 col-md-4 col-sm-5">
+                      <a href="http://tili.kg/thanks" class="pull-left"><img height="60" src="/banners/soroskg.png"></a>
+                      Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан».
+                  </div>
+                   <div class="netkg col-xs-4 col-md-2 col-sm-4">
                            <!-- WWW.NET.KG , code for http://tili.kg -->
                            <script language="javascript" type="text/javascript">
                             java="1.0";
@@ -52,22 +67,6 @@
                        </div>
 
     </div>
-    <div class="partners row">
-        <div class="col-xs-12 col-md-6 col-sm-6">
-            <a href="http://tili.kg/thanks" class="pull-left"><img height="60" src="/banners/soroskg.png"></a>
-            Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан».
-        </div>
-        <div class="col-xs-12 col-md-6 col-sm-6">
-            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="300" height="75"	id="20050.swf" align="middle">
-            <param name="allowScriptAccess" value="sameDomain">
-            <param name="movie"
-            value="/banners/20050.swf">
-            <param name="quality" value="high">
-            <param name="bgcolor" value="#ffffff">
-            <embed src="/banners/20050.swf" quality="high" bgcolor="#ffffff" width="300" height="75" name="20050.swf" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
-            </object>
-        </div>
-    </div>
 </div>
 
 <?php wp_footer();?>
@@ -80,7 +79,7 @@
             w.yaCounter13790767 = new Ya.Metrika({id:13790767, enableAll: true, trackHash:true, webvisor:true});
         } catch(e) {}
     });
-    
+
     var n = d.getElementsByTagName("script")[0],
         s = d.createElement("script"),
         f = function () { n.parentNode.insertBefore(s, n); };
