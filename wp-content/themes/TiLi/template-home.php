@@ -4,7 +4,8 @@
 <?php get_header(); ?>
 
 	<div id="wrapper" class="homepage-wrapper">
-        <div id="111">
+				
+        <div id="hpagecontent">
         		<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
         			<div class="post">
         				<?php the_content(); ?>

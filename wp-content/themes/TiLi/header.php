@@ -8,6 +8,8 @@
     <?php wp_head(); ?>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jquery.caret.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/character.js"></script>
+    <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/dict.js"></script>
+
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
            {lang: 'ru'}
            </script>
@@ -79,36 +81,35 @@
           </div>
           <div class="headersearch">
             <div class="searchform">
-              <div id="float_chars_block">
-                <!--  <div class="close">x</div> -->
-                  <span title="Ctrl+Alt+н">ң</span>
-                  <span title="Ctrl+Alt+о">ө</span>
-                  <span title="Ctrl+Alt+у">ү</span>
-                  <div style="clear:both"></div>
-              </div>
-              <div id="float_chars_icon"><img src="<?php bloginfo('template_url'); ?>/images/character.gif" border="0"/></div>
 
-                <form action="<?php bloginfo('url'); ?>" method="get">
-                     <input name="" type="text" class="stxt" id="stxt" value="Введите слово для поиска в словаре" onFocus="javascript: if(this.value == 'Введите слово для поиска в словаре') this.value = '';" onBlur="javascript: if(this.value == '') { this.value = 'Введите слово для поиска в словаре';}" />
-                     <input type="submit" class="sbtn" value="Перевод" onClick="location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;"/>
+              <form id="mdform" >
+                  <div class="">
+                    <span class="isearch">&nbsp;</span>
+                    <input placeholder="Введите слово для поиска в словаре" type="text" id="stxt"  class="stxt col-md-12 col-sm-12 col-xs-12" required="">
+                    <input type="submit" class="sbtn col-md-3 col-sm-4 col-xs-5" value="Перевод" onClick="//location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;"/>
+                  </div>
                 </form>
+                <div id="float_chars_block">
+                  <!--  <div class="close">x</div> -->
+                    <span title="Ctrl+Alt+н">ң</span>
+                    <span title="Ctrl+Alt+о">ө</span>
+                    <span title="Ctrl+Alt+у">ү</span>
+                    <div style="clear:both"></div>
+                </div>
+                <div id="float_chars_icon"><img src="<?php bloginfo('template_url'); ?>/images/character.gif" border="0"/></div>
 
-                <br/><br/>
-                <form>
-
-                    <div class="group">
-                      <input type="text" required>
-                      <span class="highlight"></span>
-                      <span class="bar"></span>
-                      <label>Name</label>
-                    </div>
-
-                    <input type="submit" class="sbtn" value="Перевод" onClick="location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;"/>
-             
-                  </form>
 
             </div>
           </div>
+
+
+            <!--
+            <form id="" action="<?php bloginfo('url'); ?>" method="get">
+                 <input placeholder="Введите слово для поиска в словаре" type="text" />
+                 <input type="submit" class="sbtn" value="Перевод" onClick="//location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;"/>
+            </form>
+            -->
+
       </nav>
 
 </div>

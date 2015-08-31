@@ -87,17 +87,15 @@ img.aligncenter { display: block; margin: 0 auto; }
 
 .searchform {
 
+  max-width: 990px;
+  margin: 0 auto;
 
-/*
-    position: absolute;
-    left: 315px;
-    top: 45px;*/
 }
 
 .searchform form{
-    border: 1px solid #cccccc;
+    /*border: 1px solid #cccccc;
     border-radius: 10px;
-    background: white;
+    background: white;*/
     height: 50px;
 }
 
@@ -111,15 +109,21 @@ img.aligncenter { display: block; margin: 0 auto; }
     border: none;
 }
 
-.searchform .stxt {
-   /* background: url(images/stxt.gif) no-repeat;*/
-    width: 100%; /*317px;*/
-    padding: 12px 0 13px 10px;
-    color: #888;
-    font-size: 20px;
-    background: white;
-    border-radius: 10px;
+.searchform #stxt {
+padding-left:40px ;
 }
+
+
+.isearch
+{
+    float: left;
+    position: absolute;
+    margin-top: 10px;
+    background: url(images/search.png) no-repeat;
+    width: 24px;
+    height: 24px;
+}
+
 
 .searchformdict .stxt {
     /*background: url(images/stxt.gif) no-repeat;*/
@@ -135,8 +139,8 @@ img.aligncenter { display: block; margin: 0 auto; }
 
 .searchform .sbtn, .searchformdict .sbtn{
     /*background: url(images/sbtn.gif) no-repeat;*/
-    width: 103px;
-    height: 46px;
+    /*width: 103px;
+    height: 46px;*/
     cursor: pointer;
     float:right;
     margin-top: -47px;
@@ -898,10 +902,11 @@ padding: 0px;
 
 
 #float_chars_block{
-    left: 20px;
-    top: 59px;
-    z-index: 1000000000;
-
+  /*  left: 142px;*/
+  top: -7px;
+  z-index: 1000000000;
+  position: relative;
+  float: left;
 }
 
 
@@ -922,6 +927,7 @@ padding: 0px;
 .navbar-tili{
   background-color: #3f51b5;
   border-color: #e7e7e7;
+  /*height: 120px;*/
 
 }
 .navbar-tili .navbar-brand, .navbar-tili .navbar-brand:hover {
@@ -1015,94 +1021,60 @@ http://www.materialup.com/posts/material-design-input-text
 
 
 /* form starting stylings ------------------------------- */
-.group 			  {
-  position:relative;
-  margin-bottom:45px;
-}
-input 				{
-  font-size:18px;
-  padding:10px 10px 10px 5px;
-  display:block;
-  width:300px;
-  border:none;
-  border-bottom:1px solid #757575;
-}
-input:focus 		{ outline:none; }
 
-/* LABEL ======================================= */
-label 				 {
-  color:#999;
-  font-size:18px;
-  font-weight:normal;
-  position:absolute;
-  pointer-events:none;
-  left:5px;
-  top:10px;
-  transition:0.2s ease all;
-  -moz-transition:0.2s ease all;
-  -webkit-transition:0.2s ease all;
-}
 
-/* active state */
-input:focus ~ label, input:valid ~ label 		{
-  top:-20px;
-  font-size:14px;
-  color:#5264AE;
-}
 
-/* BOTTOM BARS ================================= */
-.bar 	{ position:relative; display:block; width:300px; }
-.bar:before, .bar:after 	{
-  content:'';
-  height:2px;
-  width:0;
-  bottom:1px;
-  position:absolute;
-  background:#5264AE;
-  transition:0.2s ease all;
-  -moz-transition:0.2s ease all;
-  -webkit-transition:0.2s ease all;
+#mdform input {
+  margin: 0px 0px;
+
+  display: block;
+  border: none;
+  padding: 10px 0;
+  border-bottom: solid 1px #1abc9c;
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+          transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+  background-position: -700% 0;
+  background-size: 700% 100%;
+  background-repeat: no-repeat;
+  color: #0e6252;
+
+  padding-bottom: 15px;
 }
-.bar:before {
-  left:50%;
+#mdform input:focus, #mdform input:valid {
+  box-shadow: none;
+  outline: none;
+  background-position: 0 0;
 }
-.bar:after {
-  right:50%;
+#mdform input:focus::-webkit-input-placeholder, #mdform input:valid::-webkit-input-placeholder {
+  color: #1abc9c;
+  font-size: 11px;
+  -webkit-transform: translateY(-20px);
+          transform: translateY(-20px);
+  visibility: visible !important;
 }
 
-/* active state */
-input:focus ~ .bar:before, input:focus ~ .bar:after {
-  width:50%;
-}
+#mdform .sbtn {
+  border: none;
+  background: #1abc9c;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 6px;
 
-/* HIGHLIGHTER ================================== */
-.highlight {
-  position:absolute;
-  height:60%;
-  width:100px;
-  top:25%;
-  left:0;
-  pointer-events:none;
-  opacity:0.5;
-}
+  color: white;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
 
-/* active state */
-input:focus ~ .highlight {
-  -webkit-animation:inputHighlighter 0.3s ease;
-  -moz-animation:inputHighlighter 0.3s ease;
-  animation:inputHighlighter 0.3s ease;
-}
 
-/* ANIMATIONS ================ */
-@-webkit-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
+  position: relative;
+right: 2px;
+top: -46px;
+
+
 }
-@-moz-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
+#mdform .sbtn:hover {
+  -webkit-transform: translateY(-3px);
+      -ms-transform: translateY(-3px);
+          transform: translateY(-3px);
+  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
 }
