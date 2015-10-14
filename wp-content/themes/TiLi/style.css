@@ -815,25 +815,28 @@ float: left;
 
 .navbar-nav>li{
     font-size: 18px;
+  z-index: 100000000;
+  width: 400px;
+  background-color: #ccc;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus
 {
     color: white;
-    background-color: #42AADA;
+    /*background-color: #42AADA;*/
 }
 
-.navbar-default .navbar-nav>.active>a:hover{ background-color: #2EA92E; color: white;}
+.navbar-default .navbar-nav>.active>a:hover{ /*background-color: #2EA92E;*/ color: white;}
 
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
     color: white;
-    background-color: #D445D8;
+    /*background-color: #D445D8;*/
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover
 {
     color: white;
-    background-color: #D445D8;
+  /*  background-color: #D445D8;*/
 }
 
 #topmenu{  margin: 0px 0; }
@@ -1046,9 +1049,12 @@ background-color: white;
           float: left;
     }
 .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
-  background-color: #FFF;
+  background-color: white;
 }
 
+.navbar-default .navbar-toggle:focus .icon-bar,.navbar-default .navbar-toggle:hover .icon-bar{
+  background-color: #000;
+}
 
 
 /*  material styles
@@ -1164,3 +1170,8 @@ http://www.materialup.com/posts/material-design-input-text
 
 .utext h2
 {font-size: 24px; margin-bottom: 22px;}
+
+.side-menu-glavnoe
+{
+  margin-top: 0px;
+}

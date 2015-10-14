@@ -41,7 +41,7 @@
            <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
             <div class="row topcenter">
               <div class="col-md-8 col-sm-6 col-xs-6">
-                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili.kg <span>Все для изучения Киргизского языка!</span></a></h1>
+                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili.kg <span class="hidden-xs">Все для изучения Киргизского языка!</span></a></h1>
               </div>
               <div class="col-md-3 .col-sm-3 col-xs-4 pull-right">
                 <div class="login">
@@ -71,8 +71,8 @@
                       'depth'             => 2,
                       'container'         => 'div',
                       'container_class'   => 'collapse navbar-collapse',
-              'container_id'      => 'bs-example-navbar-collapse-1',
-                      'menu_class'        => 'nav navbar-nav',
+                      'container_id'      => 'bs-example-navbar-collapse-1',
+                      'menu_class'        => 'nav navbar-nav side-menu-glavnoe',
                       'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
                       'walker'            => new wp_bootstrap_navwalker())
                   );
