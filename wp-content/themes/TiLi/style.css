@@ -18,7 +18,7 @@ html, body {
 }
 
 body {
-    font: 15px Arial, Helvetica, sans-serif;
+    font: 15px 'Roboto',Arial, Helvetica, sans-serif;
     color: #000;/*#2b2b2b;*/
    /* background: url(images/bg.gif) repeat-x top;*/
     background-color: #f2f2f2 !important;
@@ -46,7 +46,7 @@ img.alignright { float: right; margin-left: 10px; }
 img.aligncenter { display: block; margin: 0 auto; }
 
 #site {
-    max-width: 990px;
+    max-width: 1200px;
     margin: 0 auto;
     position: relative;
     min-height: 100%;
@@ -62,7 +62,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 /* Header
 --------------------------- */
 #header {
-    min-height: 155px;
+    min-height: 0px;
     margin-right: 0px;
     margin-left: 0px;
 }
@@ -72,7 +72,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 }
 
 .login { /*position: absolute; top: 10px; right: 22px; */ color: #777;  }
-.login a { color: #777; margin: 0 5px; }
+.login a { color: #777; margin: 0 5px; text-transform: uppercase; text-decoration: none;}
 
 .sbuttons { width: 420px; margin: 0 auto 10px; overflow: hidden; _zoom: 1; }
 .sbuttons .sbut { float: left; }
@@ -87,8 +87,9 @@ img.aligncenter { display: block; margin: 0 auto; }
 
 .searchform {
 
-  max-width: 990px;
-  margin: 0 auto;
+  max-width: 1200px;
+  margin: 40px auto 0px;
+
 
 }
 
@@ -111,6 +112,8 @@ img.aligncenter { display: block; margin: 0 auto; }
 
 .searchform #stxt {
 padding-left:40px ;
+padding-bottom: 26px;
+font-size: 24px;
 }
 
 
@@ -186,10 +189,21 @@ padding-left:40px ;
     _zoom: 1;
     padding-bottom: 20px;
     background-color: white;
-      border-radius: 10px;
+      border-radius: 0px;
       overflow: hidden;
-      box-shadow: 0 1px 5px grey;
+      box-shadow: 0 1px 3px grey;
       padding: 20px 10px 0 10px;
+}
+
+.dbcontent
+{
+  padding-bottom: 20px;
+  background-color: white;
+    border-radius: 0px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px grey;
+    padding: 20px 10px 20px 10px;
+    margin: 20px 0;
 }
 
 /* Wrapper
@@ -400,14 +414,14 @@ line-height:0px;
     position: relative;
     background-color: white;
     padding-bottom: 10px;
-
+    min-height: 175px;
 }
 
 #footer .inner {
-    max-width: 960px;
+    max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    padding-top: 10px;
+    padding-top: 50px;
 	min-height: 50px;
     margin-bottom: 20px;
 
@@ -670,7 +684,11 @@ p {
 
 #footer-menu li { display: inline; margin-left: 15px; }
 
-.copyright {  }
+.copyright, .sorosfooter {
+  font-size: 14px;
+  color:#bdbdbd;
+ }
+ .copyright h3{color:#484849; margin-top: 0px; }
 #footer-menu { float: right; }
 
 .linklove, .error404 .sbuttons { display: none; }
@@ -702,7 +720,10 @@ p {
 
 #header .iosapp  img, #header .android img {height: 45px;}
 */
-.netkg{}
+.netkg img{
+    float: right;
+
+}
 
 
 
@@ -815,7 +836,7 @@ float: left;
     background-color: #D445D8;
 }
 
-#topmenu{  margin: 10px 0; }
+#topmenu{  margin: 0px 0; }
 
 
 
@@ -925,63 +946,80 @@ padding: 0px;
 }
 
 .navbar-tili{
-  background-color: #3f51b5;
-  border-color: #e7e7e7;
-  /*height: 120px;*/
-
+  top: 0;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);
 }
 .navbar-tili .navbar-brand, .navbar-tili .navbar-brand:hover {
   color: white;
 }
 
+#logotext,.searchform,#mdform input
+{
+    font-family: 'Roboto Mono';
+}
+
+.login a{
+    font-family: 'Roboto';
+}
+
 #logotext
 {
   font-size: 24px;
-
+  font-weight: bold;
 }
 
 #logotext span
 {
   font-size: 20px;
-
+  font-weight: normal;
 }
 
 #logotext {
-  margin:10px;
+  margin:28px 0;
 }
 #logotext a{
     text-decoration: none;
     color: white;
+    font-size: 24px;
 }
 
 #logotext a span{
     text-decoration: none;
     color: #7986cb;
+    font-size: 18px;
 }
 
 .navbar .login{
-  margin:15px;
+  margin:28px 0 0 0;
   float: right;
 }
 
 .navbar .login a{
   color:white;
-
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .headersearch
 {
-  background-color:white; height30px;
+  background-color:white;
   padding: 10px;
+  height: 150px;
 }
 
 /* Bootstrap ovverride */
+
+.navbar-default{
+background-color: white;
+
+}
 
 .navbar-header {
         float: none;
     }
     .navbar-toggle {
         display: block;
+        margin-top: 22px;
     }
     .navbar-collapse {
         border-top: 1px solid transparent;
@@ -1030,25 +1068,25 @@ http://www.materialup.com/posts/material-design-input-text
   display: block;
   border: none;
   padding: 10px 0;
-  border-bottom: solid 1px #1abc9c;
+  border-bottom: solid 1px #dadadb;
   -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
           transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #dadadb 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #dadadb 4%);
   background-position: -700% 0;
   background-size: 700% 100%;
   background-repeat: no-repeat;
-  color: #0e6252;
+  color: #dadadb;
 
   padding-bottom: 15px;
 }
 #mdform input:focus, #mdform input:valid {
-  box-shadow: none;
+  /*box-shadow: none;*/
   outline: none;
   background-position: 0 0;
 }
 #mdform input:focus::-webkit-input-placeholder, #mdform input:valid::-webkit-input-placeholder {
-  color: #1abc9c;
+  color: #dadadb;
   font-size: 11px;
   -webkit-transform: translateY(-20px);
           transform: translateY(-20px);
@@ -1056,19 +1094,19 @@ http://www.materialup.com/posts/material-design-input-text
 }
 
 #mdform .sbtn {
-  border: none;
-  background: #1abc9c;
+  border: 0px solid #ccc; /*none;*/
+  background: #FFFFFF; /*#1abc9c;*/
   cursor: pointer;
   border-radius: 3px;
   padding: 6px;
 
-  color: white;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  color: #222228;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
 
 
   position: relative;
-right: 2px;
-top: -46px;
+  right: 0px;
+  top: -66px;
 
 
 }
@@ -1076,5 +1114,53 @@ top: -46px;
   -webkit-transform: translateY(-3px);
       -ms-transform: translateY(-3px);
           transform: translateY(-3px);
-  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
 }
+
+.navbar-header .topcenter
+{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.topbluebox
+{
+  height: 80px;
+  background-color: #3f51b5;
+  border-color: #e7e7e7;
+}
+
+.navbar-default .navbar-toggle .icon-bar
+{
+  background-color: #fff;
+}
+
+.navbar-default .navbar-toggle:hover .icon-bar
+{
+  background-color: #000;
+}
+
+
+.ulist
+{
+  padding: 40px 0px;
+}
+.uitem{margin-top: 25px;}
+
+.uitem a{
+  display: block;
+  height: 90px;
+  width: 100%;
+  margin-top:20px;
+  padding-right: 25px;
+}
+
+.utext
+{
+  border-bottom: 1px solid #dbdbdb;
+  padding-bottom: 30px;
+}
+.utext a{ text-decoration: none;}
+
+.utext h2
+{font-size: 24px; margin-bottom: 22px;}

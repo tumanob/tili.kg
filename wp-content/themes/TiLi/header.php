@@ -9,6 +9,7 @@
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jquery.caret.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/character.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/dict.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto|Roboto+Mono">
 
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
            {lang: 'ru'}
@@ -26,9 +27,9 @@
 
 <body <?php body_class(); ?>>
   <div id="topmenu">
-        <nav class="navbar navbar-fixed-top navbar-default navbar-tili" role="navigation" style="margin-top:0px;">
+        <nav class="navbar navbar-default navbar-tili" role="navigation" style="margin-top:0px;">
 
-        <div class="container-fluid">
+        <div class="container-fluid topbluebox">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -37,13 +38,12 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <span class="navbar-brand hidden-xs"> Меню</span>
-            <div class="row">
-              <div class="col-md-1 col-sm-1 hidden-xs"></div>
-              <div class="col-md-5 col-sm-5 col-xs-6">
-                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili.kg <span> Учи язык интересно! </span></a></h1>
+           <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
+            <div class="row topcenter">
+              <div class="col-md-8 col-sm-6 col-xs-6">
+                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili.kg <span>Все для изучения Киргизского языка!</span></a></h1>
               </div>
-              <div class="col-md-4 .col-sm-3 col-xs-3">
+              <div class="col-md-3 .col-sm-3 col-xs-4 pull-right">
                 <div class="login">
                  <?php
                  if ( is_user_logged_in() ) {?>
@@ -86,7 +86,7 @@
                   <div class="">
                     <span class="isearch">&nbsp;</span>
                     <input placeholder="Введите слово для поиска в словаре" type="text" id="stxt"  class="stxt col-md-12 col-sm-12 col-xs-12" required="">
-                    <input type="submit" class="sbtn col-md-3 col-sm-4 col-xs-5" value="Перевод" onClick="//location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;"/>
+                    <input type="submit" class="sbtn col-md-2 col-sm-2 col-xs-3" value="Найти" onClick="//location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;"/>
                   </div>
                 </form>
                 <div id="float_chars_block">
