@@ -32,12 +32,13 @@
         <div class="container-fluid topbluebox">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
               <span class="sr-only">Меню</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+
            <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
             <div class="row topcenter">
               <div class="col-md-8 col-sm-6 col-xs-6">
@@ -63,9 +64,40 @@
             </div>
 
           </div>
+          <div class="collapse navbar-collapse " id="navbar-collapse">
+             <center><img src="http://tili.kg/wp-content/themes/TiLi/images/logo.png" /> </center>
+               <ul class="nav navbar-nav">
+                 <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                 <li><a href="#">Link</a></li>
+                 <li class="dropdown">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                   <ul class="dropdown-menu">
+                     <li><a href="#">Action</a></li>
+                     <li><a href="#">Another action</a></li>
+                     <li><a href="#">Something else here</a></li>
+                     <li role="separator" class="divider"></li>
+                     <li><a href="#">Separated link</a></li>
+                     <li role="separator" class="divider"></li>
+                     <li><a href="#">One more separated link</a></li>
+                   </ul>
+                 </li>
+               </ul>
+
+               <?php
+                    wp_nav_menu( array(
+                       'menu'              => 'primary',
+                       'theme_location'    => 'primary',
+                       'depth'             => 2,
+                       'container'         => 'false',
+                       'container_class'   => '',
+                       'container_id'      => '',
+                       'menu_class'        => 'nav2 navbar-nav2' )
+                   );
+               ?>
+            </div>
 
               <?php
-                  wp_nav_menu( array(
+                  /* wp_nav_menu( array(
                       'menu'              => 'primary',
                       'theme_location'    => 'primary',
                       'depth'             => 2,
@@ -75,7 +107,7 @@
                       'menu_class'        => 'nav navbar-nav side-menu-glavnoe',
                       'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
                       'walker'            => new wp_bootstrap_navwalker())
-                  );
+                  ); */
               ?>
 
           </div>

@@ -1033,7 +1033,7 @@ background-color: white;
     }
     .navbar-nav {
         float: none!important;
-        margin: 7.5px -15px;
+        margin: 7.5px 0px;
     }
     .navbar-nav>li {
         float: none;
@@ -1138,7 +1138,7 @@ http://www.materialup.com/posts/material-design-input-text
 
 .navbar-default .navbar-toggle .icon-bar
 {
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 
 .navbar-default .navbar-toggle:hover .icon-bar
@@ -1174,4 +1174,43 @@ http://www.materialup.com/posts/material-design-input-text
 .side-menu-glavnoe
 {
   margin-top: 0px;
+}
+.navbar-toggle .icon-bar
+{
+  height: 3px !important;
+}
+
+#navbar-collapse
+{
+  width: 400px;
+  background-color: white;
+  z-index: 1000;
+  position: absolute;
+  margin: -82px 0 0 -15px;
+  box-shadow: 2px 3px 5px #ccc;
+}
+.navbar-default .navbar-toggle{
+  position: absolute;
+  z-index: 1000000000000;
+}
+
+
+
+.navbar-header .navbar-toggle span.icon-bar{
+display: none;
+}
+
+.navbar-header .navbar-toggle {
+width: 44px;
+height: 37px;
+background: url('https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-round-32.png') no-repeat 6px;
+}
+
+.navbar-header .collapsed {
+background-image: none;
+
+}
+
+.navbar-header .collapsed span.icon-bar{
+display: block;
 }
