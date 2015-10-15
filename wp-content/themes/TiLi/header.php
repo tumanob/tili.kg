@@ -65,22 +65,30 @@
 
           </div>
           <div class="collapse navbar-collapse " id="navbar-collapse">
-             <center><img src="http://tili.kg/wp-content/themes/TiLi/images/logo.png" /> </center>
+              <div class="menulogo">
+                 <center><img src="http://tili.kg/wp-content/themes/TiLi/images/logo.png" /> </center>
+              </div>
                <ul class="nav navbar-nav">
-                 <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                 <li><a href="#">Link</a></li>
-                 <li class="dropdown">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                 <li class="iconhome dropdown"><a href="/">Главная</a></li>
+                 <li role="separator" class="divider"></li>
+                 <li class="dropdown iconslovar">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Словарь<span class="caret"></span></a>
                    <ul class="dropdown-menu">
-                     <li><a href="#">Action</a></li>
-                     <li><a href="#">Another action</a></li>
-                     <li><a href="#">Something else here</a></li>
+                     <li><a href="#">cловари от а до я</a></li>
+                     <li><a href="#">глосарий</a></li>
                      <li role="separator" class="divider"></li>
                      <li><a href="#">Separated link</a></li>
-                     <li role="separator" class="divider"></li>
-                     <li><a href="#">One more separated link</a></li>
+
                    </ul>
                  </li>
+                  <li class="iconuse"><a href="#">Полезное</a></li>
+                  <li class="iconapps "><a href="/">Приложения</a></li>
+                  <li class="iconlove"><a href="#">Благодарности</a></li>
+                  <li class="iconhelp"><a href="#">Как помочь проекту?</a></li>
+                  <li class="iconmail"><a href="#">Контакты</a></li>
+                  <li role="separator" class="divider"></li>
+
+
                </ul>
 
                <?php
@@ -91,7 +99,7 @@
                        'container'         => 'false',
                        'container_class'   => '',
                        'container_id'      => '',
-                       'menu_class'        => 'nav2 navbar-nav2' )
+                       'menu_class'        => 'bmenu' )
                    );
                ?>
             </div>

@@ -151,7 +151,7 @@ font-size: 24px;
     border-radius: 10px;
     margin-right: 1px;
     color:rgb(70, 93, 109);
-    z-index: 100000;
+    /*z-index: 100000;*/
     font-size: 1.6em;
 }
 
@@ -814,22 +814,22 @@ float: left;
 
 
 .navbar-nav>li{
-    font-size: 18px;
+  font-size: 16px;
   z-index: 100000000;
-  width: 400px;
-  background-color: #ccc;
+  width: 280px;
+  background-color: none;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus
 {
-    color: white;
-    /*background-color: #42AADA;*/
+    color: #ccc;
+    background-color: transparent;
 }
 
-.navbar-default .navbar-nav>.active>a:hover{ /*background-color: #2EA92E;*/ color: white;}
+.navbar-default .navbar-nav>.active>a:hover{ background-color: transparent; color: #ccc;}
 
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
-    color: white;
+    color: #ccc;
     /*background-color: #D445D8;*/
 }
 
@@ -979,6 +979,7 @@ padding: 0px;
 
 #logotext {
   margin:28px 0;
+  margin-left: 37px;
 }
 #logotext a{
     text-decoration: none;
@@ -1039,9 +1040,38 @@ background-color: white;
         float: none;
     }
     .navbar-nav>li>a {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin-left: 50px;
     }
+
+/*   main menu icons classes */
+    .navbar-nav>li.icontag{
+        background: url('images/icons/pricetag.png') no-repeat 18px 15px;
+    }
+    .navbar-nav>li.iconhome{
+        background: url('images/icons/home.png') no-repeat 18px 15px;
+    }
+    .navbar-nav>li.iconslovar{
+        background: url('images/icons/slovar.png') no-repeat 18px 15px;
+    }
+    .navbar-nav>li.iconapps{
+        background: url('images/icons/apps.png') no-repeat 18px 15px;
+    }
+
+    .navbar-nav>li.iconuse{
+        background: url('images/icons/use.png') no-repeat 18px 15px;
+    }
+    .navbar-nav>li.iconlove{
+        background: url('images/icons/love.png') no-repeat 18px 15px;
+    }
+    .navbar-nav>li.iconhelp{
+        background: url('images/icons/help.png') no-repeat 18px 15px;
+    }
+    .navbar-nav>li.iconmail{
+        background: url('images/icons/contact.png') no-repeat 18px 15px;
+    }
+
 
     .navbar-collapse.collapse.in {display: block !important; }
 
@@ -1182,7 +1212,7 @@ http://www.materialup.com/posts/material-design-input-text
 
 #navbar-collapse
 {
-  width: 400px;
+  width: 280px;
   background-color: white;
   z-index: 1000;
   position: absolute;
@@ -1203,7 +1233,7 @@ display: none;
 .navbar-header .navbar-toggle {
 width: 44px;
 height: 37px;
-background: url('https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-close-round-32.png') no-repeat 6px;
+background: url('images/icons/close1.png') #fff no-repeat 9px;
 }
 
 .navbar-header .collapsed {
@@ -1214,3 +1244,45 @@ background-image: none;
 .navbar-header .collapsed span.icon-bar{
 display: block;
 }
+
+li.divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+.menulogo{
+  padding-top: 70px;
+  padding-bottom: 0px;
+}
+
+
+.bmenu li {
+    display: inline;
+    position: relative;
+    margin: 0 7px;
+}
+
+.bmenu li a {
+    font-size: 13px;
+    color: #000;
+}
+
+.navbar-nav>li.open>.dropdown-menu
+{
+    background: white;
+    z-index: 100000000000000;
+    display: block;
+    width: 280px;
+    float: none;
+    position: relative;
+
+  }
+
+  .dropdown-menu{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border-radius: 0px;
+    
+  }
