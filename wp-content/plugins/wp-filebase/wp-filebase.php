@@ -8,6 +8,10 @@ Version: 3.1.01
 Author URI: https://wpfilebase.com/
 */
 
+if (!function_exists('is_multisite')) {
+	function is_multisite() { return false; }
+}
+
 if(!defined('WPFB'))
 {
 	define('WPFB', 'wpfb');
@@ -17,7 +21,7 @@ if(!defined('WPFB'))
 		define('ABSPATH', dirname(dirname(dirname(dirname(__FILE__)))));
 	} else {
 		//define('WPFB_PLUGIN_URI', is_multisite() ? str_replace(array('http://','https://'), '//', str_replace(str_replace('\\','/',ABSPATH),get_option('siteurl').'/',WPFB_PLUGIN_ROOT)) : plugin_dir_url(__FILE__));
-		define('WPFB_PLUGIN_URI', is_multisite() ? get_site_url(null,substr(WPFB_PLUGIN_ROOT,strlen(ABSPATH))) : plugin_dir_url(__FILE__));
+		define('WPFB_PLUGIN_URI', false ? get_site_url(null,substr(WPFB_PLUGIN_ROOT,strlen(ABSPATH))) : plugin_dir_url(__FILE__));
 	}
 	if(!defined('WPFB_PERM_FILE')) define('WPFB_PERM_FILE', 666);
 	if(!defined('WPFB_PERM_DIR')) define('WPFB_PERM_DIR', 777);

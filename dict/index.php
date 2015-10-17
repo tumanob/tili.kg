@@ -4,18 +4,6 @@ require_once ('silex.phar');
 require_once('../config.php');
 require "../wp-load.php";
 
-//use Symfony\Component\Routing\RouteCollection;
-//use Symfony\Component\Routing\Route;
-/*
-$collection = new RouteCollection();
-$collection->add('_dict', new Route('/dict/show/{dictword}', array(
-    '_controller' => 'AppBundle:Demo:hello',
-), array(
-    'dictword' => '.+',
-)));
-
-return $collection;
-*/
 $app = new Silex\Application();
 $app['debug'] = true;
 

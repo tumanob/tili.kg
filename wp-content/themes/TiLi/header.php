@@ -6,9 +6,9 @@
     <title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
     <?php wp_head(); ?>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jquery.caret.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/character.js"></script>
-    <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/dict.js"></script>
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto|Roboto+Mono">
 
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
@@ -72,16 +72,15 @@
                  <li class="iconhome dropdown"><a href="/">Главная</a></li>
                  <li role="separator" class="divider"></li>
                  <li class="dropdown iconslovar">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Словарь<span class="caret"></span></a>
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                       Словарь<span class="caret"></span>
+                   </a>
                    <ul class="dropdown-menu">
-                     <li><a href="#">cловари от а до я</a></li>
-                     <li><a href="#">глосарий</a></li>
-                     <li role="separator" class="divider"></li>
-                     <li><a href="#">Separated link</a></li>
-
+                     <li><a href="/dict/dlist/">cловари от а до я</a></li>
+                     <li><a href="/dict/glossary/">глосарий</a></li>
                    </ul>
                  </li>
-                  <li class="iconuse"><a href="#">Полезное</a></li>
+                  <li class="iconuse"><a href="/category/useful">Полезное</a></li>
                   <li class="iconapps "><a href="/">Приложения</a></li>
                   <li class="iconlove"><a href="#">Благодарности</a></li>
                   <li class="iconhelp"><a href="#">Как помочь проекту?</a></li>
@@ -126,7 +125,7 @@
                   <div class="">
                     <span class="isearch">&nbsp;</span>
                     <input placeholder="Введите слово для поиска в словаре" type="text" id="stxt"  class="stxt col-md-12 col-sm-12 col-xs-12" required="">
-                    <input type="submit" class="sbtn col-md-2 col-sm-2 col-xs-3" value="Найти" onClick="//location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;"/>
+                    <input type="submit" class="sbtn col-md-2 col-sm-2 col-xs-3" value="Найти" onClick="location.href = '/dict/#'+document.getElementById('stxt').value;  return false;"/>
                   </div>
                 </form>
                 <div id="float_chars_block">
@@ -155,10 +154,5 @@
 </div>
 
 <div id="site">
-	<div id="header" >
-
-
-
-
-
+	<div id="header">
 	</div>
