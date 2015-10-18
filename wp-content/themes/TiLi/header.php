@@ -8,7 +8,9 @@
     <?php wp_head(); ?>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jquery.caret.js"></script>
+    <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/typeahead.bundle.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/character.js"></script>
+    <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto|Roboto+Mono">
 
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
@@ -121,11 +123,11 @@
           <div class="headersearch">
             <div class="searchform">
 
-              <form id="mdform" >
+              <form id="mdform" onsubmit="location.href = '/dict/#'+document.getElementById('stxt').value;  return false;">
                   <div class="">
                     <span class="isearch">&nbsp;</span>
                     <input placeholder="Введите слово для поиска в словаре" type="text" id="stxt"  class="stxt col-md-12 col-sm-12 col-xs-12" required="">
-                    <input type="submit" class="sbtn col-md-2 col-sm-2 col-xs-3" value="Найти" onClick="location.href = '/dict/#'+document.getElementById('stxt').value;  return false;"/>
+                    <input type="submit" class="sbtn col-md-2 col-sm-2 col-xs-3" value="Найти" />
                   </div>
                 </form>
                 <div id="float_chars_block">

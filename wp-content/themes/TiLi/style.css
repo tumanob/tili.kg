@@ -1280,9 +1280,28 @@ li.divider {
 
   }
 
-  .dropdown-menu{
+.dropdown-menu{
     box-shadow: none;
     -webkit-box-shadow: none;
     border-radius: 0px;
-    
-  }
+}
+
+.searchform .tt-menu {
+    background: #FFF;
+    width: 100%;
+}
+.searchform .twitter-typeahead {
+    width: 100%;
+}
+.searchform .tt-suggestion {
+    font-size: 18px;
+    font-family: 'Roboto Mono';
+    width: 100%;
+}
+.searchform .tt-suggestion:hover {
+    background: #BBBBBB;
+    cursor: pointer;
+}
+.searchform .tt-dataset-keywords {
+    padding-top: 30px;
+}
