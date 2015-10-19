@@ -111,7 +111,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 }
 
 .searchform #stxt {
-padding-left:40px ;
+padding-left:100px ;
 padding-bottom: 26px;
 font-size: 24px;
 }
@@ -121,7 +121,8 @@ font-size: 24px;
 {
     float: left;
     position: absolute;
-    margin-top: 10px;
+    margin-top: 18px;
+    margin-left: 36px;
     background: url(images/search.png) no-repeat;
     width: 24px;
     height: 24px;
@@ -708,8 +709,8 @@ p {
 #respond input { padding: 3px; }
 
 #float_chars_block, #float_chars_icon{position:absolute;left:0;top:0;display:none;z-index: 9999;}
-#float_chars_block {background-color: #FFFFFF;border: 1px solid #CCC;display: none;left: 0;  padding: 4px 10px; position: absolute;top: 0;width: 92px;z-index: 9999;}
-#float_chars_block span {border: 1px solid #CCCCCC;cursor: pointer;display: block;float: left;margin: 2px;padding: 4px;}
+#float_chars_block {background-color: #FFFFFF;border: 1px solid #CCC;display: none;left: 0;  padding: 4px; position: absolute;top: 0;width: 92px;z-index: 9999;}
+#float_chars_block span {border: 1px solid #CCCCCC;cursor: pointer;display: block;float: left;margin: 2px;padding: 4px; font-size: 18px; font-weight: bold;}
 #float_chars_block .close {color: #C00000;cursor: pointer;font-weight: bold;height: 6px;position: absolute;right: 1px;top: -1px;width: 6px;}
 
 #comments { clear: both; }
@@ -926,8 +927,8 @@ padding: 0px;
 
 
 #float_chars_block{
-  /*  left: 142px;*/
-  top: -7px;
+  left: 0px;
+  top: -60px;
   z-index: 1000000000;
   position: relative;
   float: left;
@@ -1289,6 +1290,12 @@ li.divider {
 .searchform .tt-menu {
     background: #FFF;
     width: 100%;
+    border-left: solid 1px #fff;
+    border-right: solid 1px #fff;
+    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    text-align: left;
+    z-index: 10;
 }
 .searchform .twitter-typeahead {
     width: 100%;
@@ -1297,11 +1304,14 @@ li.divider {
     font-size: 18px;
     font-family: 'Roboto Mono';
     width: 100%;
+    padding: 3px;
 }
 .searchform .tt-suggestion:hover {
     background: #BBBBBB;
     cursor: pointer;
 }
 .searchform .tt-dataset-keywords {
-    padding-top: 30px;
+    padding-top: 0px;
+    padding: 12px;
+
 }
