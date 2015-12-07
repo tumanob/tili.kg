@@ -68,7 +68,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 }
 
 .dict #header {
-    min-height: 170px;
+  /*  min-height: 170px;*/
 }
 
 .login { /*position: absolute; top: 10px; right: 22px; */ color: #777;  }
@@ -474,8 +474,9 @@ line-height:0px;
     top: 125px;*/
   /*  left: 0;*/
     width: 100%;
-    max-width: 970px;
+  /*max-width: 970px; */
     z-index: 10000000;
+    min-height: 50px;
 }
 
 .catlist, #mainmenu {
@@ -715,12 +716,12 @@ p {
 
 #comments { clear: both; }
 
-/*#header .android { position: absolute; right: 200px; top: 39px; }
+#header .android {  height: 45px;}
 
-#header .iosapp { position: absolute; right: 360px; top: 39px; }
+#header .iosapp {  height: 45px;}
 
 #header .iosapp  img, #header .android img {height: 45px;}
-*/
+
 .netkg img{
     float: right;
 
@@ -892,7 +893,7 @@ padding: 0px;
 }
 
 
-.apps{  margin: 20px 0;}
+.apps{  margin: 0px 0;}
 
 
 #result{

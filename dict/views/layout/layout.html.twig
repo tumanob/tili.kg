@@ -2,7 +2,7 @@
 {% extends 'layout/base.html.twig' %}
 
 {%block logo%}
-<h1><a href="/"><img width="234" height="91" alt="KG TiLi" id="logo" src="/wp-content/themes/TiLi/images/logo.png"></a></h1>
+    <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili.kg <span class="hidden-xs">Все для изучения Киргизского языка!</span></a></h1>
 {%endblock%}
 
 {%block menu%}
@@ -14,7 +14,7 @@
 
     <a href="/dict/add/" class="addword-menu"><img src="/dict/assets/images/button-addword.gif"></a>
 {%endblock%}
-		
+
 {%block content%}
 
 {%endblock%}

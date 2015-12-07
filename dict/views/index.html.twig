@@ -11,34 +11,13 @@
 {%endblock%}
 
 {%block menu%}
-    <div class="menu row">
 
-                <div class="dict-searchblock col-xs-12 col-md-6 col-sm-6" style="">
-            			<div class="searchform dict ">
-                            <form action="http://tili.kg" method="get">
-                                <div id="float_chars_block">
-                                                                     	<span title="Ctrl+Alt+н">ң</span>
-                                                                    	<span title="Ctrl+Alt+о">ө</span>
-                                                                       <span title="Ctrl+Alt+у">ү</span>
-                                                                       <div style="clear:both"></div>
-                                                               </div>
-                                 <input name="keyword" type="text" class="stxt" id="keyword" value="Введите слово для перевода" autocomplete="off" onfocus="javascript: if(this.value == 'Введите слово для перевода') this.value = '';" onblur="javascript: if(this.value == '') { this.value = 'Введите слово для перевода';}">
-
-                                 <input type="submit" class="sbtn" value="Перевод" onclick="showWord(document.getElementById('keyword').value);
-                                  return false;">
-
-                                <div id="result" style="overflow: auto;"></div>
-                            </form>
-
-                         </div>
-                </div>
-            <div class="menu-items col-xs-12 col-md-6 col-sm-6">
                 <a href="/">Главная</a> |
                 <a href="/dict/dlist/">Словари от А до Я</a> |
                 <a href="/dict/glossary/">Глоссарий</a> |
-               <!-- <a href="/dict/add/" class="addword-menu"><img src="/dict/assets/images/button-addword.gif"></a> -->
-            </div>
-    </div>
+               <a href="/dict/add/" class="addword-menu"><img src="/dict/assets/images/button-addword.gif"></a> 
+
+
 {%endblock%}
 
 {%block content%}
@@ -90,7 +69,7 @@
 
 
 
-			
+
         </div>
 
 

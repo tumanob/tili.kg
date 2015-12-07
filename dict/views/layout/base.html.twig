@@ -57,7 +57,7 @@
            <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
             <div class="row topcenter">
               <div class="col-md-8 col-sm-6 col-xs-6">
-                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili.kg <span class="hidden-xs">Все для изучения Киргизского языка!</span></a></h1>
+                {%block logo%}{%endblock%}
               </div>
               <div class="col-md-3 .col-sm-3 col-xs-4 pull-right">
                 <div class="login">
@@ -71,7 +71,7 @@
             </div>
 
           </div>
-          <div class="collapse navbar-collapse " id="navbar-collapse">
+         <div class="collapse navbar-collapse " id="navbar-collapse">
               <div class="menulogo">
                  <center><img src="http://tili.kg/wp-content/themes/TiLi/images/logo.png" /> </center>
               </div>
@@ -126,39 +126,36 @@
 </div>
 <div id="site" class="dict-content">
   <div id="header" class="row">
-      <div class="logoimg col-xs-12 col-sm-4 col-md-4">
-          {%block logo%}{%endblock%}
-          <div class="login">
-              {%if is_logged_in() %}
-                Добро пожаловать <b>{{user.user_login}}</b> | <a href="/wp-login.php?action=logout">Выйти</a>
-              {% else %}
-                <a href="http://tili.kg/wp-login.php">Войти</a> | <a href="http://tili.kg/wp-login.php?action=register">Регистрация</a>
-              {%endif%}
-          </div>
-      </div>
-      <div class=" col-xs-12 col-sm-6 col-md-8">
-            <div class="apps col-xs-12 col-sm-6 col-md-4 hidden-xs">
-                <a href="https://chrome.google.com/webstore/detail/%D0%BA%D0%B8%D1%80%D0%B3%D0%B8%D0%B7%D1%81%D0%BA%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D1%8C/hojggilcgbfgflnmnjldhbdpomafihfd"  id="install-button" class="android" onclick="chrome.webstore.install(); return false;" style="margin-top: -8px; right: 525px;"><img class="aligncenter" src="/banners/chromead.png" alt="Добавить расширение в хром." style="height: 60px;"/></a>
+    <div id="mainmenu-old" class="dbcontent">
 
-                <script>
-                if (chrome.app.isInstalled) {
-                  document.getElementById('install-button').style.display = 'none';
-                }
-                </script>
-            </div>
-             <div class="apps col-xs-12 col-sm-6 col-md-4">
-                 <a href="http://play.google.com/store/search?q=pub:Tili.kg" target="_blank" class="android"><img class="aligncenter" src="/banners/get-from-gp.png" alt="Установить словарь на телефон Android." /></a>
-             </div>
-             <div class="apps col-xs-12 col-sm-6 col-md-4">
-                  <a href="http://itunes.apple.com/us/app/tili.kg/id528317649?mt=8" target="_blank" class="iosapp"><img class="aligncenter" src="/banners/app-store.png" alt="Установить словарь на iPhone." /></a>
-             </div>
-      </div>
-
-      </div>
-      <div id="mainmenu">
+            <div class=" col-xs-12 col-sm-6 col-md-6">
               {%block menu%}
               {%endblock%}
-      </div>
+            </div>
+            <div class=" col-xs-12 col-sm-6 col-md-6">
+                  <div class="apps col-xs-12 col-sm-6 col-md-4 hidden-xs">
+                      <a href="https://chrome.google.com/webstore/detail/%D0%BA%D0%B8%D1%80%D0%B3%D0%B8%D0%B7%D1%81%D0%BA%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D1%8C/hojggilcgbfgflnmnjldhbdpomafihfd"  id="install-button" class="android" onclick="chrome.webstore.install(); return false;" style="margin-top: -8px; right: 525px;">
+                        <img class="aligncenter" src="/banners/chromead.png" alt="Добавить расширение в хром." style=""/>
+                      </a>
+
+                      <script>
+                      if (chrome.app.isInstalled) {
+                        document.getElementById('install-button').style.display = 'none';
+                      }
+                      </script>
+                  </div>
+                   <div class="apps col-xs-12 col-sm-6 col-md-4">
+                       <a href="http://play.google.com/store/search?q=pub:Tili.kg" target="_blank" class="android"><img class="aligncenter" src="/banners/get-from-gp.png" alt="Установить словарь на телефон Android." /></a>
+                   </div>
+                   <div class="apps col-xs-12 col-sm-6 col-md-4">
+                        <a href="http://itunes.apple.com/us/app/tili.kg/id528317649?mt=8" target="_blank" class="iosapp"><img class="aligncenter" src="/banners/app-store.png" alt="Установить словарь на iPhone." /></a>
+                   </div>
+            </div>
+    </div>
+
+
+  </div>
+
   <div id="wrapper">
       {%block content%}
       <div id="content">

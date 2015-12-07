@@ -151,13 +151,14 @@ $(document).ready(function () {
 
     $(window).trigger("hashchange");
 
+/*   // fixed height when is down -  btter for search field
     $(window).bind('scroll', function () {
         if ($(window).scrollTop() > 150) {
             $('#mainmenu').addClass('fixed');
         } else {
             $('#mainmenu').removeClass('fixed');
         }
-    });
+    });*/
 
 
 });

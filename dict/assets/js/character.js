@@ -52,7 +52,7 @@ jQuery(document).ready(function() {
         range = jQuery(input_element_focus).caretPos();
         //if($FCB.is(':visible'))$FCB.hide();
         var cur_offset = jQuery(this).offset();
-        var pos = {left:cur_offset.left, top:cur_offset.top-30};
+        var pos = {left:cur_offset.left-39, top:cur_offset.top-200};
         if(!$FCB.is(':visible'))$FCB.css(pos).show();
     })
     .bind('mousedown', function() {
