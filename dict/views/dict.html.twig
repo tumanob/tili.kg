@@ -25,9 +25,9 @@
         <div class="pagination" style="text-align: center;">
             {% for item in pagination %}
                 {% if pagination|length > 0 %}
-                  <b><a href="{{app.request.uri}}/../p{{item.value}}"> {{item.value}} </a> </b>
+                  <a href="{{app.request.uri}}/../p{{item.value}}"> {{item.value}} </a>
                 {% else %}
-                     <b><a href="{{app.request.uri}}p{{item.value}}"> {{item.value}} </a> </b>
+                    <a href="{{app.request.uri}}p{{item.value}}"> {{item.value}} </a>
 
                 {%endif%}
 
@@ -38,7 +38,7 @@
     <br/>
         {% if result %}
             {% for item in result %}
-                <div class="keywords">
+                <div class="keywords col-xs-12 col-sm-6 col-md-6" >
                     <a href="{{asset('/')}}d{{id}}/show/{{item.keyword}}">{{item.keyword}}</a>
                     {{item.value|raw}}
                 </div>
@@ -51,9 +51,9 @@
             <div class="pagination" style="text-align: center;">
                 {% for item in pagination %}
                     {% if pagination|length > 0 %}
-                      <b><a href="{{app.request.uri}}/../p{{item.value}}"> {{item.value}} </a> </b>
+                      <a href="{{app.request.uri}}/../p{{item.value}}"> {{item.value}} </a>
                      {% else %}
-                         <b><a href="{{app.request.uri}}p{{item.value}}"> {{item.value}} </a> </b>
+                      <a href="{{app.request.uri}}p{{item.value}}"> {{item.value}} </a> 
 
                     {%endif%}
 

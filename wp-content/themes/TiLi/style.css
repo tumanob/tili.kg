@@ -533,28 +533,29 @@ line-height:0px;
 }
 
 .keywords {
-    width: 400px;
+    width: 100%;
     float: left;
-    min-height: 25px;
-    height: 37px;
+    min-height: 40px;
     overflow: hidden;
-    margin: 5px 10px;
+    padding: 5px 10px;
 }
 
+
 .keywords a {
-    font-size: 16px;
+    font-size: 24px;
     font-weight: bold;
 
 }
 
-.dict-block {
-    width: 390px;
-    margin: 20px 20px;
+.dict-block a {
+    width: 100%;
+    margin: 5px 0;
     float: left;
     border: 1px solid #ccc;
     padding: 20px;
     font-size: 20px;
 }
+
 
 /*.menu {
     height: 10px;
@@ -646,21 +647,22 @@ p {
 
 .gdarticle {
     margin: 0 0 30px 20px;
-    font-size: 13px;
+    font-size: 20px;
 
 }
 
+.pagination
+{width: 100%;}
 .pagination a {
-    font-size: 16px;
+    font-size: 20px;
     margin: 0 2px;
-
 }
 
 .letter1, .letter2 {
-    font-size: 14px;
+    font-size: 20px;
     margin: 0 2px;
     margin-left: 50px;
-
+    text-align: center;
 }
 
 .letter1 a, .letter2 a {

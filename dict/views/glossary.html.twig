@@ -27,7 +27,8 @@
 
     <div id="glossary">
         {% for tag in tags %}
-        <div class="glossary-entry">
+        <div class="glossary-entry col-xs-12 col-sm-4 col-md-3">
+          <div class="glossary-item">
             <h2 class="title">
                 <a href="{{asset('/glossary/' ~ tag.id ~ '/' ~ tag.tag)}}">
                     {{tag.tag}}
@@ -37,12 +38,15 @@
                 <a href="{{asset('/glossary/' ~ tag.id ~ '/' ~ tag.tag)}}">
                     <img src="{{asset('/assets/images/tag/' ~ tag.id ~ '.jpg')}}" alt="{{tag.tag}}" />
                 </a>
+
+                </div>
             </div>
         </div>
         {% endfor %}
         {% if words is defined %}
         {% for word in words %}
-        <div class="glossary-entry word-entry">
+        <div class="glossary-entry word-entry col-xs-12 col-sm-6 col-md-4">
+          <div class="glossary-word-item">
             <h2 class="title">
                 <a href="{{asset('/d' ~ word.dictid ~ '/show/' ~ word.keyword)}}">
                     {{word.keyword}}
@@ -72,6 +76,7 @@
             </div>
             <div class="word-value">
                 {{word.value|raw}}
+            </div>
             </div>
         </div>
         {% endfor %}

@@ -6,12 +6,13 @@
 {%block content%}
 
 <div id="container">
-<div id="wrapper">
+<div id="">
 <div id="" style="">
 
     <br/>
+
     {% for item in result %}
-            <div class="dict-block"><a href="{{asset('/')}}d{{item.id}}/">{{item.name}}</a></div>
+            <div class="dict-block col-xs-12 col-sm-6 col-md-6"><a href="{{asset('/')}}d{{item.id}}/">{{item.name}}</a></div>
     {% endfor %}
 
 

@@ -127,29 +127,46 @@ span.delete-image {
     float: left; display: block; margin-right: 10px;
 }
 .tags {margin-top: 5px;}
+
 .glossary-entry {
     float:left;
-    margin: 15px;
+    margin: 0px;
     width: 165px;
-    height: 155px;
-    border: 1px solid #CAD8F3;;
-    border-radius: 5px;
+    min-height: 155px;
+
     padding: 10px;
     overflow: hidden;
 }
-.glossary-entry .image {text-align: center; margin: 0 auto;}
-.glossary-entry h2 {font-size: 14px; text-align: center; }
+.glossary-item{
+  border: 1px solid #CAD8F3;;
+  border-radius: 5px;
+  margin: 0px;
+}
+
+.glossary-word-item{
+  border: 1px solid #CAD8F3;;
+  border-radius: 5px;
+  margin: 0px;
+}
+
+.glossary-word-item .image img
+{
+  height:100px;
+}
+.glossary-entry .image {text-align: center; margin: 10px auto;}
+.glossary-entry h2 {font-size: 24px; text-align: center; }
 #glossary {
     margin: 0 auto;
-    width: 750px;
+    width: 100%;
 }
 .word-value {
-    height: 75px;
-    line-height: 15px;
+    height: 112px;
+  /*  line-height: 15px; */
     overflow: hidden;
+    padding: 10px;
 }
 .word-entry {
-    height: 202px;
+    height: 300px;
 }
 #disqus_thread{
     width: 610px;
