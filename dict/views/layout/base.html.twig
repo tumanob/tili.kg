@@ -9,17 +9,18 @@
     {%endblock%}
 
     {%block scripts%}
-    <script src="{{asset('/assets/js/jquery-1.4.1.js')}}"></script>
+    <script src="{{asset('/assets/js/jquery-1.11.3.min.js')}}"></script>
     <script src="{{asset('/assets/js/jquery.caret.js')}}"></script>
     <script src="{{asset('/assets/js/character.js')}}"></script>
     <script src="{{asset('/assets/js/jquery-ui-1.8.21.custom.min.js')}}"></script>
     <script src="{{asset('/assets/js/jquery.ba-bbq.min.js')}}"></script>
+    <script src="/wp-content/themes/TiLi/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/wp-content/themes/TiLi/js/typeahead.bundle.js"></script>
+    <script src="/wp-content/themes/TiLi/js/index.js"></script>
+
     <script type="text/javascript" src="{{asset('/assets/js/jquery.lightbox-0.5.min.js')}}"></script>
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">{lang: 'ru'}</script>
 
-
-       {lang: 'ru'}
-    </script>
     {%endblock%}
 
     {%block styles%}
@@ -27,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/jquery.lightbox-0.5.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/style.css')}}" />
     <link rel="stylesheet" type="text/css" href="/wp-content/themes/TiLi/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto|Roboto+Mono">
     {%endblock%}
 	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/hojggilcgbfgflnmnjldhbdpomafihfd">
 </head>
@@ -39,7 +41,89 @@
     js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+<div id="topmenu">
+        <nav class="navbar navbar-default navbar-tili" role="navigation" style="margin-top:0px;">
 
+        <div class="container-fluid topbluebox">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+              <span class="sr-only">Меню</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+           <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
+            <div class="row topcenter">
+              <div class="col-md-8 col-sm-6 col-xs-6">
+                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili.kg <span class="hidden-xs">Все для изучения Киргизского языка!</span></a></h1>
+              </div>
+              <div class="col-md-3 .col-sm-3 col-xs-4 pull-right">
+                <div class="login">
+                    {%if is_logged_in() %}
+                      Добро пожаловать <b>{{user.user_login}}</b> | <a href="/wp-login.php?action=logout">Выйти</a>
+                    {% else %}
+                      <a href="http://tili.kg/wp-login.php">Войти</a> | <a href="http://tili.kg/wp-login.php?action=register">Регистрация</a>
+                    {%endif%}
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="collapse navbar-collapse " id="navbar-collapse">
+              <div class="menulogo">
+                 <center><img src="http://tili.kg/wp-content/themes/TiLi/images/logo.png" /> </center>
+              </div>
+               <ul class="nav navbar-nav">
+                 <li class="iconhome dropdown"><a href="/">Главная</a></li>
+                 <li role="separator" class="divider"></li>
+                 <li class="dropdown iconslovar">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                       Словарь<span class="caret"></span>
+                   </a>
+                   <ul class="dropdown-menu">
+                     <li><a href="/dict/dlist/">cловари от а до я</a></li>
+                     <li><a href="/dict/glossary/">глосарий</a></li>
+                   </ul>
+                 </li>
+                  <li class="iconuse"><a href="/category/useful">Полезное</a></li>
+                  <li class="iconapps "><a href="/">Приложения</a></li>
+                  <li class="iconlove"><a href="#">Благодарности</a></li>
+                  <li class="iconhelp"><a href="#">Как помочь проекту?</a></li>
+                  <li class="iconmail"><a href="#">Контакты</a></li>
+                  <li role="separator" class="divider"></li>
+
+
+               </ul>
+
+
+            </div>
+
+
+
+          </div>
+          <div class="headersearch">
+            <div class="searchform">
+
+              <form id="mdform" onsubmit="location.href = '/dict/#'+document.getElementById('stxt').value;  return false;">
+                  <div class="">
+                    <span class="isearch">&nbsp;</span>
+                    <input placeholder="Введите слово для поиска в словаре" type="text" id="stxt"  class="stxt col-md-12 col-sm-12 col-xs-12" required="">
+                    <input type="submit" class="sbtn col-md-2 col-sm-2 col-xs-3" value="Найти" />
+                  </div>
+                </form>
+                <div id="float_chars_block">
+                  <!--  <div class="close">x</div> -->
+                    <span title="Ctrl+Alt+н">ң</span>
+                    <span title="Ctrl+Alt+о">ө</span>
+                    <span title="Ctrl+Alt+у">ү</span>
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+          </div>
+      </nav>
+</div>
 <div id="site" class="dict-content">
   <div id="header" class="row">
       <div class="logoimg col-xs-12 col-sm-4 col-md-4">

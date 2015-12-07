@@ -3,6 +3,7 @@ var inRequest = false;
 var keyword = false;
 var lastQuery = false;
 
+
 function findWord(autoshow) {
     if (autoshow == 'undefined') {
         autoshow = false;
@@ -116,7 +117,7 @@ $(document).ready(function () {
             clearTimeout(timer);
             timer = setTimeout(findWord, 1500);
         }
-		
+
 		   });
 
    // $("#keyword").focus();
