@@ -34,17 +34,18 @@
         <div class="container-fluid topbluebox">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-              <span class="sr-only">Меню</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
 
            <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
             <div class="row topcenter">
               <div class="col-md-8 col-sm-6 col-xs-6">
-                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili.kg <span class="hidden-xs">Все для изучения Киргизского языка!</span></a></h1>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                  <span class="sr-only">Меню</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+
+                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili<span class="green">.kg</span> <span class="grey hidden-xs">Все для изучения Киргизского языка!</span></a></h1>
               </div>
               <div class="col-md-3 .col-sm-3 col-xs-4 pull-right">
                 <div class="login">
@@ -58,7 +59,7 @@
 
                    <?php }
                  else {?>
-                     	<a href="http://tili.kg/wp-login.php">Войти</a>  <a href="http://tili.kg/wp-login.php?action=register">Регистрация</a>
+                     	<a href="http://tili.kg/wp-login.php" class="login-i">Войти</a>  <a href="http://tili.kg/wp-login.php?action=register" class="reg-i">Регистрация</a>
                  <?php }
                  ?>
                  </div>
@@ -121,13 +122,13 @@
 
           </div>
           <div class="headersearch">
-            <div class="searchform">
-
+            <div class="col-md-2 col-sm-1">&nbsp; </div>
+            <div class="searchform col-md-8 col-sm-10 col-xs-10">
+              <label> <h1>Кыргызско <-> Русский словарь</h1></label>
               <form id="mdform" onsubmit="location.href = '/dict/#'+document.getElementById('stxt').value;  return false;">
                   <div class="">
-                    <span class="isearch">&nbsp;</span>
-                    <input placeholder="Введите слово для поиска в словаре" type="text" id="stxt"  class="stxt col-md-12 col-sm-12 col-xs-12" required="">
-                    <input type="submit" class="sbtn col-md-2 col-sm-2 col-xs-3" value="Найти" />
+                    <input type="text" id="stxt"  class="stxt col-md-10 col-sm-10 col-xs-10 searchtext" required="">
+                    <input type="submit" class="sbtn" value="Найти" />
                   </div>
                 </form>
                 <div id="float_chars_block">
@@ -141,6 +142,7 @@
 
 
             </div>
+            <div class="col-md-2 col-sm-1 ">&nbsp; </div>
           </div>
 
 

@@ -53,6 +53,7 @@ img.aligncenter { display: block; margin: 0 auto; }
     height: auto !important;
     height: 100%;
     padding: 10px;
+    margin-top: -61px;
 }
 
 .home {
@@ -72,7 +73,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 }
 
 .login { /*position: absolute; top: 10px; right: 22px; */ color: #777;  }
-.login a { color: #777; margin: 0 5px; text-transform: uppercase; text-decoration: none;}
+.login a { color: #777; margin: 0 5px; /*text-transform: uppercase; */ text-decoration: none;}
 
 .sbuttons { width: 420px; margin: 0 auto 10px; overflow: hidden; _zoom: 1; }
 .sbuttons .sbut { float: left; }
@@ -88,7 +89,7 @@ img.aligncenter { display: block; margin: 0 auto; }
 .searchform {
 
   max-width: 1200px;
-  margin: 40px auto 0px;
+  margin: 25px auto 0px;
 
 
 }
@@ -111,11 +112,18 @@ img.aligncenter { display: block; margin: 0 auto; }
 }
 
 .searchform #stxt {
-padding-left:100px ;
-padding-bottom: 26px;
-font-size: 24px;
+padding-left:82px ;
+padding-bottom: 11px;
+padding-top: 11px;
+font-size: 20px;
 }
 
+.searchform label h1{
+  font-size: 14px;
+  color: #dcdcdc;
+  font-weight: normal;
+  margin: 2px;
+}
 
 .isearch
 {
@@ -123,11 +131,13 @@ font-size: 24px;
     position: absolute;
     margin-top: 18px;
     margin-left: 36px;
-    background: url(images/search.png) no-repeat;
+    /*background: url(images/search.png) no-repeat;*/
     width: 24px;
     height: 24px;
 }
-
+.searchtext{
+      background: transparent url(images/search.png) no-repeat 15px center !important;
+}
 
 .searchformdict .stxt {
     /*background: url(images/stxt.gif) no-repeat;*/
@@ -690,9 +700,10 @@ p {
 
 .copyright, .sorosfooter {
   font-size: 14px;
-  color:#bdbdbd;
+  color:#dcdcdc;
  }
- .copyright h3{color:#484849; margin-top: 0px; }
+ .copyright h3 a{color:#212b37; margin-top: 0px; font-family: "Courier New"; text-decoration: none; font-weight: bold; font-size: 33px;}
+ .copyright h3{margin: 0;}
 #footer-menu { float: right; }
 
 .linklove, .error404 .sbuttons { display: none; }
@@ -712,7 +723,7 @@ p {
 #respond input { padding: 3px; }
 
 #float_chars_block, #float_chars_icon{position:absolute;left:0;top:0;display:none;z-index: 9999;}
-#float_chars_block {background-color: #FFFFFF;border: 1px solid #CCC;display: none;left: 0;  padding: 4px; position: absolute;top: 0;width: 92px;z-index: 9999;}
+#float_chars_block {background-color: #FFFFFF;border: 1px solid #CCC;display: none;left: 0;  padding: 2px; position: absolute;top: 0;width: 82px;z-index: 9999;}
 #float_chars_block span {border: 1px solid #CCCCCC;cursor: pointer;display: block;float: left;margin: 2px;padding: 4px; font-size: 18px; font-weight: bold;}
 #float_chars_block .close {color: #C00000;cursor: pointer;font-weight: bold;height: 6px;position: absolute;right: 1px;top: -1px;width: 6px;}
 
@@ -931,7 +942,7 @@ padding: 0px;
 
 #float_chars_block{
   left: 0px;
-  top: -60px;
+  top: -50px;
   z-index: 1000000000;
   position: relative;
   float: left;
@@ -971,19 +982,21 @@ padding: 0px;
 
 #logotext
 {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
+  font-family: "Courier New";
 }
 
-#logotext span
+/*#logotext span
 {
   font-size: 20px;
   font-weight: normal;
 }
+*/
 
 #logotext {
-  margin:28px 0;
-  margin-left: 37px;
+  margin:21px 0;
+  margin-left: 46px;
 }
 #logotext a{
     text-decoration: none;
@@ -991,9 +1004,15 @@ padding: 0px;
     font-size: 24px;
 }
 
-#logotext a span{
+a span.green{
     text-decoration: none;
-    color: #7986cb;
+    color: #01aab3;
+
+}
+
+#logotext a span.grey{
+    text-decoration: none;
+    color: #ccc;
     font-size: 18px;
 }
 
@@ -1010,16 +1029,16 @@ padding: 0px;
 
 .headersearch
 {
-  background-color:white;
+  /*background-color:white;*/
   padding: 10px;
-  height: 150px;
+  height: 200px;
 }
 
 /* Bootstrap ovverride */
 
 .navbar-default{
-background-color: white;
-
+background-color: #414751;
+background-image: url('images/header-bg.jpg');
 }
 
 .navbar-header {
@@ -1027,7 +1046,7 @@ background-color: white;
     }
     .navbar-toggle {
         display: block;
-        margin-top: 22px;
+        margin-top: 16px;
     }
     .navbar-collapse {
         border-top: 1px solid transparent;
@@ -1083,11 +1102,12 @@ background-color: white;
           float: left;
     }
 .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
-  background-color: white;
+  background: none;
+
 }
 
 .navbar-default .navbar-toggle:focus .icon-bar,.navbar-default .navbar-toggle:hover .icon-bar{
-  background-color: #000;
+  background: white;
 }
 
 
@@ -1106,7 +1126,7 @@ http://www.materialup.com/posts/material-design-input-text
   margin: 0px 0px;
 
   display: block;
-  border: none;
+
   padding: 10px 0;
   border-bottom: solid 1px #dadadb;
   -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
@@ -1116,9 +1136,14 @@ http://www.materialup.com/posts/material-design-input-text
   background-position: -700% 0;
   background-size: 700% 100%;
   background-repeat: no-repeat;
-  color: #dadadb;
+  color: #afafaf;
 
   padding-bottom: 15px;
+}
+
+#mdform .searchtext{
+  border: 1px solid #5f656c;
+  height: 44px;
 }
 #mdform input:focus, #mdform input:valid {
   /*box-shadow: none;*/
@@ -1134,20 +1159,18 @@ http://www.materialup.com/posts/material-design-input-text
 }
 
 #mdform .sbtn {
-  border: 0px solid #ccc; /*none;*/
-  background: #FFFFFF; /*#1abc9c;*/
+  border: 0px solid #ccc;
+  background: #00aeef;
   cursor: pointer;
   border-radius: 3px;
   padding: 6px;
-
-  color: #222228;
+  color: white;
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
-
-
-  position: relative;
+  position: absolute;
   right: 0px;
-  top: -66px;
-
+  top: 22px;
+  width: 120px;
+  height: 44px;
 
 }
 #mdform .sbtn:hover {
@@ -1165,19 +1188,19 @@ http://www.materialup.com/posts/material-design-input-text
 
 .topbluebox
 {
-  height: 80px;
-  background-color: #3f51b5;
-  border-color: #e7e7e7;
+  height: 68px;
+  /*background-color: #3f51b5;
+  border-color: #e7e7e7;*/
 }
 
 .navbar-default .navbar-toggle .icon-bar
 {
-  /*background-color: #fff;*/
+  background-color: #fff;
 }
 
 .navbar-default .navbar-toggle:hover .icon-bar
 {
-  background-color: #000;
+  background-color: #01aab3 !important;
 }
 
 
@@ -1220,8 +1243,10 @@ http://www.materialup.com/posts/material-design-input-text
   background-color: white;
   z-index: 1000;
   position: absolute;
-  margin: -82px 0 0 -15px;
-  box-shadow: 2px 3px 5px #ccc;
+  margin: -70px 0 0 -15px;
+  box-shadow: 2px 3px 5px #292F3B;
+  background-color: #414751;
+  background-image: url('images/header-bg.jpg');
 }
 .navbar-default .navbar-toggle{
   position: absolute;
@@ -1230,14 +1255,20 @@ http://www.materialup.com/posts/material-design-input-text
 
 
 
-.navbar-header .navbar-toggle span.icon-bar{
-display: none;
+.navbar-header .navbar-toggle span.icon-bar, .navbar-header .navbar-toggle:hover span.icon-bar, .navbar-header .navbar-toggle:active span.icon-bar{
+/*display: none;*/
+background: white;
+}
+
+
+.navbar-default .navbar-toggle{
+  border: none;
 }
 
 .navbar-header .navbar-toggle {
 width: 44px;
 height: 37px;
-background: url('images/icons/close1.png') #fff no-repeat 9px;
+background: url('images/icons/close1.png') no-repeat 9px;
 }
 
 .navbar-header .collapsed {
@@ -1292,7 +1323,7 @@ li.divider {
 
 .searchform .tt-menu {
     background: #FFF;
-    width: 100%;
+    width: 80%;
     border-left: solid 1px #fff;
     border-right: solid 1px #fff;
     box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.4);
@@ -1317,4 +1348,16 @@ li.divider {
     padding-top: 0px;
     padding: 12px;
 
+}
+
+
+.login-i{
+  background: transparent url("images/login-i.png") no-repeat left  top;
+  padding-left: 25px;
+  color: #00aeef !important;
+  margin-right: 30px !important;
+}
+.reg-i{
+  background: transparent url("images/reg-i.png") no-repeat left  top;
+  padding-left: 25px;
 }

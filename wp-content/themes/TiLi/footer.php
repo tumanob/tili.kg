@@ -5,8 +5,8 @@
 	<div class="inner row">
 
                   <div class="copyright  col-xs-4 col-md-2 col-sm-3">
-                    <h3>TILI.KG</h3>
-                    &copy; Все права защищены. <br/>
+                    <h3><a href="<?php bloginfo('url'); ?>">Tili<span class="green">.kg</span></a></h3>
+                       Все права защищены. <br/>
                   </div>
                   <div class="col-xs-12 col-md-4 col-sm-4">
                       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="300" height="75"	id="20050.swf" align="middle">
