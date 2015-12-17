@@ -2,6 +2,61 @@
 
 
 <?php get_header(); ?>
+<div class="dbcontent-main">
+	<div class=" ulist">
+
+		<div class="col-md-4 uitem">
+			<h4>Курс языка</h4>
+			<hr>
+			<div class=" col-md-12 ">
+				<center><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful1.png" class="pull-right" /></a></center>
+			</div>
+			<div class="col-md-12 utext">
+				<a href="#">
+					<span> Книги, учебники, статьи, фильмы, музыка, клипы ...</span>
+				</a>
+			</div>
+			<a href="#" class="main-button">
+        начать обучение
+			</a>
+		</div>
+
+		<div class="col-md-4 uitem db-green">
+			<h4>Полезное</h4>
+			<hr>
+			<div class=" col-md-12 ">
+				<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful2.png" class="pull-right" /></a>
+			</div>
+			<div class="col-md-12 utext">
+				<a href="#">
+					<span> Книги, учебники, статьи, фильмы, музыка, клипы ...</span>
+				</a>
+			</div>
+			<a href="#" class="main-button">
+				начать обучение
+			</a>
+		</div>
+
+
+		<div class="col-md-4 uitem db-lightgreen">
+			<h4>Первые 200 слов</h4>
+			<hr>
+			<div class=" col-md-12 ">
+				<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful3.png" class="pull-right" /></a>
+			</div>
+			<div class="col-md-12 utext">
+				<a href="#">
+					<span> Книги, учебники, статьи, фильмы, музыка, клипы ...</span>
+				</a>
+			</div>
+			<a href="#" class="main-button">
+        начать обучение
+			</a>
+		</div>
+
+	</div>
+
+</div>
 
 	<div id="wrapper" class="homepage-wrapper">
 
@@ -18,53 +73,5 @@
 
 	</div>
 
-	<div class="dbcontent">
-		<div class="row ulist">
-			<div class="col-md-12 uitem">
-				<div class="col-md-2 ">
-					<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful1.png" class="pull-right" /></a>
-				</div>
-				<div class="col-md-9 utext">
-					<a href="#">
-						<h2>Всё полезное для изучения киргизского языка</h2>
-						<span> Книги, учебники, статьи, фильмы, музыка, клипы ...</span>
-					</a>
-				</div>
-			</div>
-			<div class="col-md-12 uitem">
-				<div class="col-md-2 ">
-					<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful2.png" class="pull-right" /></a>
-				</div>
-				<div class="col-md-9 utext">
-					<a href="#">
-						<h2>Наши приложения</h2>
-						<span> Скачивайте наши приложения для iPhone и Android.</span>
-					</a>
-				</div>
-			</div>
-			<div class="col-md-12 uitem">
-				<div class="col-md-2 ">
-					<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful3.png" class="pull-right" /></a>
-				</div>
-				<div class="col-md-9 utext">
-					<a href="#">
-						<h2>Расширения для браузера  Goolge Chrome</h2>
-						<span> Удобные расширения для браузера.</span>
-					</a>
-				</div>
-			</div>
-			<div class="col-md-12 uitem">
-				<div class="col-md-2 ">
-					<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful4.png" class="pull-right" /></a>
-				</div>
-				<div class="col-md-9 utext">
-					<a href="#">
-						<h2>200 первых слов на киргизском языке</h2>
-						<span> Удобно учить первые слова с озвучиванием.</span>
-					</a>
-				</div>
-			</div>
-		</div>
 
-	</div>
 <?php get_footer(); ?>

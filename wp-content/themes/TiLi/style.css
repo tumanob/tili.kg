@@ -214,7 +214,81 @@ font-size: 20px;
     overflow: hidden;
     box-shadow: 0 1px 3px grey;
     padding: 20px 10px 20px 10px;
-    margin: 20px 0;
+    margin: 0px 0;
+}
+
+.dbcontent-main
+{
+
+  background-color: white;
+    border-radius: 0px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px grey;
+    padding: 0px;
+    margin: 0px 0 10px 0;
+}
+
+.dbcontent-main .db-white
+{
+  background: white;
+
+}
+
+.dbcontent-main .db-green
+{
+  background: #00aba2;
+
+}
+
+.dbcontent-main .db-lightgreen
+{
+  background: #66b484;
+
+}
+
+.dbcontent-main h4{ font-size: 31px; font-family: Roboto;  font-weight: 100;   text-align: center;margin-top: 30px;}
+
+.dbcontent-main hr{
+    border-top: 1px solid #5e5e5e;
+    margin: 20px;
+  }
+
+.dbcontent-main hr:before{
+  content: '';
+   display: inline-block;
+   width: 8px;
+   height: 8px;
+   -moz-border-radius: 8px;
+   -webkit-border-radius: 8px;
+   border-radius: 8px;
+   background-color: #5e5e5e;
+   border: 1px solid #5e5e5e;
+    margin-top: -5px;
+
+}
+.dbcontent-main hr:after{
+  float: right;
+  content: '';
+   display: inline-block;
+   width: 8px;
+   height: 8px;
+   -moz-border-radius: 8px;
+   -webkit-border-radius: 8px;
+   border-radius: 8px;
+   background-color: #5e5e5e;
+   border: 1px solid #5e5e5e;
+    margin-top: -5px;
+}
+.dbcontent-main .db-green hr:after,.dbcontent-main .db-green hr:before,
+.dbcontent-main .db-lightgreen hr:after,.dbcontent-main .db-lightgreen hr:before
+{
+  background-color: white;
+  border-color: white;
+}
+.dbcontent-main .db-green hr,.dbcontent-main .db-lightgreen hr
+{
+
+  border-color: white;
 }
 
 /* Wrapper
@@ -1203,7 +1277,7 @@ http://www.materialup.com/posts/material-design-input-text
   background-color: #01aab3 !important;
 }
 
-
+/*
 .ulist
 {
   padding: 40px 0px;
@@ -1227,6 +1301,7 @@ http://www.materialup.com/posts/material-design-input-text
 
 .utext h2
 {font-size: 24px; margin-bottom: 22px;}
+*/
 
 .side-menu-glavnoe
 {
