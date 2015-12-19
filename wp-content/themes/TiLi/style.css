@@ -245,15 +245,21 @@ font-size: 20px;
   background: #66b484;
 
 }
+.dbcontent-main .db-green h4,.dbcontent-main .db-lightgreen h4
+{
+  color: #fff;
+
+}
 
 .dbcontent-main h4{ font-size: 31px; font-family: Roboto;  font-weight: 100;   text-align: center;margin-top: 30px;}
 
-.dbcontent-main hr{
+ hr.grey,hr.white {
     border-top: 1px solid #5e5e5e;
     margin: 20px;
   }
 
-.dbcontent-main hr:before{
+
+ hr.grey:before ,hr.white:before{
   content: '';
    display: inline-block;
    width: 8px;
@@ -266,7 +272,7 @@ font-size: 20px;
     margin-top: -5px;
 
 }
-.dbcontent-main hr:after{
+ hr.grey:after,hr.white:after{
   float: right;
   content: '';
    display: inline-block;
@@ -279,15 +285,13 @@ font-size: 20px;
    border: 1px solid #5e5e5e;
     margin-top: -5px;
 }
-.dbcontent-main .db-green hr:after,.dbcontent-main .db-green hr:before,
-.dbcontent-main .db-lightgreen hr:after,.dbcontent-main .db-lightgreen hr:before
+hr.white:after, hr.white:before
 {
   background-color: white;
   border-color: white;
 }
-.dbcontent-main .db-green hr,.dbcontent-main .db-lightgreen hr
+hr.white
 {
-
   border-color: white;
 }
 
@@ -1245,6 +1249,7 @@ http://www.materialup.com/posts/material-design-input-text
   top: 22px;
   width: 120px;
   height: 44px;
+  font-size: 20px;
 
 }
 #mdform .sbtn:hover {
@@ -1291,17 +1296,23 @@ http://www.materialup.com/posts/material-design-input-text
   margin-top:20px;
   padding-right: 25px;
 }
-
+*/
+.uitem{
+  padding-top: 1px;
+}
 .utext
 {
-  border-bottom: 1px solid #dbdbdb;
-  padding-bottom: 30px;
+  margin-top: 32px;
+  text-align: center;
 }
-.utext a{ text-decoration: none;}
+.utext a{ text-decoration: none; color: #5e5e5e;}
 
-.utext h2
-{font-size: 24px; margin-bottom: 22px;}
-*/
+.db-green .utext a,.db-lightgreen .utext a{
+  color: white;
+}
+
+
+
 
 .side-menu-glavnoe
 {
@@ -1435,4 +1446,30 @@ li.divider {
 .reg-i{
   background: transparent url("images/reg-i.png") no-repeat left  top;
   padding-left: 25px;
+}
+
+
+div.text-button {
+
+}
+
+div.text-button a{
+    text-align: center;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    display: block;
+    margin: 26px 0 36px 0;
+    text-align: center;
+    border: 2px solid white;
+    padding: 10px 22px;
+    background: url("images/icons/warrow-right.png") no-repeat 90% 50%;
+}
+
+div.grey a{
+
+    color: #40505f;
+    background: url("images/icons/garrow-right.png") no-repeat 90% 50%;
+    border: 2px solid #40505f;
+
 }

@@ -7,51 +7,60 @@
 
 		<div class="col-md-4 uitem">
 			<h4>Курс языка</h4>
-			<hr>
+			<hr class="grey">
 			<div class=" col-md-12 ">
-				<center><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful1.png" class="pull-right" /></a></center>
+				<center><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful1.png" /></a></center>
 			</div>
 			<div class="col-md-12 utext">
 				<a href="#">
 					<span> Книги, учебники, статьи, фильмы, музыка, клипы ...</span>
 				</a>
 			</div>
-			<a href="#" class="main-button">
-        начать обучение
-			</a>
+			<div class="col-md-12 text-button grey">
+				<a href="#" class="">
+	        Начать обучение
+				</a>
+			</div>
+
 		</div>
 
 		<div class="col-md-4 uitem db-green">
 			<h4>Полезное</h4>
-			<hr>
+			<hr class="white">
 			<div class=" col-md-12 ">
-				<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful2.png" class="pull-right" /></a>
+				<center><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful2.png" class="" /></a></center>
 			</div>
 			<div class="col-md-12 utext">
 				<a href="#">
 					<span> Книги, учебники, статьи, фильмы, музыка, клипы ...</span>
 				</a>
 			</div>
-			<a href="#" class="main-button">
-				начать обучение
-			</a>
+			<div class="col-md-12 text-button">
+				<a href="#">
+	        Переход в раздел
+				</a>
+			</div>
+
 		</div>
 
 
 		<div class="col-md-4 uitem db-lightgreen">
 			<h4>Первые 200 слов</h4>
-			<hr>
+			<hr class="white">
 			<div class=" col-md-12 ">
-				<a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful3.png" class="pull-right" /></a>
+				<center><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful3.png" class="" /></a></center>
 			</div>
 			<div class="col-md-12 utext">
 				<a href="#">
 					<span> Книги, учебники, статьи, фильмы, музыка, клипы ...</span>
 				</a>
 			</div>
-			<a href="#" class="main-button">
-        начать обучение
-			</a>
+			<div class="col-md-12 text-button">
+				<a href="#">
+	        Выучить слова
+				</a>
+			</div>
+
 		</div>
 
 	</div>
