@@ -491,7 +491,7 @@ line-height:0px;
 
 .empty {
     clear: both;
-    height: 40px;
+    /* height: 40px; */
 }
 
 #footer {
@@ -1472,4 +1472,78 @@ div.grey a{
     background: url("images/icons/garrow-right.png") no-repeat 90% 50%;
     border: 2px solid #40505f;
 
+}
+
+
+/*  phone - social main page */
+
+.margin-0{
+  margin:0;
+  padding: 0;
+}
+.home-apps-sicial{
+  margin: 20px 0;
+}
+.phone-icon{
+  /*
+  background: transparent url("images/phone-bg.png") no-repeat;
+  height: 418px;
+  width: 264px;*/
+}
+
+.social-icon
+{
+  /*background: transparent url("images/social-bg.png") no-repeat;
+  height: 380px;
+  width: 378px;*/
+  margin-top: -100px;
+}
+.apps-content{
+  background: transparent url("images/apps-bg.png") no-repeat;
+  min-height: 190px;
+  background-position: 0% 100%;
+  padding-top: 50px;
+  margin-top: 36px;
+}
+.apps-content a{
+  display: block;
+}
+.apps-content a.glow:hover{
+  -webkit-box-shadow: 1px 0px 22px -1px rgba(64,191,245,1);
+  -moz-box-shadow: 1px 0px 22px -1px rgba(64,191,245,1);
+  box-shadow: 1px 0px 22px -1px rgba(64,191,245,1);
+}
+
+.apps-content a img{
+  width: 100%;
+}
+
+a.all-apps{
+  text-align: center;
+  margin-top: 15px;
+  color: white;
+  font-size: 18px;
+  text-shadow: 2px 2px 4px black;
+}
+a.all-apps:hover{
+  color: white;
+}
+
+
+.apps h3, .social-block h3
+{
+      margin-left: 28px;
+      font-weight: 100;
+}
+
+.social-block{
+  margin-top: 20px;
+}
+/*phone -social  end*/
+.socia-content{
+  margin-top: 20px;
+}
+.main-contacts{
+  background: url("images/conact-bg.jpg") repeat-x;
+  min-height: 470px;
 }

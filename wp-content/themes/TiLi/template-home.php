@@ -81,6 +81,66 @@
 		<?php endif; ?>
 
 	</div>
+<div class="home-apps-sicial">
+	<div class="apps">
+		<div class="phone-icon col-md-3 margin-0">
+			<img src="/wp-content/themes/TiLi/images/phone-bg.png" width="100%" alt="google play" />
+		</div>
+		<div class="col-md-9 margin-0">
+			<h3>Наши приложения</h3>
+			<hr class="grey">
+			<div class="apps-content">
+				<div class="col-md-4">
+					<a href="#" class="glow"><img src="/wp-content/themes/TiLi/images/gplay-banner.png" alt="google play" /></a>
+				</div>
+				<div class="col-md-4">
+					<a href="#" class="glow"><img src="/wp-content/themes/TiLi/images/appstore-banner.png" alt="google play" /></a>
+				</div>
+				<div class="col-md-4">
+					<a href="#" class="glow"><img src="/wp-content/themes/TiLi/images/chrome-banner.png" alt="google play" /></a>
+				</div>
+				<div class="col-md-12">
+					<a href="#" class="all-apps"> Все приложения</a>
+				</div>
+
+
+
+			</div>
+
+		</div>
+	</div>
+
+	<div class="social-block col-md-12 margin-0">
+		<div class="col-md-8 margin-0">
+			<hr class="grey">
+			<h3>Мы в социальных сетях</h3>
+			<div class="socia-content">
+					<div class="col-md-2 ">
+						<img src="/wp-content/themes/TiLi/images/icons/fb-icon.png" alt="google play" />
+					</div>
+					<div class="col-md-2">
+						<img src="/wp-content/themes/TiLi/images/icons/gplus-icon.png" alt="google play" />
+					</div>
+					<div class="col-md-2">
+						<img src="/wp-content/themes/TiLi/images/icons/fb-icon.png" alt="google play" />
+					</div>
+	</div>
+
+		</div>
+		<div class="social-icon col-md-4 pull-right margin-0">
+			<img src="/wp-content/themes/TiLi/images/social-bg.png" alt="google play" width="100%"/>
+
+		</div>
+	</div>
+</div>
+
+</div>
+
+<div class="main-contacts col-md-12">
+	<form class="" action="index.html" method="post">
+		324fsdf sd fdf sdf sf d fsd
+	</form>
+</div>
 
 
 <?php get_footer(); ?>
