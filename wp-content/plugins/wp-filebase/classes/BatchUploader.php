@@ -12,7 +12,7 @@ class WPFB_BatchUploader {
 	
 	var $hidden_vars = array();
 	
-	public function WPFB_BatchUploader($prefix = 'batch', $presets = array())
+	public function __construct($prefix = 'batch', $presets = array())
 	{
 		$this->prefix = $prefix;
 		$this->presets = $presets; //TODO
@@ -30,7 +30,7 @@ class WPFB_BatchUploader {
 	<div id="<?php echo $this->prefix; ?>-uploader-interface" class="wpfb-batch-uploader-interface">	
 		<div class="form-wrap uploader-presets" id="<?php echo $this->prefix; ?>-uploader-presets">	
 		<form method="POST" action="" class="validate" name="batch_presets">
-			 <h2><?php _e('Upload Presets',WPFB); ?></h2> 
+			 <h2><?php _e('Upload Presets','wp-filebase'); ?></h2> 
 			<?php
 				 {
 					self::DisplayUploadPresets($this->prefix);
@@ -170,8 +170,15 @@ function batchUploaderFileQueued(up, file)
 function batchUploaderSuccess(file, serverData)
 {
 	var item = jQuery('#'+file.dom_id);	
+        
+        if(!serverData || serverData == -1 || 'object' != typeof(serverData)) {
+            jQuery('.error', item).show().html('Server response error! '+serverData);
+            console.log(serverData);
+            return;
+        }
+        
 	var url = serverData.file_cur_user_can_edit ? serverData.file_edit_url : serverData.file_download_url;
-	jQuery('.filename', item).html('<a href="'+url+'" target="_blank">'+serverData.file_display_name+'</a>');
+	jQuery('.filename', item).html('<a href="'+url+'" target="_blank">'+serverData.file_display_name+'</a> <span class="ok"><?php _e('Upload OK!','wp-filebase') ?></span>');
 	jQuery('img', item).attr('src', serverData.file_thumbnail_url);
 }
 </script>
@@ -238,13 +245,13 @@ function batchUploaderSuccess(file, serverData)
 	
 <?php if(WPFB_Core::$settings->licenses) { ?>
 <tr class="form-field">
-	<th scope="row"><label for="batch_license"><?php _e('License',WPFB) ?></label></th>
+	<th scope="row"><label for="batch_license"><?php _e('License','wp-filebase') ?></label></th>
 	<td><select id="<?php echo $prefix; ?>_license" name="file_license"><?php echo WPFB_Admin::MakeFormOptsList('licenses', $defaults['license'], true) ?></select></td>
 </tr>
 <?php } ?>
 
 <tr class="form-field">
-	<th scope="row"><label for="<?php echo $prefix; ?>_post_id"><?php _e('Attach to Post',WPFB) ?></label></th>
+	<th scope="row"><label for="<?php echo $prefix; ?>_post_id"><?php _e('Attach to Post','wp-filebase') ?></label></th>
 	<td>ID: <input type="text" name="file_post_id" class="num" style="width:60px; text-align:right;" id="<?php echo $prefix; ?>_post_id" value="<?php echo esc_attr($defaults['post_id']); ?>" />
 	<span id="<?php echo $prefix; ?>_post_title" style="font-style:italic;"><?php if($defaults['post_id'] > 0) echo get_the_title($defaults['post_id']); ?></span>
 	<a href="javascript:;" class="button" onclick="WPFB_PostBrowser('<?php echo $prefix; ?>_post_id', '<?php echo $prefix; ?>_post_title');"><?php _e('Select') ?></a></td>
@@ -253,7 +260,7 @@ function batchUploaderSuccess(file, serverData)
 <tr>
 	<td></td>
 	<td><input type="checkbox" name="file_offline" id="<?php echo $prefix; ?>_offline" value="1" <?php checked('1', $defaults['offline']); ?> />
-	<label for="<?php echo $prefix; ?>_offline" style="display: inline;"><?php _e('Don\'t publish uploaded files (set offline)', WPFB) ?></label></td>
+	<label for="<?php echo $prefix; ?>_offline" style="display: inline;"><?php _e('Don\'t publish uploaded files (set offline)','wp-filebase') ?></label></td>
 </tr>
 
 <?php  /*ADV_BATCH_UPLOADER*/?>

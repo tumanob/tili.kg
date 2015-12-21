@@ -3,8 +3,8 @@ Contributors: fabifott
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=wpfilebase%40fabi%2eme&item_name=WP-Filebase&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
 Tags: filebase, filemanager, file, files, manager, upload, download, downloads, downloadmanager, images, pdf, widget, filelist, list, thumbnails, thumbnail, attachment, attachments, category, categories, media, template, ftp, http, mp3, id3
 Requires at least: 3.1
-Tested up to: 4.1.1
-Stable tag: 3.1.01
+Tested up to: 4.4
+Stable tag: 3.1.05
 
 Adds a powerful download manager including file categories, downloads counter, widgets, sorted file lists and more to your WordPress blog.
 
@@ -120,16 +120,58 @@ Goto WP-Filebase Settings and disable Permalinks under "Download". Try to disabl
 
 == Changelog ==
 
+= 3.1.05 =
+* Fixed AJAX calls
+* Thumbnails not served through direct plugins script
+
+
+= 3.1.04 =
+* FileBrowser: new option `Inline Add` to toggle the display of Add File/Category links
+* Async Uploader: Added error message on invalid server response after upload
+* Prevent direct script access for Editor Plugin, Post Browser and AJAX
+* PHP 7 compatibility: `mysql_close` only called if exists
+
+= 3.1.03 =
+* Added Extension Update API caching
+* Load getid3_lib if necessary
+* Fixed XXS URL redirection vulnerability found by [Cybersecurity Works](http://www.cybersecurityworks.com)
+
+= 3.1.02 =
+* PHP 7 constructor compatibility (and WP 4.3.0)
+* Updated getId3
+* Fixed sideload issue
+* Made treeview drag&drop IE compatible
+* Added delete buttons to backend file browser 
+* Show icons in file/category selector tree
+* Better sync progress reporting
+* Improved sync performance, reduced server load during sync
+* Removed FLV player, replaced with HTML5 video player
+* Added compatibility for latest CF7
+* Fix: More robust file name handling with special characters
+* Fixed individual file force download option
+* File browser: only show add category if user has permission
+* Run a File Sync to fix category file counter bug (categories no opening in file browser)
+* Inherit category upload permissions
+* Deleting a category removes the folder
+* New list template header/footer var: `%search_term%`
+* Rescan looks for thumbnails with same basename if `Auto-detect thumbnails` is enabled
+* Fixed fatal error in editor plugin with conflicting plugins
+* Updated french translation by Marco Siviero
+* Changed textdomain from 'wpfb' to 'wp-filebase' for language pack compatibility
+
 = 3.1.01 =
 * Added support for remote urls for local files with `file://` scheme
 * New template variabla `%file_user_can_edit%`
 * Updated DataTables to 1.10.4
 * Updated DataTables column filter to 1.5.6
 * Back-end filebrowser: hide edit button if not permitted
+* Disable expiration time of thumbnail browser caching
 * Fixed category file counter bug when adding new files causing categories not to expand in file browser
 * Fixed pagination in back-end category list
 * Fixed mysql table structure update causing `Unknown column` errors
 * Fixed broken thumbnails when chaning category of a remote file
+* Fixed pagination for lists
+* Fixed MP3 cover image extraction
 
 = 3.1.00 =
 * New Feature: Treeview: Drag & Drop Files, Move Categories and Files by dragging

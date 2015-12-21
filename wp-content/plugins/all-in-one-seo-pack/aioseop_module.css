@@ -118,7 +118,7 @@ div.aioseop_tip_icon:before {
 	color: #5F5F5F;
 	font-weight: bold;
 	line-height: 19px;
-	padding-left: 20px;
+	padding-left: 10px; /*changed from 20px to 10px for certain language support*/
 	display: inline-block;
 	text-align: left;
 	position: absolute;
@@ -216,14 +216,62 @@ div.aioseop_tip_icon:before {
 	width: 423px;
 }
 
+.headwaythemes {
+	background-color: #FFFFFF;
+	padding-bottom: 110px;
+	height: 125px;
+}
+
 .aioseop_nopad {
 	padding-left: 0px;
 	padding-top: 0px;
 }
 
+.aioseop_nopad_all {
+  padding: 0px;
+  height: 220px;
+  width: 445px;
+  margin-bottom: 20px;
+  border: none;
+}
+
 .aioseop_adverts {
 	float: right;
 }
+
+.wincherad {
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin-bottom: 0px;
+  border: none;
+}
+/*
+#wincher11 {
+	background-image: url(images/banner11.png);
+}
+#wincher12 {
+	background-image: url(images/banner12.png);
+}
+#wincher13 {
+	background-image: url(images/banner13.png);
+}
+#wincher14 {
+	background-image: url(images/banner14.png);
+}
+#wincher15 {
+	background-image: url(images/banner15.png);
+}
+*/
+#wincher21 {
+	background-image: url(images/banner21.jpg);
+}
+#wincher22 {
+	background-image: url(images/banner22.jpg);
+}
+}
+
 .aioseop_content {
 	min-width: 760px;
 	clear: left;
@@ -237,6 +285,9 @@ div.aioseop_tip_icon:before {
 	padding: 7px 10px;
 	margin: 0;
 	line-height: 1;
+}
+.aioseop_options_wrapper .submit input.button-primary {
+	margin-bottom: 5px;
 }
 #aiosp_feature_manager_metabox.postbox {
 	margin-top: 20px;
@@ -299,6 +350,7 @@ div.aioseop_tip_icon:before {
 	max-width: 270px;
 	padding-top: 3px;
 	padding-bottom: 3px;
+	height:67px !important; /*added for certain language support*/
 }
 .aioseop_metabox_text h2 {
 	font-size: 14px;
@@ -460,10 +512,10 @@ div.aioseop_feature#aioseop_opengraph .aioseop_featured_image {
 div.aioseop_feature#aioseop_opengraph .aioseop_featured_image.active {
 	background-image: url(images/SocialMeta-Color-Standard.png);
 }
-div.aioseop_feature#aioseop_robots .aioseop_featured_image {
+div.aioseop_feature#aioseop_robots .aioseop_featured_image, div.aioseop_feature#aioseop_bad_robots .aioseop_featured_image {
 	background-image: url(images/Robots-BW-Standard.png);
 }
-div.aioseop_feature#aioseop_robots .aioseop_featured_image.active {
+div.aioseop_feature#aioseop_robots .aioseop_featured_image.active, div.aioseop_feature#aioseop_bad_robots .aioseop_featured_image.active {
 	background-image: url(images/Robots-Color-Standard.png);
 }
 div.aioseop_feature#aioseop_file_editor .aioseop_featured_image {
@@ -701,6 +753,17 @@ table.aioseop_table td {
 	border-right: 1px solid #dfdfdf;
 	border-bottom: 1px solid #dfdfdf;
 }
+#aioseop_opengraph_settings_facebook_debug_result li.aioseop_opengraph_settings_facebook_debug_item {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+}
+#aioseop_opengraph_settings_facebook_debug_result li.aioseop_opengraph_settings_facebook_debug_item:nth-child(even) {
+  font-weight: bold;
+}
+#aioseop_opengraph_settings_facebook_debug_result li.aioseop_opengraph_settings_facebook_debug_item:nth-child(odd) {
+  width: 70%;
+}
 #aiosp_sitemap_addl_pages_metabox table.aioseop_table td {
 	width: 25%;
 	padding-left: 5%;
@@ -873,8 +936,8 @@ div.aioseop_notice a.aioseop_dismiss_link {
 .aioseop_tabs {
 	padding-top: 6px;
 }
-.aioseop_tabs.hide {
-	display: block;
+.aioseop_tabs.hide, .aioseop_header_tabs.hide {
+	display: block !important;
 }
 .aioseop_header_tabs li {
 	display: inline;

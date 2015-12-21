@@ -7,14 +7,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: GlotPress/1.0-alpha-1000\n"
+"X-Generator: GlotPress/1.0-alpha-1100\n"
 "Project-Id-Version: Twenty Fourteen\n"
 
 #. Theme URI of the plugin/theme
 msgid "https://wordpress.org/themes/twentyfourteen/"
 msgstr "https://wordpress.org/themes/twentyfourteen/"
 
+#. #-#-#-#-#  twentyfourteen.pot (Twenty Fourteen 1.6)  #-#-#-#-#
 #. Author URI of the plugin/theme
+#: footer.php:21
 msgid "https://wordpress.org/"
 msgstr "https://wordpress.org/"
 
@@ -114,14 +116,6 @@ msgstr "Не отображать метку на сайте."
 msgid "In 2014, our default theme lets you create a responsive magazine website with a sleek, modern design. Feature your favorite homepage content in either a grid or a slider. Use the three widget areas to customize your website, and change your content's layout with a full-width page template and a contributor page to show off your authors. Creating a magazine website with WordPress has never been easier."
 msgstr "В 2014 году наша тема по умолчанию позволит вам создать адаптивный журнальный сайт с современным дизайном. Отобразите на главной свои любимые записи в виде сетки или слайдера. Используйте три области для виджетов, чтобы настроить свой сайт. Попробуйте также изменить представление содержимого с помощью шаблона страницы на всю ширину и создайте страницу участников, чтобы показать авторов сайта. Создать журнальный сайт на WordPress стало проще, чем когда-либо."
 
-#: functions.php:258
-msgid "Previous"
-msgstr "Назад"
-
-#: functions.php:259
-msgid "Next"
-msgstr "Далее"
-
 #: 404.php:21
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr "По данному адресу ничего не найдено. Попробуйте воспользоваться поиском."
@@ -149,12 +143,13 @@ msgstr "Область подвала"
 msgid "Appears in the footer section of the site."
 msgstr "Отображается в нижней части сайта."
 
-#: functions.php:376
-msgid "%d Article"
-msgid_plural "%d Articles"
-msgstr[0] "%d статья"
-msgstr[1] "%d статьи"
-msgstr[2] "%d статей"
+#: functions.php:258
+msgid "Previous"
+msgstr "Назад"
+
+#: functions.php:259
+msgid "Next"
+msgstr "Далее"
 
 #: image.php:65
 msgid "Previous Image"
@@ -188,10 +183,6 @@ msgstr "Сетка"
 msgid "Slider"
 msgstr "Слайдер"
 
-#: inc/customizer.php:109
-msgid "Enhance your site design by using <a href=\"%s\">Featured Images</a> for posts you&rsquo;d like to stand out (also known as post thumbnails). This allows you to associate an image with your post without inserting it. Twenty Fourteen uses featured images for posts and pages&mdash;above the title&mdash;and in the Featured Content area on the home page."
-msgstr "Улучшите дизайн вашего сайта с помощью <a href=\"%s\">миниатюр записей</a>. Эта функция позволяет связать изображение с записью, не вставляя его. Тема Twenty Fourteen использует миниатюры для записей и страниц (над заголовком), а также в разделе &laquo;Избранное содержимое&raquo; на главной."
-
 #: inc/template-tags.php:58
 msgid "Posts navigation"
 msgstr "Навигация по записям"
@@ -216,13 +207,6 @@ msgstr "Мимолётное (Twenty Fourteen)"
 msgid "Audio"
 msgstr "Аудио"
 
-#: inc/widgets.php:162
-msgid "This gallery contains <a href=\"%1$s\" rel=\"bookmark\">%2$s photo</a>."
-msgid_plural "This gallery contains <a href=\"%1$s\" rel=\"bookmark\">%2$s photos</a>."
-msgstr[0] "Эта галерея содержит <a href=\"%1$s\" rel=\"bookmark\">%2$s фотографию</a>."
-msgstr[1] "Эта галерея содержит <a href=\"%1$s\" rel=\"bookmark\">%2$s фотографии</a>."
-msgstr[2] "Эта галерея содержит <a href=\"%1$s\" rel=\"bookmark\">%2$s фотографий</a>."
-
 #: inc/widgets.php:255
 msgid "Title:"
 msgstr "Заголовок:"
@@ -239,13 +223,27 @@ msgstr "Формат записей:"
 msgid "Contributor Page"
 msgstr "Страница участников"
 
-#: category.php:20
-msgid "Category Archives: %s"
-msgstr "Архив рубрики: %s"
+#: inc/customizer.php:109
+msgid "Enhance your site design by using <a href=\"%s\">Featured Images</a> for posts you&rsquo;d like to stand out (also known as post thumbnails). This allows you to associate an image with your post without inserting it. Twenty Fourteen uses featured images for posts and pages&mdash;above the title&mdash;and in the Featured Content area on the home page."
+msgstr "Улучшите дизайн вашего сайта с помощью <a href=\"%s\">миниатюр записей</a>. Эта функция позволяет связать изображение с записью, не вставляя его. Тема Twenty Fourteen использует миниатюры для записей и страниц (над заголовком), а также в разделе &laquo;Избранное содержимое&raquo; на главной."
 
-#: tag.php:22
-msgid "Tag Archives: %s"
-msgstr "Архив метки: %s"
+#: functions.php:376
+msgid "%d Article"
+msgid_plural "%d Articles"
+msgstr[0] "%d статья"
+msgstr[1] "%d статьи"
+msgstr[2] "%d статей"
+
+#: inc/widgets.php:162
+msgid "This gallery contains <a href=\"%1$s\" rel=\"bookmark\">%2$s photo</a>."
+msgid_plural "This gallery contains <a href=\"%1$s\" rel=\"bookmark\">%2$s photos</a>."
+msgstr[0] "Эта галерея содержит <a href=\"%1$s\" rel=\"bookmark\">%2$s фотографию</a>."
+msgstr[1] "Эта галерея содержит <a href=\"%1$s\" rel=\"bookmark\">%2$s фотографии</a>."
+msgstr[2] "Эта галерея содержит <a href=\"%1$s\" rel=\"bookmark\">%2$s фотографий</a>."
+
+#: footer.php:21
+msgid "Proudly powered by %s"
+msgstr "Сайт работает на %s"
 
 #: archive.php:31
 msgid "Daily Archives: %s"
@@ -259,32 +257,49 @@ msgstr "Архив за месяц: %s"
 msgid "Yearly Archives: %s"
 msgstr "Архив за год: %s"
 
-#: archive.php:40 taxonomy-post_format.php:51
-msgid "Archives"
-msgstr "Архивы"
-
-#: comments.php:27
-msgid "One thought on &ldquo;%2$s&rdquo;"
-msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
-msgstr[0] "%2$s: %1$s комментарий"
-msgstr[1] "%2$s: %1$s комментария"
-msgstr[2] "%2$s: %1$s комментариев"
-
-#: comments.php:34 comments.php:52
-msgid "Comment navigation"
-msgstr "Навигация по комментариям"
-
-#: comments.php:35 comments.php:53
-msgid "&larr; Older Comments"
-msgstr "&larr; Предыдущие комментарии"
+#. Author of the plugin/theme
+msgid "the WordPress team"
+msgstr "Команда WordPress"
 
 #: comments.php:36 comments.php:54
 msgid "Newer Comments &rarr;"
 msgstr "Следующие комментарии &rarr;"
 
+#: comments.php:35 comments.php:53
+msgid "&larr; Older Comments"
+msgstr "&larr; Предыдущие комментарии"
+
 #: comments.php:59
 msgid "Comments are closed."
 msgstr "Комментарии запрещены."
+
+#: category.php:20
+msgid "Category Archives: %s"
+msgstr "Архив рубрики: %s"
+
+#: comments.php:34 comments.php:52
+msgid "Comment navigation"
+msgstr "Навигация по комментариям"
+
+#: tag.php:22
+msgid "Tag Archives: %s"
+msgstr "Архив метки: %s"
+
+#: search.php:18
+msgid "Search Results for: %s"
+msgstr "Результаты поиска: %s"
+
+#: header.php:48
+msgid "Search"
+msgstr "Поиск"
+
+#: archive.php:40 taxonomy-post_format.php:51
+msgid "Archives"
+msgstr "Архивы"
+
+#: inc/widgets.php:127 inc/widgets.php:172
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Читать далее <span class=\"meta-nav\">&rarr;</span>"
 
 #: content-aside.php:53 content-audio.php:53 content-gallery.php:53
 #: content-image.php:53 content-link.php:53 content-page.php:22
@@ -299,11 +314,43 @@ msgstr "Страницы:"
 msgid "Edit"
 msgstr "Изменить"
 
+#: functions.php:495
+msgid "Page %s"
+msgstr "Страница %s"
+
+#: inc/template-tags.php:85
+msgid "Post navigation"
+msgstr "Навигация по записям"
+
+#: header.php:52
+msgid "Primary Menu"
+msgstr "Основное меню"
+
+#: content-none.php:27
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Запрошенную информацию найти не удалось. Возможно, будет полезен поиск по сайту."
+
+#: header.php:53
+msgid "Skip to content"
+msgstr "Перейти к содержимому"
+
 #: content-aside.php:37 content-audio.php:37 content-gallery.php:37
 #: content-image.php:37 content-link.php:37 content-quote.php:37
 #: content-video.php:37 content.php:38 inc/widgets.php:194
 msgid "Leave a comment"
 msgstr "Добавить комментарий"
+
+#: content-none.php:12
+msgid "Nothing Found"
+msgstr "Не найдено"
+
+#: content-none.php:18
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Готовы опубликовать свою первую запись? <a href=\"%1$s\">Начните отсюда</a>."
+
+#: inc/template-tags.php:109
+msgid "Sticky"
+msgstr "Прилеплена"
 
 #: content-aside.php:37 content-audio.php:37 content-gallery.php:37
 #: content-image.php:37 content-link.php:37 content-quote.php:37
@@ -317,17 +364,9 @@ msgstr "1 комментарий"
 msgid "% Comments"
 msgstr "Комментарии (%)"
 
-#: inc/widgets.php:127 inc/widgets.php:172
-msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
-msgstr "Читать далее <span class=\"meta-nav\">&rarr;</span>"
-
-#: footer.php:21
-msgid "http://wordpress.org/"
-msgstr "http://wordpress.org/"
-
-#: footer.php:21
-msgid "Proudly powered by %s"
-msgstr "Сайт работает на %s"
+#: content-none.php:22
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Извините, по вашему запросу ничего не найдено. Попробуйте другие ключевые слова."
 
 #: functions.php:83
 msgid "Top primary menu"
@@ -356,25 +395,11 @@ msgctxt "Lato font: on or off"
 msgid "on"
 msgstr "on"
 
-#: functions.php:495
-msgid "Page %s"
-msgstr "Страница %s"
-
-#: header.php:48
-msgid "Search"
-msgstr "Поиск"
-
-#: header.php:52
-msgid "Primary Menu"
-msgstr "Основное меню"
-
-#: header.php:53
-msgid "Skip to content"
-msgstr "Перейти к содержимому"
-
-#: inc/template-tags.php:85
-msgid "Post navigation"
-msgstr "Навигация по записям"
+#. #-#-#-#-#  twentyfourteen.pot (Twenty Fourteen 1.6)  #-#-#-#-#
+#. Theme Name of the plugin/theme
+#: inc/customizer.php:105
+msgid "Twenty Fourteen"
+msgstr "Twenty Fourteen"
 
 #: inc/template-tags.php:50
 msgid "&larr; Previous"
@@ -384,68 +409,41 @@ msgstr "&larr; Назад"
 msgid "Next &rarr;"
 msgstr "Далее &rarr;"
 
-#: inc/template-tags.php:109
-msgid "Sticky"
-msgstr "Прилеплена"
-
-#: content-none.php:12
-msgid "Nothing Found"
-msgstr "Не найдено"
-
-#: content-none.php:18
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr "Готовы опубликовать свою первую запись? <a href=\"%1$s\">Начните отсюда</a>."
-
-#: content-none.php:22
-msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
-msgstr "Извините, по вашему запросу ничего не найдено. Попробуйте другие ключевые слова."
-
-#: content-none.php:27
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr "Запрошенную информацию найти не удалось. Возможно, будет полезен поиск по сайту."
-
-#: inc/widgets.php:58 taxonomy-post_format.php:36
-msgid "Videos"
-msgstr "Видео"
+#: inc/widgets.php:79 taxonomy-post_format.php:30
+msgid "Asides"
+msgstr "Заметки"
 
 #: inc/widgets.php:54 taxonomy-post_format.php:33
 msgid "Images"
 msgstr "Изображения"
 
-#: inc/widgets.php:55
-msgid "More images"
-msgstr "Другие изображения"
-
-#: inc/widgets.php:74 taxonomy-post_format.php:48
-msgid "Galleries"
-msgstr "Галереи"
-
-#: inc/widgets.php:79 taxonomy-post_format.php:30
-msgid "Asides"
-msgstr "Заметки"
-
-#: inc/widgets.php:70 taxonomy-post_format.php:45
-msgid "Links"
-msgstr "Ссылки"
+#: inc/widgets.php:58 taxonomy-post_format.php:36
+msgid "Videos"
+msgstr "Видео"
 
 #: inc/widgets.php:66 taxonomy-post_format.php:42
 msgid "Quotes"
 msgstr "Цитаты"
 
-#: search.php:18
-msgid "Search Results for: %s"
-msgstr "Результаты поиска: %s"
+#: inc/widgets.php:70 taxonomy-post_format.php:45
+msgid "Links"
+msgstr "Ссылки"
 
-#. #-#-#-#-#  twentyfourteen.pot (Twenty Fourteen 1.4)  #-#-#-#-#
-#. Theme Name of the plugin/theme
-#: inc/customizer.php:105
-msgid "Twenty Fourteen"
-msgstr "Twenty Fourteen"
-
-#. Author of the plugin/theme
-msgid "the WordPress team"
-msgstr "Команда WordPress"
+#: inc/widgets.php:74 taxonomy-post_format.php:48
+msgid "Galleries"
+msgstr "Галереи"
 
 #. Template Name of the plugin/theme
 msgid "Full Width Page"
 msgstr "Страница на всю ширину"
+
+#: inc/widgets.php:55
+msgid "More images"
+msgstr "Другие изображения"
+
+#: comments.php:27
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "%2$s: %1$s комментарий"
+msgstr[1] "%2$s: %1$s комментария"
+msgstr[2] "%2$s: %1$s комментариев"

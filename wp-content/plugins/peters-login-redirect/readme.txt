@@ -3,7 +3,7 @@ Contributors: pkthree
 Donate link: http://www.theblog.ca
 Tags: login, logout, redirect, admin, administration, dashboard, users, authentication
 Requires at least: 3.2
-Tested up to: 4.1
+Tested up to: 4.4
 Stable tag: trunk
 
 Redirect users to different locations after logging in and logging out.
@@ -12,7 +12,7 @@ Redirect users to different locations after logging in and logging out.
 
 Define a set of redirect rules for specific users, users with specific roles, users with specific capabilities, and a blanket rule for all other users. Also, set a redirect URL for post-registration. This is all managed in Settings > Login/logout redirects.
 
-You can use the syntax **[variable]username[/variable]** in your URLs so that the system will build a dynamic URL upon each login, replacing that text with the user's username. In addition to username, there is "homeurl", "siteurl", "postid-23", "http_referer" and you can also add your own custom URL "variables". See Other Notes / How to Extend for documentation.
+You can use the syntax **[variable]username[/variable]** in your URLs so that the system will build a dynamic URL upon each login, replacing that text with the user's username. In addition to username, there is "userslug", "homeurl", "siteurl", "postid-23", "http_referer" and you can also add your own custom URL "variables". See Other Notes / How to Extend for documentation.
 
 If you're using a plugin such as Gigya that bypasses the regular WordPress login redirect process (and only allows one fixed redirect URL), set that plugin to redirect to wp-content/plugins/peters-login-redirect/wplogin_redirect_control.php and set the relevant setting to "Yes" at the bottom of the Settings &gt; Login/Logout redirects page in the WordPress admin panel.
 
@@ -26,7 +26,7 @@ This plugin also includes a function `rul_register` that acts the same as the `w
 * sk\_SK translation by Michal Miksik of http://moonpixel.com/michal-miksik/
 * ro\_RO translation by Anunturi Jibo of http://www.jibo.ro
 * cs\_CZ translation by Petr Mašek and Michal Kuk
-* de\_DE translation by Lara of http://www.u-center.nl
+* de\_DE translation by Lara of http://www.u-center.nl and Mario
 * es\_ES translation by Closemarketing of http://www.closemarketing.es
 * lt\_LT translation by Vincent G of http://www.host1free.com
 * da\_DK translation by Tom of http://artikelforlaget.dk
@@ -208,6 +208,12 @@ For a deeper dive into this feature, please see this video:
 http://www.screenr.com/Gqi8
 
 == Changelog ==
+
+= 2.9.0 =
+* 2015-09-25: Update translation text domain in order to support translate.wordpress.org translation system
+
+= 2.8.3 =
+* 2015-08-03: Add new URL variable "userslug" to match author URLs.
 
 = 2.8.2 =
 * 2014-09-06: Translation string fix.

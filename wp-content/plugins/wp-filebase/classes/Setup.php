@@ -78,13 +78,10 @@ static function AddTpls($old_ver=null) {
  <div style="clear: both;"></div>
 </div>',
 	
-	'flv-player' => "<!-- the player only works when permalinks are enabled!!! -->
- <object width='%file_info/video/resolution_x%' height='%file_info/video/resolution_y%' id='flvPlayer%uid%'>
-  <param name='allowFullScreen' value='true'>
-   <param name='allowScriptAccess' value='always'> 
-  <param name='movie' value='%wpfb_url%extras/flvplayer/OSplayer.swf?movie=%file_url_encoded%&btncolor=0x333333&accentcolor=0x31b8e9&txtcolor=0xdddddd&volume=30&autoload=on&autoplay=off&vTitle=%file_display_name%&showTitle=yes'>
-  <embed src='%wpfb_url%extras/flvplayer/OSplayer.swf?movie=%file_url_encoded%&btncolor=0x333333&accentcolor=0x31b8e9&txtcolor=0xdddddd&volume=30&autoload=on&autoplay=off&vTitle=%file_display_name%&showTitle=yes' width='%file_info/video/resolution_x%' height='%file_info/video/resolution_y%' allowFullScreen='true' type='application/x-shockwave-flash' allowScriptAccess='always'>
- </object>",
+	'html5_video' => "<video width='%file_info/video/resolution_x%' height='%file_info/video/resolution_y%' controls>
+  <source src='%file_url%' type='%file_type%'>
+Your browser does not support the video tag.  <a href='%file_url%'>Open Video directly</a>.
+</video>",
 	
 	'data-table' => '<tr><td><a href="%file_url%">%file_display_name%</a></td><td>%file_size%</td><td>%file_hits%</td></tr>',
 	);
@@ -263,6 +260,7 @@ static function SetupDBTables($old_ver=null)
 	$queries[] = "CREATE TABLE IF NOT EXISTS `$tbl_files` (
   `file_id` bigint(20) unsigned NOT NULL auto_increment,
   `file_name` varchar(300) NOT NULL default '',
+  `file_name_original` varchar(300) NOT NULL default '',
   `file_path` varchar(2000) NOT NULL default '',
   `file_size` bigint(20) unsigned NOT NULL default '0',
   `file_date` datetime NOT NULL default '0000-00-00 00:00:00',
@@ -295,6 +293,7 @@ static function SetupDBTables($old_ver=null)
   `file_rating_sum` bigint(20) unsigned NOT NULL default '0',
   `file_last_dl_ip` varchar(100) NOT NULL default '',
   `file_last_dl_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `file_rescan_pending` tinyint(4) NOT NULL default '0',
   ". /*`file_meta` TEXT NULL DEFAULT NULL,*/ "
   PRIMARY KEY  (`file_id`),
   FULLTEXT KEY `DESCRIPTION` (`file_description`),
@@ -310,7 +309,7 @@ static function SetupDBTables($old_ver=null)
   FULLTEXT KEY `KEYWORDS` (`keywords`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8";
 
-
+	
 	
 
 	// errors of queries starting with @ are supressed
@@ -387,6 +386,8 @@ static function SetupDBTables($old_ver=null)
 		$queries[] = "ALTER TABLE  `$tbl_files` CHANGE  `file_direct_linking`  `file_direct_linking` ENUM(  '0',  '1',  '2' ) NOT NULL DEFAULT '0'";
 
 	
+	$queries[] = "@ALTER TABLE `$tbl_files` ADD `file_rescan_pending` tinyint(4) NOT NULL default '0'";
+
 	// since 0.2.9.25
 	
 	// fix (0,1,3) => (0,1,2)
@@ -395,6 +396,9 @@ static function SetupDBTables($old_ver=null)
 	// roles text
 	$queries[] = "ALTER TABLE  `$tbl_files` CHANGE  `file_user_roles`  `file_user_roles` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  ''";
 	$queries[] = "ALTER TABLE  `$tbl_cats` CHANGE  `cat_user_roles`  `cat_user_roles` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT  ''";
+	
+	
+	$queries[] = "@ALTER TABLE `$tbl_files` ADD  `file_name_original` varchar(300) NOT NULL default '' AFTER `file_name`";
 				
 				
 	$queries[] = "OPTIMIZE TABLE `$tbl_cats`";

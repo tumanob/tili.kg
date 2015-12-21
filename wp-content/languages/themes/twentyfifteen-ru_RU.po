@@ -2,13 +2,18 @@
 # This file is distributed under the same license as the Twenty Fifteen package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2015-04-23 17:32:35+0000\n"
+"PO-Revision-Date: 2015-08-17 23:57:18+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: GlotPress/1.0-alpha-1000\n"
+"X-Generator: GlotPress/1.0-alpha-1100\n"
 "Project-Id-Version: Twenty Fifteen\n"
+
+#. translators: %s: post title
+#: inc/template-tags.php:123
+msgid "Leave a comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr "Добавить комментарий<span class=\"screen-reader-text\"> к записи %s</span>"
 
 #. Theme URI of the plugin/theme
 msgid "https://wordpress.org/themes/twentyfifteen/"
@@ -26,46 +31,47 @@ msgstr "Следующая запись:"
 msgid "Applied to the header on small screens and the sidebar on wide screens."
 msgstr "Применяется к заголовку на маленьких экранах и к боковой колонке на широких."
 
-#: single.php:33
-msgid "Next"
-msgstr "Далее"
-
 #: single.php:36
 msgid "Previous"
 msgstr "Назад"
 
-#. Author of the plugin/theme
-msgid "the WordPress team"
-msgstr "Команда WordPress"
+#: single.php:33
+msgid "Next"
+msgstr "Далее"
 
-#. Description of the plugin/theme
-msgid "Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, straightforward typography is readable on a wide variety of screen sizes, and suitable for multiple languages. We designed it using a mobile-first approach, meaning your content takes center-stage, regardless of whether your visitors arrive by smartphone, tablet, laptop, or desktop computer."
-msgstr "В 2015 году наша тема по умолчанию ориентирована на блоги и отличается наглядностью. Простые шрифты Twenty Fourteen легко читаются на экранах разных размеров и подходят для многих языков. Тема разрабатывалась в первую очередь для мобильных устройств, поэтому основное внимание уделяется вашему контенту, где бы его ни просматривали: на смартфоне, планшете, ноутбуке или настольном компьютере."
+#: inc/template-tags.php:23
+msgid "Comment navigation"
+msgstr "Навигация по комментариям"
 
-#. Theme Name of the plugin/theme
-msgid "Twenty Fifteen"
-msgstr "Twenty Fifteen"
+#: inc/template-tags.php:91 inc/template-tags.php:99
+msgctxt "Used between list items, there is a space after the comma."
+msgid ", "
+msgstr ", "
+
+#: image.php:24
+msgid "Previous Image"
+msgstr "Предыдущее изображение"
+
+#: image.php:24
+msgid "Next Image"
+msgstr "Следующее изображение"
 
 #: search.php:18
 msgid "Search Results for: %s"
 msgstr "Результаты поиска: %s"
 
-#: inc/template-tags.php:122
-msgid "% Comments"
-msgstr "Комментарии (%)"
+#. Author of the plugin/theme
+msgid "the WordPress team"
+msgstr "Команда WordPress"
 
-#: inc/template-tags.php:122
-msgid "1 Comment"
-msgstr "1 комментарий"
+#. Theme Name of the plugin/theme
+msgid "Twenty Fifteen"
+msgstr "Twenty Fifteen"
 
 #: inc/template-tags.php:113
 msgctxt "Used before full size attachment link."
 msgid "Full size"
 msgstr "Полный размер"
-
-#: inc/template-tags.php:122
-msgid "Leave a comment"
-msgstr "Добавить комментарий"
 
 #: inc/template-tags.php:102
 msgctxt "Used before tag names."
@@ -76,11 +82,6 @@ msgstr "Метки"
 msgctxt "Used before category names."
 msgid "Categories"
 msgstr "Рубрики"
-
-#: inc/template-tags.php:91 inc/template-tags.php:99
-msgctxt "Used between list items, there is a space after the comma."
-msgid ", "
-msgstr ", "
 
 #: inc/template-tags.php:85
 msgctxt "Used before post author name."
@@ -109,31 +110,27 @@ msgstr "Следующие комментарии"
 msgid "Featured"
 msgstr "Избранное"
 
-#: inc/template-tags.php:23
-msgid "Comment navigation"
-msgstr "Навигация по комментариям"
-
-#: inc/customizer.php:147
+#: inc/customizer.php:168
 msgid "Blue"
 msgstr "Синяя"
 
-#: inc/customizer.php:136
+#: inc/customizer.php:157
 msgid "Purple"
 msgstr "Пурпурная"
 
-#: inc/customizer.php:125
+#: inc/customizer.php:146
 msgid "Pink"
 msgstr "Розовая"
 
-#: inc/customizer.php:103
+#: inc/customizer.php:124
 msgid "Dark"
 msgstr "Тёмная"
 
-#: inc/customizer.php:114
+#: inc/customizer.php:135
 msgid "Yellow"
 msgstr "Жёлтая"
 
-#: inc/customizer.php:92
+#: inc/customizer.php:113
 msgid "Default"
 msgstr "По умолчанию"
 
@@ -153,14 +150,6 @@ msgstr "Цвет текста заголовка и боковой колонк�
 msgid "Twenty Fifteen requires at least WordPress version 4.1. You are running version %s. Please upgrade and try again."
 msgstr "Тема Twenty Fifteen требует WordPress 4.1 или выше. У вас версия %s. Пожалуйста, обновите WordPress и попробуйте ещё раз."
 
-#: image.php:24
-msgid "Previous Image"
-msgstr "Предыдущее изображение"
-
-#: image.php:24
-msgid "Next Image"
-msgstr "Следующее изображение"
-
 #: image.php:84
 msgctxt "Parent post link"
 msgid "<span class=\"meta-nav\">Published in</span><span class=\"post-title\">%title</span>"
@@ -170,13 +159,60 @@ msgstr "<span class=\"meta-nav\">Опубликовано в</span><span class=\
 msgid "Menu and widgets"
 msgstr "Меню и виджеты"
 
-#: functions.php:255
-msgid "expand child menu"
-msgstr "раскрыть дочернее меню"
+#. Description of the plugin/theme
+msgid "Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, straightforward typography is readable on a wide variety of screen sizes, and suitable for multiple languages. We designed it using a mobile-first approach, meaning your content takes center-stage, regardless of whether your visitors arrive by smartphone, tablet, laptop, or desktop computer."
+msgstr "В 2015 году наша тема по умолчанию ориентирована на блоги и отличается наглядностью. Простые шрифты Twenty Fifteen легко читаются на экранах разных размеров и подходят для многих языков. Тема разрабатывалась в первую очередь для мобильных устройств, поэтому основное внимание уделяется вашему контенту, где бы его ни просматривали: на смартфоне, планшете, ноутбуке или настольном компьютере."
 
-#: functions.php:256
-msgid "collapse child menu"
-msgstr "свернуть дочернее меню"
+#. #-#-#-#-#  twentyfifteen.pot (Twenty Fifteen 1.4)  #-#-#-#-#
+#. Author URI of the plugin/theme
+#: footer.php:25
+msgid "https://wordpress.org/"
+msgstr "https://wordpress.org/"
+
+#: comments.php:28
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "%2$s: %1$s комментарий"
+msgstr[1] "%2$s: %1$s комментария"
+msgstr[2] "%2$s: %1$s комментариев"
+
+#: comments.php:53
+msgid "Comments are closed."
+msgstr "Комментарии запрещены."
+
+#: content-link.php:56 content-page.php:35 content-search.php:28
+#: content-search.php:33 content.php:57 image.php:71
+msgid "Edit"
+msgstr "Изменить"
+
+#: content-link.php:36 content-page.php:25 content.php:38 image.php:59
+msgid "Pages:"
+msgstr "Страницы:"
+
+#: content-none.php:15
+msgid "Nothing Found"
+msgstr "Не найдено"
+
+#: content-none.php:22
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Готовы опубликовать свою первую запись? <a href=\"%1$s\">Начните отсюда</a>."
+
+#: content-none.php:26
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Извините, по вашему запросу ничего не найдено. Попробуйте другие ключевые слова."
+
+#: content-none.php:31
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Запрошенную информацию найти не удалось. Возможно, будет полезен поиск по сайту."
+
+#: footer.php:25
+msgid "Proudly powered by %s"
+msgstr "Сайт работает на %s"
+
+#: functions.php:85
+msgid "Primary Menu"
+msgstr "Основное меню"
 
 #: header.php:26
 msgid "Skip to content"
@@ -189,6 +225,14 @@ msgstr "Перейти к содержимому"
 msgctxt "Add new subset (greek, cyrillic, devanagari, vietnamese)"
 msgid "no-subset"
 msgstr "cyrillic"
+
+#: functions.php:255
+msgid "expand child menu"
+msgstr "раскрыть дочернее меню"
+
+#: functions.php:256
+msgid "collapse child menu"
+msgstr "свернуть дочернее меню"
 
 #. Translators: If there are characters in your language that are not supported
 #. by Inconsolata, translate this to 'off'. Do not translate into your own
@@ -222,65 +266,18 @@ msgstr "Добавьте сюда виджеты, которые вы хотит
 msgid "Widget Area"
 msgstr "Область для виджетов"
 
-#: functions.php:85
-msgid "Primary Menu"
-msgstr "Основное меню"
-
 #: functions.php:86
 msgid "Social Links Menu"
 msgstr "Меню социальных ссылок"
 
-#: footer.php:25
-msgid "Proudly powered by %s"
-msgstr "Сайт работает на %s"
-
-#. #-#-#-#-#  twentyfifteen.pot (Twenty Fifteen 1.2)  #-#-#-#-#
-#. Author URI of the plugin/theme
-#: footer.php:25
-msgid "https://wordpress.org/"
-msgstr "https://wordpress.org/"
-
-#: content-none.php:31
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr "Запрошенную информацию найти не удалось. Возможно, будет полезен поиск по сайту."
-
-#: content-none.php:26
-msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
-msgstr "Извините, по вашему запросу ничего не найдено. Попробуйте другие ключевые слова."
-
-#: content-none.php:22
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr "Готовы опубликовать свою первую запись? <a href=\"%1$s\">Начните отсюда</a>."
-
-#: content-none.php:15
-msgid "Nothing Found"
-msgstr "Не найдено"
-
-#: content-link.php:56 content-page.php:35 content-search.php:28
-#: content-search.php:33 content.php:57 image.php:71
-msgid "Edit"
-msgstr "Изменить"
-
-#: content-link.php:36 content-page.php:25 content.php:38 image.php:59
-msgid "Pages:"
-msgstr "Страницы:"
-
 #. translators: %s: Name of current post
-#: content-link.php:31 content.php:33 inc/template-tags.php:237
+#: content-link.php:31 content.php:33 inc/template-tags.php:238
 msgid "Continue reading %s"
 msgstr "Читать далее %s"
 
-#: comments.php:53
-msgid "Comments are closed."
-msgstr "Комментарии запрещены."
-
-#: comments.php:28
-msgctxt "comments title"
-msgid "One thought on &ldquo;%2$s&rdquo;"
-msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
-msgstr[0] "%2$s: %1$s комментарий"
-msgstr[1] "%2$s: %1$s комментария"
-msgstr[2] "%2$s: %1$s комментариев"
+#: 404.php:21
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr "По данному адресу ничего не найдено. Попробуйте воспользоваться поиском."
 
 #: author-bio.php:34
 msgid "View all posts by %s"
@@ -302,10 +299,6 @@ msgstr "Следующая страница"
 #: archive.php:49 index.php:46 search.php:38
 msgid "Previous page"
 msgstr "Предыдущая страница"
-
-#: 404.php:21
-msgid "It looks like nothing was found at this location. Maybe try a search?"
-msgstr "По данному адресу ничего не найдено. Попробуйте воспользоваться поиском."
 
 #: 404.php:17
 msgid "Oops! That page can&rsquo;t be found."

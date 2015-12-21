@@ -1,10 +1,12 @@
 === All in One SEO Pack ===
-Contributors: hallsofmontezuma
+Contributors: hallsofmontezuma, wpsmort
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=All%20In%20One%20SEO%20Pack&item_number=Support%20Open%20Source&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
-Tags: all in one, all in one seo, all in one seo pack, seo, search engine optimization, google
+Tags: seo, all in one seo pack, search engine optimization, google
 Requires at least: 3.3
-Tested up to: 4.2
-Stable tag: trunk
+Tested up to: 4.4
+Stable tag: 2.2.7.5
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 All in One SEO Pack is a WordPress SEO plugin to automatically optimize your WordPress blog for Search Engines such as Google.
 
@@ -33,7 +35,6 @@ All in One SEO Pack **Optimizes** your WordPress blog for SEO (**Search Engine O
 * You can override any title and set any META description and any META keywords you want.
 * Compatibility with many other plugins
 
-**If upgrading, please back up your database first!**
 
 Follow me on Twitter to keep up with the latest updates [Michael
 Torbert](http://twitter.com/michaeltorbert/)
@@ -52,7 +53,6 @@ the top-level folder. Don't just upload all the php files and put them in `/wp-c
 fc
 If you have to upgrade manually simply repeat the installation steps and re-enable the plugin.
 
-**If upgrading, please back up your database first!**
 
 == Changelog ==
 
@@ -67,5 +67,25 @@ Please read these **[FAQs](http://semperfiwebdesign.com/documentation/all-in-one
 
 == Upgrade Notice ==
 
-= 2.0.4 =
-This version fixes a security related bug.  Please Upgrade immediately.
+= 2.2.7.5 =
+fixes:
+category capitalization fixes
+
+enhancements:
+futureproofing the performance function for PHP7,8
+futureproofing the open graph and social meta function for PHP7,8
+futureproofing the file editor function for PHP7,8
+futureproofing the import-export function for PHP7,8
+
+= 2.2.7.4 = 
+
+-Update for WordPress 4.4
+-CSS fixes
+-Important localization improvements
+-Update for Social Meta Module - Photo Twitter Card
+-Add support for the full set of Twitter meta tags (https://dev.twitter.com/cards/markup)
+-Bugfix for issue with Nonindex options for post types
+-Bugfix for schema.org OG markup
+
+
+

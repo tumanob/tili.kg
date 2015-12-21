@@ -49,7 +49,7 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 	var $meta_opts = false;
 	var $is_front_page = null;
  	
-	function All_in_One_SEO_Pack() {
+	function __construct() {
 		global $aioseop_options;
 		$this->log_file = dirname( __FILE__ ) . '/all_in_one_seo_pack.log';
 	
@@ -60,171 +60,174 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 
 		$this->init();
 		
-		$this->name = sprintf( __( '%s Plugin Options', 'all_in_one_seo_pack' ), AIOSEOP_PLUGIN_NAME );
-		$this->menu_name = __( 'General Settings', 'all_in_one_seo_pack' );
+		$this->name = sprintf( __( '%s Plugin Options', 'all-in-one-seo-pack' ), AIOSEOP_PLUGIN_NAME );
+		$this->menu_name = __( 'General Settings', 'all-in-one-seo-pack' );
 		
 		$this->prefix = 'aiosp_';						// option prefix
 		$this->option_name = 'aioseop_options';
 		$this->store_option = true;
 		$this->file = __FILE__;								// the current file
+		$blog_name = esc_attr( get_bloginfo( 'name' ) );
 		parent::__construct();
 		
 		$this->help_text = Array(
-			"donate"				=> __( "All donations support continued development of this free software.", 'all_in_one_seo_pack'),
-			"can"					=> __( "This option will automatically generate Canonical URLs for your entire WordPress installation.  This will help to prevent duplicate content penalties by <a href=\'http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html\' target=\'_blank\'>Google</a>.", 'all_in_one_seo_pack'),
-			"no_paged_canonical_links"=> __( "Checking this option will set the Canonical URL for all paginated content to the first page.", 'all_in_one_seo_pack'),
-			"customize_canonical_links"=> __( "Checking this option will allow you to customize Canonical URLs for specific posts.", 'all_in_one_seo_pack'),
-			"can_set_protocol" => __( "Set protocol for canonical URLs.", 'all_in_one_seo_pack' ),
-			"use_original_title"	=> __( "Use wp_title to get the title used by the theme; this is disabled by default. If you use this option, set your title formats appropriately, as your theme might try to do its own title SEO as well.", 'all_in_one_seo_pack' ),
-			"do_log"				=> __( "Check this and All in One SEO Pack will create a log of important events (all_in_one_seo_pack.log) in its plugin directory which might help debugging. Make sure this directory is writable.", 'all_in_one_seo_pack' ),
-			"home_title"			=> __( "As the name implies, this will be the Meta Title of your homepage. This is independent of any other option. If not set, the default Site Title (found in WordPress under Settings, General, Site Title) will be used.", 'all_in_one_seo_pack' ), 
-			"home_description"		=> __( "This will be the Meta Description for your homepage. This is independent of any other option. The default is no Meta Description at all if this is not set.", 'all_in_one_seo_pack' ), 
-			"home_keywords"			=> __( "Enter a comma separated list of your most important keywords for your site that will be written as Meta Keywords on your homepage. Don\'t stuff everything in here.", 'all_in_one_seo_pack' ), 
-			"use_static_home_info"	=> __( "Checking this option uses the title, description, and keywords set on your static Front Page.", 'all_in_one_seo_pack' ),
-			"togglekeywords"		=> __( "This option allows you to toggle the use of Meta Keywords throughout the whole of the site.", 'all_in_one_seo_pack' ), 
-			"use_categories"		=> __( "Check this if you want your categories for a given post used as the Meta Keywords for this post (in addition to any keywords you specify on the Edit Post screen).", 'all_in_one_seo_pack' ),
-			"use_tags_as_keywords"	=> __( "Check this if you want your tags for a given post used as the Meta Keywords for this post (in addition to any keywords you specify on the Edit Post screen).", 'all_in_one_seo_pack' ),
-			"dynamic_postspage_keywords"=> 	__( "Check this if you want your keywords on your Posts page (set in WordPress under Settings, Reading, Front Page Displays) and your archive pages to be dynamically generated from the keywords of the posts showing on that page.  If unchecked, it will use the keywords set in the edit page screen for the posts page.", 'all_in_one_seo_pack'),
-			"rewrite_titles"		=> __( "Note that this is all about the title tag. This is what you see in your browser's window title bar. This is NOT visible on a page, only in the title bar and in the source code. If enabled, all page, post, category, search and archive page titles get rewritten. You can specify the format for most of them. For example: Using the default post title format below, Rewrite Titles will write all post titles as 'Post Title | Blog Name'. If you have manually defined a title using All in One SEO Pack, this will become the title of your post in the format string.", 'all_in_one_seo_pack' ),
-			"cap_titles"			=> __( "Check this and Search Page Titles and Tag Page Titles will have the first letter of each word capitalized.", 'all_in_one_seo_pack' ),
-			"cap_cats"				=> __( "Check this and Category Titles will have the first letter of each word capitalized.", 'all_in_one_seo_pack'),
+			"donate"				=> __( "All donations support continued development of this free software.", 'all-in-one-seo-pack'),
+			"can"					=> __( "This option will automatically generate Canonical URLs for your entire WordPress installation.  This will help to prevent duplicate content penalties by <a href=\'http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html\' target=\'_blank\'>Google</a>.", 'all-in-one-seo-pack'),
+			"no_paged_canonical_links"=> __( "Checking this option will set the Canonical URL for all paginated content to the first page.", 'all-in-one-seo-pack'),
+			"customize_canonical_links"=> __( "Checking this option will allow you to customize Canonical URLs for specific posts.", 'all-in-one-seo-pack'),
+			"can_set_protocol" => __( "Set protocol for canonical URLs.", 'all-in-one-seo-pack' ),
+			"use_original_title"	=> __( "Use wp_title to get the title used by the theme; this is disabled by default. If you use this option, set your title formats appropriately, as your theme might try to do its own title SEO as well.", 'all-in-one-seo-pack' ),
+			"do_log"				=> __( "Check this and All in One SEO Pack will create a log of important events (all_in_one_seo_pack.log) in its plugin directory which might help debugging. Make sure this directory is writable.", 'all-in-one-seo-pack' ),
+			"home_title"			=> __( "As the name implies, this will be the Meta Title of your homepage. This is independent of any other option. If not set, the default Site Title (found in WordPress under Settings, General, Site Title) will be used.", 'all-in-one-seo-pack' ), 
+			"home_description"		=> __( "This will be the Meta Description for your homepage. This is independent of any other option. The default is no Meta Description at all if this is not set.", 'all-in-one-seo-pack' ), 
+			"home_keywords"			=> __( "Enter a comma separated list of your most important keywords for your site that will be written as Meta Keywords on your homepage. Don\'t stuff everything in here.", 'all-in-one-seo-pack' ), 
+			"use_static_home_info"	=> __( "Checking this option uses the title, description, and keywords set on your static Front Page.", 'all-in-one-seo-pack' ),
+			"togglekeywords"		=> __( "This option allows you to toggle the use of Meta Keywords throughout the whole of the site.", 'all-in-one-seo-pack' ), 
+			"use_categories"		=> __( "Check this if you want your categories for a given post used as the Meta Keywords for this post (in addition to any keywords you specify on the Edit Post screen).", 'all-in-one-seo-pack' ),
+			"use_tags_as_keywords"	=> __( "Check this if you want your tags for a given post used as the Meta Keywords for this post (in addition to any keywords you specify on the Edit Post screen).", 'all-in-one-seo-pack' ),
+			"dynamic_postspage_keywords"=> 	__( "Check this if you want your keywords on your Posts page (set in WordPress under Settings, Reading, Front Page Displays) and your archive pages to be dynamically generated from the keywords of the posts showing on that page.  If unchecked, it will use the keywords set in the edit page screen for the posts page.", 'all-in-one-seo-pack'),
+			"rewrite_titles"		=> __( "Note that this is all about the title tag. This is what you see in your browser's window title bar. This is NOT visible on a page, only in the title bar and in the source code. If enabled, all page, post, category, search and archive page titles get rewritten. You can specify the format for most of them. For example: Using the default post title format below, Rewrite Titles will write all post titles as 'Post Title | Blog Name'. If you have manually defined a title using All in One SEO Pack, this will become the title of your post in the format string.", 'all-in-one-seo-pack' ),
+			"cap_titles"			=> __( "Check this and Search Page Titles and Tag Page Titles will have the first letter of each word capitalized.", 'all-in-one-seo-pack' ),
+			"cap_cats"				=> __( "Check this and Category Titles will have the first letter of each word capitalized.", 'all-in-one-seo-pack'),
 			"home_page_title_format"		=>
-				__( "This controls the format of the title tag for your Home Page.<br />The following macros are supported:", 'all_in_one_seo_pack' )
-				. '<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%page_title% - The original title of the page', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%page_author_login% - This page's author' login", 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%page_author_nicename% - This page's author' nicename", 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%page_author_firstname% - This page's author' first name (capitalized)", 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%page_author_lastname% - This page's author' last name (capitalized)", 'all_in_one_seo_pack' ) . '</li>' . 
+				__( "This controls the format of the title tag for your Home Page.<br />The following macros are supported:", 'all-in-one-seo-pack' )
+				. '<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%page_title% - The original title of the page', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%page_author_login% - This page's author' login", 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%page_author_nicename% - This page's author' nicename", 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%page_author_firstname% - This page's author' first name (capitalized)", 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%page_author_lastname% - This page's author' last name (capitalized)", 'all-in-one-seo-pack' ) . '</li>' . 
 				'</ul>',
 			"page_title_format"		=>
-				__( "This controls the format of the title tag for Pages.<br />The following macros are supported:", 'all_in_one_seo_pack' )
-				. '<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%page_title% - The original title of the page', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%page_author_login% - This page's author' login", 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%page_author_nicename% - This page's author' nicename", 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%page_author_firstname% - This page's author' first name (capitalized)", 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%page_author_lastname% - This page's author' last name (capitalized)", 'all_in_one_seo_pack' ) . '</li>' . 
+				__( "This controls the format of the title tag for Pages.<br />The following macros are supported:", 'all-in-one-seo-pack' )
+				. '<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%page_title% - The original title of the page', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%page_author_login% - This page's author' login", 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%page_author_nicename% - This page's author' nicename", 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%page_author_firstname% - This page's author' first name (capitalized)", 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%page_author_lastname% - This page's author' last name (capitalized)", 'all-in-one-seo-pack' ) . '</li>' . 
 				'</ul>',
 			"post_title_format"		=> 
-				__( "This controls the format of the title tag for Posts.<br />The following macros are supported:", 'all_in_one_seo_pack' )
-				. '<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%post_title% - The original title of the post', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%category_title% - The (main) category of the post', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%category% - Alias for %category_title%', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%post_author_login% - This post's author' login", 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%post_author_nicename% - This post's author' nicename", 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%post_author_firstname% - This post's author' first name (capitalized)", 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( "%post_author_lastname% - This post's author' last name (capitalized)", 'all_in_one_seo_pack' ) . '</li>' . 
+				__( "This controls the format of the title tag for Posts.<br />The following macros are supported:", 'all-in-one-seo-pack' )
+				. '<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%post_title% - The original title of the post', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%category_title% - The (main) category of the post', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%category% - Alias for %category_title%', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%post_author_login% - This post's author' login", 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%post_author_nicename% - This post's author' nicename", 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%post_author_firstname% - This post's author' first name (capitalized)", 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( "%post_author_lastname% - This post's author' last name (capitalized)", 'all-in-one-seo-pack' ) . '</li>' . 
 				'</ul>',
 			"category_title_format"	=> 
-				__( "This controls the format of the title tag for Category Archives.<br />The following macros are supported:", 'all_in_one_seo_pack' ) .
-				'<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%category_title% - The original title of the category', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%category_description% - The description of the category', 'all_in_one_seo_pack' ) . '</li></ul>',
+				__( "This controls the format of the title tag for Category Archives.<br />The following macros are supported:", 'all-in-one-seo-pack' ) .
+				'<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%category_title% - The original title of the category', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%category_description% - The description of the category', 'all-in-one-seo-pack' ) . '</li></ul>',
 			"archive_title_format"	=> 
-				__( "This controls the format of the title tag for Custom Post Archives.<br />The following macros are supported:", 'all_in_one_seo_pack' ) . 
-				'<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%archive_title - The original archive title given by wordpress', 'all_in_one_seo_pack' ) . '</li></ul>',
+				__( "This controls the format of the title tag for Custom Post Archives.<br />The following macros are supported:", 'all-in-one-seo-pack' ) . 
+				'<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%archive_title - The original archive title given by wordpress', 'all-in-one-seo-pack' ) . '</li></ul>',
 			"date_title_format"	=> 
-				__( "This controls the format of the title tag for Date Archives.<br />The following macros are supported:", 'all_in_one_seo_pack' ) . 
-				'<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%date% - The original archive title given by wordpress, e.g. "2007" or "2007 August"', 'all_in_one_seo_pack' ) . '</li><li>' .
-				__( '%day% - The original archive day given by wordpress, e.g. "17"', 'all_in_one_seo_pack' ) . '</li><li>' .
-				__( '%month% - The original archive month given by wordpress, e.g. "August"', 'all_in_one_seo_pack' ) . '</li><li>' .
-				__( '%year% - The original archive year given by wordpress, e.g. "2007"', 'all_in_one_seo_pack' ) . '</li></ul>',
+				__( "This controls the format of the title tag for Date Archives.<br />The following macros are supported:", 'all-in-one-seo-pack' ) . 
+				'<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%date% - The original archive title given by wordpress, e.g. "2007" or "2007 August"', 'all-in-one-seo-pack' ) . '</li><li>' .
+				__( '%day% - The original archive day given by wordpress, e.g. "17"', 'all-in-one-seo-pack' ) . '</li><li>' .
+				__( '%month% - The original archive month given by wordpress, e.g. "August"', 'all-in-one-seo-pack' ) . '</li><li>' .
+				__( '%year% - The original archive year given by wordpress, e.g. "2007"', 'all-in-one-seo-pack' ) . '</li></ul>',
 			"author_title_format"	=> 
-				__( "This controls the format of the title tag for Author Archives.<br />The following macros are supported:", 'all_in_one_seo_pack' ) . 
-				'<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%author% - The original archive title given by wordpress, e.g. "Steve" or "John Smith"', 'all_in_one_seo_pack' ) . '</li></ul>',
+				__( "This controls the format of the title tag for Author Archives.<br />The following macros are supported:", 'all-in-one-seo-pack' ) . 
+				'<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%author% - The original archive title given by wordpress, e.g. "Steve" or "John Smith"', 'all-in-one-seo-pack' ) . '</li></ul>',
 			"tag_title_format"	=> 
-				__( "This controls the format of the title tag for Tag Archives.<br />The following macros are supported:", 'all_in_one_seo_pack' ) . 
-				'<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%tag% - The name of the tag', 'all_in_one_seo_pack' ) . '</li></ul>',
+				__( "This controls the format of the title tag for Tag Archives.<br />The following macros are supported:", 'all-in-one-seo-pack' ) . 
+				'<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%tag% - The name of the tag', 'all-in-one-seo-pack' ) . '</li></ul>',
 			"search_title_format"	=> 
-				__( "This controls the format of the title tag for the Search page.<br />The following macros are supported:", 'all_in_one_seo_pack' ) . 
-				'<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%search% - What was searched for', 'all_in_one_seo_pack' ) . '</li></ul>',
-			"description_format"	=> __( "This controls the format of Meta Descriptions.The following macros are supported:", 'all_in_one_seo_pack' ) . 
-				'<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%description% - The original description as determined by the plugin, e.g. the excerpt if one is set or an auto-generated one if that option is set', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%post_title% - The original title of the post', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%wp_title% - The original wordpress title, e.g. post_title for posts', 'all_in_one_seo_pack' ) . '</li></ul>',
-			"404_title_format"	=> __( "This controls the format of the title tag for the 404 page.<br />The following macros are supported:", 'all_in_one_seo_pack' ) .
-				'<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%request_url% - The original URL path, like "/url-that-does-not-exist/"', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%request_words% - The URL path in human readable form, like "Url That Does Not Exist"', 'all_in_one_seo_pack' ) . '</li><li>' . 
-				__( '%404_title% - Additional 404 title input"', 'all_in_one_seo_pack' ) . '</li></ul>',
-			"paged_format"	=> __( "This string gets appended/prepended to titles of paged index pages (like home or archive pages).", 'all_in_one_seo_pack' )
-				. __( 'The following macros are supported:', 'all_in_one_seo_pack' )
-				. '<ul><li>' . __( '%page% - The page number', 'all_in_one_seo_pack' ) . '</li></ul>',
-			"enablecpost"			=> __( "Check this if you want to use All in One SEO Pack with any Custom Post Types on this site.", 'all_in_one_seo_pack' ),
-			"cpostadvanced" 		=> __( "This will show or hide the advanced options for SEO for Custom Post Types.", 'all_in_one_seo_pack' ),
-			"cpostactive" 			=> __( "Use these checkboxes to select which Post Types you want to use All in One SEO Pack with.", 'all_in_one_seo_pack' ),
-			"cposttitles" 			=> __( "This allows you to set the title tags for each Custom Post Type.", 'all_in_one_seo_pack' ),
-			"posttypecolumns" 		=> __( "This lets you select which screens display the SEO Title, SEO Keywords and SEO Description columns.", 'all_in_one_seo_pack' ),
-			"admin_bar" 			=> __( "Check this to add All in One SEO Pack to the Admin Bar for easy access to your SEO settings.", 'all_in_one_seo_pack' ),
-			"custom_menu_order" 	=> __( "Check this to move the All in One SEO Pack menu item to the top of your WordPress Dashboard menu.", 'all_in_one_seo_pack' ),
-			"google_verify" 		=> __( "Enter your verification code here to verify your site with Google Webmaster Tools.<br /><a href='http://semperplugins.com/documentation/google-webmaster-tools-verification/' target='_blank'>Click here for documentation on this setting</a>", 'all_in_one_seo_pack' ),
-			"bing_verify" 			=> __( "Enter your verification code here to verify your site with Bing Webmaster Tools.<br /><a href='http://semperplugins.com/documentation/bing-webmaster-verification/' target='_blank'>Click here for documentation on this setting</a>", 'all_in_one_seo_pack' ),
-			"pinterest_verify" 		=> __( "Enter your verification code here to verify your site with Pinterest.<br /><a href='http://semperplugins.com/documentation/pinterest-site-verification/' target='_blank'>Click here for documentation on this setting</a>", 'all_in_one_seo_pack' ),
-			"google_publisher"		=> __( "Enter your Google+ Profile URL here to add the rel=“author” tag to your site for Google authorship. It is recommended that the URL you enter here should be your personal Google+ profile.  Use the Advanced Authorship Options below if you want greater control over the use of authorship.", 'all_in_one_seo_pack' ),
-			"google_disable_profile"=> __( "Check this to remove the Google Plus field from the user profile screen.", 'all_in_one_seo_pack' ),
-			"google_author_advanced"=> __( "Enable this to display advanced options for controlling Google Plus authorship information on your website.", 'all_in_one_seo_pack' ),
-			"google_author_location"=> __( "This option allows you to control which types of pages you want to display rel=\"author\" on for Google authorship. The options include the Front Page (the homepage of your site), Posts, Pages, and any Custom Post Types. The Everywhere Else option includes 404, search, categories, tags, custom taxonomies, date archives, author archives and any other page template.", 'all_in_one_seo_pack' ),
-			"google_enable_publisher"=> __( "This option allows you to control whether rel=\"publisher\" is displayed on the homepage of your site. Google recommends using this if the site is a business website.", 'all_in_one_seo_pack' ),
-			"google_specify_publisher"=> __( "The Google+ profile you enter here will appear on your homepage only as the rel=\"publisher\" tag. It is recommended that the URL you enter here should be the Google+ profile for your business.", 'all_in_one_seo_pack' ),
-			"google_sitelinks_search"=> __( "Add markup to display the Google Sitelinks Search Box next to your search results in Google.", 'all_in_one_seo_pack' ),
-			"google_connect"		=> __( "Press the connect button to connect with Google Analytics; or if already connected, press the disconnect button to disable and remove any stored analytics credentials.", 'all_in_one_seo_pack' ),
-			"google_analytics_id"	=> __( "Enter your Google Analytics ID here to track visitor behavior on your site using Google Analytics.", 'all_in_one_seo_pack' ),
-			"ga_use_universal_analytics" => __( "Use the new Universal Analytics tracking code for Google Analytics.", 'all_in_one_seo_pack' ),
-			"ga_advanced_options"	=> __( "Check to use advanced Google Analytics options.", 'all_in_one_seo_pack' ),
-			"ga_domain"				=> __( "Enter your domain name without the http:// to set your cookie domain.", 'all_in_one_seo_pack' ),
-			"ga_multi_domain"		=> __( "Use this option to enable tracking of multiple or additional domains.", 'all_in_one_seo_pack' ),
-			"ga_addl_domains"		=> __( "Add a list of additional domains to track here.  Enter one domain name per line without the http://.", 'all_in_one_seo_pack' ),			
-			"ga_anonymize_ip"		=> __( "This enables support for IP Anonymization in Google Analytics.", 'all_in_one_seo_pack' ),	
-			"ga_display_advertising"=> __( "This enables support for the Display Advertiser Features in Google Analytics.", 'all_in_one_seo_pack' ),
-			"ga_exclude_users"		=> __( "Exclude logged-in users from Google Analytics tracking by role.", 'all_in_one_seo_pack' ),
-			"ga_track_outbound_links"=> __( "Check this if you want to track outbound links with Google Analytics.", 'all_in_one_seo_pack' ),
-			"ga_link_attribution"=> __( "This enables support for the Enhanced Link Attribution in Google Analytics.", 'all_in_one_seo_pack' ),
-			"ga_enhanced_ecommerce" => __( "This enables support for the Enhanced Ecommerce in Google Analytics.", 'all_in_one_seo_pack' ),
-			"cpostnoindex" 			=> __( "Set the default NOINDEX setting for each Post Type.", 'all_in_one_seo_pack' ),
-			"cpostnofollow" 		=> __( "Set the default NOFOLLOW setting for each Post Type.", 'all_in_one_seo_pack' ),
-			"category_noindex"		=> 	__( "Check this to ask search engines not to index Category Archives. Useful for avoiding duplicate content.", 'all_in_one_seo_pack' ),
-			"archive_date_noindex"	=> 	__( "Check this to ask search engines not to index Date Archives. Useful for avoiding duplicate content.", 'all_in_one_seo_pack' ),
-			"archive_author_noindex"=> 	__( "Check this to ask search engines not to index Author Archives. Useful for avoiding duplicate content.", 'all_in_one_seo_pack' ),
-			"tags_noindex"			=> __( "Check this to ask search engines not to index Tag Archives. Useful for avoiding duplicate content.", 'all_in_one_seo_pack' ),
-			"search_noindex"		=> 	__( "Check this to ask search engines not to index the Search page. Useful for avoiding duplicate content.", 'all_in_one_seo_pack' ),
-			"404_noindex"		=> 	__( "Check this to ask search engines not to index the 404 page.", 'all_in_one_seo_pack' ),
-			"paginated_noindex"		=> 	__( "Check this to ask search engines not to index paginated pages/posts. Useful for avoiding duplicate content.", 'all_in_one_seo_pack' ),
-			"paginated_nofollow"		=> 	__( "Check this to ask search engines not to follow links from paginated pages/posts. Useful for avoiding duplicate content.", 'all_in_one_seo_pack' ),
-			'noodp'			 	 => __( 'Check this box to ask search engines not to use descriptions from the Open Directory Project for your entire site.', 'all_in_one_seo_pack' ),
-			'cpostnoodp'		 => __( "Set the default noodp setting for each Post Type.", 'all_in_one_seo_pack' ),
-			'noydir'			 => __( 'Check this box to ask Yahoo! not to use descriptions from the Yahoo! directory for your entire site.', 'all_in_one_seo_pack' ),
-			'cpostnoydir'		 => __( "Set the default noydir setting for each Post Type.", 'all_in_one_seo_pack' ),
-			"skip_excerpt"		 => __( "Check this and your Meta Descriptions won't be generated from the excerpt.", 'all_in_one_seo_pack' ),
-			"generate_descriptions"	=> __( "Check this and your Meta Descriptions will be auto-generated from your excerpt or content.", 'all_in_one_seo_pack' ),
-			"run_shortcodes"	=> __( "Check this and shortcodes will get executed for descriptions auto-generated from content.", 'all_in_one_seo_pack' ),
-			"hide_paginated_descriptions"=> __( "Check this and your Meta Descriptions will be removed from page 2 or later of paginated content.", 'all_in_one_seo_pack' ),
-			"dont_truncate_descriptions"=> __( "Check this to prevent your Description from being truncated regardless of its length.", 'all_in_one_seo_pack' ),
-			"schema_markup"=> __( "Check this to support Schema.org markup, i.e., itemprop on supported metadata.", 'all_in_one_seo_pack' ),
-			"unprotect_meta"		=> __( "Check this to unprotect internal postmeta fields for use with XMLRPC. If you don't know what that is, leave it unchecked.", 'all_in_one_seo_pack' ),
-			"ex_pages" 				=> 	__( "Enter a comma separated list of pages here to be excluded by All in One SEO Pack.  This is helpful when using plugins which generate their own non-WordPress dynamic pages.  Ex: <em>/forum/, /contact/</em>  For instance, if you want to exclude the virtual pages generated by a forum plugin, all you have to do is add forum or /forum or /forum/ or and any URL with the word \"forum\" in it, such as http://mysite.com/forum or http://mysite.com/forum/someforumpage here and it will be excluded from All in One SEO Pack.", 'all_in_one_seo_pack' ),
-			"post_meta_tags"		=> __( "What you enter here will be copied verbatim to the header of all Posts. You can enter whatever additional headers you want here, even references to stylesheets.", 'all_in_one_seo_pack' ),
-			"page_meta_tags"		=> __( "What you enter here will be copied verbatim to the header of all Pages. You can enter whatever additional headers you want here, even references to stylesheets.", 'all_in_one_seo_pack' ),
-			"front_meta_tags"		=> 	__( "What you enter here will be copied verbatim to the header of the front page if you have set a static page in Settings, Reading, Front Page Displays. You can enter whatever additional headers you want here, even references to stylesheets. This will fall back to using Additional Page Headers if you have them set and nothing is entered here.", 'all_in_one_seo_pack' ),
-			"home_meta_tags"		=> 	__( "What you enter here will be copied verbatim to the header of the home page if you have Front page displays your latest posts selected in Settings, Reading.  It will also be copied verbatim to the header on the Posts page if you have one set in Settings, Reading. You can enter whatever additional headers you want here, even references to stylesheets.", 'all_in_one_seo_pack' ),
+				__( "This controls the format of the title tag for the Search page.<br />The following macros are supported:", 'all-in-one-seo-pack' ) . 
+				'<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%search% - What was searched for', 'all-in-one-seo-pack' ) . '</li></ul>',
+			"description_format"	=> __( "This controls the format of Meta Descriptions.The following macros are supported:", 'all-in-one-seo-pack' ) . 
+				'<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%description% - The original description as determined by the plugin, e.g. the excerpt if one is set or an auto-generated one if that option is set', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%post_title% - The original title of the post', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%wp_title% - The original wordpress title, e.g. post_title for posts', 'all-in-one-seo-pack' ) . '</li></ul>',
+			"404_title_format"	=> __( "This controls the format of the title tag for the 404 page.<br />The following macros are supported:", 'all-in-one-seo-pack' ) .
+				'<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%request_url% - The original URL path, like "/url-that-does-not-exist/"', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%request_words% - The URL path in human readable form, like "Url That Does Not Exist"', 'all-in-one-seo-pack' ) . '</li><li>' . 
+				__( '%404_title% - Additional 404 title input"', 'all-in-one-seo-pack' ) . '</li></ul>',
+			"paged_format"	=> __( "This string gets appended/prepended to titles of paged index pages (like home or archive pages).", 'all-in-one-seo-pack' )
+				. __( 'The following macros are supported:', 'all-in-one-seo-pack' )
+				. '<ul><li>' . __( '%page% - The page number', 'all-in-one-seo-pack' ) . '</li></ul>',
+			"enablecpost"			=> __( "Check this if you want to use All in One SEO Pack with any Custom Post Types on this site.", 'all-in-one-seo-pack' ),
+			"cpostadvanced" 		=> __( "This will show or hide the advanced options for SEO for Custom Post Types.", 'all-in-one-seo-pack' ),
+			"cpostactive" 			=> __( "Use these checkboxes to select which Post Types you want to use All in One SEO Pack with.", 'all-in-one-seo-pack' ),
+			"cposttitles" 			=> __( "This allows you to set the title tags for each Custom Post Type.", 'all-in-one-seo-pack' ),
+			"posttypecolumns" 		=> __( "This lets you select which screens display the SEO Title, SEO Keywords and SEO Description columns.", 'all-in-one-seo-pack' ),
+			"admin_bar" 			=> __( "Check this to add All in One SEO Pack to the Admin Bar for easy access to your SEO settings.", 'all-in-one-seo-pack' ),
+			"custom_menu_order" 	=> __( "Check this to move the All in One SEO Pack menu item to the top of your WordPress Dashboard menu.", 'all-in-one-seo-pack' ),
+			"google_verify" 		=> __( "Enter your verification code here to verify your site with Google Webmaster Tools.<br /><a href='http://semperplugins.com/documentation/google-webmaster-tools-verification/' target='_blank'>Click here for documentation on this setting</a>", 'all-in-one-seo-pack' ),
+			"bing_verify" 			=> __( "Enter your verification code here to verify your site with Bing Webmaster Tools.<br /><a href='http://semperplugins.com/documentation/bing-webmaster-verification/' target='_blank'>Click here for documentation on this setting</a>", 'all-in-one-seo-pack' ),
+			"pinterest_verify" 		=> __( "Enter your verification code here to verify your site with Pinterest.<br /><a href='http://semperplugins.com/documentation/pinterest-site-verification/' target='_blank'>Click here for documentation on this setting</a>", 'all-in-one-seo-pack' ),
+			"google_publisher"		=> __( "Enter your Google+ Profile URL here to add the rel=“author” tag to your site for Google authorship. It is recommended that the URL you enter here should be your personal Google+ profile.  Use the Advanced Authorship Options below if you want greater control over the use of authorship.", 'all-in-one-seo-pack' ),
+			"google_disable_profile"=> __( "Check this to remove the Google Plus field from the user profile screen.", 'all-in-one-seo-pack' ),
+			"google_author_advanced"=> __( "Enable this to display advanced options for controlling Google Plus authorship information on your website.", 'all-in-one-seo-pack' ),
+			"google_author_location"=> __( "This option allows you to control which types of pages you want to display rel=\"author\" on for Google authorship. The options include the Front Page (the homepage of your site), Posts, Pages, and any Custom Post Types. The Everywhere Else option includes 404, search, categories, tags, custom taxonomies, date archives, author archives and any other page template.", 'all-in-one-seo-pack' ),
+			"google_enable_publisher"=> __( "This option allows you to control whether rel=\"publisher\" is displayed on the homepage of your site. Google recommends using this if the site is a business website.", 'all-in-one-seo-pack' ),
+			"google_specify_publisher"=> __( "The Google+ profile you enter here will appear on your homepage only as the rel=\"publisher\" tag. It is recommended that the URL you enter here should be the Google+ profile for your business.", 'all-in-one-seo-pack' ),
+			"google_sitelinks_search"=> __( "Add markup to display the Google Sitelinks Search Box next to your search results in Google.", 'all-in-one-seo-pack' ),
+			"google_set_site_name"   => __( "Add markup to tell Google the preferred name for your website.", 'all-in-one-seo-pack' ),
+			"google_connect"		=> __( "Press the connect button to connect with Google Analytics; or if already connected, press the disconnect button to disable and remove any stored analytics credentials.", 'all-in-one-seo-pack' ),
+			"google_analytics_id"	=> __( "Enter your Google Analytics ID here to track visitor behavior on your site using Google Analytics.", 'all-in-one-seo-pack' ),
+			"ga_use_universal_analytics" => __( "Use the new Universal Analytics tracking code for Google Analytics.", 'all-in-one-seo-pack' ),
+			"ga_advanced_options"	=> __( "Check to use advanced Google Analytics options.", 'all-in-one-seo-pack' ),
+			"ga_domain"				=> __( "Enter your domain name without the http:// to set your cookie domain.", 'all-in-one-seo-pack' ),
+			"ga_multi_domain"		=> __( "Use this option to enable tracking of multiple or additional domains.", 'all-in-one-seo-pack' ),
+			"ga_addl_domains"		=> __( "Add a list of additional domains to track here.  Enter one domain name per line without the http://.", 'all-in-one-seo-pack' ),			
+			"ga_anonymize_ip"		=> __( "This enables support for IP Anonymization in Google Analytics.", 'all-in-one-seo-pack' ),	
+			"ga_display_advertising"=> __( "This enables support for the Display Advertiser Features in Google Analytics.", 'all-in-one-seo-pack' ),
+			"ga_exclude_users"		=> __( "Exclude logged-in users from Google Analytics tracking by role.", 'all-in-one-seo-pack' ),
+			"ga_track_outbound_links"=> __( "Check this if you want to track outbound links with Google Analytics.", 'all-in-one-seo-pack' ),
+			"ga_link_attribution"=> __( "This enables support for the Enhanced Link Attribution in Google Analytics.", 'all-in-one-seo-pack' ),
+			"ga_enhanced_ecommerce" => __( "This enables support for the Enhanced Ecommerce in Google Analytics.", 'all-in-one-seo-pack' ),
+			"cpostnoindex" 			=> __( "Set the default NOINDEX setting for each Post Type.", 'all-in-one-seo-pack' ),
+			"cpostnofollow" 		=> __( "Set the default NOFOLLOW setting for each Post Type.", 'all-in-one-seo-pack' ),
+			"category_noindex"		=> 	__( "Check this to ask search engines not to index Category Archives. Useful for avoiding duplicate content.", 'all-in-one-seo-pack' ),
+			"archive_date_noindex"	=> 	__( "Check this to ask search engines not to index Date Archives. Useful for avoiding duplicate content.", 'all-in-one-seo-pack' ),
+			"archive_author_noindex"=> 	__( "Check this to ask search engines not to index Author Archives. Useful for avoiding duplicate content.", 'all-in-one-seo-pack' ),
+			"tags_noindex"			=> __( "Check this to ask search engines not to index Tag Archives. Useful for avoiding duplicate content.", 'all-in-one-seo-pack' ),
+			"search_noindex"		=> 	__( "Check this to ask search engines not to index the Search page. Useful for avoiding duplicate content.", 'all-in-one-seo-pack' ),
+			"404_noindex"		=> 	__( "Check this to ask search engines not to index the 404 page.", 'all-in-one-seo-pack' ),
+			"tax_noindex"			=> __( "Check this to ask search engines not to index custom Taxonomy archive pages. Useful for avoiding duplicate content.", 'all-in-one-seo-pack' ),
+			"paginated_noindex"		=> 	__( "Check this to ask search engines not to index paginated pages/posts. Useful for avoiding duplicate content.", 'all-in-one-seo-pack' ),
+			"paginated_nofollow"		=> 	__( "Check this to ask search engines not to follow links from paginated pages/posts. Useful for avoiding duplicate content.", 'all-in-one-seo-pack' ),
+			'noodp'			 	 => __( 'Check this box to ask search engines not to use descriptions from the Open Directory Project for your entire site.', 'all-in-one-seo-pack' ),
+			'cpostnoodp'		 => __( "Set the default noodp setting for each Post Type.", 'all-in-one-seo-pack' ),
+			'noydir'			 => __( 'Check this box to ask Yahoo! not to use descriptions from the Yahoo! directory for your entire site.', 'all-in-one-seo-pack' ),
+			'cpostnoydir'		 => __( "Set the default noydir setting for each Post Type.", 'all-in-one-seo-pack' ),
+			"skip_excerpt"		 => __( "Check this and your Meta Descriptions won't be generated from the excerpt.", 'all-in-one-seo-pack' ),
+			"generate_descriptions"	=> __( "Check this and your Meta Descriptions will be auto-generated from your excerpt or content.", 'all-in-one-seo-pack' ),
+			"run_shortcodes"	=> __( "Check this and shortcodes will get executed for descriptions auto-generated from content.", 'all-in-one-seo-pack' ),
+			"hide_paginated_descriptions"=> __( "Check this and your Meta Descriptions will be removed from page 2 or later of paginated content.", 'all-in-one-seo-pack' ),
+			"dont_truncate_descriptions"=> __( "Check this to prevent your Description from being truncated regardless of its length.", 'all-in-one-seo-pack' ),
+			"schema_markup"=> __( "Check this to support Schema.org markup, i.e., itemprop on supported metadata.", 'all-in-one-seo-pack' ),
+			"unprotect_meta"		=> __( "Check this to unprotect internal postmeta fields for use with XMLRPC. If you don't know what that is, leave it unchecked.", 'all-in-one-seo-pack' ),
+			"ex_pages" 				=> 	__( "Enter a comma separated list of pages here to be excluded by All in One SEO Pack.  This is helpful when using plugins which generate their own non-WordPress dynamic pages.  Ex: <em>/forum/, /contact/</em>  For instance, if you want to exclude the virtual pages generated by a forum plugin, all you have to do is add forum or /forum or /forum/ or and any URL with the word \"forum\" in it, such as http://mysite.com/forum or http://mysite.com/forum/someforumpage here and it will be excluded from All in One SEO Pack.", 'all-in-one-seo-pack' ),
+			"post_meta_tags"		=> __( "What you enter here will be copied verbatim to the header of all Posts. You can enter whatever additional headers you want here, even references to stylesheets.", 'all-in-one-seo-pack' ),
+			"page_meta_tags"		=> __( "What you enter here will be copied verbatim to the header of all Pages. You can enter whatever additional headers you want here, even references to stylesheets.", 'all-in-one-seo-pack' ),
+			"front_meta_tags"		=> 	__( "What you enter here will be copied verbatim to the header of the front page if you have set a static page in Settings, Reading, Front Page Displays. You can enter whatever additional headers you want here, even references to stylesheets. This will fall back to using Additional Page Headers if you have them set and nothing is entered here.", 'all-in-one-seo-pack' ),
+			"home_meta_tags"		=> 	__( "What you enter here will be copied verbatim to the header of the home page if you have Front page displays your latest posts selected in Settings, Reading.  It will also be copied verbatim to the header on the Posts page if you have one set in Settings, Reading. You can enter whatever additional headers you want here, even references to stylesheets.", 'all-in-one-seo-pack' ),
 		);
 		
 		$this->help_anchors = Array(
@@ -243,6 +246,7 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 			'dynamic_postspage_keywords' => '#dynamically-generate-keywords-for-posts-page',
 			'rewrite_titles' => '#rewrite-titles',
 			'cap_titles' => '#capitalize-titles',
+			'home_page_title_format' => '#title-format-fields',
 			'page_title_format' => '#title-format-fields',
 			'post_title_format' => '#title-format-fields',
 			'category_title_format' => '#title-format-fields',
@@ -296,374 +300,387 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 		);
 
 		$meta_help_text = Array(
-			'snippet'			 => __( 'A preview of what this page might look like in search engine results.', 'all_in_one_seo_pack' ),
-			'title'				 => __( 'A custom title that shows up in the title tag for this page.', 'all_in_one_seo_pack' ),
-			'description'		 => __( 'The META description for this page. This will override any autogenerated descriptions.', 'all_in_one_seo_pack' ),
-			'keywords'			 => __( 'A comma separated list of your most important keywords for this page that will be written as META keywords.', 'all_in_one_seo_pack' ),
-			'custom_link'		 => __( "Override the canonical URLs for this post.", 'all_in_one_seo_pack'),
-			'noindex'			 => __( 'Check this box to ask search engines not to index this page.', 'all_in_one_seo_pack' ),
-			'nofollow'			 => __( 'Check this box to ask search engines not to follow links from this page.', 'all_in_one_seo_pack' ),
-			'noodp'			 	 => __( 'Check this box to ask search engines not to use descriptions from the Open Directory Project for this page.', 'all_in_one_seo_pack' ),
-			'noydir'			 => __( 'Check this box to ask Yahoo! not to use descriptions from the Yahoo! directory for this page.', 'all_in_one_seo_pack' ),
-			'titleatr'			 => __( 'Set the title attribute for menu links.', 'all_in_one_seo_pack' ),
-			'menulabel'			 => __( 'Set the label for this page menu item.', 'all_in_one_seo_pack' ),
-			'sitemap_exclude'	 => __( "Don't display this page in the sitemap.", 'all_in_one_seo_pack' ),
-			'disable'			 => __( 'Disable SEO on this page.', 'all_in_one_seo_pack' ),
-			'disable_analytics'	 => __( 'Disable Google Analytics on this page.', 'all_in_one_seo_pack' )
+			'snippet'			 => __( 'A preview of what this page might look like in search engine results.', 'all-in-one-seo-pack' ),
+			'title'				 => __( 'A custom title that shows up in the title tag for this page.', 'all-in-one-seo-pack' ),
+			'description'		 => __( 'The META description for this page. This will override any autogenerated descriptions.', 'all-in-one-seo-pack' ),
+			'keywords'			 => __( 'A comma separated list of your most important keywords for this page that will be written as META keywords.', 'all-in-one-seo-pack' ),
+			'custom_link'		 => __( "Override the canonical URLs for this post.", 'all-in-one-seo-pack'),
+			'noindex'			 => __( 'Check this box to ask search engines not to index this page.', 'all-in-one-seo-pack' ),
+			'nofollow'			 => __( 'Check this box to ask search engines not to follow links from this page.', 'all-in-one-seo-pack' ),
+			'noodp'			 	 => __( 'Check this box to ask search engines not to use descriptions from the Open Directory Project for this page.', 'all-in-one-seo-pack' ),
+			'noydir'			 => __( 'Check this box to ask Yahoo! not to use descriptions from the Yahoo! directory for this page.', 'all-in-one-seo-pack' ),
+			'titleatr'			 => __( 'Set the title attribute for menu links.', 'all-in-one-seo-pack' ),
+			'menulabel'			 => __( 'Set the label for this page menu item.', 'all-in-one-seo-pack' ),
+			'sitemap_exclude'	 => __( "Don't display this page in the sitemap.", 'all-in-one-seo-pack' ),
+			'disable'			 => __( 'Disable SEO on this page.', 'all-in-one-seo-pack' ),
+			'disable_analytics'	 => __( 'Disable Google Analytics on this page.', 'all-in-one-seo-pack' )
 		);
 		
 		$this->default_options = array( 
 			   "donate" => Array( 
-				       'name' => __( 'I enjoy this plugin and have made a donation:', 'all_in_one_seo_pack' ) ),
+				       'name' => __( 'I enjoy this plugin and have made a donation:', 'all-in-one-seo-pack' ) ),
 		   "home_title"=> Array( 
-				'name' => __( 'Home Title:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Home Title:', 'all-in-one-seo-pack' ), 
 				'default' => null, 'type' => 'textarea', 'sanitize' => 'text',
 				'count' => true, 'rows' => 1, 'cols' => 60,
 				'condshow' => Array( "aiosp_use_static_home_info" => 0 ) ),
 		   "home_description"=> Array( 
-				'name' => __( 'Home Description:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Home Description:', 'all-in-one-seo-pack' ), 
 				'default' => '', 'type' => 'textarea', 'sanitize' => 'text',
 				'count' => true, 'cols' => 80, 'rows' => 2,
 				'condshow' => Array( "aiosp_use_static_home_info" => 0 ) ),
 		   "togglekeywords" => Array( 
-				'name' => __( 'Use Keywords:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Use Keywords:', 'all-in-one-seo-pack' ), 
 				'default' =>  0,
 				'type' => 'radio',
-			    'initial_options' => Array( 0 => __( 'Enabled', 'all_in_one_seo_pack' ),
-			                                1 => __( 'Disabled', 'all_in_one_seo_pack' ) )
+			    'initial_options' => Array( 0 => __( 'Enabled', 'all-in-one-seo-pack' ),
+			                                1 => __( 'Disabled', 'all-in-one-seo-pack' ) )
 				),
 		   "home_keywords"=> Array( 
-				'name' => __( 'Home Keywords (comma separated):', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Home Keywords (comma separated):', 'all-in-one-seo-pack' ), 
 				'default' => null, 'type' => 'textarea', 'sanitize' => 'text',
 				'condshow' => Array( "aiosp_togglekeywords" => 0, "aiosp_use_static_home_info" => 0 ) ),
 		   "use_static_home_info" => Array(
-				'name' => __( "Use Static Front Page Instead", 'all_in_one_seo_pack' ),
+				'name' => __( "Use Static Front Page Instead", 'all-in-one-seo-pack' ),
 				'default' => 0,
 				'type' => 'radio',
-				'initial_options' => Array( 1 => __( 'Enabled', 'all_in_one_seo_pack' ),
-			                                0 => __( 'Disabled', 'all_in_one_seo_pack' ) )
+				'initial_options' => Array( 1 => __( 'Enabled', 'all-in-one-seo-pack' ),
+			                                0 => __( 'Disabled', 'all-in-one-seo-pack' ) )
 			),
 		   "can"=> Array(
-				'name' => __( 'Canonical URLs:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Canonical URLs:', 'all-in-one-seo-pack' ),
 				'default' => 1),
 		   "no_paged_canonical_links"=> Array(
-				'name' => __( 'No Pagination for Canonical URLs:', 'all_in_one_seo_pack' ),
+				'name' => __( 'No Pagination for Canonical URLs:', 'all-in-one-seo-pack' ),
 				'default' => 0,
 				'condshow' => Array( "aiosp_can" => 'on' ) ),
 		   "customize_canonical_links"	=> Array(
-				'name' => __( 'Enable Custom Canonical URLs:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Enable Custom Canonical URLs:', 'all-in-one-seo-pack' ),
 				'default' => 0,
 				'condshow' => Array( "aiosp_can" => 'on' ) ),
 			"can_set_protocol" => Array(
-				'name' => __( 'Set Protocol For Canonical URLs:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Set Protocol For Canonical URLs:', 'all-in-one-seo-pack' ),
 				'type' => 'radio',
 				'default' => 'auto',
-				'initial_options' => Array( 'auto' => __( 'Auto', 'all_in_one_seo_pack' ),
-											'http' => __( 'HTTP', 'all_in_one_seo_pack' ),
-											'https' => __( 'HTTPS', 'all_in_one_seo_pack' ) ),
+				'initial_options' => Array( 'auto' => __( 'Auto', 'all-in-one-seo-pack' ),
+											'http' => __( 'HTTP', 'all-in-one-seo-pack' ),
+											'https' => __( 'HTTPS', 'all-in-one-seo-pack' ) ),
 				'condshow' => Array( "aiosp_can" => 'on' )
 				),
 			"rewrite_titles"=> Array( 
-				'name' => __( 'Rewrite Titles:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Rewrite Titles:', 'all-in-one-seo-pack' ), 
 				'default' => 1,
 				'type' => 'radio',
-				'initial_options' => Array( 1 => __( 'Enabled', 'all_in_one_seo_pack' ),
-											0 => __( 'Disabled', 'all_in_one_seo_pack' ) )
+				'initial_options' => Array( 1 => __( 'Enabled', 'all-in-one-seo-pack' ),
+											0 => __( 'Disabled', 'all-in-one-seo-pack' ) )
 				),
 			"force_rewrites"=> Array( 
-				'name' => __( 'Force Rewrites:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Force Rewrites:', 'all-in-one-seo-pack' ), 
 				'default' => 1,
 				'type' => 'hidden',
 				'prefix' => $this->prefix,
-				'initial_options' => Array( 1 => __( 'Enabled', 'all_in_one_seo_pack' ),
-											0 => __( 'Disabled', 'all_in_one_seo_pack' ) )
+				'initial_options' => Array( 1 => __( 'Enabled', 'all-in-one-seo-pack' ),
+											0 => __( 'Disabled', 'all-in-one-seo-pack' ) )
 				),
 			"use_original_title"=> Array(
-					'name' => __( 'Use Original Title:', 'all_in_one_seo_pack' ),
+					'name' => __( 'Use Original Title:', 'all-in-one-seo-pack' ),
 					'type' => 'radio',
 					'default' => 0,
-					'initial_options' => Array( 1 => __( 'Enabled', 'all_in_one_seo_pack' ),
-												0 => __( 'Disabled', 'all_in_one_seo_pack' ) )					
+					'initial_options' => Array( 1 => __( 'Enabled', 'all-in-one-seo-pack' ),
+												0 => __( 'Disabled', 'all-in-one-seo-pack' ) )					
 				),
 			"cap_titles"=> Array(
-				'name' => __( 'Capitalize Titles:', 'all_in_one_seo_pack' ), 'default' => 1),
+				'name' => __( 'Capitalize Titles:', 'all-in-one-seo-pack' ), 'default' => 1),
 			"cap_cats"=> Array(
-				'name' => __( 'Capitalize Category Titles:', 'all_in_one_seo_pack' ), 'default' => 1),
+				'name' => __( 'Capitalize Category Titles:', 'all-in-one-seo-pack' ), 'default' => 1),
 		   "home_page_title_format"=> Array( 
-				'name' => __( 'Home Page Title Format:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Home Page Title Format:', 'all-in-one-seo-pack' ), 
 				'type' => 'text', 'default' => '%page_title%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 		   "page_title_format"=> Array( 
-				'name' => __( 'Page Title Format:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Page Title Format:', 'all-in-one-seo-pack' ), 
 				'type' => 'text', 'default' => '%page_title% | %blog_title%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 		   "post_title_format"=> Array( 
-				'name' => __( 'Post Title Format:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Post Title Format:', 'all-in-one-seo-pack' ), 
 				'type' => 'text', 'default' => '%post_title% | %blog_title%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 		   "category_title_format"=> Array( 
-				'name' => __( 'Category Title Format:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Category Title Format:', 'all-in-one-seo-pack' ), 
 				'type' => 'text', 'default' => '%category_title% | %blog_title%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 		   "archive_title_format"=> Array(
-				'name' => __( 'Archive Title Format:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Archive Title Format:', 'all-in-one-seo-pack' ), 
 				'type' => 'text', 'default' => '%archive_title% | %blog_title%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 		   "date_title_format"=> Array(
-				'name' => __( 'Date Archive Title Format:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Date Archive Title Format:', 'all-in-one-seo-pack' ), 
 				'type' => 'text', 'default' => '%date% | %blog_title%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 			"author_title_format"=> Array(
-				'name' => __( 'Author Archive Title Format:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Author Archive Title Format:', 'all-in-one-seo-pack' ), 
 				'type' => 'text', 'default' => '%author% | %blog_title%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 		   "tag_title_format"=> Array( 
-				'name' => __( 'Tag Title Format:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Tag Title Format:', 'all-in-one-seo-pack' ), 
 				'type' => 'text', 'default' => '%tag% | %blog_title%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 		   "search_title_format"=> Array( 
-				'name' => __( 'Search Title Format:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Search Title Format:', 'all-in-one-seo-pack' ), 
 				'type' => 'text', 'default' => '%search% | %blog_title%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 		   "description_format"=> Array( 
-				'name' => __( 'Description Format', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Description Format', 'all-in-one-seo-pack' ), 
 				'type' => 'text', 'default' => '%description%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 		   "404_title_format"=> Array( 
-				'name' => __( '404 Title Format:', 'all_in_one_seo_pack' ), 
+				'name' => __( '404 Title Format:', 'all-in-one-seo-pack' ), 
 				'type' => 'text', 'default' => 'Nothing found for %request_words%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 			"paged_format"=> Array(
-				'name' => __( 'Paged Format:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Paged Format:', 'all-in-one-seo-pack' ),
 				'type' => 'text', 'default' => ' - Part %page%',
 				'condshow' => Array( "aiosp_rewrite_titles" => 1 ) ),
 			"enablecpost"=> Array(
-				'name' => __( 'SEO for Custom Post Types:', 'all_in_one_seo_pack' ),
+				'name' => __( 'SEO for Custom Post Types:', 'all-in-one-seo-pack' ),
 				'default' => 'on',
 				'type' => 'radio',
-				'initial_options' => Array( 'on' => __( 'Enabled', 'all_in_one_seo_pack' ),
-											0 => __( 'Disabled', 'all_in_one_seo_pack' ) )
+				'initial_options' => Array( 'on' => __( 'Enabled', 'all-in-one-seo-pack' ),
+											0 => __( 'Disabled', 'all-in-one-seo-pack' ) )
 				),
 			"cpostactive" => Array(
-				'name' => __( 'SEO on only these post types:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'SEO on only these post types:', 'all-in-one-seo-pack' ), 
 				'type' => 'multicheckbox', 'default' => array('post', 'page'),
 				'condshow' => Array( 'aiosp_enablecpost' => 'on' )
 				),
 			"cpostadvanced" => Array(
-				'name' => __( 'Enable Advanced Options:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Enable Advanced Options:', 'all-in-one-seo-pack' ), 
 				'default' => 0, 'type' => 'radio',
-				'initial_options' => Array( 'on' => __( 'Enabled', 'all_in_one_seo_pack' ),
-											0 => __( 'Disabled', 'all_in_one_seo_pack' ) ),
+				'initial_options' => Array( 'on' => __( 'Enabled', 'all-in-one-seo-pack' ),
+											0 => __( 'Disabled', 'all-in-one-seo-pack' ) ),
 				'label' => null,
 				'condshow' => Array( "aiosp_enablecpost" => 'on' )
 				),
 			"cpostnoindex" => Array(
-				'name' => __( 'Default to NOINDEX:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Default to NOINDEX:', 'all-in-one-seo-pack' ), 
 				'type' => 'multicheckbox', 'default' => array(),
-				'condshow' => Array( 'aiosp_enablecpost' => 'on', 'aiosp_cpostadvanced' => 'on' )
+				'condshow' => Array( 'aiosp_enablecpost' => 'on' )
 				),
 			"cpostnofollow" => Array(
-				'name' => __( 'Default to NOFOLLOW:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Default to NOFOLLOW:', 'all-in-one-seo-pack' ), 
 				'type' => 'multicheckbox', 'default' => array(),
-				'condshow' => Array( 'aiosp_enablecpost' => 'on', 'aiosp_cpostadvanced' => 'on' )
+				'condshow' => Array( 'aiosp_enablecpost' => 'on' )
 				),
 			"cpostnoodp"=> Array(
-					'name' => __( 'Default to NOODP:', 'all_in_one_seo_pack' ),
+					'name' => __( 'Default to NOODP:', 'all-in-one-seo-pack' ),
 					'type' => 'multicheckbox', 'default' => array(),
-					'condshow' => Array( 'aiosp_enablecpost' => 'on', 'aiosp_cpostadvanced' => 'on' )
+					'condshow' => Array( 'aiosp_enablecpost' => 'on' )
 				),
 			"cpostnoydir"=> Array(
-				'name' => __( 'Default to NOYDIR:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Default to NOYDIR:', 'all-in-one-seo-pack' ),
 				'type' => 'multicheckbox', 'default' => array(),
-				'condshow' => Array( 'aiosp_enablecpost' => 'on', 'aiosp_cpostadvanced' => 'on' )
+				'condshow' => Array( 'aiosp_enablecpost' => 'on' )
 				),
 			"cposttitles" => Array(
-				'name' => __( 'Custom titles:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Custom titles:', 'all-in-one-seo-pack' ), 
 				'type' => 'checkbox', 'default' => 0,
 				'condshow' => Array( "aiosp_rewrite_titles" => 1, 'aiosp_enablecpost' => 'on', 'aiosp_cpostadvanced' => 'on' )
 				),
 			"posttypecolumns" => Array(
-				'name' => __( 'Show Column Labels for Custom Post Types:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Show Column Labels for Custom Post Types:', 'all-in-one-seo-pack' ),
 				'type' => 'multicheckbox', 'default' =>  array('post', 'page') ),
 			"admin_bar" => Array(
-				'name' => __( 'Display Menu In Admin Bar:', 'all_in_one_seo_pack' ), 'default' => 'on',
+				'name' => __( 'Display Menu In Admin Bar:', 'all-in-one-seo-pack' ), 'default' => 'on',
 				),
 			"custom_menu_order" => Array(
-				'name' => __( 'Display Menu At The Top:', 'all_in_one_seo_pack' ), 'default' => 'on',
+				'name' => __( 'Display Menu At The Top:', 'all-in-one-seo-pack' ), 'default' => 'on',
 				),
 			"google_verify" => Array(
-				'name' => __( 'Google Webmaster Tools:', 'all_in_one_seo_pack' ), 'default' => '', 'type' => 'text'
+				'name' => __( 'Google Webmaster Tools:', 'all-in-one-seo-pack' ), 'default' => '', 'type' => 'text'
 				),
 			"bing_verify" => Array(
-				'name' => __( 'Bing Webmaster Center:', 'all_in_one_seo_pack' ), 'default' => '', 'type' => 'text'
+				'name' => __( 'Bing Webmaster Center:', 'all-in-one-seo-pack' ), 'default' => '', 'type' => 'text'
 				),
 			"pinterest_verify" => Array(
-				'name' => __( 'Pinterest Site Verification:', 'all_in_one_seo_pack' ), 'default' => '', 'type' => 'text'
+				'name' => __( 'Pinterest Site Verification:', 'all-in-one-seo-pack' ), 'default' => '', 'type' => 'text'
 				),
 			"google_publisher"=> Array(
-				'name' => __( 'Google Plus Default Profile:', 'all_in_one_seo_pack' ), 'default' => '', 'type' => 'text'
+				'name' => __( 'Google Plus Default Profile:', 'all-in-one-seo-pack' ), 'default' => '', 'type' => 'text'
 				),
 			"google_disable_profile"=> Array(
-				'name' => __( 'Disable Google Plus Profile:', 'all_in_one_seo_pack' ), 'default' => 0, 'type' => 'checkbox'
+				'name' => __( 'Disable Google Plus Profile:', 'all-in-one-seo-pack' ), 'default' => 0, 'type' => 'checkbox'
 				),
 			"google_sitelinks_search" => Array(
-					'name' => __( 'Display Sitelinks Search Box:', 'all_in_one_seo_pack' )
+					'name' => __( 'Display Sitelinks Search Box:', 'all-in-one-seo-pack' )
+			),
+			"google_set_site_name" => Array(
+					'name' => __( 'Set Preferred Site Name:', 'all-in-one-seo-pack' )
+			),
+			"google_specify_site_name" => Array(
+					'name' => __( 'Specify A Preferred Name:', 'all-in-one-seo-pack' ),
+					'type' => 'text',
+					'placeholder' => $blog_name,
+					'condshow' => Array( 'aiosp_google_set_site_name' => 'on' )
 			),
 			"google_author_advanced" => Array(
-					'name' => __( 'Advanced Authorship Options:', 'all_in_one_seo_pack' ), 
+					'name' => __( 'Advanced Authorship Options:', 'all-in-one-seo-pack' ), 
 					'default' => 0, 'type' => 'radio',
-					'initial_options' => Array( 'on' => __( 'Enabled', 'all_in_one_seo_pack' ),
-												0 => __( 'Disabled', 'all_in_one_seo_pack' ) ),
+					'initial_options' => Array( 'on' => __( 'Enabled', 'all-in-one-seo-pack' ),
+												0 => __( 'Disabled', 'all-in-one-seo-pack' ) ),
 					'label' => null
 					),
 			"google_author_location"=> Array(
-				'name' => __( 'Display Google Authorship:', 'all_in_one_seo_pack' ), 'default' => array( 'all' ), 'type' => 'multicheckbox',
+				'name' => __( 'Display Google Authorship:', 'all-in-one-seo-pack' ), 'default' => array( 'all' ), 'type' => 'multicheckbox',
 				'condshow' => Array( 'aiosp_google_author_advanced' => 'on' )
 				),
 			"google_enable_publisher" => Array(
-				'name' => __( 'Display Publisher Meta on Front Page:', 'all_in_one_seo_pack' ), 
+				'name' => __( 'Display Publisher Meta on Front Page:', 'all-in-one-seo-pack' ), 
 				'default' => 'on', 'type' => 'radio',
-				'initial_options' => Array( 'on' => __( 'Enabled', 'all_in_one_seo_pack' ),
-											0 => __( 'Disabled', 'all_in_one_seo_pack' ) ),
+				'initial_options' => Array( 'on' => __( 'Enabled', 'all-in-one-seo-pack' ),
+											0 => __( 'Disabled', 'all-in-one-seo-pack' ) ),
 				'condshow' => Array( 'aiosp_google_author_advanced' => 'on' )
 				),
 			"google_specify_publisher" => Array(
-					'name' => __( 'Specify Publisher URL:', 'all_in_one_seo_pack' ), 'type' => 'text',
+					'name' => __( 'Specify Publisher URL:', 'all-in-one-seo-pack' ), 'type' => 'text',
 					'condshow' => Array( 'aiosp_google_author_advanced' => 'on', 'aiosp_google_enable_publisher' => 'on' )
 				),
-			"google_connect"=>Array( 'name' => __( 'Connect With Google Analytics', 'all_in_one_seo_pack' ), 
-				),
+//			"google_connect"=>Array( 'name' => __( 'Connect With Google Analytics', 'all-in-one-seo-pack' ), ),
 			"google_analytics_id"=> Array(
-				'name' => __( 'Google Analytics ID:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Google Analytics ID:', 'all-in-one-seo-pack' ),
 				'default' => null, 'type' => 'text', 'placeholder' => 'UA-########-#' ),
 			"ga_use_universal_analytics" => Array(
-				'name' => __( 'Use Universal Analytics:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use Universal Analytics:', 'all-in-one-seo-pack' ),
 				'default' => 0,
 				 'condshow' => Array( 'aiosp_google_analytics_id' => Array( 'lhs' => 'aiosp_google_analytics_id', 'op' => '!=', 'rhs' => '' ) ) ),
 			"ga_advanced_options"=> Array(
-				'name' => __( 'Advanced Analytics Options:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Advanced Analytics Options:', 'all-in-one-seo-pack' ),
 				'default' => 'on',
 				'type' => 'radio',
-				'initial_options' => Array( 'on' => __( 'Enabled', 'all_in_one_seo_pack' ),
-											0 => __( 'Disabled', 'all_in_one_seo_pack' ) ),
+				'initial_options' => Array( 'on' => __( 'Enabled', 'all-in-one-seo-pack' ),
+											0 => __( 'Disabled', 'all-in-one-seo-pack' ) ),
 				'condshow' => Array( 'aiosp_google_analytics_id' => Array( 'lhs' => 'aiosp_google_analytics_id', 'op' => '!=', 'rhs' => '' ) ) ),
 			"ga_domain"=> Array(
-				'name' => __( 'Tracking Domain:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Tracking Domain:', 'all-in-one-seo-pack' ),
 				'type' => 'text',
 				'condshow' => Array( 'aiosp_google_analytics_id' => Array( 'lhs' => 'aiosp_google_analytics_id', 'op' => '!=', 'rhs' => '' ), 'aiosp_ga_advanced_options' => 'on') ),
 			"ga_multi_domain"=> Array(
-				'name' => __( 'Track Multiple Domains:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Track Multiple Domains:', 'all-in-one-seo-pack' ),
 				'default' => 0,
 				'condshow' => Array( 'aiosp_google_analytics_id' => Array( 'lhs' => 'aiosp_google_analytics_id', 'op' => '!=', 'rhs' => '' ), 'aiosp_ga_advanced_options' => 'on' ) ),
 			"ga_addl_domains" => Array(
-								'name' => __( 'Additional Domains:', 'all_in_one_seo_pack' ),
+								'name' => __( 'Additional Domains:', 'all-in-one-seo-pack' ),
 								'type' => 'textarea',
 								'condshow' => Array( 'aiosp_google_analytics_id' => Array( 'lhs' => 'aiosp_google_analytics_id', 'op' => '!=', 'rhs' => '' ), 'aiosp_ga_advanced_options' => 'on', 'aiosp_ga_multi_domain' => 'on' ) ),
 			"ga_anonymize_ip"=> Array(
-				'name' => __( 'Anonymize IP Addresses:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Anonymize IP Addresses:', 'all-in-one-seo-pack' ),
 				'type' => 'checkbox',
 				'condshow' => Array( 'aiosp_google_analytics_id' => Array( 'lhs' => 'aiosp_google_analytics_id', 'op' => '!=', 'rhs' => '' ), 'aiosp_ga_advanced_options' => 'on' ) ),
 			"ga_display_advertising"=> Array(
-				'name' => __( 'Display Advertiser Tracking:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Display Advertiser Tracking:', 'all-in-one-seo-pack' ),
 				'type' => 'checkbox',
 				'condshow' => Array( 'aiosp_google_analytics_id' => Array( 'lhs' => 'aiosp_google_analytics_id', 'op' => '!=', 'rhs' => '' ), 'aiosp_ga_advanced_options' => 'on' ) ),
 			"ga_exclude_users"=> Array(
-				'name' => __( 'Exclude Users From Tracking:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Exclude Users From Tracking:', 'all-in-one-seo-pack' ),
 				'type' => 'multicheckbox',
 				'condshow' => Array( 'aiosp_google_analytics_id' => Array( 'lhs' => 'aiosp_google_analytics_id', 'op' => '!=', 'rhs' => '' ), 'aiosp_ga_advanced_options' => 'on' ) ),
 			"ga_track_outbound_links"=> Array(
-				'name' => __( 'Track Outbound Links:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Track Outbound Links:', 'all-in-one-seo-pack' ),
 				'default' => 0,
 				 'condshow' => Array( 'aiosp_google_analytics_id' => Array( 'lhs' => 'aiosp_google_analytics_id', 'op' => '!=', 'rhs' => '' ), 'aiosp_ga_advanced_options' => 'on' ) ),
 			"ga_link_attribution"=> Array(
-				'name' => __( 'Enhanced Link Attribution:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Enhanced Link Attribution:', 'all-in-one-seo-pack' ),
 				'default' => 0,
 				 'condshow' => Array( 'aiosp_google_analytics_id' => Array( 'lhs' => 'aiosp_google_analytics_id', 'op' => '!=', 'rhs' => '' ), 'aiosp_ga_advanced_options' => 'on' ) ),
 			"ga_enhanced_ecommerce"=> Array(
-				'name' => __( 'Enhanced Ecommerce:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Enhanced Ecommerce:', 'all-in-one-seo-pack' ),
 				'default' => 0,
 				 'condshow' => Array( 'aiosp_google_analytics_id' => Array( 'lhs' => 'aiosp_google_analytics_id', 'op' => '!=', 'rhs' => '' ), 'aiosp_ga_use_universal_analytics' => 'on', 'aiosp_ga_advanced_options' => 'on' ) ),			
 			"use_categories"=> Array(
-				'name' => __( 'Use Categories for META keywords:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use Categories for META keywords:', 'all-in-one-seo-pack' ),
 				'default' => 0,
 				'condshow' => Array( "aiosp_togglekeywords" => 0 ) ),
 			"use_tags_as_keywords" => Array(
-				'name' => __( 'Use Tags for META keywords:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use Tags for META keywords:', 'all-in-one-seo-pack' ),
 				'default' => 1,
 				'condshow' => Array( "aiosp_togglekeywords" => 0 ) ),
 			"dynamic_postspage_keywords"=> Array(
-				'name' => __( 'Dynamically Generate Keywords for Posts Page/Archives:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Dynamically Generate Keywords for Posts Page/Archives:', 'all-in-one-seo-pack' ),
 				'default' => 1,
 				'condshow' => Array( "aiosp_togglekeywords" => 0 ) ),
 			"category_noindex"=> Array(
-				'name' => __( 'Use noindex for Categories:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use noindex for Categories:', 'all-in-one-seo-pack' ),
 				'default' => 1),
 			"archive_date_noindex"=> Array(
-				'name' => __( 'Use noindex for Date Archives:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use noindex for Date Archives:', 'all-in-one-seo-pack' ),
 				'default' => 1),
 			"archive_author_noindex"=> Array(
-				'name' => __( 'Use noindex for Author Archives:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use noindex for Author Archives:', 'all-in-one-seo-pack' ),
 				'default' => 1),
 			"tags_noindex"=> Array(
-				'name' => __( 'Use noindex for Tag Archives:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use noindex for Tag Archives:', 'all-in-one-seo-pack' ),
 				'default' => 0),
 			"search_noindex"=> Array(
-				'name' => __( 'Use noindex for the Search page:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use noindex for the Search page:', 'all-in-one-seo-pack' ),
 				'default' => 0),
 			"404_noindex"=> Array(
-				'name' => __( 'Use noindex for the 404 page:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use noindex for the 404 page:', 'all-in-one-seo-pack' ),
 				'default' => 0),
+			"tax_noindex"=> Array(
+				'name' => __( 'Use noindex for Taxonomy Archives:', 'all-in-one-seo-pack' ),
+				'type' => 'multicheckbox', 'default' => array(),
+				'condshow' => Array( 'aiosp_enablecpost' => 'on', 'aiosp_cpostadvanced' => 'on' )
+				),
 			"paginated_noindex"	=> Array(
-				'name' => __( 'Use noindex for paginated pages/posts:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use noindex for paginated pages/posts:', 'all-in-one-seo-pack' ),
 				'default' => 0),
 			"paginated_nofollow"=> Array(
-				'name' => __( 'Use nofollow for paginated pages/posts:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use nofollow for paginated pages/posts:', 'all-in-one-seo-pack' ),
 				'default' => 0),
 			"noodp"=> Array(
-				'name' => __( 'Exclude site from the Open Directory Project:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Exclude site from the Open Directory Project:', 'all-in-one-seo-pack' ),
 				'default' => 0),
 			"noydir"=> Array(
-				'name' => __( 'Exclude site from Yahoo! Directory:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Exclude site from Yahoo! Directory:', 'all-in-one-seo-pack' ),
 				'default' => 0),
 			"skip_excerpt"=> Array(
-				'name' => __( 'Avoid Using The Excerpt In Descriptions:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Avoid Using The Excerpt In Descriptions:', 'all-in-one-seo-pack' ),
 				'default' => 0 ),
 			"generate_descriptions"=> Array(
-				'name' => __( 'Autogenerate Descriptions:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Autogenerate Descriptions:', 'all-in-one-seo-pack' ),
 				'default' => 1),
 			"run_shortcodes"=> Array(
-				'name' => __( 'Run Shortcodes In Autogenerated Descriptions:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Run Shortcodes In Autogenerated Descriptions:', 'all-in-one-seo-pack' ),
 				'default' => 0,
 				'condshow' => Array( 'aiosp_generate_descriptions' => 'on' ) ),
 			"hide_paginated_descriptions"=> Array(
-				'name' => __( 'Remove Descriptions For Paginated Pages:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Remove Descriptions For Paginated Pages:', 'all-in-one-seo-pack' ),
 				'default' => 0),
 			"dont_truncate_descriptions"=> Array(
-				'name' => __( 'Never Shorten Long Descriptions:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Never Shorten Long Descriptions:', 'all-in-one-seo-pack' ),
 				'default' => 0),
 			"schema_markup"=> Array(
-				'name' => __( 'Use Schema.org Markup', 'all_in_one_seo_pack' ),
+				'name' => __( 'Use Schema.org Markup', 'all-in-one-seo-pack' ),
 				'default' => 1),
 			"unprotect_meta"=> Array(
-				'name' => __( 'Unprotect Post Meta Fields:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Unprotect Post Meta Fields:', 'all-in-one-seo-pack' ),
 				'default' => 0),
 			"ex_pages" => Array(
-				'name' => __( 'Exclude Pages:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Exclude Pages:', 'all-in-one-seo-pack' ),
 				'type' => 'textarea', 'default' =>  '' ),
 			"post_meta_tags"=> Array(
-				'name' => __( 'Additional Post Headers:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Additional Post Headers:', 'all-in-one-seo-pack' ),
 				'type' => 'textarea', 'default' => '', 'sanitize' => 'default' ),
 			"page_meta_tags"=> Array(
-				'name' => __( 'Additional Page Headers:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Additional Page Headers:', 'all-in-one-seo-pack' ),
 				'type' => 'textarea', 'default' => '', 'sanitize' => 'default' ),
 			"front_meta_tags"=> Array(
-				'name' => __( 'Additional Front Page Headers:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Additional Front Page Headers:', 'all-in-one-seo-pack' ),
 				'type' => 'textarea', 'default' => '', 'sanitize' => 'default' ),
 			"home_meta_tags"=> Array(
-				'name' => __( 'Additional Blog Page Headers:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Additional Blog Page Headers:', 'all-in-one-seo-pack' ),
 				'type' => 'textarea', 'default' => '', 'sanitize' => 'default' ),
 			"do_log"=> Array(
-				'name' => __( 'Log important events:', 'all_in_one_seo_pack' ),
+				'name' => __( 'Log important events:', 'all-in-one-seo-pack' ),
 				'default' => null ),
 			);
 
@@ -676,9 +693,9 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 																		'nonce-aioseop-edit' => Array( 'type' => 'hidden', 'default' => null, 'prefix' => false, 'nowrap' => 1 ),
 																		'upgrade' 			 => Array( 'type' => 'html', 'label' => 'none',
 																										'default' => '<a target="__blank" href="http://semperplugins.com/plugins/all-in-one-seo-pack-pro-version/?loc=meta">' 
-																										. __( 'Upgrade to All in One SEO Pack Pro Version', 'all_in_one_seo_pack' ) . '</a>'
+																										. __( 'Upgrade to All in One SEO Pack Pro Version', 'all-in-one-seo-pack' ) . '</a>'
 																					 		),
-																		'snippet'			 => Array( 'name' => __( 'Preview Snippet', 'all_in_one_seo_pack' ), 'type' => 'custom', 'label' => 'top', 
+																		'snippet'			 => Array( 'name' => __( 'Preview Snippet', 'all-in-one-seo-pack' ), 'type' => 'custom', 'label' => 'top', 
 																									   'default' => '
 																									<script>
 																									jQuery(document).ready(function() {
@@ -691,20 +708,20 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 																									});
 																									</script>
 																									<div class="preview_snippet"><div id="aioseop_snippet"><h3><a>%s</a></h3><div><div><cite id="aioseop_snippet_link">%s</cite></div><span id="aioseop_snippet_description">%s</span></div></div></div>' ),
-																		'title'				 => Array( 'name' => __( 'Title', 'all_in_one_seo_pack' ), 'type' => 'text', 'count' => true, 'size' => 60 ),
-																		'description'		 => Array( 'name' => __( 'Description', 'all_in_one_seo_pack' ), 'type' => 'textarea', 'count' => true, 'cols' => 80, 'rows' => 2 ),
+																		'title'				 => Array( 'name' => __( 'Title', 'all-in-one-seo-pack' ), 'type' => 'text', 'count' => true, 'size' => 60 ),
+																		'description'		 => Array( 'name' => __( 'Description', 'all-in-one-seo-pack' ), 'type' => 'textarea', 'count' => true, 'cols' => 80, 'rows' => 2 ),
 																		
-																		'keywords'			 => Array( 'name' => __( 'Keywords (comma separated)', 'all_in_one_seo_pack' ), 'type' => 'text' ),
-																		'custom_link'		 => Array( 'name' => __( 'Custom Canonical URL', 'all_in_one_seo_pack' ), 'type' => 'text', 'size' => 60 ),																		
-																		'noindex'			 => Array( 'name' => __( "Robots Meta NOINDEX", 'all_in_one_seo_pack' ), 'default' => '' ),
-																		'nofollow'			 => Array( 'name' => __( "Robots Meta NOFOLLOW", 'all_in_one_seo_pack' ), 'default' => '' ),
-																		'noodp'			 	 => Array( 'name' => __( "Robots Meta NOODP", 'all_in_one_seo_pack' ) ),
-																		'noydir'			 => Array( 'name' => __( "Robots Meta NOYDIR", 'all_in_one_seo_pack' ) ),
-																		'titleatr'			 => Array( 'name' => __( 'Title Attribute', 'all_in_one_seo_pack' ), 'type' => 'text', 'size' => 60 ),
-																		'menulabel'			 => Array( 'name' => __( 'Menu Label', 'all_in_one_seo_pack' ), 'type' => 'text', 'size' => 60 ),
-																		'sitemap_exclude'	 => Array( 'name' => __( 'Exclude From Sitemap', 'all_in_one_seo_pack' ) ),
-																		'disable'			 => Array( 'name' => __( 'Disable on this page/post', 'all_in_one_seo_pack' ) ),
-																		'disable_analytics'	 => Array( 'name' => __( 'Disable Google Analytics', 'all_in_one_seo_pack' ), 'condshow' => Array( 'aiosp_disable' => 'on' ) ) ),
+																		'keywords'			 => Array( 'name' => __( 'Keywords (comma separated)', 'all-in-one-seo-pack' ), 'type' => 'text' ),
+																		'custom_link'		 => Array( 'name' => __( 'Custom Canonical URL', 'all-in-one-seo-pack' ), 'type' => 'text', 'size' => 60 ),																		
+																		'noindex'			 => Array( 'name' => __( "Robots Meta NOINDEX", 'all-in-one-seo-pack' ), 'default' => '' ),
+																		'nofollow'			 => Array( 'name' => __( "Robots Meta NOFOLLOW", 'all-in-one-seo-pack' ), 'default' => '' ),
+																		'noodp'			 	 => Array( 'name' => __( "Robots Meta NOODP", 'all-in-one-seo-pack' ) ),
+																		'noydir'			 => Array( 'name' => __( "Robots Meta NOYDIR", 'all-in-one-seo-pack' ) ),
+																		'titleatr'			 => Array( 'name' => __( 'Title Attribute', 'all-in-one-seo-pack' ), 'type' => 'text', 'size' => 60 ),
+																		'menulabel'			 => Array( 'name' => __( 'Menu Label', 'all-in-one-seo-pack' ), 'type' => 'text', 'size' => 60 ),
+																		'sitemap_exclude'	 => Array( 'name' => __( 'Exclude From Sitemap', 'all-in-one-seo-pack' ) ),
+																		'disable'			 => Array( 'name' => __( 'Disable on this page/post', 'all-in-one-seo-pack' ) ),
+																		'disable_analytics'	 => Array( 'name' => __( 'Disable Google Analytics', 'all-in-one-seo-pack' ), 'condshow' => Array( 'aiosp_disable' => 'on' ) ) ),
 																	'display' => null )
 				);
 		
@@ -714,55 +731,55 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 
 			$this->layout = Array(
 				'default' => Array(
-						'name' => __( 'General Settings', 'all_in_one_seo_pack' ),
+						'name' => __( 'General Settings', 'all-in-one-seo-pack' ),
 						'help_link' => 'http://semperplugins.com/documentation/general-settings/',
 						'options' => Array() // this is set below, to the remaining options -- pdb
 					),
 				'home'  => Array(
-						'name' => __( 'Home Page Settings', 'all_in_one_seo_pack' ),
+						'name' => __( 'Home Page Settings', 'all-in-one-seo-pack' ),
 						'help_link' => 'http://semperplugins.com/documentation/home-page-settings/',
 						'options' => Array( 'home_title', 'home_description', 'home_keywords', 'use_static_home_info' )
 					),
 				'keywords' => Array(
-					'name' => __( 'Keyword Settings', 'all_in_one_seo_pack' ),
+					'name' => __( 'Keyword Settings', 'all-in-one-seo-pack' ),
 					'help_link' => 'http://semperplugins.com/documentation/keyword-settings/',
 					'options' => Array( "togglekeywords", "use_categories", "use_tags_as_keywords", "dynamic_postspage_keywords" )
 					),
 				'title'	=> Array(
-						'name' => __( 'Title Settings', 'all_in_one_seo_pack' ),
+						'name' => __( 'Title Settings', 'all-in-one-seo-pack' ),
 						'help_link' => 'http://semperplugins.com/documentation/title-settings/',
 						'options' => Array( "rewrite_titles", "force_rewrites", "cap_titles", "cap_cats", "home_page_title_format", "page_title_format", "post_title_format", "category_title_format", "archive_title_format", "date_title_format", "author_title_format",
 						 					"tag_title_format", "search_title_format", "description_format", "404_title_format", "paged_format" )						
 					),
 				'cpt' => Array(
-						'name' => __( 'Custom Post Type Settings', 'all_in_one_seo_pack' ),
+						'name' => __( 'Custom Post Type Settings', 'all-in-one-seo-pack' ),
 						'help_link' => 'http://semperplugins.com/documentation/custom-post-type-settings/',
 						'options' => Array( "enablecpost", "cpostadvanced", "cpostactive", "cposttitles" )
 					),
 				'display' => Array(
-						'name' => __( 'Display Settings', 'all_in_one_seo_pack' ),
+						'name' => __( 'Display Settings', 'all-in-one-seo-pack' ),
 						'help_link' => 'http://semperplugins.com/documentation/display-settings/',
 						'options' => Array( "posttypecolumns", "admin_bar", "custom_menu_order" )
 					),
 				'webmaster' => Array(
-						'name' => __( 'Webmaster Verification', 'all_in_one_seo_pack' ),
+						'name' => __( 'Webmaster Verification', 'all-in-one-seo-pack' ),
 						'help_link' => 'http://semperplugins.com/sections/webmaster-verification/',
 						'options' => Array( "google_verify", "bing_verify", "pinterest_verify" )
 					),
 				'google' => Array(
-						'name' => __( 'Google Settings', 'all_in_one_seo_pack' ),
+						'name' => __( 'Google Settings', 'all-in-one-seo-pack' ),
 						'help_link' => 'http://semperplugins.com/documentation/google-settings/',
-						'options' => Array( "google_publisher", "google_disable_profile", "google_sitelinks_search", "google_author_advanced", "google_author_location", "google_enable_publisher" , "google_specify_publisher",
-											"google_connect", 
+						'options' => Array( "google_publisher", "google_disable_profile", "google_sitelinks_search", "google_set_site_name", "google_specify_site_name", "google_author_advanced", "google_author_location", "google_enable_publisher" , "google_specify_publisher",
+										//	"google_connect", 
 											"google_analytics_id", "ga_use_universal_analytics", "ga_advanced_options", "ga_domain", "ga_multi_domain", "ga_addl_domains", "ga_anonymize_ip", "ga_display_advertising", "ga_exclude_users", "ga_track_outbound_links", "ga_link_attribution", "ga_enhanced_ecommerce" )
 					),
 				'noindex' => Array(
-						'name' => __( 'Noindex Settings', 'all_in_one_seo_pack' ),
+						'name' => __( 'Noindex Settings', 'all-in-one-seo-pack' ),
 						'help_link' => 'http://semperplugins.com/documentation/noindex-settings/',
-						'options' => Array( 'cpostnoindex', 'cpostnofollow', 'cpostnoodp', 'cpostnoydir', 'category_noindex', 'archive_date_noindex', 'archive_author_noindex', 'tags_noindex', 'search_noindex', '404_noindex', 'paginated_noindex', 'paginated_nofollow', 'noodp', 'noydir' )						
+						'options' => Array( 'cpostnoindex', 'cpostnofollow', 'cpostnoodp', 'cpostnoydir', 'category_noindex', 'archive_date_noindex', 'archive_author_noindex', 'tags_noindex', 'search_noindex', '404_noindex', 'tax_noindex', 'paginated_noindex', 'paginated_nofollow', 'noodp', 'noydir' )						
 					),
 				'advanced' => Array(
-						'name' => __( 'Advanced Settings', 'all_in_one_seo_pack' ),
+						'name' => __( 'Advanced Settings', 'all-in-one-seo-pack' ),
 						'help_link' => 'http://semperplugins.com/documentation/advanced-settings/',
 						'options' => Array( 'generate_descriptions', 'skip_excerpt', 'run_shortcodes', 'hide_paginated_descriptions', 'dont_truncate_descriptions', 'unprotect_meta', 'ex_pages', 'post_meta_tags', 'page_meta_tags', 'front_meta_tags', 'home_meta_tags' )
 					)
@@ -1032,7 +1049,7 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 	}
 	
 	function add_page_hooks() {
-		$this->oauth_init();
+//		$this->oauth_init();
 		$post_objs = get_post_types( '', 'objects' );
 		$pt = array_keys( $post_objs );
 		$rempost = array( 'revision', 'nav_menu_item' );
@@ -1044,6 +1061,16 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 			else
 				$post_types[$p] = $p;
 		}
+		$taxes = get_taxonomies( '', 'objects' );
+		$tx = array_keys( $taxes );
+		$remtax = array( 'nav_menu', 'link_category', 'post_format' );
+		$tx = array_diff( $tx, $remtax );
+		$tax_types = Array();
+		foreach( $tx as $t )
+			if ( !empty( $taxes[$t]->label ) )
+				$tax_types[$t] = $taxes[$t]->label;
+			else
+				$taxes[$t] = $t;
 		$this->default_options["posttypecolumns"]['initial_options'] = $post_types;
 		$this->default_options["cpostactive"]['initial_options'] = $post_types;
 		$this->default_options["cpostnoindex"]['initial_options'] = $post_types;
@@ -1051,7 +1078,7 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 		$this->default_options["cpostnoodp"]['initial_options'] = $post_types;
 		$this->default_options["cpostnoydir"]['initial_options'] = $post_types;
 		$this->default_options["google_author_location"]['initial_options'] = $post_types;
-		$this->default_options['google_author_location' ]['initial_options'] = array_merge( Array( 'front' => __( 'Front Page', 'all_in_one_seo_pack' ) ), $post_types, Array( 'all' => __( 'Everywhere Else', 'all_in_one_seo_pack' ) ) );
+		$this->default_options['google_author_location' ]['initial_options'] = array_merge( Array( 'front' => __( 'Front Page', 'all-in-one-seo-pack' ) ), $post_types, Array( 'all' => __( 'Everywhere Else', 'all-in-one-seo-pack' ) ) );
 		$this->default_options["google_author_location"]['default'] = array_keys( $this->default_options["google_author_location"]['initial_options'] );
 		
 		foreach ( $post_types as $p => $pt ) {
@@ -1059,19 +1086,24 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 			$name = $post_objs[$p]->labels->singular_name;
 			if ( !isset( $this->default_options[$field] ) ) {
 				$this->default_options[$field] = Array (
-						'name' => "$name " . __( 'Title Format:', 'all_in_one_seo_pack' ) . "<br />($p)",
+						'name' => "$name " . __( 'Title Format:', 'all-in-one-seo-pack' ) . "<br />($p)",
 						'type' => 'text',
 						'default' => '%post_title% | %blog_title%',
 						'condshow' => Array( 'aiosp_rewrite_titles' => 1, 'aiosp_enablecpost' => 'on', 'aiosp_cpostadvanced' => 'on', 'aiosp_cposttitles' => 'on', 'aiosp_cpostactive\[\]' => $p )
 				);
-				$this->help_text[$field] = __( 'The following macros are supported:', 'all_in_one_seo_pack' )
-					. '<ul><li>' . __( '%blog_title% - Your blog title', 'all_in_one_seo_pack' ) . '</li><li>' . 
-					__( '%blog_description% - Your blog description', 'all_in_one_seo_pack' ) . '</li><li>' . 
-					__( '%post_title% - The original title of the post', 'all_in_one_seo_pack' ) . '</li><li>' . 
-					__( "%post_author_login% - This post's author' login", 'all_in_one_seo_pack' ) . '</li><li>' . 
-					__( "%post_author_nicename% - This post's author' nicename", 'all_in_one_seo_pack' ) . '</li><li>' . 
-					__( "%post_author_firstname% - This post's author' first name (capitalized)", 'all_in_one_seo_pack' ) . '</li><li>' . 
-					__( "%post_author_lastname% - This post's author' last name (capitalized)", 'all_in_one_seo_pack' ) . '</li>' . 
+				$this->help_text[$field] = __( 'The following macros are supported:', 'all-in-one-seo-pack' )
+					. '<ul><li>' . __( '%blog_title% - Your blog title', 'all-in-one-seo-pack' ) . '</li><li>' . 
+					__( '%blog_description% - Your blog description', 'all-in-one-seo-pack' ) . '</li><li>' . 
+					__( '%post_title% - The original title of the post.', 'all-in-one-seo-pack' ) . '</li><li>';
+				$taxes = get_object_taxonomies( $p, 'objects' );
+				if ( !empty( $taxes ) )
+					foreach( $taxes as $n => $t )
+						$this->help_text[$field] .= sprintf( __( "%%tax_%s%% - This post's associated %s taxonomy title", 'all-in-one-seo-pack' ), $n, $t->label ) . '</li><li>';
+				$this->help_text[$field] .= 
+					__( "%post_author_login% - This post's author' login", 'all-in-one-seo-pack' ) . '</li><li>' . 
+					__( "%post_author_nicename% - This post's author' nicename", 'all-in-one-seo-pack' ) . '</li><li>' . 
+					__( "%post_author_firstname% - This post's author' first name (capitalized)", 'all-in-one-seo-pack' ) . '</li><li>' . 
+					__( "%post_author_lastname% - This post's author' last name (capitalized)", 'all-in-one-seo-pack' ) . '</li>' . 
 					'</ul>';
 				$this->help_anchors[$field] = '#custom-titles';
 				$this->layout['cpt']['options'][] = $field;
@@ -1085,6 +1117,11 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 		ksort( $role_names );
 		$this->default_options["ga_exclude_users"]['initial_options'] = $role_names;
         
+		unset( $tax_types['category'] );
+		unset( $tax_types['post_tag'] );
+		$this->default_options["tax_noindex"]['initial_options'] = $tax_types;
+		if ( empty( $tax_types ) )
+			unset( $this->default_options["tax_noindex"] );
 		$this->setting_options();
 		$this->add_help_text_links();
 		add_filter( "{$this->prefix}display_options", Array( $this, 'filter_options' ), 10, 2 );
@@ -1093,15 +1130,15 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 	
 	function add_admin_pointers() {
 		$this->pointers['aioseop_menu_220'] = Array( 'pointer_target' => '#toplevel_page_all-in-one-seo-pack-aioseop_class',
-												 'pointer_text' => 	'<h3>' . sprintf( __( 'Welcome to Version %s!', 'all_in_one_seo_pack' ), AIOSEOP_VERSION )
-													. '</h3><p>' . __( 'Thank you for running the latest and greatest All in One SEO Pack ever! Please review your settings, as we\'re always adding new features for you!', 'all_in_one_seo_pack' ) . '</p>',
+												 'pointer_text' => 	'<h3>' . sprintf( __( 'Welcome to Version %s!', 'all-in-one-seo-pack' ), AIOSEOP_VERSION )
+													. '</h3><p>' . __( 'Thank you for running the latest and greatest All in One SEO Pack ever! Please review your settings, as we\'re always adding new features for you!', 'all-in-one-seo-pack' ) . '</p>',
 												 'pointer_edge' => 'top',
 												 'pointer_align' => 'left',
 												 'pointer_scope' => 'global'
 											);
 		$this->pointers['aioseop_welcome_220'] = Array( 'pointer_target' => '#aioseop_top_button',
-													'pointer_text' => '<h3>' . sprintf( __( 'Review Your Settings', 'all_in_one_seo_pack' ), AIOSEOP_VERSION )
-													. '</h3><p>' . __( 'Thank you for running the latest and greatest All in One SEO Pack ever! New since 2.2: Control who accesses your site with the new Robots.txt Editor and File Editor modules!  Enable them from the Feature Manager.  Remember to review your settings, we have added some new ones!', 'all_in_one_seo_pack' ) . '</p>',
+													'pointer_text' => '<h3>' . sprintf( __( 'Review Your Settings', 'all-in-one-seo-pack' ), AIOSEOP_VERSION )
+													. '</h3><p>' . __( 'Thank you for running the latest and greatest All in One SEO Pack ever! New since 2.2: Control who accesses your site with the new Robots.txt Editor and File Editor modules!  Enable them from the Feature Manager.  Remember to review your settings, we have added some new ones!', 'all-in-one-seo-pack' ) . '</p>',
 													 'pointer_edge' => 'bottom',
 													 'pointer_align' => 'left',
 													 'pointer_scope' => 'local'
@@ -1120,8 +1157,8 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 	}
 	
 	function filter_submit( $submit ) {
-		$submit['Submit_Default']['value'] = __( 'Reset General Settings to Defaults', 'all_in_one_seo_pack' ) . ' &raquo;';
-		$submit['Submit_All_Default'] = Array( 'type' => 'submit', 'class' => 'button-primary', 'value' => __( 'Reset ALL Settings to Defaults', 'all_in_one_seo_pack' ) . ' &raquo;' );
+		$submit['Submit_Default']['value'] = __( 'Reset General Settings to Defaults', 'all-in-one-seo-pack' ) . ' &raquo;';
+		$submit['Submit_All_Default'] = Array( 'type' => 'submit', 'class' => 'button-primary', 'value' => __( 'Reset ALL Settings to Defaults', 'all-in-one-seo-pack' ) . ' &raquo;' );
 		return $submit;
 	}
 	
@@ -1182,19 +1219,19 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 				$post_type = get_post_type( $post );
 				if ( !empty( $this->options['aiosp_cpostnoindex'] ) && ( in_array( $post_type, $this->options['aiosp_cpostnoindex'] ) ) ) {
 					$settings["{$prefix}noindex"]['type'] = 'select';
-					$settings["{$prefix}noindex"]['initial_options'] = Array( '' => __( 'Default - noindex', 'all_in_one_seo_pack' ), 'off' => __( 'index', 'all_in_one_seo_pack' ), 'on' => __( 'noindex', 'all_in_one_seo_pack' ) );
+					$settings["{$prefix}noindex"]['initial_options'] = Array( '' => __( 'Default - noindex', 'all-in-one-seo-pack' ), 'off' => __( 'index', 'all-in-one-seo-pack' ), 'on' => __( 'noindex', 'all-in-one-seo-pack' ) );
 				}
 				if ( !empty( $this->options['aiosp_cpostnofollow'] ) && ( in_array( $post_type, $this->options['aiosp_cpostnofollow'] ) ) ) {
 					$settings["{$prefix}nofollow"]['type'] = 'select';
-					$settings["{$prefix}nofollow"]['initial_options'] = Array( '' => __( 'Default - nofollow', 'all_in_one_seo_pack' ), 'off' => __( 'follow', 'all_in_one_seo_pack' ), 'on' => __( 'nofollow', 'all_in_one_seo_pack' ) );
+					$settings["{$prefix}nofollow"]['initial_options'] = Array( '' => __( 'Default - nofollow', 'all-in-one-seo-pack' ), 'off' => __( 'follow', 'all-in-one-seo-pack' ), 'on' => __( 'nofollow', 'all-in-one-seo-pack' ) );
 				}
 				if ( !empty( $this->options['aiosp_cpostnoodp'] ) && ( in_array( $post_type, $this->options['aiosp_cpostnoodp'] ) ) ) {
 					$settings["{$prefix}noodp"]['type'] = 'select';
-					$settings["{$prefix}noodp"]['initial_options'] = Array( '' => __( 'Default - noodp', 'all_in_one_seo_pack' ), 'off' => __( 'odp', 'all_in_one_seo_pack' ), 'on' => __( 'noodp', 'all_in_one_seo_pack' ) );
+					$settings["{$prefix}noodp"]['initial_options'] = Array( '' => __( 'Default - noodp', 'all-in-one-seo-pack' ), 'off' => __( 'odp', 'all-in-one-seo-pack' ), 'on' => __( 'noodp', 'all-in-one-seo-pack' ) );
 				}
 				if ( !empty( $this->options['aiosp_cpostnoydir'] ) && ( in_array( $post_type, $this->options['aiosp_cpostnoydir'] ) ) ) {
 					$settings["{$prefix}noydir"]['type'] = 'select';
-					$settings["{$prefix}noydir"]['initial_options'] = Array( '' => __( 'Default - noydir', 'all_in_one_seo_pack' ), 'off' => __( 'ydir', 'all_in_one_seo_pack' ), 'on' => __( 'noydir', 'all_in_one_seo_pack' ) );
+					$settings["{$prefix}noydir"]['initial_options'] = Array( '' => __( 'Default - noydir', 'all-in-one-seo-pack' ), 'off' => __( 'ydir', 'all-in-one-seo-pack' ), 'on' => __( 'noydir', 'all-in-one-seo-pack' ) );
 				}
 				global $post;
 				$info = $this->get_page_snippet_info();
@@ -1258,8 +1295,8 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 		switch ( $meta['id'] ) {
 			case "aioseop-about":
 				?><div class="aioseop_metabox_text">
-							<p><h2 style="display:inline;"><?php echo AIOSEOP_PLUGIN_NAME; ?></h2> by Michael Torbert of <a target="_blank" title="Semper Fi Web Design"
-							href="http://semperfiwebdesign.com/">Semper Fi Web Design</a>.</p>
+							<p><h2 style="display:inline;"><?php echo AIOSEOP_PLUGIN_NAME; ?></h2><?php sprintf( __( "by %s of %s.", 'all-in-one-seo-pack' ), 'Michael Torbert', '<a target="_blank" title="Semper Fi Web Design"
+							href="http://semperfiwebdesign.com/">Semper Fi Web Design</a>' ); ?>.</p>
 							<?php
 							global $current_user;
 							$user_id = $current_user->ID;
@@ -1269,13 +1306,13 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 								wp_parse_str( $_SERVER["QUERY_STRING"], $qa );
 								$qa['aioseop_reset_notices'] = 1;
 								$url = '?' . build_query( $qa );
-								echo '<p><a href="' . $url . '">' . __( "Reset Dismissed Notices", 'all_in_one_seo_pack' ) . '</a></p>';
+								echo '<p><a href="' . $url . '">' . __( "Reset Dismissed Notices", 'all-in-one-seo-pack' ) . '</a></p>';
 							}
 							?>
 							<p>
-							<strong><a target="_blank" title="<?php _e('Pro Version', 'all_in_one_seo_pack' ); ?>"
+							<strong><a target="_blank" title="<?php _e('Pro Version', 'all-in-one-seo-pack' ); ?>"
 							href="http://semperplugins.com/plugins/all-in-one-seo-pack-pro-version/?loc=side">
-							<?php _e('UPGRADE TO PRO VERSION', 'all_in_one_seo_pack' ); ?></a></strong></p>
+							<?php _e('UPGRADE TO PRO VERSION', 'all-in-one-seo-pack' ); ?></a></strong></p>
 						</div>
 				<?php
 		    case "aioseop-donate":
@@ -1290,13 +1327,13 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 								</div>
 								
 							<div class="aioseop_metabox_feature">
-								<a target="_blank" title="<?php _e( 'Donate', 'all_in_one_seo_pack' ); ?>"
+								<a target="_blank" title="<?php _e( 'Donate', 'all-in-one-seo-pack' ); ?>"
 	href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mrtorbert%40gmail%2ecom&item_name=All%20In%20One%20SEO%20Pack&item_number=Support%20Open%20Source&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8">
-					<img src="<?php echo AIOSEOP_PLUGIN_URL; ?>images/donate.jpg" alt="<?php _e('Donate with Paypal', 'all_in_one_seo_pack' ); ?>" />	</a>
+					<img src="<?php echo AIOSEOP_PLUGIN_URL; ?>images/donate.jpg" alt="<?php _e('Donate with Paypal', 'all-in-one-seo-pack' ); ?>" />	</a>
 					<a target="_blank" title="Amazon Wish List" href="https://www.amazon.com/wishlist/1NFQ133FNCOOA/ref=wl_web">
-					<img src="<?php echo AIOSEOP_PLUGIN_URL; ?>images/amazon.jpg" alt="<?php _e('My Amazon Wish List', 'all_in_one_seo_pack' ); ?>" /> </a>
-					<a target="_blank" title="<?php _e( 'Follow us on Facebook', 'all_in_one_seo_pack' ); ?>" href="http://www.facebook.com/pages/Semper-Fi-Web-Design/121878784498475"><span class="aioseop_follow_button aioseop_facebook_follow"></span></a>
-					<a target="_blank" title="<?php _e( 'Follow us on Twitter', 'all_in_one_seo_pack' ); ?>" href="http://twitter.com/semperfidev/"><span class="aioseop_follow_button aioseop_twitter_follow"></span></a>
+					<img src="<?php echo AIOSEOP_PLUGIN_URL; ?>images/amazon.jpg" alt="<?php _e('My Amazon Wish List', 'all-in-one-seo-pack' ); ?>" /> </a>
+					<a target="_blank" title="<?php _e( 'Follow us on Facebook', 'all-in-one-seo-pack' ); ?>" href="http://www.facebook.com/pages/Semper-Fi-Web-Design/121878784498475"><span class="aioseop_follow_button aioseop_facebook_follow"></span></a>
+					<a target="_blank" title="<?php _e( 'Follow us on Twitter', 'all-in-one-seo-pack' ); ?>" href="http://twitter.com/semperfidev/"><span class="aioseop_follow_button aioseop_twitter_follow"></span></a>
 					</div>
 				
 				</div>
@@ -1307,8 +1344,8 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 				<div class="aioseop_metabox_text">
 						<form action="http://semperfiwebdesign.us1.list-manage.com/subscribe/post?u=794674d3d54fdd912f961ef14&amp;id=af0a96d3d9" 
 						method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-						<h2><?php _e( 'Join our mailing list for tips, tricks, and WordPress secrets.', 'all_in_one_seo_pack' ); ?></h2>
-						<p><i><?php _e( 'Sign up today and receive a free copy of the e-book 5 SEO Tips for WordPress ($39 value).', 'all_in_one_seo_pack' ); ?></i></p>
+						<h2><?php _e( 'Join our mailing list for tips, tricks, and WordPress secrets.', 'all-in-one-seo-pack' ); ?></h2>
+						<p><i><?php _e( 'Sign up today and receive a free copy of the e-book 5 SEO Tips for WordPress ($39 value).', 'all-in-one-seo-pack' ); ?></i></p>
 						<p><input type="text" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
 							<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn"></p>
 						</form>
@@ -1317,13 +1354,13 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 				break;
 		    case "aioseop-support":
 		        ?><div class="aioseop_metabox_text">
-				<p><div class="aioseop_icon aioseop_file_icon"></div><a target="_blank" href="http://semperplugins.com/documentation/"><?php _e( 'Read the All in One SEO Pack user guide', 'all_in_one_seo_pack' ); ?></a></p>
-				<p><div class="aioseop_icon aioseop_support_icon"></div><a target="_blank" title="<?php _e( 'All in One SEO Pro Plugin Support Forum', 'all_in_one_seo_pack' ); ?>"
-				href="http://semperplugins.com/support/"><?php _e( 'Access our Premium Support Forums', 'all_in_one_seo_pack' ); ?></a></p>
-				<p><div class="aioseop_icon aioseop_cog_icon"></div><a target="_blank" title="<?php _e( 'All in One SEO Pro Plugin Changelog', 'all_in_one_seo_pack' ); ?>"
-				href="http://semperfiwebdesign.com/blog/all-in-one-seo-pack/all-in-one-seo-pack-release-history/"><?php _e( 'View the Changelog', 'all_in_one_seo_pack' ); ?></a></p>
-				<p><div class="aioseop_icon aioseop_youtube_icon"></div><a target="_blank" href="http://semperplugins.com/doc-type/video/"><?php _e( 'Watch video tutorials', 'all_in_one_seo_pack' ); ?></a></p>
-				<p><div class="aioseop_icon aioseop_book_icon"></div><a target="_blank" href="http://semperplugins.com/documentation/quick-start-guide/"><?php _e( 'Getting started? Read the Beginners Guide', 'all_in_one_seo_pack' ); ?></a></p>
+				<p><div class="aioseop_icon aioseop_file_icon"></div><a target="_blank" href="http://semperplugins.com/documentation/"><?php _e( 'Read the All in One SEO Pack user guide', 'all-in-one-seo-pack' ); ?></a></p>
+				<p><div class="aioseop_icon aioseop_support_icon"></div><a target="_blank" title="<?php _e( 'All in One SEO Pro Plugin Support Forum', 'all-in-one-seo-pack' ); ?>"
+				href="http://semperplugins.com/support/"><?php _e( 'Access our Premium Support Forums', 'all-in-one-seo-pack' ); ?></a></p>
+				<p><div class="aioseop_icon aioseop_cog_icon"></div><a target="_blank" title="<?php _e( 'All in One SEO Pro Plugin Changelog', 'all-in-one-seo-pack' ); ?>"
+				href="http://semperfiwebdesign.com/blog/all-in-one-seo-pack/all-in-one-seo-pack-release-history/"><?php _e( 'View the Changelog', 'all-in-one-seo-pack' ); ?></a></p>
+				<p><div class="aioseop_icon aioseop_youtube_icon"></div><a target="_blank" href="http://semperplugins.com/doc-type/video/"><?php _e( 'Watch video tutorials', 'all-in-one-seo-pack' ); ?></a></p>
+				<p><div class="aioseop_icon aioseop_book_icon"></div><a target="_blank" href="http://semperplugins.com/documentation/quick-start-guide/"><?php _e( 'Getting started? Read the Beginners Guide', 'all-in-one-seo-pack' ); ?></a></p>
 				</div>
 		        <?php
 		        break;
@@ -1409,9 +1446,9 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 
 	function init() {
 		if ( !defined( 'WP_PLUGIN_DIR' ) ) {
-			load_plugin_textdomain( 'all_in_one_seo_pack', str_replace( ABSPATH, '', dirname( __FILE__ ) ) );
+			load_plugin_textdomain( 'all-in-one-seo-pack', str_replace( ABSPATH, '', dirname( __FILE__ ) ) );
 		} else {
-			load_plugin_textdomain( 'all_in_one_seo_pack', false, AIOSEOP_PLUGIN_DIRNAME );
+			load_plugin_textdomain( 'all-in-one-seo-pack', false, AIOSEOP_PLUGIN_DIRNAME );
 		}
 	}
 	
@@ -1478,6 +1515,11 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 				$this->log( "another plugin interfering?" );
 				// if we get here there *could* be trouble with another plugin :(
 				$this->ob_start_detected = true;
+				if ( $this->option_isset( "rewrite_titles" ) ) { // try alternate method -- pdb
+					$aioseop_options['aiosp_rewrite_titles'] = 0;
+					$force_rewrites = 0;
+					add_filter( 'wp_title', array( $this, 'wp_title' ), 20 );
+				}
 				if ( function_exists( 'ob_list_handlers' ) ) {
 					foreach ( ob_list_handlers() as $handler ) {
 						$this->log( "detected output handler $handler" );
@@ -1596,8 +1638,11 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 		global $aioseop_options;
 		$opts = $this->meta_opts;
 		$page = $this->get_page_number();
-		$robots_meta = '';
-				
+		$robots_meta = $tax_noindex = '';
+		if ( isset( $aioseop_options['aiosp_tax_noindex'] ) ) $tax_noindex = $aioseop_options['aiosp_tax_noindex'];
+		
+		if ( empty( $tax_noindex ) || !is_array( $tax_noindex) ) $tax_noindex = Array();
+								
 		$aiosp_noindex = $aiosp_nofollow = $aiosp_noodp = $aiosp_noydir = '';
 		$noindex = "index";
 		$nofollow = "follow";
@@ -1605,7 +1650,8 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 			&& ( ( is_date() && !empty( $aioseop_options['aiosp_archive_date_noindex'] ) ) || ( is_author() && !empty( $aioseop_options['aiosp_archive_author_noindex'] ) ) ) ) 
 			|| ( is_tag() && !empty( $aioseop_options['aiosp_tags_noindex'] ) ) 
 			|| ( is_search() && !empty( $aioseop_options['aiosp_search_noindex'] ) )
-			|| ( is_404() && !empty( $aioseop_options['aiosp_404_noindex'] ) ) ) {
+		 	|| ( is_404() && !empty( $aioseop_options['aiosp_404_noindex'] ) )
+			|| ( is_tax() && in_array( get_query_var( 'taxonomy' ), $tax_noindex ) ) ) {
 				$noindex = 'noindex';
 		} elseif ( ( is_single() || is_page() || $this->is_static_posts_page() || is_attachment() || ( $page > 1 ) ) ) {
 			$post_type = get_post_type();
@@ -1726,7 +1772,7 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 			static $aioseop_dup_counter = 0;
 			$aioseop_dup_counter++;
 			if ( $aioseop_dup_counter > 1 ) {
-			    echo "\n<!-- " . sprintf( __( "Debug Warning: All in One SEO Pack meta data was included again from %s filter. Called %s times!", 'all_in_one_seo_pack' ), current_filter(), $aioseop_dup_counter ) . " -->\n";
+			    echo "\n<!-- " . sprintf( __( "Debug Warning: All in One SEO Pack meta data was included again from %s filter. Called %s times!", 'all-in-one-seo-pack' ), current_filter(), $aioseop_dup_counter ) . " -->\n";
 			    return;
 			}
 			if ( is_home() && !is_front_page() ) {
@@ -1795,7 +1841,7 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 						$meta_string .= '<meta name="' . $v . '" content="' . trim( strip_tags( $aioseop_options["aiosp_{$k}_verify"] ) ) . '" />' . "\n";
 				
 				// sitelinks search
-				if ( !empty( $aioseop_options["aiosp_google_sitelinks_search"] ) )
+				if ( !empty( $aioseop_options["aiosp_google_sitelinks_search"] ) || !empty( $aioseop_options["aiosp_google_set_site_name"] ) )
 					$meta_string .= $this->sitelinks_search_box() . "\n";
 			}
 			// handle extra meta fields
@@ -1978,15 +2024,15 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 			$this->default_options["google_connect"]["type"] = 'html';
 			$this->default_options["google_connect"]["nolabel"] = 1;
 			$this->default_options["google_connect"]["save"] = true;
-			$this->default_options["google_connect"]["name"] = __( 'Disconnect From Google Analytics', 'all_in_one_seo_pack' );
-			$this->default_options["google_connect"]["default"] = "<input name='aiosp_google_connect' type=submit  class='button-primary' value='" . __( 'Remove Stored Credentials', 'all_in_one_seo_pack' ) . "'>";
+			$this->default_options["google_connect"]["name"] = __( 'Disconnect From Google Analytics', 'all-in-one-seo-pack' );
+			$this->default_options["google_connect"]["default"] = "<input name='aiosp_google_connect' type=submit  class='button-primary' value='" . __( 'Remove Stored Credentials', 'all-in-one-seo-pack' ) . "'>";
 			add_filter( $this->prefix . 'override_options', Array( $this, 'override_options' ), 10, 3 );
 		} else {
 			$this->default_options["google_connect"]["type"] = 'html';
 			$this->default_options["google_connect"]["nolabel"] = 1;
 			$this->default_options["google_connect"]["save"] = false;
 			$url = $this->oauth_connect();
-			$this->default_options["google_connect"]["default"] = "<a href='{$url}' class='button-primary'>" . __( 'Connect With Google Analytics', 'all_in_one_seo_pack' ) . "</a>";
+			$this->default_options["google_connect"]["default"] = "<a href='{$url}' class='button-primary'>" . __( 'Connect With Google Analytics', 'all-in-one-seo-pack' ) . "</a>";
 			foreach ( Array( "token", "secret", "access_token", "ga_token", "account_cache" ) as $v ) {
 				if ( !empty( $this->$v) )  $preload["{$this->prefix}{$v}"] = $this->$v;
 			}
@@ -2001,7 +2047,7 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 
 	function oauth_get_data( $oauth_url, $args = null ) {
 		if ( !class_exists( 'OAuthConsumer' ) ) require_once( 'OAuth.php' );
-		if ( $args === null ) $args = Array( 'scope' => 'https://www.googleapis.com/auth/analytics.readonly', 'xoauth_displayname' => AIOSEOP_PLUGIN_NAME . ' ' . __('Google Analytics', 'all_in_one_seo_pack' ) );
+		if ( $args === null ) $args = Array( 'scope' => 'https://www.googleapis.com/auth/analytics.readonly', 'xoauth_displayname' => AIOSEOP_PLUGIN_NAME . ' ' . __('Google Analytics', 'all-in-one-seo-pack' ) );
 		$req_token = new OAuthConsumer( $this->token, $this->secret );
 		$req = $this->oauth_get_creds( $oauth_url, $req_token, $args );
 		return wp_remote_get( $req->to_url() );
@@ -2019,7 +2065,7 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 
 	function oauth_get_token( $oauth_verifier ) {
 		if ( !class_exists( 'OAuthConsumer' ) ) require_once( 'OAuth.php' );
-		$args = Array( 'scope' => 'https://www.google.com/analytics/feeds/', 'xoauth_displayname' => AIOSEOP_PLUGIN_NAME . ' ' . __('Google Analytics', 'all_in_one_seo_pack' ) );
+		$args = Array( 'scope' => 'https://www.google.com/analytics/feeds/', 'xoauth_displayname' => AIOSEOP_PLUGIN_NAME . ' ' . __('Google Analytics', 'all-in-one-seo-pack' ) );
 		$args['oauth_verifier'] = $oauth_verifier;
 		$oauth_access_token = "https://www.google.com/accounts/OAuthGetAccessToken";
 		$reqData = $this->oauth_get_data( $oauth_access_token, $args );
@@ -2051,7 +2097,7 @@ class All_in_One_SEO_Pack extends All_in_One_SEO_Pack_Module {
 		}
 		$args = array(
 			'scope' => 'https://www.google.com/analytics/feeds/',
-			'xoauth_displayname' => AIOSEOP_PLUGIN_NAME . ' ' . __('Google Analytics', 'all_in_one_seo_pack')
+			'xoauth_displayname' => AIOSEOP_PLUGIN_NAME . ' ' . __('Google Analytics', 'all-in-one-seo-pack')
 		);
 		$req_req = $this->oauth_get_creds( $oauth_request_token, NULL, $args, admin_url( "admin.php?page=all-in-one-seo-pack/aioseop_class.php" ) );
 		$reqData = wp_remote_get( $req_req->to_url() );
@@ -2281,18 +2327,41 @@ function aiosp_google_analytics() {
 }
 
 	function sitelinks_search_box() {
-		$home_url = get_home_url();
+		global $aioseop_options;
+		$home_url = esc_url( get_home_url() );
+		$name_block = $search_block = '';
+		if ( !empty( $aioseop_options["aiosp_google_set_site_name"] ) ) {
+			if ( !empty( $aioseop_options["aiosp_google_specify_site_name"] ) ) {
+				$blog_name = $aioseop_options["aiosp_google_specify_site_name"];
+			} else {
+				$blog_name = get_bloginfo( 'name' );
+			}
+			$blog_name = esc_attr( $blog_name );
+			$name_block=<<<EOF
+		  "name": "{$blog_name}",
+EOF;
+		}
+
+		if ( !empty( $aioseop_options["aiosp_google_sitelinks_search"] ) ) {
+			$search_block=<<<EOF
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "{$home_url}/?s={search_term}",
+          "query-input": "required name=search_term"
+        },
+EOF;
+		}
+
 		$search_box=<<<EOF
 <script type="application/ld+json">
         {
           "@context": "http://schema.org",
           "@type": "WebSite",
-          "url": "{$home_url}/",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "{$home_url}/?s={search_term}",
-            "query-input": "required name=search_term"
-          }
+EOF;
+		if ( !empty( $name_block ) )   $search_box .= $name_block;
+		if ( !empty( $search_block ) ) $search_box .= $search_block;
+		$search_box.=<<<EOF
+		  "url": "{$home_url}/"
         }
 </script>
 EOF;
@@ -2417,9 +2486,9 @@ EOF;
 	function get_post_description( $post ) {
 		global $aioseop_options;
 		$description = '';
-		if ( !$this->show_page_description() )
-			return '';
-		
+		if ( !$this->show_page_description() ) {
+			return '';			
+		}
 	    $description = trim( stripslashes( $this->internationalize( get_post_meta( $post->ID, "_aioseop_description", true ) ) ) );
 		if ( !empty( $post ) && post_password_required( $post ) ) {
 			return $description;
@@ -2623,6 +2692,7 @@ EOF;
 	}
 	
 	function get_tax_name( $tax ) {
+		global $aioseop_options;
 		$name = '';
 		if ( empty( $name ) ) $name = single_term_title( '', false );
 		if ( ( $tax == 'category' ) && ( !empty( $aioseop_options['aiosp_cap_cats'] ) ) )
@@ -2680,45 +2750,58 @@ EOF;
 		return $title;
 	}
 	
-	function apply_post_title_format( $title, $category = '', $p = null ) {
-		if ( $p === null ) {
-			global $post;			
-		} else {
-			$post = $p;
-		}
-		$title_format = $this->get_post_title_format( 'post', $p );
+	function title_placeholder_helper( $title, $post, $type = 'post', $title_format = '', $category = '' ) {
 		if ( !empty( $post ) )
 			$authordata = get_userdata( $post->post_author );
 		else
 			$authordata = new WP_User();
-		$r_title = array( '%blog_title%', '%blog_description%', '%post_title%', '%category%', '%category_title%', '%post_author_login%', '%post_author_nicename%', '%post_author_firstname%', '%post_author_lastname%' );
-		$d_title = array( $this->internationalize( get_bloginfo('name') ), $this->internationalize( get_bloginfo( 'description' ) ), $title, $category, $category, $authordata->user_login, $authordata->user_nicename, $this->ucwords( $authordata->first_name ), $this->ucwords( $authordata->last_name ) );
-		$title = trim( str_replace( $r_title, $d_title, $title_format ) );
+		$new_title = str_replace( "%blog_title%", $this->internationalize( get_bloginfo( 'name' ) ), $title_format );
+        if ( strpos( $new_title, "%blog_description%"			) !== false ) $new_title = str_replace( "%blog_description%", $this->internationalize( get_bloginfo( 'description' ) ), $new_title );
+        if ( strpos( $new_title, "%{$type}_title%"				) !== false ) $new_title = str_replace( "%{$type}_title%", $title, $new_title );
+		if ( $type == 'post' ) {
+	        if ( strpos( $new_title, "%category%"				) !== false ) $new_title = str_replace( "%category%", $category, $new_title );
+	        if ( strpos( $new_title, "%category_title%"			) !== false ) $new_title = str_replace( "%category_title%", $category, $new_title );
+			if ( strpos( $new_title, "%tax_" ) && !empty( $post ) ) {
+				$taxes = get_object_taxonomies( $post, 'objects' );
+				if ( !empty( $taxes ) )
+					foreach( $taxes as $t )
+						if ( strpos( $new_title, "%tax_{$t->name}%" ) ) {
+							$terms = $this->get_all_terms( $post->ID, $t->name );
+							$term = '';
+							if ( count( $terms ) > 0 )
+								$term = $terms[0];
+							$new_title = str_replace( "%tax_{$t->name}%", $term, $new_title );
+						}
+			}
+		}
+        if ( strpos( $new_title, "%{$type}_author_login%"		) !== false ) $new_title = str_replace( "%{$type}_author_login%", $authordata->user_login, $new_title );
+        if ( strpos( $new_title, "%{$type}_author_nicename%"	) !== false ) $new_title = str_replace( "%{$type}_author_nicename%", $authordata->user_nicename, $new_title );
+        if ( strpos( $new_title, "%{$type}_author_firstname%"	) !== false ) $new_title = str_replace( "%{$type}_author_firstname%", $this->ucwords($authordata->first_name ), $new_title );
+        if ( strpos( $new_title, "%{$type}_author_lastname%"	) !== false ) $new_title = str_replace( "%{$type}_author_lastname%", $this->ucwords($authordata->last_name ), $new_title );
+		$title = trim( $new_title );
 		return $title;
+	}
+	
+	function apply_post_title_format( $title, $category = '', $p = null ) {
+		if ( $p === null ) {
+			global $post;
+		} else {
+			$post = $p;
+		}
+		$title_format = $this->get_post_title_format( 'post', $post );		
+		return $this->title_placeholder_helper( $title, $post, 'post', $title_format, $category );
 	}
 	
 	function apply_page_title_format( $title, $p = null, $title_format = '' ) {
 		global $aioseop_options;
 		if ( $p === null ) {
-			global $post;			
+			global $post;
 		} else {
 			$post = $p;
 		}
 		if ( empty( $title_format ) )
 			$title_format = $aioseop_options['aiosp_page_title_format'];
-		if ( !empty( $post ) )
-			$authordata = get_userdata( $post->post_author );
-		else
-			$authordata = new WP_User();
-        $new_title = str_replace( '%blog_title%', $this->internationalize( get_bloginfo( 'name' ) ), $title_format );
-        if ( strpos( $new_title, '%blog_description%'	   ) !== false ) $new_title = str_replace( '%blog_description%', $this->internationalize( get_bloginfo( 'description' ) ), $new_title );
-        if ( strpos( $new_title, '%page_title%'			   ) !== false ) $new_title = str_replace( '%page_title%', $title, $new_title );
-        if ( strpos( $new_title, '%page_author_login%'	   ) !== false ) $new_title = str_replace( '%page_author_login%', $authordata->user_login, $new_title );
-        if ( strpos( $new_title, '%page_author_nicename%'  ) !== false ) $new_title = str_replace( '%page_author_nicename%', $authordata->user_nicename, $new_title );
-        if ( strpos( $new_title, '%page_author_firstname%' ) !== false ) $new_title = str_replace( '%page_author_firstname%', $this->ucwords($authordata->first_name ), $new_title );
-        if ( strpos( $new_title, '%page_author_lastname%'  ) !== false ) $new_title = str_replace( '%page_author_lastname%', $this->ucwords($authordata->last_name ), $new_title );
-		$title = trim( $new_title );
-		return $title;
+		return $this->title_placeholder_helper( $title, $post, 'page', $title_format );
 	}
 
 	/*** Gets the title that will be used by AIOSEOP for title rewrites or returns false. ***/
@@ -3037,6 +3120,15 @@ EOF;
 		return $keywords;
 	}
 	
+	function get_all_terms( $id, $taxonomy ) {
+		$keywords = Array();
+		$terms = get_the_terms( $id, $taxonomy );
+		if ( !empty( $terms ) )
+			foreach ( $terms as $term )
+				$keywords[] = $this->internationalize( $term->name );
+        return $keywords;
+	}
+		
 	/**
 	 * @return comma-separated list of unique keywords
 	 */
@@ -3192,21 +3284,21 @@ EOF;
             if ( empty( $url ) )
                     $url = esc_url( admin_url( 'admin.php?page=' . $menu_slug ) );
 			
-			$wp_admin_bar->add_menu( array( 'id' => AIOSEOP_PLUGIN_DIRNAME, 'title' => __( 'SEO', 'all_in_one_seo_pack' ), 'href' => $url ) );
+			$wp_admin_bar->add_menu( array( 'id' => AIOSEOP_PLUGIN_DIRNAME, 'title' => __( 'SEO', 'all-in-one-seo-pack' ), 'href' => $url ) );
 			if ( current_user_can( 'update_plugins' ) )
 				add_action( 'admin_bar_menu', array( $this, 'admin_bar_upgrade_menu' ), 1101 );
 			$aioseop_admin_menu = 1;
 			if ( !is_admin() && !empty( $post ) ) {
 				$blog_page = $this->get_blog_page( $post );
 				if ( !empty( $blog_page ) ) $post = $blog_page;
-				$wp_admin_bar->add_menu( array( 'id' => 'aiosp_edit_' . $post->ID, 'parent' => AIOSEOP_PLUGIN_DIRNAME, 'title' => __( 'Edit SEO', 'all_in_one_seo_pack' ), 'href' => get_edit_post_link( $post->ID ) . '#aiosp' ) );				
+				$wp_admin_bar->add_menu( array( 'id' => 'aiosp_edit_' . $post->ID, 'parent' => AIOSEOP_PLUGIN_DIRNAME, 'title' => __( 'Edit SEO', 'all-in-one-seo-pack' ), 'href' => get_edit_post_link( $post->ID ) . '#aiosp' ) );				
 			}
 		}
 	}
 			
 	function admin_bar_upgrade_menu() {
 		global $wp_admin_bar;
-		$wp_admin_bar->add_menu( array( 'parent' => AIOSEOP_PLUGIN_DIRNAME, 'title' => __( 'Upgrade To Pro', 'all_in_one_seo_pack' ), 'id' => 'aioseop-pro-upgrade', 'href' => 'http://semperplugins.com/plugins/all-in-one-seo-pack-pro-version/?loc=menu', 'meta' => Array( 'target' => '_blank' ) ) );
+		$wp_admin_bar->add_menu( array( 'parent' => AIOSEOP_PLUGIN_DIRNAME, 'title' => __( 'Upgrade To Pro', 'all-in-one-seo-pack' ), 'id' => 'aioseop-pro-upgrade', 'href' => 'http://semperplugins.com/plugins/all-in-one-seo-pack-pro-version/?loc=menu', 'meta' => Array( 'target' => '_blank' ) ) );
 	}
 
 	function menu_order() {
@@ -3215,7 +3307,7 @@ EOF;
 	
 	function admin_menu() {
 		$file = plugin_basename( __FILE__ );
-		$menu_name = __( 'All in One SEO', 'all_in_one_seo_pack' );
+		$menu_name = __( 'All in One SEO', 'all-in-one-seo-pack' );
 
 		$this->locations['aiosp']['default_options']['nonce-aioseop-edit']['default'] = wp_create_nonce('edit-aioseop-nonce');
 		
@@ -3259,8 +3351,8 @@ EOF;
 		if ( $donated ) {
 			// Thank you for your donation
 			$this->pointers['aioseop_donate'] = Array( 'pointer_target' => '#aiosp_donate_wrapper',
-														'pointer_text' => '<h3>' . __( 'Thank you!', 'all_in_one_seo_pack' ) 
-														. '</h3><p>' . __( 'Thank you for your donation, it helps keep this plugin free and actively developed!', 'all_in_one_seo_pack' ) . '</p>'
+														'pointer_text' => '<h3>' . __( 'Thank you!', 'all-in-one-seo-pack' ) 
+														. '</h3><p>' . __( 'Thank you for your donation, it helps keep this plugin free and actively developed!', 'all-in-one-seo-pack' ) . '</p>'
 												 );
 		}
 		
@@ -3284,9 +3376,9 @@ EOF;
 		else
 			add_utility_page( $menu_name, $menu_name, 'manage_options', $file, Array( $this, 'display_settings_page' ) );
 		
-		add_meta_box('aioseop-list', __( "Join Our Mailing List", 'all_in_one_seo_pack' ), array( $this, 'display_extra_metaboxes'), 'aioseop_metaboxes', 'normal', 'core');
+		add_meta_box('aioseop-list', __( "Join Our Mailing List", 'all-in-one-seo-pack' ), array( $this, 'display_extra_metaboxes'), 'aioseop_metaboxes', 'normal', 'core');
 		add_meta_box('aioseop-about', "About <span style='float:right;'>Version <b>" . AIOSEOP_VERSION . "</b></span>", array( $this, 'display_extra_metaboxes'), 'aioseop_metaboxes', 'side', 'core');
-		add_meta_box('aioseop-support', __( "Support", 'all_in_one_seo_pack' ) . " <span style='float:right;'>" . __( "Version", 'all_in_one_seo_pack' ) . " <b>" . AIOSEOP_VERSION . "</b></span>", array( $this, 'display_extra_metaboxes'), 'aioseop_metaboxes', 'side', 'core');
+		add_meta_box('aioseop-support', __( "Support", 'all-in-one-seo-pack' ) . " <span style='float:right;'>" . __( "Version", 'all-in-one-seo-pack' ) . " <b>" . AIOSEOP_VERSION . "</b></span>", array( $this, 'display_extra_metaboxes'), 'aioseop_metaboxes', 'side', 'core');
 		
 		add_action( 'aioseop_modules_add_menus', Array( $this, 'add_menu' ), 5 );
 		do_action( 'aioseop_modules_add_menus', $file );
@@ -3308,7 +3400,7 @@ EOF;
 						if ( $title != $this->plugin_name ) $title = $this->plugin_name . ' - ' . $title;
 						if ( $tab_num <= 1 ) {
 							if ( !empty( $m[0]['callback_args']['help_link'] ) )
-								$title .= "<a class='aioseop_help_text_link aioseop_meta_box_help' target='_blank' href='" . $m[0]['callback_args']['help_link'] . "'><span>" . __( 'Help', 'all_in_one_seo_pack' ) . "</span></a>";
+								$title .= "<a class='aioseop_help_text_link aioseop_meta_box_help' target='_blank' href='" . $m[0]['callback_args']['help_link'] . "'><span>" . __( 'Help', 'all-in-one-seo-pack' ) . "</span></a>";
 							add_meta_box( $m[0]['id'], $title, $m[0]['callback'], $m[0]['post_type'], $m[0]['context'], $m[0]['priority'], $m[0]['callback_args'] );
 						} elseif ( $tab_num > 1 ) {
 							add_meta_box( $m[0]['id'] . '_tabbed', $title, Array( $this, 'display_tabbed_metabox' ), $m[0]['post_type'], $m[0]['context'], $m[0]['priority'], $m );
@@ -3320,7 +3412,7 @@ EOF;
 					$title = $m['title'];
 					if ( $title != $this->plugin_name ) $title = $this->plugin_name . ' - ' . $title;
 					if ( !empty( $m['help_link'] ) )
-						$title .= "<a class='aioseop_help_text_link aioseop_meta_box_help' target='_blank' href='" . $m['help_link'] . "'><span>" . __( 'Help', 'all_in_one_seo_pack' ) . "</span></a>";
+						$title .= "<a class='aioseop_help_text_link aioseop_meta_box_help' target='_blank' href='" . $m['help_link'] . "'><span>" . __( 'Help', 'all-in-one-seo-pack' ) . "</span></a>";
 					add_meta_box( $m['id'], $title, $m['callback'], $m['post_type'], $m['context'], $m['priority'], $m['callback_args'] );
 				}
 			}
@@ -3332,7 +3424,7 @@ EOF;
 		$active = ' active';
 		foreach( $tabs as $t ) {
 			if ( $active )
-				$title = __( 'Main Settings', 'all_in_one_seo_pack' );
+				$title = __( 'Main Settings', 'all-in-one-seo-pack' );
 			else
 				$title = $t['title'];
 			$header .= '<li><label class="aioseop_header_nav"><a class="aioseop_header_tab' . $active . '" href="#'. $t['id'] .'">'.$title.'</a></label></li>';
@@ -3361,7 +3453,7 @@ EOF;
 	function display_right_sidebar( ) { ?>
 		
 <?php
-/* <label class="aioseop_generic_label"><?php _e('Click on option titles to get help!', 'all_in_one_seo_pack' ); ?></label> */
+/* <label class="aioseop_generic_label"><?php _e('Click on option titles to get help!', 'all-in-one-seo-pack' ); ?></label> */
 		global $wpdb;
 
 		if( !get_option( 'aioseop_options' ) ) {
@@ -3402,17 +3494,35 @@ EOF;
 				});
 				//]]>
 			</script>
-		<div class="aioseop_advert aioseop_nopad">
-			<a href="https://wp.wincher.com/v1/link" target="_blank"><img src="<?php echo AIOSEOP_PLUGIN_IMAGES_URL; ?>wincherbanner.png"></a>
+		<div class="aioseop_advert aioseop_nopad_all">
+				<?php $adid = mt_rand( 21, 23 ); 
+			
+				 if($adid == 23){ ?><div style="height: 220px; background-image: url('https://www.wincher.com/Content/Images/plugin/wp/banner30.jpg')">
+					<form  style="position: relative; top: 170px; left: 40px;" action="https://www.wincher.com/FastReg" method="post" target="_blank">
+					<input type="hidden" name="adreferer" value="banner<?php echo $adid; ?>"/>
+					<input type="hidden" name="referer" value="all-in-one-seo-pack"/>
+					<input type="text" name="email" placeholder="Email" style="padding-left: 7px; height: 30px; width: 290px; border: solid 1px #DDD;"/>
+					<input type="submit" name="sub"  value="Sign up!" style="height: 30px; width: 90px; background-color: #42DA76; color: #FFF; font-weight: bold; border:none; margin-left:5px;"/>
+					</form></div>
+					<?
+				}else{
+				?>	
+				<a href="https://www.wincher.com/?referer=all-in-one-seo-pack&adreferer=banner<?php echo $adid; ?>" target="_blank"><div class=wincherad id=wincher<?php echo $adid; ?>>
+			    </div></a>
+			<?php } ?>
+				
 		</div>
+		
+		
 		<!-- Headway Themes-->
-		<div class="aioseop_advert">
+		<div class="aioseop_advert headwaythemes">
 					<div>
 					<h3>Drag and Drop WordPress Design</h3>
 					<p><a href="http://semperfiwebdesign.com/headwayaio/" target="_blank">Headway Themes</a> allows you to easily create your own stunning website designs! Stop using premade themes start making your own design with Headway's easy to use Drag and Drop interface. All in One SEO Pack users have an exclusive discount by using coupon code <strong>SEMPERFI30</strong> at checkout.</p>
 					</div>
 				<a href="http://semperfiwebdesign.com/headwayaio/" target="_blank"><img src="<?php echo AIOSEOP_PLUGIN_IMAGES_URL; ?>headwaybanner.png"></a>
 		</div>
+		
 		
 	</div>
 </div>	

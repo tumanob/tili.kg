@@ -142,10 +142,10 @@ if ( !function_exists( 'aioseop_addmycolumns' ) ) {
 if ( !function_exists( 'aioseop_mrt_pcolumns' ) ) {
 	function aioseop_mrt_pcolumns( $aioseopc ) {
 		global $aioseop_options;
-	    $aioseopc['seotitle'] = __( 'SEO Title', 'all_in_one_seo_pack' );
-	    $aioseopc['seodesc'] = __( 'SEO Description', 'all_in_one_seo_pack' );
+	    $aioseopc['seotitle'] = __( 'SEO Title', 'all-in-one-seo-pack' );
+	    $aioseopc['seodesc'] = __( 'SEO Description', 'all-in-one-seo-pack' );
 	    if ( empty( $aioseop_options['aiosp_togglekeywords'] ) )
-			$aioseopc['seokeywords'] = __( 'SEO Keywords', 'all_in_one_seo_pack' );
+			$aioseopc['seokeywords'] = __( 'SEO Keywords', 'all-in-one-seo-pack' );
 	    return $aioseopc;
 	}	
 }
@@ -189,6 +189,11 @@ if ( !function_exists( 'aioseop_admin_head' ) ) {
 		td.seokeywords.column-seokeywords {
 			overflow: visible;
 		}
+		@media screen and (max-width: 782px) {
+			body.wp-admin th.column-seotitle, th.column-seodesc, th.column-seokeywords, td.seotitle.column-seotitle, td.seodesc.column-seodesc, td.seokeywords.column-seokeywords {
+			  display: none;
+			}
+		}
 		</style>
 		<?php wp_print_scripts( Array( 'sack' ) );
 		?><script type="text/javascript">
@@ -198,9 +203,9 @@ if ( !function_exists( 'aioseop_admin_head' ) ) {
 			pluginUrl: "<?php print AIOSEOP_PLUGIN_URL; ?>", 
 			requestUrl: "<?php print WP_ADMIN_URL . '/admin-ajax.php' ?>", 
 			imgUrl: "<?php print AIOSEOP_PLUGIN_IMAGES_URL; ?>",
-			Edit: "<?php _e( 'Edit', 'all_in_one_seo_pack'); ?>", Post: "<?php _e( 'Post', 'all_in_one_seo_pack'); ?>", Save: "<?php _e( 'Save', 'all_in_one_seo_pack'); ?>", Cancel: "<?php _e( 'Cancel', 'all_in_one_seo_pack'); ?>", postType: "post", 
-			pleaseWait: "<?php _e( 'Please wait...', 'all_in_one_seo_pack'); ?>", slugEmpty: "<?php _e( 'Slug may not be empty!', 'all_in_one_seo_pack'); ?>", 
-			Revisions: "<?php _e( 'Revisions', 'all_in_one_seo_pack'); ?>", Time: "<?php _e( 'Insert time', 'all_in_one_seo_pack'); ?>"
+			Edit: "<?php _e( 'Edit', 'all-in-one-seo-pack'); ?>", Post: "<?php _e( 'Post', 'all-in-one-seo-pack'); ?>", Save: "<?php _e( 'Save', 'all-in-one-seo-pack'); ?>", Cancel: "<?php _e( 'Cancel', 'all-in-one-seo-pack'); ?>", postType: "post", 
+			pleaseWait: "<?php _e( 'Please wait...', 'all-in-one-seo-pack'); ?>", slugEmpty: "<?php _e( 'Slug may not be empty!', 'all-in-one-seo-pack'); ?>", 
+			Revisions: "<?php _e( 'Revisions', 'all-in-one-seo-pack'); ?>", Time: "<?php _e( 'Insert time', 'all-in-one-seo-pack'); ?>"
 		}
 		//]]>
 		</script>
@@ -270,7 +275,7 @@ if ( !function_exists( 'aioseop_ajax_save_meta' ) ) {
 		if( $result != '' ): 
 			$label = "<label id='aioseop_label_{$target}_{$post_id}'><span style='width: 20px;display: inline-block;'></span>" . $result . '</label>';  
 		else: 
-			$label = "<label id='aioseop_label_{$target}_{$post_id}'></label><span style='width: 20px;display: inline-block;'></span><strong><i>" . __( 'No', 'all_in_one_seo_pack' ) . ' ' . $target . '</i></strong>';
+			$label = "<label id='aioseop_label_{$target}_{$post_id}'></label><span style='width: 20px;display: inline-block;'></span><strong><i>" . __( 'No', 'all-in-one-seo-pack' ) . ' ' . $target . '</i></strong>';
 		endif;
 		$nonce = wp_create_nonce( "aioseop_meta_{$target}_{$post_id}" );
 		$output = '<a id="' . $target . 'editlink' . $post_id . '" class="aioseop_edit_link" href="javascript:void(0);"'
@@ -284,12 +289,14 @@ if ( !function_exists( 'aioseop_ajax_save_meta' ) ) {
 
 if ( !function_exists( 'aioseop_ajax_init' ) ) {
 	function aioseop_ajax_init() {
-		if ( !empty( $_POST ) && !empty( $_POST['settings'] ) && !empty( $_POST['nonce-aioseop']) && !empty( $_POST['options'] ) ) {
+		if ( !empty( $_POST ) && !empty( $_POST['settings'] ) && (!empty( $_POST['nonce-aioseop'])||(!empty( $_POST['nonce-aioseop-edit']))) && !empty( $_POST['options'] ) ) {
 			$_POST = stripslashes_deep( $_POST );
 			$settings = esc_attr( $_POST['settings'] );
 			if ( ! defined( 'AIOSEOP_AJAX_MSG_TMPL' ) )
 			    define( 'AIOSEOP_AJAX_MSG_TMPL', "jQuery('div#aiosp_$settings').fadeOut('fast', function(){jQuery('div#aiosp_$settings').html('%s').fadeIn('fast');});" );
-			if ( !wp_verify_nonce($_POST['nonce-aioseop'], 'aioseop-nonce') ) die( sprintf( AIOSEOP_AJAX_MSG_TMPL, __( "Unauthorized access; try reloading the page.", 'all_in_one_seo_pack' ) ) );
+
+			if ( !wp_verify_nonce($_POST['nonce-aioseop'], 'aioseop-nonce') )
+				die( sprintf( AIOSEOP_AJAX_MSG_TMPL, __( "Unauthorized access; try reloading the page.", 'all-in-one-seo-pack' ) ) );				
 		} else {
 			die(0);
 		}
@@ -348,7 +355,7 @@ if ( !function_exists( 'aioseop_ajax_delete_url' ) ) {
 			$output = str_replace( "'", "\'", $output );
 			$output = str_replace( "\n", '\n', $output );
 		} else {
-			$output = sprintf( __( "Row %s not found; no rows were deleted.", 'all_in_one_seo_pack' ), esc_attr( $options ) );
+			$output = sprintf( __( "Row %s not found; no rows were deleted.", 'all-in-one-seo-pack' ), esc_attr( $options ) );
 		}
 		die( sprintf( AIOSEOP_AJAX_MSG_TMPL, $output ) );
 	}
@@ -412,18 +419,18 @@ if ( !function_exists( 'aioseop_ajax_scan_header' ) ) {
 								if ( $m[$tags['name']] == $tv )
 									$meta .= "<tr><th style='color:red;'>" . sprintf( __( 'Duplicate %s Meta'), ucwords( $type ) ) . "</th><td>" . ucwords( $tk ) . "</td><td>{$m[$tags['name']]}</td><td>{$m[$tags['value']]}</td></tr>\n";
 				}
-		if ( empty( $meta ) ) $meta = '<span style="color:green;">' . __( 'No duplicate meta tags found.', 'all_in_one_seo_pack' ) . '</span>';
+		if ( empty( $meta ) ) $meta = '<span style="color:green;">' . __( 'No duplicate meta tags found.', 'all-in-one-seo-pack' ) . '</span>';
 		else {
 			$meta = "<table cellspacing=0 cellpadding=0 width=80% class='aioseop_table'><tr class='aioseop_table_header'><th>Meta For Site</th><th>Kind of Meta</th><th>Element Name</th><th>Element Value</th></tr>" . $meta . "</table>";
-			$meta .= "<p><div class='aioseop_meta_info'><h3 style='padding:5px;margin-bottom:0px;'>" . __( 'What Does This Mean?', 'all_in_one_seo_pack' ) . "</h3><div style='padding:5px;padding-top:0px;'>"
-					. "<p>" . __( 'All in One SEO Pack has detected that a plugin(s) or theme is also outputting social meta tags on your site.  You can view this social meta in the source code of your site (check your browser help for instructions on how to view source code).',  'all_in_one_seo_pack' )
-					. "</p><p>" . __( 'You may prefer to use the social meta tags that are being output by the other plugin(s) or theme.  If so, then you should deactivate this Social Meta feature in All in One SEO Pack Feature Manager.',  'all_in_one_seo_pack' )
-				 	. "</p><p>" . __( 'You should avoid duplicate social meta tags.  You can use these free tools from Facebook, Google and Twitter to validate your social meta and check for errors:',  'all_in_one_seo_pack' ) . "</p>";
+			$meta .= "<p><div class='aioseop_meta_info'><h3 style='padding:5px;margin-bottom:0px;'>" . __( 'What Does This Mean?', 'all-in-one-seo-pack' ) . "</h3><div style='padding:5px;padding-top:0px;'>"
+					. "<p>" . __( 'All in One SEO Pack has detected that a plugin(s) or theme is also outputting social meta tags on your site.  You can view this social meta in the source code of your site (check your browser help for instructions on how to view source code).',  'all-in-one-seo-pack' )
+					. "</p><p>" . __( 'You may prefer to use the social meta tags that are being output by the other plugin(s) or theme.  If so, then you should deactivate this Social Meta feature in All in One SEO Pack Feature Manager.',  'all-in-one-seo-pack' )
+				 	. "</p><p>" . __( 'You should avoid duplicate social meta tags.  You can use these free tools from Facebook, Google and Twitter to validate your social meta and check for errors:',  'all-in-one-seo-pack' ) . "</p>";
 				
 			foreach( Array( 'https://developers.facebook.com/tools/debug', 'http://www.google.com/webmasters/tools/richsnippets', 'https://dev.twitter.com/docs/cards/validation/validator' ) as $link ) {
 				$meta .= "<a href='{$link}' target='_blank'>{$link}</a><br />";
 			}
-			$meta .= "<p>" . __( 'Please refer to the document for each tool for help in using these to debug your social meta.',  'all_in_one_seo_pack' ) . "</div></div>";
+			$meta .= "<p>" . __( 'Please refer to the document for each tool for help in using these to debug your social meta.',  'all-in-one-seo-pack' ) . "</div></div>";
 		}
 		$output = $meta;
 		$output = str_replace( "'", "\'", $output );
@@ -532,7 +539,7 @@ if ( !function_exists( 'aioseop_mrt_pccolumn' ) ) {
 				if( !empty($content) ): 
 					$label = "<label id='aioseop_label_{$target}_{$id}'><span style='width: 20px;display: inline-block;'></span>" . $content . '</label>';  
 				else: 
-					$label = "<label id='aioseop_label_{$target}_{$id}'></label><span style='width: 20px;display: inline-block;'></span><strong><i>" . __( 'No', 'all_in_one_seo_pack' ) . " " . $target . '</i></strong>';
+					$label = "<label id='aioseop_label_{$target}_{$id}'></label><span style='width: 20px;display: inline-block;'></span><strong><i>" . __( 'No', 'all-in-one-seo-pack' ) . " " . $target . '</i></strong>';
 				endif;
 					$nonce = wp_create_nonce( "aioseop_meta_{$target}_{$id}" );
 					echo '<a id="' . $target . 'editlink' . $id . '" class="aioseop_edit_link" href="javascript:void(0);" onclick=\'aioseop_ajax_edit_meta_form(' .
@@ -647,14 +654,14 @@ if ( !function_exists( 'aioseop_add_contactmethods' ) ) {
 	function aioseop_add_contactmethods( $contactmethods ) {
 		global $aioseop_options, $aioseop_modules;
 		if ( empty( $aioseop_options['aiosp_google_disable_profile'] ) )
-			$contactmethods['googleplus'] = __( 'Google+', 'all_in_one_seo_pack' );
+			$contactmethods['googleplus'] = __( 'Google+', 'all-in-one-seo-pack' );
 		if ( !empty( $aioseop_modules ) && is_object( $aioseop_modules ) ) {
 			$m = $aioseop_modules->return_module( 'All_in_One_SEO_Pack_Opengraph' );
 			if ( ( $m !== false ) && is_object( $m ) ) {
 				if ( $m->option_isset( 'twitter_creator' ) )
-					$contactmethods['twitter'] = __( 'Twitter', 'all_in_one_seo_pack' );
+					$contactmethods['twitter'] = __( 'Twitter', 'all-in-one-seo-pack' );
 				if ( $m->option_isset( 'facebook_author' ) )
-					$contactmethods['facebook'] = __( 'Facebook', 'all_in_one_seo_pack' );
+					$contactmethods['facebook'] = __( 'Facebook', 'all-in-one-seo-pack' );
 			}
 		}
 		return $contactmethods;

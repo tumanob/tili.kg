@@ -39,7 +39,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 		function __call( $name, $arguments ) {
 			if ( $this->strpos( $name, "display_settings_page_" ) === 0 )
 				return $this->display_settings_page( $this->substr( $name, 22 ) );
-			$error = __( sprintf( "Method %s doesn't exist", $name ), 'all_in_one_seo_pack' );
+			$error = __( sprintf( "Method %s doesn't exist", $name ), 'all-in-one-seo-pack' );
 			if ( class_exists( 'BadMethodCallException' ) )
 				throw new BadMethodCallException( $error );
 			throw new Exception( $error );
@@ -337,6 +337,259 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 			return in_array( AIOSEOP_PLUGIN_BASENAME, (array) get_blog_option( $bid, 'active_plugins', array() ) );
 		}
 		
+		function quote_list_for_regex( $list, $quote = '/' ) {
+			$regex = '';
+			$cont = 0;
+			foreach( $list as $l ) {
+			        if ( $cont ) {
+			                $regex .= '|';
+			        }
+			        $cont = 1;
+			        $regex .= preg_quote( trim( $l ), $quote );
+			}
+			return $regex;
+		}
+		
+		// original code thanks to Sean M. Brown -- http://smbrown.wordpress.com/2009/04/29/verify-googlebot-forward-reverse-dns/
+		function is_good_bot() {
+			$botlist = Array(
+				"Yahoo! Slurp" => "crawl.yahoo.net",
+				"googlebot" => ".googlebot.com",
+				"msnbot" => "search.msn.com"
+			);
+			$botlist = apply_filters( $this->prefix . "botlist", $botlist );
+			if ( !empty( $botlist ) ) {
+			    $ua = $_SERVER['HTTP_USER_AGENT'];
+				$uas = $this->quote_list_for_regex( $botlist );
+			    if ( preg_match( '/' . $uas . '/i', $ua ) ) {
+					$ip = $_SERVER['REMOTE_ADDR'];
+					$hostname = gethostbyaddr( $ip );
+					$ip_by_hostname = gethostbyname( $hostname );
+			        if ( $ip_by_hostname == $ip ) {
+						$hosts = array_values( $botlist );
+						foreach( $hosts as $k => $h )
+							$hosts[$k] = preg_quote( $h ) . '$';
+						$hosts = join( '|', $hosts );
+						if ( preg_match( '/' . $hosts . '/i', $hostname ) )
+							return true;
+					}
+				}
+				return false;
+			}
+		}
+		
+		function default_bad_bots() {
+			$botlist = Array(
+				"Abonti",
+				"aggregator",
+				"AhrefsBot",
+				"asterias",
+				"BDCbot",
+				"BLEXBot",
+				"BuiltBotTough",
+				"Bullseye",
+				"BunnySlippers",
+				"ca-crawler",
+				"CCBot",
+				"Cegbfeieh",
+				"CheeseBot",
+				"CherryPicker",
+				"CopyRightCheck",
+				"cosmos",
+				"Crescent",
+				"discobot",
+				"DittoSpyder",
+				"DOC",
+				"DotBot",
+				"Download Ninja",
+				"EasouSpider",
+				"EmailCollector",
+				"EmailSiphon",
+				"EmailWolf",
+				"EroCrawler",
+				"Exabot",
+				"ExtractorPro",
+				"Fasterfox",
+				"FeedBooster",
+				"Foobot",
+				"Genieo",
+				"grub-client",
+				"Harvest",
+				"hloader",
+				"httplib",
+				"HTTrack",
+				"humanlinks",
+				"ieautodiscovery",
+				"InfoNaviRobot",
+				"IstellaBot",
+				"Java/1.",
+				"JennyBot",
+				"k2spider",
+				"Kenjin Spider",
+				"Keyword Density/0.9",
+				"larbin",
+				"LexiBot",
+				"libWeb",
+				"libwww",
+				"LinkextractorPro",
+				"linko",
+				"LinkScan/8.1a Unix",
+				"LinkWalker",
+				"LNSpiderguy",
+				"lwp-trivial",
+				"magpie",
+				"Mata Hari",
+				'MaxPointCrawler',
+				'MegaIndex',
+				"Microsoft URL Control",
+				"MIIxpc",
+				"Mippin",
+				"Missigua Locator",
+				"Mister PiX",
+				"MJ12bot",
+				"moget",
+				"MSIECrawler",
+				"NetAnts",
+				"NICErsPRO",
+				"Niki-Bot",
+				"NPBot",
+				"Nutch",
+				"Offline Explorer",
+				"Openfind",
+				'panscient.com',
+				"PHP/5.{",
+				"ProPowerBot/2.14",
+				"ProWebWalker",
+				"Python-urllib",
+				"QueryN Metasearch",
+				"RepoMonkey",
+				"RMA",
+				'SemrushBot',
+				"SeznamBot",
+				"SISTRIX",
+				"sitecheck.Internetseer.com",
+				"SiteSnagger",
+				"SnapPreviewBot",
+				"Sogou",
+				"SpankBot",
+				"spanner",
+				"spbot",
+				"Spinn3r",
+				"suzuran",
+				"Szukacz/1.4",
+				"Teleport",
+				"Telesoft",
+				"The Intraformant",
+				"TheNomad",
+				"TightTwatBot",
+				"Titan",
+				"toCrawl/UrlDispatcher",
+				"True_Robot",
+				"turingos",
+				"TurnitinBot",
+				"UbiCrawler",
+				"UnisterBot",
+				"URLy Warning",
+				"VCI",
+				"WBSearchBot",
+				"Web Downloader/6.9",
+				"Web Image Collector",
+				"WebAuto",
+				"WebBandit",
+				"WebCopier",
+				"WebEnhancer",
+				"WebmasterWorldForumBot",
+				"WebReaper",
+				"WebSauger",
+				"Website Quester",
+				"Webster Pro",
+				"WebStripper",
+				"WebZip",
+				"Wotbox",
+				"wsr-agent",
+				"WWW-Collector-E",
+				"Xenu",
+				"yandex",
+				"Zao",
+				"Zeus",
+				"ZyBORG",
+				'coccoc',
+				'Incutio',
+				'lmspider',
+				'memoryBot',
+				'SemrushBot',
+				'serf',
+				'Unknown',
+				'uptime files'
+			);
+			return $botlist;
+		}
+		
+		function is_bad_bot() {
+			$botlist = $this->default_bad_bots();
+			$botlist = apply_filters( $this->prefix . "badbotlist", $botlist );
+			if ( !empty( $botlist ) ) {
+			    $ua = $_SERVER['HTTP_USER_AGENT'];
+				$uas = $this->quote_list_for_regex( $botlist );
+			    if ( preg_match( '/' . $uas . '/i', $ua ) ) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		function default_bad_referers() {
+			$referlist = Array(
+				'semalt.com',
+				'kambasoft.com',
+				'savetubevideo.com',
+				'buttons-for-website.com',
+				'sharebutton.net',
+				'soundfrost.org',
+				'srecorder.com',
+				'softomix.com',
+				'softomix.net',
+				'myprintscreen.com',
+				'joinandplay.me',
+				'fbfreegifts.com',
+				'openmediasoft.com',
+				'zazagames.org',
+				'extener.org',
+				'openfrost.com',
+				'openfrost.net',
+				'googlsucks.com',
+				'best-seo-offer.com',
+				'buttons-for-your-website.com',
+				'www.Get-Free-Traffic-Now.com',
+				'best-seo-solution.com',
+				'buy-cheap-online.info',
+				'site3.free-share-buttons.com',
+				'webmaster-traffic.com'
+			);
+			return $referlist;
+		}
+		
+		function is_bad_referer() {
+			$referlist = $this->default_bad_referers();
+			$referlist = apply_filters( $this->prefix . "badreferlist", $referlist );
+
+			if ( !empty( $referlist ) && !empty( $_SERVER ) && !empty( $_SERVER['HTTP_REFERER'] ) ) {
+			    $ref = $_SERVER['HTTP_REFERER'];
+				$regex = $this->quote_list_for_regex( $referlist );
+			    if ( preg_match( '/' . $regex . '/i', $ref ) ) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		function allow_bot() {
+			$allow_bot = true;
+			if ( ( !$this->is_good_bot() ) && ( $this->is_bad_bot() ) && !is_user_logged_in() )
+				$allow_bot = false;
+			return apply_filters( $this->prefix . "allow_bot", $allow_bot );
+		}
+				
 		/**
 		 * Displays tabs for tabbed locations on a settings page.
 		 */
@@ -607,8 +860,8 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 		 * Save a file through WP Filesystem.
 		 */
 		function save_file( $filename, $contents ) {
-			$failed_str = __( sprintf( "Failed to write file %s!\n", $filename ), 'all_in_one_seo_pack' );
-			$readonly_str = __( sprintf( "File %s isn't writable!\n", $filename ), 'all_in_one_seo_pack' );
+			$failed_str = __( sprintf( "Failed to write file %s!\n", $filename ), 'all-in-one-seo-pack' );
+			$readonly_str = __( sprintf( "File %s isn't writable!\n", $filename ), 'all-in-one-seo-pack' );
 			$wpfs = $this->get_filesystem_object();
 			if ( is_object( $wpfs ) ) {
 				$file_exists = $wpfs->exists( $filename );
@@ -628,10 +881,10 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 			if ( is_object( $wpfs ) ) {
 				if ( $wpfs->exists( $filename ) ) {
 					if ( $wpfs->delete( $filename ) === FALSE)
-						$this->output_error( __( sprintf( "Failed to delete file %s!\n", $filename ), 'all_in_one_seo_pack' ) );
+						$this->output_error( __( sprintf( "Failed to delete file %s!\n", $filename ), 'all-in-one-seo-pack' ) );
 					else
 						return true;
-				} else $this->output_error( __( sprintf( "File %s doesn't exist!\n", $filename ), 'all_in_one_seo_pack' ) );
+				} else $this->output_error( __( sprintf( "File %s doesn't exist!\n", $filename ), 'all-in-one-seo-pack' ) );
 			}
 			return false;
 		}
@@ -646,14 +899,14 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 				$newfile_exists = $wpfs->exists( $newname );
 				if ( $file_exists && !$newfile_exists ) {
 					if ( $wpfs->move( $filename, $newname ) === FALSE)
-						$this->output_error( __( sprintf( "Failed to rename file %s!\n", $filename ), 'all_in_one_seo_pack' ) );
+						$this->output_error( __( sprintf( "Failed to rename file %s!\n", $filename ), 'all-in-one-seo-pack' ) );
 					else
 						return true;
 				} else {
 					if ( !$file_exists )
-						$this->output_error( __( sprintf( "File %s doesn't exist!\n", $filename ), 'all_in_one_seo_pack' ) );
+						$this->output_error( __( sprintf( "File %s doesn't exist!\n", $filename ), 'all-in-one-seo-pack' ) );
 					elseif ( $newfile_exists )
-						$this->output_error( __( sprintf( "File %s already exists!\n", $newname ), 'all_in_one_seo_pack' ) );
+						$this->output_error( __( sprintf( "File %s already exists!\n", $newname ), 'all-in-one-seo-pack' ) );
 				}
 			}
 			return false;
@@ -954,7 +1207,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 					}
 					if ( ( !empty( $ha ) && ( $ha[0] == 'h' ) ) ) $hl = '';
 					if ( !empty( $ha ) || !isset( $this->help_anchors[$o] ) ) {
-						$ht .= "<br /><a href='" . $hl . $ha . "' target='_blank'>" . __( "Click here for documentation on this setting", 'all_in_one_seo_pack' ) . "</a>";						
+						$ht .= "<br /><a href='" . $hl . $ha . "' target='_blank'>" . __( "Click here for documentation on this setting", 'all-in-one-seo-pack' ) . "</a>";						
 					}
 					$default_options[$o]['help_text'] = $ht;
 				}
@@ -1192,7 +1445,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 								$title = $v['name'];
 								if ( $title != $this->plugin_name ) $title = $this->plugin_name . ' - ' . $title;
 								if ( !empty( $v['help_link'] ) )
-									$title .= "<a class='aioseop_help_text_link aioseop_meta_box_help' target='_blank' href='" . $lopts['help_link'] . "'><span>" . __( 'Help', 'all_in_one_seo_pack' ) . "</span></a>";
+									$title .= "<a class='aioseop_help_text_link aioseop_meta_box_help' target='_blank' href='" . $lopts['help_link'] . "'><span>" . __( 'Help', 'all-in-one-seo-pack' ) . "</span></a>";
 								add_meta_box( $v['prefix'] . $k, $title, Array( $this, 'display_metabox' ), $posttype, $v['context'], $v['priority'], $v );
 							}
 						}
@@ -1329,7 +1582,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 				if ( isset( $options['count_desc'] ) )
 					$count_desc = $options['count_desc'];
 				else
-					$count_desc = __( ' characters. Most search engines use a maximum of %s chars for the %s.', 'all_in_one_seo_pack' );
+					$count_desc = __( ' characters. Most search engines use a maximum of %s chars for the %s.', 'all-in-one-seo-pack' );
 				$buf .= "<br /><input readonly type='text' name='{$prefix}length$n' size='3' maxlength='3' style='width:53px;height:23px;margin:0px;padding:0px 0px 0px 10px;' value='" . $this->strlen($value) . "' />"
 					 . sprintf( $count_desc, $size, trim( $this->strtolower( $options['name'] ), ':' ) );
 				if ( !empty( $onload ) ) $buf .= "<script>jQuery( document ).ready(function() { {$onload} });</script>";
@@ -1355,7 +1608,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 			if ( isset( $opts['id'] ) ) $id_attr .= " id=\"{$opts['id']}_div\" ";
 			if ( $opts['label'] != 'none' ) { 
 				if ( isset( $opts['help_text'] ) ) {
-					$help_text = sprintf(	All_in_One_SEO_Pack_Module::DISPLAY_HELP_START, __( 'Click for Help!', 'all_in_one_seo_pack' ), $name, $opts['name'] );
+					$help_text = sprintf(	All_in_One_SEO_Pack_Module::DISPLAY_HELP_START, __( 'Click for Help!', 'all-in-one-seo-pack' ), $name, $opts['name'] );
 					$help_text_2 = sprintf(	All_in_One_SEO_Pack_Module::DISPLAY_HELP_END, $name, $opts['help_text'] );
 				} else $help_text = $opts['name'];
 				$label_text = sprintf( All_in_One_SEO_Pack_Module::DISPLAY_LABEL_FORMAT, $align, $help_text );
@@ -1382,7 +1635,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 					}
 				}
 				if ( !empty( $help_link ) )
-					echo "<a class='aioseop_help_text_link aioseop_meta_box_help' target='_blank' href='" . $help_link . "'><span>" . __( 'Help', 'all_in_one_seo_pack' ) . "</span></a>";
+					echo "<a class='aioseop_help_text_link aioseop_meta_box_help' target='_blank' href='" . $help_link . "'><span>" . __( 'Help', 'all-in-one-seo-pack' ) . "</span></a>";
 				
 				if ( !isset( $location_settings[$prefix] ) ) {
 					$current_options = apply_filters( "{$this->prefix}display_options",  $this->get_current_options( Array(), $location, $defaults ), $location );
@@ -1500,9 +1753,9 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 			if ( (isset($_POST['action']) && $_POST['action'] == 'aiosp_update_module' &&
 			     ( isset( $_POST['Submit_Default'] ) || isset( $_POST['Submit_All_Default'] ) || !empty( $_POST['Submit'] ) ) ) ) {
 				$nonce = $_POST['nonce-aioseop'];
-				if (!wp_verify_nonce($nonce, 'aioseop-nonce')) die ( __( 'Security Check - If you receive this in error, log out and back in to WordPress', 'all_in_one_seo_pack' ) );
+				if (!wp_verify_nonce($nonce, 'aioseop-nonce')) die ( __( 'Security Check - If you receive this in error, log out and back in to WordPress', 'all-in-one-seo-pack' ) );
 				if ( isset( $_POST['Submit_Default'] ) || isset( $_POST['Submit_All_Default'] ) ) {
-					$message = __( "Options Reset.", 'all_in_one_seo_pack' );
+					$message = __( "Options Reset.", 'all-in-one-seo-pack' );
 					if ( isset($_POST['Submit_All_Default']) ) {
 						$this->reset_options( $location, true );
 						do_action( 'aioseop_options_reset' );
@@ -1511,7 +1764,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 					}
 				}
 				if ( !empty( $_POST['Submit'] ) ) {
-					$message = __("All in One SEO Options Updated.", 'all_in_one_seo_pack');
+					$message = __("All in One SEO Options Updated.", 'all-in-one-seo-pack');
 					$default_options = $this->default_options( $location );
 					foreach( $default_options as $k => $v ) {
 						if ( isset( $_POST[$k] ) )
@@ -1557,8 +1810,8 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 									'location'		=> Array( 'type' => 'hidden', 'value' => $location ), 
 									'nonce-aioseop'	=> Array( 'type' => 'hidden', 'value' => wp_create_nonce('aioseop-nonce') ),
 									'page_options'	=> Array( 'type' => 'hidden', 'value' => 'aiosp_home_description' ),
-									'Submit'		=> Array( 'type' => 'submit', 'class' => 'button-primary', 'value' => __('Update Options', 'all_in_one_seo_pack') . ' &raquo;' ),
-									'Submit_Default'=> Array( 'type' => 'submit', 'class' => 'button-primary', 'value' => __( sprintf( 'Reset %s Settings to Defaults', $name ), 'all_in_one_seo_pack') . ' &raquo;' )
+									'Submit'		=> Array( 'type' => 'submit', 'class' => 'button-primary', 'value' => __('Update Options', 'all-in-one-seo-pack') . ' &raquo;' ),
+									'Submit_Default'=> Array( 'type' => 'submit', 'class' => 'button-primary', 'value' => __( sprintf( 'Reset %s Settings to Defaults', $name ), 'all-in-one-seo-pack') . ' &raquo;' )
 								   );
 			$submit_options = apply_filters( "{$this->prefix}submit_options", $submit_options, $location );
 			foreach ( $submit_options as $k => $s ) {
@@ -1577,7 +1830,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Module' ) ) {
 								if ( !isset( $lopts['tab'] ) || ( $this->current_tab == $lopts['tab'] ) ) {
 									$title = $lopts['name'];
 									if ( !empty( $lopts['help_link'] ) )
-										$title .= "<a class='aioseop_help_text_link aioseop_meta_box_help' target='_blank' href='" . $lopts['help_link'] . "'><span>" . __( 'Help', 'all_in_one_seo_pack' ) . "</span></a>";
+										$title .= "<a class='aioseop_help_text_link aioseop_meta_box_help' target='_blank' href='" . $lopts['help_link'] . "'><span>" . __( 'Help', 'all-in-one-seo-pack' ) . "</span></a>";
 									add_meta_box( $this->get_prefix( $location ) . $l . "_metabox", $title, array($this, 'display_options' ),
 												"{$this->prefix}settings", 'advanced', 'default', $lopts );									
 								}

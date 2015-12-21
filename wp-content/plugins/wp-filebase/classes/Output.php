@@ -203,6 +203,7 @@ static function GetTreeItems($parent_id, $args=array())
  * priv
  * idp => 
  * onselect
+ * inline_add
  * );
  */				
 		$parent_id = is_object($parent_id) ? $parent_id->cat_id : intval($parent_id);		
@@ -237,7 +238,7 @@ static function GetTreeItems($parent_id, $args=array())
 		
 		$files_before_cats = $browser && WPFB_Core::$settings->file_browser_fbc;	
 		
-		$inline_add_cat = /*($cat && $cat->CurUserCanAddFiles()) ||*/  WPFB_Core::CurUserCanCreateCat();
+		$inline_add_cat = (is_admin() || WPFB_Core::$settings->file_browser_inline_add) && /*($cat && $cat->CurUserCanAddFiles()) ||*/  WPFB_Core::CurUserCanCreateCat() && (!isset($args['inline_add']) || $args['inline_add']);
 	
 		$where = " cat_parent = $parent_id ";
 		if($browser) $where .= " AND cat_exclude_browser <> '1' ";
@@ -247,33 +248,34 @@ static function GetTreeItems($parent_id, $args=array())
 		
 		$cat_items = array();
 		$i = 0;
-		$folder_class = ($filesel||$catsel)?'folder':'';
+		$folder_class = ($filesel||$catsel)?'cat folder':'cat';
 		foreach($cats as $c)
 		{
 			if($c->CurUserCanAccess(true))
 				$cat_items[$i++] = (object)array(
 					'id'=>$idp_cat.$c->cat_id, 'cat_id' => $c->cat_id,
 					'text'=> self::fileBrowserCatItemText($catsel,$filesel,$c,$args['onselect'],$cat_tpl),
-					'hasChildren'=>($inline_add_cat||$c->HasChildren($catsel)),
+					'hasChildren'=>(($inline_add_cat&&$c->CurUserCanAddFiles())||$c->HasChildren($catsel)),
+					'type' => 'cat',
 					'classes'=>$folder_class 				);
 		}
 		
-		if( $inline_add_cat ) {
+		if( $inline_add_cat && ($parent_id <= 0 || $cat->CurUserCanAddFiles()) ) {
 			$is = WPFB_Core::$settings->small_icon_size > 0 ? WPFB_Core::$settings->small_icon_size : 32;
 				$cat_items[$i++] = (object)array('id'=>$idp_cat.'0', 'cat_id' => 0,
-					'text'=> '<form action="" style="display:none;"><input type="text" placeholder="'.__('Category Name',WPFB).'" name="cat_name" /></form> '
+					'text'=> '<form action="" style="display:none;"><input type="text" placeholder="'.__('Category Name','wp-filebase').'" name="cat_name" /></form> '
 					 . '<a href="#" style="text-decoration:none;" onclick=\'return wpfb_newCatInput(this,'.$parent_id.');\'><span style="'
-					 . ($browser ? ('font-size:'.$is.'px;width:'.$is.'px'):'font-size:200%').';line-height:0;vertical-align:sub;display:inline-block;text-align:center;">+</span>'.__('Add Category',WPFB).'</a>'
+					 . ($browser ? ('font-size:'.$is.'px;width:'.$is.'px'):'font-size:200%').';line-height:0;vertical-align:sub;display:inline-block;text-align:center;">+</span>'.__('Add Category','wp-filebase').'</a>'
 					 . '<span style="font-size: 200%;vertical-align: sub;line-height: 0;font-weight: lighter;"> / </span>'
 					 . '<a href="#" style="text-decoration:none;" class="add-file"><span style="'
-					 . ($browser ? ('font-size:'.$is.'px;width:'.$is.'px'):'font-size:200%').';line-height:0;vertical-align:sub;display:inline-block;text-align:center;">+</span>'.__('Add File',WPFB).'</a>'					 ,
+					 . ($browser ? ('font-size:'.$is.'px;width:'.$is.'px'):'font-size:200%').';line-height:0;vertical-align:sub;display:inline-block;text-align:center;">+</span>'.__('Add File','wp-filebase').'</a>'					 ,
 					'hasChildren'=>false,
 					 'classes'=>'add-item'
 				);
 		} elseif($parent_id == 0 && $catsel && $i == 0) {
 			return array((object)array(
 						'id' => $idp_cat.'0',
-						'text' => sprintf(__('You did not create a category. <a href="%s" target="_parent">Click here to create one.</a>', WPFB), admin_url('admin.php?page=wpfilebase_cats#addcat')),
+						'text' => sprintf(__('You did not create a category. <a href="%s" target="_parent">Click here to create one.</a>','wp-filebase'), admin_url('admin.php?page=wpfilebase_cats#addcat')),
 						'hasChildren'=>false
 				 )
 			);
@@ -298,9 +300,10 @@ static function GetTreeItems($parent_id, $args=array())
 			
 			foreach($files as $f)
 				$file_items[$i++] = (object)array(
-					 'id'=>$idp_file.$f->file_id,
-					 'text'=>$filesel?('<a href="javascript:;" onclick="'.sprintf($args['onselect'],$f->file_id).'">'.esc_html($f->GetTitle(24)).'</a> <span style="font-size:75%;vertical-align:top;">'.esc_html($f->file_name).'</span>'):$f->GenTpl2($file_tpl, false),
+					 'id'=>$idp_file.$f->file_id, 'file_id' => $f->file_id,
+					 'text'=>$filesel?('<a href="javascript:;" onclick="'.sprintf($args['onselect'],$f->file_id).'">'.$f->get_tpl_var ('file_small_icon').' '.esc_html($f->GetTitle(24)).'</a> <span style="font-size:75%;vertical-align:top;">'.esc_html($f->file_name).'</span>'):$f->GenTpl2($file_tpl, false),
 					 'classes'=>$filesel?'file':null,
+					 'type' => 'file',
 					 'hasChildren'=>false
 				);
 		}
@@ -400,6 +403,7 @@ static function Filename2Title($ft, $remove_ext=true)
 	}
 	$ft = preg_replace('/\.([^0-9])/', ' $1', $ft);
 	$ft = str_replace('_', ' ', $ft);
+	$ft = str_replace('%20',' ',$ft);
 	$ft = ucwords($ft);
 	return trim($ft);
 }
@@ -435,7 +439,7 @@ static function CatSelTree($args=null, $root_cat_id = 0, $depth = 0)
 				$out .= self::CatSelTree(null, $c->cat_id, 0);	
 			}
 		}
-		if($s_add_cats) $out .= '<option value="+0" class="add-cat">+ '.__('Add Category', WPFB).'</option>';
+		if($s_add_cats) $out .= '<option value="+0" class="add-cat">+ '.__('Add Category','wp-filebase').'</option>';
 	} else {
 		$cat = WPFB_Category::GetCat($root_cat_id);
 	
@@ -445,7 +449,7 @@ static function CatSelTree($args=null, $root_cat_id = 0, $depth = 0)
 				  				  . '>' . str_repeat('&nbsp;&nbsp; ', $depth) . esc_html($cat->cat_name).($s_count?' ('.$cat->cat_num_files.')':'').'</option>';
 		
 		if($s_add_cats)
-			$out .= '<option value="+'.$root_cat_id.'" class="add-cat">' . str_repeat('&nbsp;&nbsp; ', $depth+1).'+ '.__('Add Category', WPFB).'</option>';
+			$out .= '<option value="+'.$root_cat_id.'" class="add-cat">' . str_repeat('&nbsp;&nbsp; ', $depth+1).'+ '.__('Add Category','wp-filebase').'</option>';
 
 		if(isset($cat->cat_childs)) {
 			foreach($cat->cat_childs as $c) {
@@ -473,7 +477,7 @@ private static function initFileTreeView($id=null, $base=0)
 	if(is_object($base)) $base = $base->GetId();
 
 	$ajax_data =  array(
-		 'action'=>'tree',
+		 'wpfb_action'=>'tree',
 		 'type'=>'browser',
 		 'base' => intval($base)
 	) ;
@@ -483,7 +487,7 @@ private static function initFileTreeView($id=null, $base=0)
 	?>
 <script type="text/javascript">
 //<![CDATA[
-function wpfb_initfb<?php echo $jss ?>() {	jQuery("#<?php echo $id ?>").treeview(wpfb_fbsets<?php echo $jss ?>={url: "<?php echo WPFB_Core::$ajax_url ?>",
+function wpfb_initfb<?php echo $jss ?>() {	jQuery("#<?php echo $id ?>").treeview(wpfb_fbsets<?php echo $jss ?>={url: "<?php echo WPFB_Core::$ajax_url_public ?>",
 ajax:{data:<?php echo json_encode($ajax_data); ?>,type:"post",error:function(x,status,error){if(error) alert(error);},complete:function(x,status){if(typeof(wpfb_setupLinks)=='function')wpfb_setupLinks();}},
 animated: "medium"}).data("settings",wpfb_fbsets<?php echo $jss ?>);
 }
@@ -587,10 +591,10 @@ static function RoleNames($roles, $fmt_string=false) {
 	if(!empty($roles)) {
 		foreach($roles as $role)
 		{
-				$names[$role] = translate_user_role($wp_roles->roles[$role]['name']);
+				$names[$role] = empty($wp_roles->roles[$role]['name']) ? $role : translate_user_role($wp_roles->roles[$role]['name']);
 		}
 	}
-	return $fmt_string ? (empty($names) ? ("<i>".__('Everyone',WPFB)."</i>") : join(', ',$names)) : $names;
+	return $fmt_string ? (empty($names) ? ("<i>".__('Everyone','wp-filebase')."</i>") : join(', ',$names)) : $names;
 }
 
 static function FileForm($prefix, $form_url, $vars, $secret_key=null ) {	
@@ -603,16 +607,16 @@ static function FileForm($prefix, $form_url, $vars, $secret_key=null ) {
 				<?php self::DisplayExtendedFormFields($prefix, $secret_key, $vars ); ?>
 				
 				<?php if(empty($adv_uploader)) { ?>
-					<label for="<?php echo $prefix ?>file_upload"><?php _e('Choose File', WPFB) ?></label>
+					<label for="<?php echo $prefix ?>file_upload"><?php _e('Choose File','wp-filebase') ?></label>
 					<input type="file" name="file_upload" id="<?php echo $prefix ?>file_upload" /><br /> <!--   style="width: 160px" size="10" -->
 				<?php  } else {
 					$adv_uploader->Display($prefix);
 				} ?>
 				<small><?php printf(str_replace('%d%s','%s',__('Maximum upload file size: %d%s.'/*def*/)), WPFB_Output::FormatFilesize(WPFB_Core::GetMaxUlSize())) ?></small>
-				
-				<?php if(empty($auto_submit)) { ?><div style="float: right; text-align:right;"><input type="submit" class="button-primary" name="submit-btn" value="<?php _e('Add New', WPFB); ?>" /></div>
+				<?php if(empty($auto_submit)) { ?><div style="float: right; text-align:right;"><input type="submit" class="button-primary" name="submit-btn" value="<?php _e('Add New','wp-filebase'); ?>" /></div>
 				<?php } ?>
 			</div>
+
 		</form>	
 	</div>
 	<?php
@@ -639,7 +643,7 @@ static function DisplayExtendedFormFields($prefix, $secret_key, $hidden_vars=arr
 	
 	if($category == -1) { ?>
 	<div>
-	<label for="<?php echo $prefix ?>file_category"><?php _e('Category',WPFB) ?></label>
+	<label for="<?php echo $prefix ?>file_category"><?php _e('Category','wp-filebase') ?></label>
 	<select name="file_category" id="<?php echo $prefix; ?>file_category"><?php wpfb_loadclass('Category'); echo WPFB_Output::CatSelTree(array('none_label' => __('Select'), 'check_add_perm'=>true)); ?></select>
 	</div>
 	<?php } else { ?>

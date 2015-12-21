@@ -8,8 +8,8 @@
 if ( !class_exists( 'All_in_One_SEO_Pack_File_Editor' ) ) {
 	class All_in_One_SEO_Pack_File_Editor extends All_in_One_SEO_Pack_Module {
 
-		function All_in_One_SEO_Pack_File_Editor( ) {
-			$this->name = __('File Editor', 'all_in_one_seo_pack');		// Human-readable name of the plugin
+		function __construct( ) {
+			$this->name = __('File Editor', 'all-in-one-seo-pack');		// Human-readable name of the plugin
 			$this->prefix = 'aiosp_file_editor_';						// option prefix
 			$this->file = __FILE__;										// the current file
 			parent::__construct();
@@ -19,13 +19,13 @@ if ( !class_exists( 'All_in_One_SEO_Pack_File_Editor' ) ) {
 				$this->current_tab = 'robots';
 
 			$help_text = Array(
-				'robotfile'	=> __( 'Robots.txt editor', 'all_in_one_seo_pack' ),
-				'htaccfile'	=> __( '.htaccess editor', 'all_in_one_seo_pack' )
+				'robotfile'	=> __( 'Robots.txt editor', 'all-in-one-seo-pack' ),
+				'htaccfile'	=> __( '.htaccess editor', 'all-in-one-seo-pack' )
 			);
 			$this->default_options = array(
-					'robotfile'	=> Array( 'name'	  => __( 'Edit Robots.txt',  'all_in_one_seo_pack'),
+					'robotfile'	=> Array( 'name'	  => __( 'Edit Robots.txt',  'all-in-one-seo-pack'),
 										  'save'	  => false, 'default'	  => '', 'type' => 'textarea', 'cols' => 70, 'rows' => 25, 'label' => 'top' ),
-					'htaccfile'	=> Array( 'name'	  => __( 'Edit .htaccess',  'all_in_one_seo_pack'),
+					'htaccfile'	=> Array( 'name'	  => __( 'Edit .htaccess',  'all-in-one-seo-pack'),
 										  'save'	  => false, 'default'	  => '', 'type' => 'textarea', 'cols' => 70, 'rows' => 25, 'label' => 'top' )
 			);
 
@@ -39,12 +39,12 @@ if ( !class_exists( 'All_in_One_SEO_Pack_File_Editor' ) ) {
 			
 			$this->layout = Array(
 				'robots' => Array(
-						'name' => __( 'Edit robots.txt', 'all_in_one_seo_pack' ),
+						'name' => __( 'Edit robots.txt', 'all-in-one-seo-pack' ),
 						'options' => Array( 'robotfile' ),
 						'tab' => 'robots'
 					),
 				'htaccess' => Array(
-					'name' => __( 'Edit .htaccess', 'all_in_one_seo_pack' ),
+					'name' => __( 'Edit .htaccess', 'all-in-one-seo-pack' ),
 					'options' => Array( 'htaccfile' ),
 					'tab' => 'htaccess'
 					)
@@ -67,9 +67,9 @@ if ( !class_exists( 'All_in_One_SEO_Pack_File_Editor' ) ) {
 			unset( $submit['Submit_Default'] );
 			$submit['Submit']['type'] = 'hidden';
 			if ( $this->current_tab == 'robots' )
-				$submit['Submit_File_Editor']	= Array( 'type' => 'submit', 'class' => 'button-primary', 'value' => __('Update robots.txt', 'all_in_one_seo_pack') . ' &raquo;' );
+				$submit['Submit_File_Editor']	= Array( 'type' => 'submit', 'class' => 'button-primary', 'value' => __('Update robots.txt', 'all-in-one-seo-pack') . ' &raquo;' );
 			elseif ( $this->current_tab == 'htaccess' )
-				$submit['Submit_htaccess']	= Array( 'type' => 'submit', 'class' => 'button-primary', 'value' => __('Update .htaccess', 'all_in_one_seo_pack') . ' &raquo;' );
+				$submit['Submit_htaccess']	= Array( 'type' => 'submit', 'class' => 'button-primary', 'value' => __('Update .htaccess', 'all-in-one-seo-pack') . ' &raquo;' );
 			return $submit;
 		}
 		

@@ -8,44 +8,44 @@
 if ( !class_exists( 'All_in_One_SEO_Pack_Robots' ) ) {
 	class All_in_One_SEO_Pack_Robots extends All_in_One_SEO_Pack_Module {
 
-		function All_in_One_SEO_Pack_Robots( ) {
-			$this->name = __('Robots.txt', 'all_in_one_seo_pack');	// Human-readable name of the plugin
+		function __construct( ) {
+			$this->name = __('Robots.txt', 'all-in-one-seo-pack');	// Human-readable name of the plugin
 			$this->prefix = 'aiosp_robots_';						// option prefix
 			$this->file = __FILE__;									// the current file
 			parent::__construct();
 			
 			$help_text = Array(
-				'additional'=> __('Rule Type', 'all_in_one_seo_pack'),
-				'useragent' => __('User Agent', 'all_in_one_seo_pack'),
-				'path' 		=> __('Directory Path', 'all_in_one_seo_pack'),
-				'robotgen' 	=> __('Robots.txt editor', 'all_in_one_seo_pack'),
+				'additional'=> __('Rule Type', 'all-in-one-seo-pack'),
+				'useragent' => __('User Agent', 'all-in-one-seo-pack'),
+				'path' 		=> __('Directory Path', 'all-in-one-seo-pack'),
+				'robotgen' 	=> __('Robots.txt editor', 'all-in-one-seo-pack'),
 			);
 			
 			$this->default_options = array(
 					'usage'		=> Array( 'type' => 'html', 'label' => 'none',
-										  'default' => __( 'Use the rule builder below to add rules to create a new Robots.txt file.  If you already have a Robots.txt file you should use the File Editor feature in All in One SEO Pack to edit it or you can delete your current Robots.txt file and start a new one with the rule builder below.', 'all_in_one_seo_pack' ),
+										  'default' => __( 'Use the rule builder below to add rules to create a new Robots.txt file.  If you already have a Robots.txt file you should use the File Editor feature in All in One SEO Pack to edit it or you can delete your current Robots.txt file and start a new one with the rule builder below.', 'all-in-one-seo-pack' ),
 										  'save' => false ),
-					'additional'=> Array( 'name'	  => __( 'Rule Type', 'all_in_one_seo_pack' ),
+					'additional'=> Array( 'name'	  => __( 'Rule Type', 'all-in-one-seo-pack' ),
 										  'save'	  => false,
 										  'type' => 'select', 'initial_options' => Array( 'allow' => 'Allow', 'block' => 'Block' ) ),
-					'useragent' => Array( 'name'	  => __( 'User Agent', 'all_in_one_seo_pack' ),
+					'useragent' => Array( 'name'	  => __( 'User Agent', 'all-in-one-seo-pack' ),
 										  'save'	  => false,
 										  'type' => 'text' ),
-					'path'		=> Array( 'name'	  => __( 'Directory Path', 'all_in_one_seo_pack' ),
+					'path'		=> Array( 'name'	  => __( 'Directory Path', 'all-in-one-seo-pack' ),
 										  'save'	  => false,
 										  'type' => 'text' ),
-					'robotgen'	=> Array( 'name'	  => __( 'Generate Robots.txt',  'all_in_one_seo_pack'),
+					'robotgen'	=> Array( 'name'	  => __( 'Generate Robots.txt',  'all-in-one-seo-pack'),
 										  'save' => false,
 										  'default'	  => '', 'type' => 'textarea', 'cols' => 57, 'rows' => 20, 'label' => 'none', 'readonly' => 'readonly' ),
-					'Submit_Preview' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name' => __( 'Add Rule', 'all_in_one_seo_pack' ) . ' &raquo;', 'nowrap' => 1, 'style' => 'margin-left: 20px;' ),
-					'Submit_Update' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name'  => __( 'Save Robots.txt File', 'all_in_one_seo_pack' ) . ' &raquo;', 'nowrap' => 1 ),
-					'Submit_Delete' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name'  => __( 'Delete Robots.txt File', 'all_in_one_seo_pack' ) . ' &raquo;', 'nowrap' => 1 ),
+					'Submit_Preview' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name' => __( 'Add Rule', 'all-in-one-seo-pack' ) . ' &raquo;', 'nowrap' => 1, 'style' => 'margin-left: 20px;' ),
+					'Submit_Update' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name'  => __( 'Save Robots.txt File', 'all-in-one-seo-pack' ) . ' &raquo;', 'nowrap' => 1 ),
+					'Submit_Delete' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name'  => __( 'Delete Robots.txt File', 'all-in-one-seo-pack' ) . ' &raquo;', 'nowrap' => 1 ),
 					'optusage'		=> Array( 'type' => 'html', 'label' => 'none',
-										  'default' => __( 'Click the Optimize button below and All in One SEO Pack will analyze your Robots.txt file to make sure it complies with the standards for Robots.txt files.  The results will be displayed in a table below.', 'all_in_one_seo_pack' ),
+										  'default' => __( 'Click the Optimize button below and All in One SEO Pack will analyze your Robots.txt file to make sure it complies with the standards for Robots.txt files.  The results will be displayed in a table below.', 'all-in-one-seo-pack' ),
 										  'save' => false ),
-					'Submit_Opt_Update' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name'  => __( 'Update Robots.txt File', 'all_in_one_seo_pack' ) . ' &raquo;', 'nowrap' => 1, 'style' => 'margin-left: 20px;' ),
-					'Submit_Opt_Preview' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name' => __( 'Disregard Changes', 'all_in_one_seo_pack' ) . ' &raquo;', 'nowrap' => 1),
-					'Submit_Optimize' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name' => __('Optimize', 'all_in_one_seo_pack') . ' &raquo;' )
+					'Submit_Opt_Update' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name'  => __( 'Update Robots.txt File', 'all-in-one-seo-pack' ) . ' &raquo;', 'nowrap' => 1, 'style' => 'margin-left: 20px;' ),
+					'Submit_Opt_Preview' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name' => __( 'Disregard Changes', 'all-in-one-seo-pack' ) . ' &raquo;', 'nowrap' => 1),
+					'Submit_Optimize' => Array( 'type' => 'submit', 'class' => 'button-primary', 'name' => __('Optimize', 'all-in-one-seo-pack') . ' &raquo;' )
 					);
 			
 			if ( !empty( $help_text ) )
@@ -58,17 +58,17 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Robots' ) ) {
 
 			$this->layout = Array(
 				'default' => Array(
-						'name' => __( 'Create a Robots.txt File', 'all_in_one_seo_pack' ),
+						'name' => __( 'Create a Robots.txt File', 'all-in-one-seo-pack' ),
 						'options' => Array( 'usage', 'additional', 'useragent', 'path', 'Submit_Preview', 'Submit_Update', 'Submit_Delete', 'robotgen' ) // this is set below, to the remaining options -- pdb
 					)
 				);
 			$this->layout['optimize']  = Array(
-					'name' => __( 'Optimize your Robots.txt File', 'all_in_one_seo_pack' ),
+					'name' => __( 'Optimize your Robots.txt File', 'all-in-one-seo-pack' ),
 					'options' => Array( 'optusage', 'Submit_Optimize' )
 				);
 			if ( isset( $_POST['Submit_Optimize'] ) ) {
 				$this->layout['optimize']['options'] = Array( 'optusage', 'Submit_Opt_Update', 'Submit_Opt_Preview', 'robothtml' );
-				$this->default_options['optusage']['default'] = __( "Your Robots.txt file has been optimized.  Here are the results and recommendations.  Click the Update Robots.txt File button below to write these changes to your Robots.txt file.  Click the Disregard Changes button to ignore these recommendations and keep your current Robots.txt file.", 'all_in_one_seo_pack' );
+				$this->default_options['optusage']['default'] = __( "Your Robots.txt file has been optimized.  Here are the results and recommendations.  Click the Update Robots.txt File button below to write these changes to your Robots.txt file.  Click the Disregard Changes button to ignore these recommendations and keep your current Robots.txt file.", 'all-in-one-seo-pack' );
 			}
 					
 			// load initial options / set defaults
@@ -88,7 +88,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Robots' ) ) {
 						$settings[ $prefix . 'robotgen' ]['type'] = 'hidden';
 						$settings[ $prefix . 'robotgen' ]['label'] = 'none';
 						$settings[ $prefix . 'robotgen' ]['help_text'] = '';
-						$settings[ $prefix . 'robothtml'] = Array(	'name'	  => __( 'Robots.txt',  'all_in_one_seo_pack'),
+						$settings[ $prefix . 'robothtml'] = Array(	'name'	  => __( 'Robots.txt',  'all-in-one-seo-pack'),
 											  						'save' => false, 'default'	  => '', 'type' => 'html', 'label' => 'none', 'style' => 'margin-top:10px;' );
 					}
 				}
@@ -158,9 +158,9 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Robots' ) ) {
 						}
 						$options[$prefix . 'robotgen'] = $this->output_robots($rules);
 						$file2 = explode("\n", $options[$prefix . 'robotgen'] );
-						$options[$prefix . 'robothtml'] = '<table width=100%><tr><td valign=top width=45%>' . $this->annotate_robots_html( $file, true, __( "Current File", 'all_in_one_seo_pack' ) ) . '</td><td><span style="font-size: xx-large">&#8594;</span></td><td valign=top>' . $this->annotate_robots_html( $file2, true, __( "Proposed Changes", 'all_in_one_seo_pack' ) ) . '</td></tr></table>';
+						$options[$prefix . 'robothtml'] = '<table width=100%><tr><td valign=top width=45%>' . $this->annotate_robots_html( $file, true, __( "Current File", 'all-in-one-seo-pack' ) ) . '</td><td><span style="font-size: xx-large">&#8594;</span></td><td valign=top>' . $this->annotate_robots_html( $file2, true, __( "Proposed Changes", 'all-in-one-seo-pack' ) ) . '</td></tr></table>';
 					} else {
-						$options[$prefix . 'robothtml'] = $this->annotate_robots_html( $file, true, __( "Current File", 'all_in_one_seo_pack' ) );
+						$options[$prefix . 'robothtml'] = $this->annotate_robots_html( $file, true, __( "Current File", 'all-in-one-seo-pack' ) );
 					}
 			}
 			return $options;
@@ -214,12 +214,12 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Robots' ) ) {
 				$buf .= '</table>';
 				if ( $show_help ) { 
 					$buf .= '<div class="aioseop_option_docs" id="aiosp_robots_main_legend_tip">
-				<h3>' . __( 'Legend', 'all_in_one_seo_pack' ) . '</h3>
+				<h3>' . __( 'Legend', 'all-in-one-seo-pack' ) . '</h3>
 				<ul>
-				<li>' . __( 'The yellow indicator means that a non-standard extension was recognized; not all crawlers may recognize it or interpret it the same way. The Allow and Sitemap directives are commonly used by Google and Yahoo.', 'all_in_one_seo_pack' ) . '</li>
-				<li>' . __( 'The red indicator means that the syntax is invalid for a robots.txt file.', 'all_in_one_seo_pack') . '</li>
+				<li>' . __( 'The yellow indicator means that a non-standard extension was recognized; not all crawlers may recognize it or interpret it the same way. The Allow and Sitemap directives are commonly used by Google and Yahoo.', 'all-in-one-seo-pack' ) . '</li>
+				<li>' . __( 'The red indicator means that the syntax is invalid for a robots.txt file.', 'all-in-one-seo-pack') . '</li>
 				</ul>
-				<a target="_blank" rel="nofollow" href="http://wikipedia.org/wiki/Robots_exclusion_standard#Nonstandard_extensions">' . __('More Information', 'all_in_one_seo_pack') . '</a>
+				<a target="_blank" rel="nofollow" href="http://wikipedia.org/wiki/Robots_exclusion_standard#Nonstandard_extensions">' . __('More Information', 'all-in-one-seo-pack') . '</a>
 				</div>';
 				}
 			} else {

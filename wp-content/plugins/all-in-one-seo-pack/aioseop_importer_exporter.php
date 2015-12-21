@@ -8,28 +8,28 @@
 if ( !class_exists( 'All_in_One_SEO_Pack_Importer_Exporter' ) ) {
 	class All_in_One_SEO_Pack_Importer_Exporter extends All_in_One_SEO_Pack_Module {
 
-		function All_in_One_SEO_Pack_Importer_Exporter( ) {
-			$this->name = __( 'Importer & Exporter', 'all_in_one_seo_pack' );	// Human-readable name of the module
+		function __construct( ) {
+			$this->name = __( 'Importer & Exporter', 'all-in-one-seo-pack' );	// Human-readable name of the module
 			$this->prefix = 'aiosp_importer_exporter_';						// option prefix
 			$this->file = __FILE__;
 			parent::__construct();
 			$help_text = Array(
-				"import_submit"		=> __( "Select a valid All in One SEO Pack ini file and click 'Import' to import options from a previous state or install of All in One SEO Pack.<br /><a href='http://semperplugins.com/documentation/importer-exporter-module/' target='_blank'>Click here for documentation on this setting</a>", 'all_in_one_seo_pack' ),
-				"export_choices"	=> __( "You may choose to export settings from active modules, and content from post data.<br /><a href='http://semperplugins.com/documentation/importer-exporter-module/' target='_blank'>Click here for documentation on this setting</a>", 'all_in_one_seo_pack'),
-				"export_post_types"	=> __( "Select which Post Types you want to export your All in One SEO Pack meta data for.<br /><a href='http://semperplugins.com/documentation/importer-exporter-module/' target='_blank'>Click here for documentation on this setting</a>", 'all_in_one_seo_pack')
+				"import_submit"		=> __( "Select a valid All in One SEO Pack ini file and click 'Import' to import options from a previous state or install of All in One SEO Pack.<br /><a href='http://semperplugins.com/documentation/importer-exporter-module/' target='_blank'>Click here for documentation on this setting</a>", 'all-in-one-seo-pack' ),
+				"export_choices"	=> __( "You may choose to export settings from active modules, and content from post data.<br /><a href='http://semperplugins.com/documentation/importer-exporter-module/' target='_blank'>Click here for documentation on this setting</a>", 'all-in-one-seo-pack'),
+				"export_post_types"	=> __( "Select which Post Types you want to export your All in One SEO Pack meta data for.<br /><a href='http://semperplugins.com/documentation/importer-exporter-module/' target='_blank'>Click here for documentation on this setting</a>", 'all-in-one-seo-pack')
 			);
 			$this->warnings = Array();
 			$this->default_options = array(
-					'import_submit'			=> Array(	'name'	=> __( 'Import', 'all_in_one_seo_pack' ), 'default'	=> '', 'type' => 'file', 'save' => false ),
-					'export_choices'		=> Array( 	'name'	=> __( 'Export Settings',  'all_in_one_seo_pack'),
+					'import_submit'			=> Array(	'name'	=> __( 'Import', 'all-in-one-seo-pack' ), 'default'	=> '', 'type' => 'file', 'save' => false ),
+					'export_choices'		=> Array( 	'name'	=> __( 'Export Settings',  'all-in-one-seo-pack'),
 														'type'			=> 'multicheckbox', 
 														'initial_options' => Array(	1 => 'General Settings', 
 																					2 => 'Post Data' ) ),
-					'export_post_types'		=> Array( 	'name'	=> __( 'Export Post Types:',  'all_in_one_seo_pack' ),
+					'export_post_types'		=> Array( 	'name'	=> __( 'Export Post Types:',  'all-in-one-seo-pack' ),
 														'default'		=> Array( 'post' => 'post', 'page' => 'page' ),
 														'type'			=> 'multicheckbox', 
 														'initial_options' => $this->get_post_type_titles( Array( '_builtin' => false ) ) ),
-					'import_export_help'	=> Array( 	'type' => 'html', 'label' => 'none', 'default' => __( "Note: If General Settings is checked, the General Settings, the Feature Manager settings, and the following currently active modules will have their settings data exported:", 'all_in_one_seo_pack') . "<br />" )
+					'import_export_help'	=> Array( 	'type' => 'html', 'label' => 'none', 'default' => __( "Note: If General Settings is checked, the General Settings, the Feature Manager settings, and the following currently active modules will have their settings data exported:", 'all-in-one-seo-pack') . "<br />" )
 			);
 			
 			if ( !empty( $help_text ) )
@@ -54,10 +54,10 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Importer_Exporter' ) ) {
 		}
 		
 		function filter_submit( $submit ) {
-			$submit['Submit']['value'] = __('Import', 'all_in_one_seo_pack') . ' &raquo;';
+			$submit['Submit']['value'] = __('Import', 'all-in-one-seo-pack') . ' &raquo;';
 			return Array( 'export_submit' => Array( 'type' => 'submit', 
 													'class' => 'button-primary',
-													'value' => __('Export', 'all_in_one_seo_pack') . ' &raquo;' ) ) + $submit;
+													'value' => __('Export', 'all-in-one-seo-pack') . ' &raquo;' ) ) + $submit;
 		}
 		
 		function debug_post_types( ) {
@@ -77,9 +77,9 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Importer_Exporter' ) ) {
 						$this->default_options['import_export_help']['default'] .= "\t<li>" . $module->name . "</li>\n";
 					}
 										$this->default_options['import_export_help']['default'] .= "\n</ul>\n";
-				} else $this->default_options['import_export_help']['default'] .= "<br />" . __( "There are no other modules currently loaded!", 'all_in_one_seo_pack' );
+				} else $this->default_options['import_export_help']['default'] .= "<br />" . __( "There are no other modules currently loaded!", 'all-in-one-seo-pack' );
 			}
-			$this->default_options['import_export_help']['default'] .= '<br />' . __( "You may change this by activating or deactivating modules in the Feature Manager.", 'all_in_one_seo_pack' );
+			$this->default_options['import_export_help']['default'] .= '<br />' . __( "You may change this by activating or deactivating modules in the Feature Manager.", 'all-in-one-seo-pack' );
 			$this->update_options( );
 			
 			if ( !empty( $_REQUEST['export_submit'] ) )
@@ -244,7 +244,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Importer_Exporter' ) ) {
 									else
 										$section[ $section_label ][ $matches[ 1 ] ] = NULL;
 								} else {
-									$this->warnings[] = sprintf( __( '<b>Warning:</b> Line not matched: <b>"%s"</b>, On Line: <b>%s</b>', 'all_in_one_seo_pack' ), $line, $line_number ) ;
+									$this->warnings[] = sprintf( __( '<b>Warning:</b> Line not matched: <b>"%s"</b>, On Line: <b>%s</b>', 'all-in-one-seo-pack' ), $line, $line_number ) ;
 								}
 						}
 						/* Update Plugin Settings */
@@ -267,7 +267,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Importer_Exporter' ) ) {
 												$post_exists = null;
 											} else {
 												$target_title = $module_options[$key]['post_title'];
-												$post_warning = sprintf( __( '<b>Warning:</b> This following post could not be found: <b>"%s"</b>', 'all_in_one_seo_pack' ), $target_title );
+												$post_warning = sprintf( __( '<b>Warning:</b> This following post could not be found: <b>"%s"</b>', 'all-in-one-seo-pack' ), $target_title );
 											}
 											if ( $post_warning != null ) {
 												$this->warnings[] = $post_warning;
@@ -295,7 +295,7 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Importer_Exporter' ) ) {
 				        
 						/* Create File Contents */
 						$settings_file = "settings_aioseop.ini"; 
-						$buf = "; " . __( 'Settings export file for All in One SEO Pack', 'all_in_one_seo_pack' ) . "\n";
+						$buf = "; " . __( 'Settings export file for All in One SEO Pack', 'all-in-one-seo-pack' ) . "\n";
 						
 						/* Add all settings to settings file */
 						$buf = $aiosp->settings_export( $buf );

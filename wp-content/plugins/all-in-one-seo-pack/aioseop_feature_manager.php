@@ -10,27 +10,29 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Feature_Manager' ) ) {
 
 		protected $module_info = Array( );
 
-		function All_in_One_SEO_Pack_Feature_Manager( $mod ) {
-			$this->name = __('Feature Manager', 'all_in_one_seo_pack');		// Human-readable name of the plugin
+		function __construct( $mod ) {
+			$this->name = __('Feature Manager', 'all-in-one-seo-pack');		// Human-readable name of the plugin
 			$this->prefix = 'aiosp_feature_manager_';						// option prefix
 			$this->file = __FILE__;									// the current file
 			parent::__construct();
 			$this->module_info = Array( 
-				'sitemap'		=> Array( 'name'		=> __( 'XML Sitemaps', 'all_in_one_seo_pack' ),
-										'description'	=> __( 'Create and manage your XML Sitemaps using this feature and submit your XML Sitemap to Google, Bing/Yahoo and Ask.com.', 'all_in_one_seo_pack' ) ),
-				'opengraph'		=> Array( 'name'		=> __( 'Social Meta', 'all_in_one_seo_pack' ),
-									    'description'	=> __( 'Activate this feature to add Social Meta data to your site to deliver closer integration between your website/blog and Facebook, Twitter, and Google+.', 'all_in_one_seo_pack' ) ),
-				'robots'	=> Array( 'name' => __( 'Robots.txt', 'all_in_one_seo_pack' ),
-									  'description' => __( 'Generate and validate your robots.txt file to guide search engines through your site.', 'all_in_one_seo_pack' ) ),
-				'file_editor' => Array( 'name' => __( 'File Editor', 'all_in_one_seo_pack' ),
-									  'description' => __( 'Edit your robots.txt file and your .htaccess file to fine-tune your site.', 'all_in_one_seo_pack' ) ),
-				'performance' => Array( 'name'			=> __( 'Performance', 'all_in_one_seo_pack' ),
-										'description'	=> __( 'Optimize performance related to SEO and check your system status.', 'all_in_one_seo_pack' ),
+				'sitemap'		=> Array( 'name'		=> __( 'XML Sitemaps', 'all-in-one-seo-pack' ),
+										'description'	=> __( 'Create and manage your XML Sitemaps using this feature and submit your XML Sitemap to Google, Bing/Yahoo and Ask.com.', 'all-in-one-seo-pack' ) ),
+				'opengraph'		=> Array( 'name'		=> __( 'Social Meta', 'all-in-one-seo-pack' ),
+									    'description'	=> __( 'Activate this feature to add Social Meta data to your site to deliver closer integration between your website/blog and Facebook, Twitter, and Google+.', 'all-in-one-seo-pack' ) ),
+				'robots'	=> Array( 'name' => __( 'Robots.txt', 'all-in-one-seo-pack' ),
+									  'description' => __( 'Generate and validate your robots.txt file to guide search engines through your site.', 'all-in-one-seo-pack' ) ),
+				'file_editor' => Array( 'name' => __( 'File Editor', 'all-in-one-seo-pack' ),
+									  'description' => __( 'Edit your robots.txt file and your .htaccess file to fine-tune your site.', 'all-in-one-seo-pack' ) ),
+				'bad_robots'=> Array( 'name' => __( 'Bad Bot Blocker', 'all-in-one-seo-pack' ),
+									  'description' => __( 'Stop badly behaving bots from slowing down your website.', 'all-in-one-seo-pack' ) ),
+				'performance' => Array( 'name'			=> __( 'Performance', 'all-in-one-seo-pack' ),
+										'description'	=> __( 'Optimize performance related to SEO and check your system status.', 'all-in-one-seo-pack' ),
 										'default'	=> 'on' ),
-				'importer_exporter'	=> Array( 'name' => __( 'Importer & Exporter', 'all_in_one_seo_pack' ),
-									  'description' => __( 'Exports and imports your All in One SEO Pack plugin settings.', 'all_in_one_seo_pack' ) ),
-				'coming_soon' => Array( 'name'			=> __( 'Coming Soon...', 'all_in_one_seo_pack' ),
-					 					'description'	=> __( 'Video Sitemap', 'all_in_one_seo_pack' ),
+				'importer_exporter'	=> Array( 'name' => __( 'Importer & Exporter', 'all-in-one-seo-pack' ),
+									  'description' => __( 'Exports and imports your All in One SEO Pack plugin settings.', 'all-in-one-seo-pack' ) ),
+				'coming_soon' => Array( 'name'			=> __( 'Coming Soon...', 'all-in-one-seo-pack' ),
+					 					'description'	=> __( 'Video Sitemap', 'all-in-one-seo-pack' ),
 										'save'		=> false ) );
 
 			// Set up default settings fields
@@ -71,8 +73,10 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Feature_Manager' ) ) {
 			);
 			// load initial options / set defaults
 			$this->update_options( );
-			add_filter( $this->prefix . 'output_option', Array( $this, 'display_option_div' ), 10, 2 );
-			add_filter( $this->prefix . 'submit_options', Array( $this, 'filter_submit' ) );
+			if ( is_admin() ) {
+				add_filter( $this->prefix . 'output_option', Array( $this, 'display_option_div' ), 10, 2 );
+				add_filter( $this->prefix . 'submit_options', Array( $this, 'filter_submit' ) );				
+			}
 		}
 		
 		function menu_order() {
@@ -80,9 +84,9 @@ if ( !class_exists( 'All_in_One_SEO_Pack_Feature_Manager' ) ) {
 		}
 		
 		function filter_submit( $submit, $location = null ) {
-			$submit['Submit']['value'] = __( 'Update Features', 'all_in_one_seo_pack' )  . ' &raquo;';
+			$submit['Submit']['value'] = __( 'Update Features', 'all-in-one-seo-pack' )  . ' &raquo;';
 			$submit['Submit']['class'] .= " hidden";
-			$submit['Submit_Default']['value'] = __( 'Reset Features', 'all_in_one_seo_pack' ) . ' &raquo;';
+			$submit['Submit_Default']['value'] = __( 'Reset Features', 'all-in-one-seo-pack' ) . ' &raquo;';
 			return $submit;
 		}
 		

@@ -98,13 +98,13 @@ private static function SyncPase1($sync_data, $output)
 	
 	if($output) {
 		$ms = self::GetMemStats();
-		self::DEcho('<p>'. sprintf(__('Starting sync. Memory usage: %s - Limit: %s',WPFB), WPFB_Output::FormatFilesize($ms['used']), WPFB_Output::FormatFilesize($ms['limit'])).' '.(($ms['used'] > self::HIGH_START_MEM)?__('<b>Note:</b> The memory usage seems to be quite high. Please disable other plugins to lower the memory consumption.'):'').'</p>');
+		self::DEcho('<p>'. sprintf(__('Starting sync. Memory usage: %s - Limit: %s','wp-filebase'), WPFB_Output::FormatFilesize($ms['used']), WPFB_Output::FormatFilesize($ms['limit'])).' '.(($ms['used'] > self::HIGH_START_MEM)?__('<b>Note:</b> The memory usage seems to be quite high. Please disable other plugins to lower the memory consumption.'):'').'</p>');
 	}
 	
-	if($output) self::DEcho('<p>'. __('Checking for file changes...',WPFB).' ');
-	self::CheckChangedFiles($sync_data);
-	if($output) self::DEcho('done!</p>');	
+	
+	self::CheckChangedFiles($sync_data, $output);
 
+	// delete missing categories
 	foreach($sync_data->cats as $id => $cat) {
 		$cat_path = $cat->GetLocalPath(true);
 		if(!@is_dir($cat_path) || !@is_readable($cat_path))
@@ -116,7 +116,7 @@ private static function SyncPase1($sync_data, $output)
 		}		
 	}
 	
-	if($output) self::DEcho('<p>'. __('Searching for new files...',WPFB).' ');
+	if($output) self::DEcho('<p>'. __('Populating file tree...','wp-filebase').' ');
 	
 	self::PrintDebugTrace("new_files");
 	
@@ -125,16 +125,31 @@ private static function SyncPase1($sync_data, $output)
 	$all_files = self::cleanPath(list_files($upload_dir));
 	$sync_data->num_all_files = count($all_files);
 	
+	if($output) self::DEcho('('.sprintf(__('%d files in upload directory','wp-filebase'), $sync_data->num_all_files).') Filtering ... ');
+	
+	if($sync_data->num_all_files > 0) {
+		wpfb_loadclass('ProgressReporter');
+		$progress_reporter = new WPFB_ProgressReporter();
+		$progress_reporter->InitProgress($sync_data->num_all_files);
+		$progress_reporter->InitProgressField('Current File: %#%', '-', true);
+	}
+	
 	$num_new_files = 0;
+	$i = 0;
+	$ulp_len = strlen($upload_dir);
 	
 	// 1ps filter	 (check extension, special file names, and filter existing file names and thumbnails)
 	$fext_blacklist = array_map('strtolower', array_map('trim', explode(',', WPFB_Core::$settings->fext_blacklist)));
 	for($i = 0; $i < $sync_data->num_all_files; $i++)
 	{
-		// $fn = $upload_dir.implode('/',array_map('urlencode', explode('/', substr($all_files[$i], strlen($upload_dir)))));
-
+		// $fn = $upload_dir.implode('/',array_map('urlencode', explode('/', substr($all_files[$i], strlen($upload_dir)))));		
+		
 		$fn = $all_files[$i];
 		$fbn = basename($fn);
+		
+		$progress_reporter->SetProgress($i);
+		$progress_reporter->SetField(substr($fn,$ulp_len));
+		
 		if(strlen($fn) < 2 || $fbn{0} == '.' || strpos($fn, '/.tmp') !== false 				|| $fbn == '_wp-filebase.css' || strpos($fbn, '_caticon.') !== false || strpos($fbn, '_wpfb_') === 0
 				|| strpos($fbn, '.__info.xml') !== false
 				|| in_array(substr($fn, strlen($upload_dir)), $sync_data->known_filenames)
@@ -169,9 +184,17 @@ private static function SyncPase1($sync_data, $output)
 			}
 		}
 		
+		// TODO: should rename here if special chars and set file_orginial_name
 		$sync_data->new_files[$num_new_files] = $fn;
 		$num_new_files++;
 	}
+	
+	$progress_reporter->SetProgress($sync_data->num_all_files);
+	
+	if($output) self::DEcho('- done!</p>');	
+	
+	self::PrintDebugTrace("new_files_end");
+	
 	
 	foreach($sync_data->missing_files as $mf) {
 		if(WPFB_Core::$settings->remove_missing_files) {
@@ -183,15 +206,37 @@ private static function SyncPase1($sync_data, $output)
 		$sync_data->log['missing_files'][$mf->file_id] = $mf;
 	}
 	
-	self::PrintDebugTrace("new_files_end");
+	if(count($sync_data->missing_files)) {
+		if($output) self::DEcho('<p>Missing files processed!</p>');	
+	}
+	
+	self::PrintDebugTrace("missing_files_end");
+	
 
 	$sync_data->num_files_to_add = $num_new_files;
 	
 	// handle thumbnails
 	self::GetThumbnails($sync_data);
 	
+	if($output) self::DEcho('<p>Thumbnails processed!</p>');	
+	
 	self::PrintDebugTrace("post_get_thumbs");
+
 }
+
+/**
+ * 
+ * @param type $steps
+ * @return \progressbar
+ */
+private static function NewProgressBar($steps)
+{
+		if(!class_exists('progressbar')) include_once(WPFB_PLUGIN_ROOT.'extras/progressbar.class.php');
+		$progress_bar = new progressbar(0, $steps);
+		$progress_bar->print_code();	
+		return $progress_bar;
+}
+		
 
 static function Sync($hash_sync=false, $output=false )
 {
@@ -200,18 +245,16 @@ static function Sync($hash_sync=false, $output=false )
 	wpfb_loadclass('File', 'Category');
 	$sync_data = new WPFB_SyncData(true);
 	$sync_data->hash_sync = $hash_sync;
-	
+	$sync_data->bg_scan = false;	
 	self::PreSync($sync_data);			
 	self::SyncPase1($sync_data, $output);
 	
 	if($output && $sync_data->num_files_to_add > 0) {
 		echo "<p>";
-		printf(__('%d Files found, %d new.', WPFB), $sync_data->num_all_files, $sync_data->num_files_to_add);
+		printf(__('%d Files found, %d new.','wp-filebase'), $sync_data->num_all_files, $sync_data->num_files_to_add);
+		if($sync_data->bg_scan) self::DEcho(__('Adding files with background scanning.','wp-filebase'));
 		echo "</p>";
-		
-		if(!class_exists('progressbar')) include_once(WPFB_PLUGIN_ROOT.'extras/progressbar.class.php');
-		$progress_bar = new progressbar(0, $sync_data->num_files_to_add);
-		$progress_bar->print_code();
+		$progress_bar = self::NewProgressBar($sync_data->num_files_to_add);
 	} else {
 		$progress_bar = null; 
 		if($output) self::DEcho('done!</p>');
@@ -225,6 +268,11 @@ static function Sync($hash_sync=false, $output=false )
 	return $sync_data->log;
 }
 
+/**
+ * 
+ * @param WPFB_SyncData $sync_data
+ * @param boolean $output
+ */
 private static function PostSync($sync_data, $output)
 {
 	self::PrintDebugTrace("post_sync");
@@ -236,8 +284,9 @@ private static function PostSync($sync_data, $output)
 	
 	// sync categories
 	if($output) self::DEcho('<p>Syncing categories... ');
-	$sync_data->log['updated_categories'] = self::SyncCats($sync_data->cats);
+	$sync_data->log['updated_categories'] = self::SyncCats($sync_data->cats, $output);
 	if($output) self::DEcho('done!</p>');
+	
 	
 	wpfb_call('Setup','ProtectUploadPath');
 	self::PrintDebugTrace("update_tags");
@@ -245,7 +294,7 @@ private static function PostSync($sync_data, $output)
 	
 	$mem_peak = max($sync_data->mem_peak, memory_get_peak_usage());
 	
-	if($output) printf("<p>".__('Sync Time: %01.2f s, Memory Peak: %s', WPFB)."</p>", microtime(true) - $sync_data->time_begin, WPFB_Output::FormatFilesize($mem_peak));
+	if($output) printf("<p>".__('Sync Time: %01.2f s, Memory Peak: %s','wp-filebase')."</p>", microtime(true) - $sync_data->time_begin, WPFB_Output::FormatFilesize($mem_peak));
 }
 
 static function UpdateItemsPath(&$files=null, &$cats=null) {
@@ -260,19 +309,41 @@ static function UpdateItemsPath(&$files=null, &$cats=null) {
 	}
 }
 
-static function CheckChangedFiles($sync_data)
+/**
+ * 
+ * @param WPFB_SyncData $sync_data
+ * @param boolean $output
+ */
+private static function CheckChangedFiles($sync_data, $output)
 {
+	if($output) self::DEcho('<p>'. sprintf(__('Checking %d files for changes...','wp-filebase'),count($sync_data->files)) .' ');
+	
 	$sync_id3 = !WPFB_Core::$settings->disable_id3;
-	$upload_dir = self::cleanPath(WPFB_Core::UploadDir());	
+	$upload_dir = self::cleanPath(WPFB_Core::UploadDir());
+	
+	if(count($sync_data->files) > 0) {
+		wpfb_loadclass('ProgressReporter');
+		$progress_reporter = new WPFB_ProgressReporter();
+		$progress_reporter->InitProgress(count($sync_data->files));
+		$progress_reporter->InitProgressField('Current File: %#%', '-', true);
+	}
+	
+	$i = 0;
+	
 	foreach($sync_data->files as $id => $file)
 	{
 		$file_path = self::cleanPath($file->GetLocalPath(true));
-		$sync_data->known_filenames[] = substr($file_path, strlen($upload_dir));
+		$rel_file_path = substr($file_path, strlen($upload_dir));
+		
+		$progress_reporter->SetProgress(++$i);
+		$progress_reporter->SetField($rel_file_path);
+		
+		$sync_data->known_filenames[] = $rel_file_path;
 		if($file->GetThumbPath())
 			$sync_data->known_filenames[] = substr(self::cleanPath($file->GetThumbPath()), strlen($upload_dir));
 		
 		if($file->file_category > 0 && is_null($file->GetParent()))
-			$sync_data->log['warnings'][] = sprintf(__('Category (ID %d) of file %s does not exist!', WPFB), $file->file_category, $file->GetLocalPathRel()); 
+			$sync_data->log['warnings'][] = sprintf(__('Category (ID %d) of file %s does not exist!','wp-filebase'), $file->file_category, $file->GetLocalPathRel()); 
 		
 		// remove thumb if missing
 		if($file->file_thumbnail && !file_exists($file->GetThumbPath()))
@@ -306,12 +377,13 @@ static function CheckChangedFiles($sync_data)
 			$file->file_mtime = $file_mtime;
 			$file->file_hash = $sync_data->hash_sync ? $file_hash : WPFB_Admin::GetFileHash($file_path);
 			
-				WPFB_GetID3::UpdateCachedFileInfo($file);
+			{
+				WPFB_Sync::ScanFile($file); // this can be async!
+			}
 			
 			$res = $file->DBSave();
-			
 			if(!empty($res['error']))
-				$sync_data->log['error'][$id] = $file;
+				$sync_data->log['error'][$id] = $res['error'] . " (file $rel_file_path)";
 			else
 				$sync_data->log['changed'][$id] = $file;
 		}
@@ -319,6 +391,8 @@ static function CheckChangedFiles($sync_data)
 	
 	// prepare for binary search (fast_in_array)
 	sort($sync_data->known_filenames);
+	
+	if($output) self::DEcho('- done!</p>');	
 }
 
 static function AddNewFiles($sync_data, $progress_bar=null, $max_batch_size=0 )
@@ -461,18 +535,35 @@ static function GetThumbnails($sync_data)
 	}
 }
 
-static function SyncCats($cats = null)
+static function SyncCats($cats = null, $output=false)
 {
 	$updated_cats = array();
+	if(is_null($cats)) $cats = WPFB_Category::GetCats();
+	
+	if(count($cats) == 0)
+		return array();
+	
+	if($output) {
+		wpfb_loadclass('ProgressReporter');
+		$progress_reporter = new WPFB_ProgressReporter();
+		$progress_reporter->InitProgress(count($cats));
+		$progress_reporter->InitProgressField('Current Category: %#%', '-', true);
+	}
+	
+	$i = 0;
 	
 	// sync file count
-	if(is_null($cats)) $cats = WPFB_Category::GetCats();
-	foreach(array_keys($cats) as $i)
+	
+	foreach(array_keys($cats) as $id)
 	{
-		$cat = $cats[$i];
-		$child_files = $cat->GetChildFiles(false);
+		/* @var $cat WPFB_Category */
+		$cat = $cats[$id];
+		
+		$child_files = $cat->GetChildFilesFast(); // $cat->GetChildFiles(false);
+		$num_files_total = (int)count($cat->GetChildFilesFast(true)); // (int)count($cat->GetChildFiles(true));
+		
 		$num_files = (int)count($child_files);
-		$num_files_total = (int)count($cat->GetChildFiles(true));
+			
 		if($num_files != $cat->cat_num_files || $num_files_total != $cat->cat_num_files_total)
 		{
 			$cat->cat_num_files = $num_files;
@@ -494,9 +585,92 @@ static function SyncCats($cats = null)
 		
 		if(is_dir($cat->GetLocalPath()) && is_writable($cat->GetLocalPath()))
 			@chmod ($cat->GetLocalPath(), octdec(WPFB_PERM_DIR));
+		
+		if($output) {
+			$progress_reporter->SetProgress(++$i);
+			$progress_reporter->SetField($cat->GetLocalPathRel());
+			self::UpdateMemBar();
+		}
 	}
 	
 	return $updated_cats;
+}
+
+/**
+ * 1. Checks if file is actually present and readable on file system and either sets file offline or completly removes it
+ * 2. If file hash not set, calculate it
+ * 3. Try to generate a thumbnail if it does not exists
+ * 4. Update ID3 info (with _async_ RPC if enabled)
+ * 
+ * @param WPFB_File $file
+ * @param bool $forced_refresh_thumb
+ * @return bool
+ */
+static function ScanFile($file, $forced_refresh_thumb=false, $allow_async=true)
+{
+    	if(!empty($_GET['debug']))
+		WPFB_Sync::PrintDebugTrace("scanning_file:".$file->GetLocalPathRel());	
+
+	$file_path = $file->GetLocalPath();
+	$tmp_file = false;	
+
+	if(!$file->IsLocal()) {
+            $res = WPFB_Admin::SideloadFile($file->GetRemoteUri(), $file_path);
+            if($res['error'])
+                    return false;
+            $tmp_file = true;
+	}
+	elseif(!is_file($file_path) || !is_readable($file_path))
+	{		
+		if(WPFB_Core::$settings->remove_missing_files) {
+			$file->Remove();
+			return true;
+		} else {
+			$file->file_offline = true;
+                        $file->file_mtime = 0;
+			$file->file_rescan_pending = 1;
+			$file->DbSave();
+                        return true;
+		}
+	}
+
+
+
+	if(empty($file->file_hash)) {
+		$file->file_hash = WPFB_Admin::GetFileHash($file->GetLocalPath());
+	}
+
+	if(empty($file->file_thumbnail) || $forced_refresh_thumb || !is_file($file->GetThumbPath()))
+	{				
+		$file->Lock(true);
+		$file->CreateThumbnail(); // this only deltes old thumb if success
+		$file->Lock(false);
+
+		if(WPFB_Core::$settings->base_auto_thumb && empty($file->file_thumbnail)) {
+			$thumb = false;
+			$pwe = substr($file->GetLocalPath(), 0, strrpos($file->GetLocalPath(), '.')+1);
+			if($pwe && (file_exists($thumb=$pwe.'png')||file_exists($thumb=$pwe.'jpg')||file_exists($thumb=$pwe.'gif'))) {
+				$file->file_thumbnail = basename($thumb);
+				$dthumb = $file->GetThumbPath(true);
+				if($dthumb != $thumb) {
+					$dir = dirname($dthumb);
+					if(!is_dir($dir)) WPFB_Admin::Mkdir($dir);
+					rename ($thumb, $dthumb);
+				}
+			}
+		}
+	}
+
+	$file->file_rescan_pending = 1;
+	$file->DBSave();
+	
+	
+	// the UpdateCachedFileInfo will delete the file if necessary! (no need of $tmp_file value!)
+	{
+		WPFB_GetID3::UpdateCachedFileInfo($file);
+	}
+	
+	return true;
 }
 
 static function Chmod($base_dir, $files)
@@ -517,7 +691,7 @@ static function Chmod($base_dir, $files)
 		{
 			@chmod ($f, octdec(WPFB_PERM_FILE));
 			if(!is_writable($f) && !is_writable(dirname($f)))
-				$result[] = sprintf(__('File <b>%s</b> is not writable!', WPFB), substr($f, $upload_dir_len));
+				$result[] = sprintf(__('File <b>%s</b> is not writable!','wp-filebase'), substr($f, $upload_dir_len));
 		}
 	}
 	
@@ -550,30 +724,30 @@ static function PrintResult(&$result)
 		
 		echo '<p>';
 		if($num_changed == 0 && $num_added == 0)
-			_e('Nothing changed!', WPFB);
+			_e('Nothing changed!','wp-filebase');
 
 		if($num_changed > 0)
-			printf(__('Changed %d items.', WPFB), $num_changed);
+			printf(__('Changed %d items.','wp-filebase'), $num_changed);
 			
 		if($num_added > 0) {
 			echo '<br />';
-			printf(__('Added %d files.', WPFB), $num_added);
+			printf(__('Added %d files.','wp-filebase'), $num_added);
 		}
 		echo '</p>';
 		
 		if( $num_errors == 0)
-			echo '<p>' . __('Filebase successfully synced.', WPFB) . '</p>';
+			echo '<p>' . __('Filebase successfully synced.','wp-filebase') . '</p>';
 			
 			//$clean_uri = remove_query_arg(array('message', 'action', 'file_id', 'cat_id', 'deltpl', 'hash_sync', 'doit', 'ids', 'files', 'cats', 'batch_sync' /* , 's'*/)); // keep search keyword	
 			$clean_uri = admin_url('admin.php?page=wpfilebase_manage&batch_sync='.(int)!empty($_GET['batch_sync']));
 			
 			// first files should be deleted, then cats!
 			if(!empty($result['missing_files'])) {
-				echo '<p>' . sprintf(__('%d Files could not be found.', WPFB), count($result['missing_files'])) . ' '.
-				(WPFB_Core::$settings->remove_missing_files ? __('The corresponding entries have been removed from the database.',WPFB) : (' <a href="'.$clean_uri.'&amp;action=del&amp;files='.join(',',array_keys($result['missing_files'])).'" class="button" target="_top">'.__('Remove entries from database',WPFB).'</a>')).'</p>';
+				echo '<p>' . sprintf(__('%d Files could not be found.','wp-filebase'), count($result['missing_files'])) . ' '.
+				(WPFB_Core::$settings->remove_missing_files ? __('The corresponding entries have been removed from the database.','wp-filebase') : (' <a href="'.$clean_uri.'&amp;action=del&amp;files='.join(',',array_keys($result['missing_files'])).'" class="button" target="_top">'.__('Remove entries from database','wp-filebase').'</a>')).'</p>';
 			} elseif(!empty($result['missing_folders'])) {
-				echo '<p>' . sprintf(__('%d Category Folders could not be found.', WPFB), count($result['missing_folders'])) . ' '.
-				(WPFB_Core::$settings->remove_missing_files ? __('The corresponding entries have been removed from the database.',WPFB) : (' <a href="'.$clean_uri.'&amp;action=del&amp;cats='.join(',',array_keys($result['missing_folders'])).'" class="button" target="_top">'.__('Remove entries from database',WPFB).'</a>')).'</p>';
+				echo '<p>' . sprintf(__('%d Category Folders could not be found.','wp-filebase'), count($result['missing_folders'])) . ' '.
+				(WPFB_Core::$settings->remove_missing_files ? __('The corresponding entries have been removed from the database.','wp-filebase') : (' <a href="'.$clean_uri.'&amp;action=del&amp;cats='.join(',',array_keys($result['missing_folders'])).'" class="button" target="_top">'.__('Remove entries from database','wp-filebase').'</a>')).'</p>';
 			}
 }
 
@@ -610,10 +784,25 @@ static function PrintDebugTrace($tag="") {
 
 class WPFB_SyncData {
 	
+	/**
+	 *
+	 * @var WPFB_File[]
+	 */
 	var $files;
+	
+	/**
+	 *
+	 * @var WPFB_Category[]
+	 */
 	var $cats;	
 	
 	var $hash_sync;
+        
+        /**
+         * Pro-only
+         * @var bool 
+         */
+	var $bg_scan;
 	
 	var $log;
 	var $time_begin;
@@ -628,7 +817,8 @@ class WPFB_SyncData {
 	var $num_all_files;
 	var $num_files_processed;
 	
-	function WPFB_SyncData($init=false)
+	
+	function __construct($init=false)
 	{
 		if($init) {
 			$this->files = WPFB_File::GetFiles2();
