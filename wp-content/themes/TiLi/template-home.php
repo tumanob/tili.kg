@@ -137,11 +137,14 @@
 </div>
 
 <div class="main-contacts col-md-12">
-	<?php
-	// Use shortcodes for contact form
-		echo do_shortcode( '[contact-form-7 id="464" title="form1"]' );
+	<div class="center-block col-md-8" style="float: none;" >
+		<?php
+		// Use shortcodes for contact form
+			echo do_shortcode( '[contact-form-7 id="464" title="form1"]' );
 
-	?>
+		?>
+	</div>
+
 
 </div>
 

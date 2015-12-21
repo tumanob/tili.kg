@@ -1543,7 +1543,48 @@ a.all-apps:hover{
 .socia-content{
   margin-top: 20px;
 }
+
+
+/* contact form  footer mainpage */
 .main-contacts{
   background: url("images/conact-bg.jpg") repeat-x;
   min-height: 470px;
+  color: white;
+  padding-top: 60px;
+}
+
+.main-contacts input, .main-contacts textarea{
+  background: #202936;
+  padding: 13px;
+  border: none;
+  width: 100%;
+  opacity: 0.7;
+  margin: 12px 0;
+}
+
+.main-contacts input{
+
+}
+.main-contacts h4
+{
+  font-size:28px;
+  margin-left:20px;
+}
+
+.main-contacts input.wpcf7-submit{
+  background: #00aeef;
+  border-bottom: 4px solid #008bbf;
+  width: 160px;
+  height: 48px;
+  float: none;
+  margin: 0px auto;
+  display: block;
+  opacity: 1;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+.main-contacts input.wpcf7-submit:hover{
+
+  border-bottom: 4px solid #00aeef;
+
 }
