@@ -137,9 +137,12 @@
 </div>
 
 <div class="main-contacts col-md-12">
-	<form class="" action="index.html" method="post">
-		324fsdf sd fdf sdf sf d fsd
-	</form>
+	<?php
+	// Use shortcodes for contact form
+		echo do_shortcode( '[contact-form-7 id="464" title="form1"]' );
+
+	?>
+
 </div>
 
 
