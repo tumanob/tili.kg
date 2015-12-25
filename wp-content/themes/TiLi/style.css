@@ -20,8 +20,9 @@ html, body {
 body {
     font: 15px 'Roboto',Arial, Helvetica, sans-serif;
     color: #000;/*#2b2b2b;*/
-   /* background: url(images/bg.gif) repeat-x top;*/
-    background-color: #f2f2f2 !important;
+   background: #fff url(images/body-bg.jpg) repeat-x top !important ;
+
+
 }
 
 a {
@@ -136,7 +137,7 @@ font-size: 20px;
     height: 24px;
 }
 .searchtext{
-      background: transparent url(images/search.png) no-repeat 15px center !important;
+      background: #181f2c url(images/search.png) no-repeat 15px center !important;
 }
 
 .searchformdict .stxt {
@@ -223,9 +224,10 @@ font-size: 20px;
   background-color: white;
     border-radius: 0px;
     overflow: hidden;
-    box-shadow: 0 1px 3px grey;
+    box-shadow: 0px 3px 20px grey;
     padding: 0px;
-    margin: 0px 0 10px 0;
+    margin: 0px 0 30px 0;
+
 }
 
 .dbcontent-main .db-white
@@ -236,13 +238,13 @@ font-size: 20px;
 
 .dbcontent-main .db-green
 {
-  background: #00aba2;
+  background: #00aba2 url("images/green-pattern.jpg");
 
 }
 
 .dbcontent-main .db-lightgreen
 {
-  background: #66b484;
+  background: #66b484 url("images/lgreen-pattern.jpg");
 
 }
 .dbcontent-main .db-green h4,.dbcontent-main .db-lightgreen h4
@@ -891,7 +893,9 @@ float: left;
 
 /* bootstrap changes*/
 
-
+.logo-static{
+  z-index: 10000000000;
+}
 #header .logoimg
 {
     height: 120px;
@@ -1114,6 +1118,10 @@ a span.green{
 
 /* Bootstrap ovverride */
 
+.navbar{
+  border:0px !important;
+  border-radius: 0px;
+}
 .navbar-default{
 background-color: #414751;
 background-image: url('images/header-bg.jpg');
@@ -1141,12 +1149,13 @@ background-image: url('images/header-bg.jpg');
         float: none;
     }
     .navbar-nav>li>a {
-        padding-top: 15px;
-        padding-bottom: 15px;
-        margin-left: 50px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-left: 40px;
     }
 
 /*   main menu icons classes */
+/*
     .navbar-nav>li.icontag{
         background: url('images/icons/pricetag.png') no-repeat 18px 15px;
     }
@@ -1172,7 +1181,7 @@ background-image: url('images/header-bg.jpg');
     .navbar-nav>li.iconmail{
         background: url('images/icons/contact.png') no-repeat 18px 15px;
     }
-
+*/
 
     .navbar-collapse.collapse.in {display: block !important; }
 
@@ -1332,7 +1341,9 @@ http://www.materialup.com/posts/material-design-input-text
   margin: -70px 0 0 -15px;
   box-shadow: 2px 3px 5px #292F3B;
   background-color: #414751;
-  background-image: url('images/header-bg.jpg');
+  background: url('images/header-bg.jpg') -38px -68px;
+  margin-top: 0px;
+  border: 0px;
 }
 .navbar-default .navbar-toggle{
   position: absolute;
@@ -1386,8 +1397,13 @@ li.divider {
 }
 
 .bmenu li a {
-    font-size: 13px;
-    color: #000;
+    font-size: 16px;
+    color: #fff !important;
+    text-decoration: none;
+}
+.bmenu li a:hover{
+  padding-left:30px;
+  background: transparent url('images/menu-hover.png') no-repeat left;
 }
 
 .navbar-nav>li.open>.dropdown-menu
@@ -1482,7 +1498,8 @@ div.grey a{
   padding: 0;
 }
 .home-apps-sicial{
-  margin: 20px 0;
+  margin: 100px 0 20px 0;
+
 }
 .phone-icon{
   /*
@@ -1562,6 +1579,7 @@ a.all-apps:hover{
   margin: 12px 0;
 }
 
+.main-contacts textarea{   height: 150px;     margin-bottom: 30px;}
 .main-contacts input{
 
 }
@@ -1569,6 +1587,7 @@ a.all-apps:hover{
 {
   font-size:28px;
   margin-left:20px;
+  font-weight: 100;
 }
 
 .main-contacts input.wpcf7-submit{
@@ -1582,9 +1601,46 @@ a.all-apps:hover{
   opacity: 1;
   font-size: 16px;
   text-transform: uppercase;
+  border: 0px solid #ccc;
+    background: #00aeef;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 6px;
+    color: white;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+    right: 0px;
+    top: 22px;
 }
 .main-contacts input.wpcf7-submit:hover{
 
   border-bottom: 4px solid #00aeef;
 
 }
+
+
+/* Menu start*/
+
+/*Style for curent page */
+.current-menu-item{
+
+}
+/*open menu*/
+button.navbar-toggle
+{
+
+}
+
+button.navbar-toggle .icon-bar, button.navbar-toggle .icon-bar:hover
+{
+background: transparent !important;
+}
+/*closed menu*/
+button.collapsed{
+
+}
+button.collapsed .icon-bar{
+background: white !important;
+}
+
+
+/*Menu End*/

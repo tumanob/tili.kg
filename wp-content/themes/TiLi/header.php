@@ -11,7 +11,7 @@
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/typeahead.bundle.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/character.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/index.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto|Roboto+Mono">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:100,400|Roboto+Mono">
 
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
            {lang: 'ru'}
@@ -37,7 +37,7 @@
 
            <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
             <div class="row topcenter">
-              <div class="col-md-8 col-sm-6 col-xs-6">
+              <div class="col-md-8 col-sm-6 col-xs-6 logo-static">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                   <span class="sr-only">Меню</span>
                   <span class="icon-bar"></span>
@@ -46,6 +46,42 @@
                 </button>
 
                 <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili<span class="green">.kg</span> <span class="grey hidden-xs">Все для изучения Киргизского языка!</span></a></h1>
+                <div class="collapse navbar-collapse " id="navbar-collapse">
+                    
+                    <!-- <ul class="nav navbar-nav">
+                       <li class="iconhome dropdown"><a href="/">Главная</a></li>
+
+                       <li class="dropdown iconslovar">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             Словарь<span class="caret"></span>
+                         </a>
+                         <ul class="dropdown-menu">
+                           <li><a href="/dict/dlist/">cловари от а до я</a></li>
+                           <li><a href="/dict/glossary/">глосарий</a></li>
+                         </ul>
+                       </li>
+                        <li class="iconuse"><a href="/category/useful">Полезное</a></li>
+                        <li class="iconapps "><a href="/">Приложения</a></li>
+                        <li class="iconlove"><a href="#">Благодарности</a></li>
+                        <li class="iconhelp"><a href="#">Как помочь проекту?</a></li>
+                        <li class="iconmail"><a href="#">Контакты</a></li>
+                        <li role="separator" class="divider"></li>
+
+
+                     </ul>
+-->
+                     <?php
+                          wp_nav_menu( array(
+                             'menu'              => 'primary',
+                             'theme_location'    => 'primary',
+                             'depth'             => 2,
+                             'container'         => 'false',
+                             'container_class'   => '',
+                             'container_id'      => '',
+                             'menu_class'        => 'bmenu nav navbar-nav' )
+                         );
+                     ?>
+                  </div>
               </div>
               <div class="col-md-3 .col-sm-3 col-xs-4 pull-right">
                 <div class="login">
@@ -67,58 +103,9 @@
             </div>
 
           </div>
-          <div class="collapse navbar-collapse " id="navbar-collapse">
-              <div class="menulogo">
-                 <center><img src="http://tili.kg/wp-content/themes/TiLi/images/logo.png" /> </center>
-              </div>
-               <ul class="nav navbar-nav">
-                 <li class="iconhome dropdown"><a href="/">Главная</a></li>
-                 <li role="separator" class="divider"></li>
-                 <li class="dropdown iconslovar">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                       Словарь<span class="caret"></span>
-                   </a>
-                   <ul class="dropdown-menu">
-                     <li><a href="/dict/dlist/">cловари от а до я</a></li>
-                     <li><a href="/dict/glossary/">глосарий</a></li>
-                   </ul>
-                 </li>
-                  <li class="iconuse"><a href="/category/useful">Полезное</a></li>
-                  <li class="iconapps "><a href="/">Приложения</a></li>
-                  <li class="iconlove"><a href="#">Благодарности</a></li>
-                  <li class="iconhelp"><a href="#">Как помочь проекту?</a></li>
-                  <li class="iconmail"><a href="#">Контакты</a></li>
-                  <li role="separator" class="divider"></li>
 
 
-               </ul>
 
-               <?php
-                    wp_nav_menu( array(
-                       'menu'              => 'primary',
-                       'theme_location'    => 'primary',
-                       'depth'             => 2,
-                       'container'         => 'false',
-                       'container_class'   => '',
-                       'container_id'      => '',
-                       'menu_class'        => 'bmenu' )
-                   );
-               ?>
-            </div>
-
-              <?php
-                  /* wp_nav_menu( array(
-                      'menu'              => 'primary',
-                      'theme_location'    => 'primary',
-                      'depth'             => 2,
-                      'container'         => 'div',
-                      'container_class'   => 'collapse navbar-collapse',
-                      'container_id'      => 'bs-example-navbar-collapse-1',
-                      'menu_class'        => 'nav navbar-nav side-menu-glavnoe',
-                      'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
-                      'walker'            => new wp_bootstrap_navwalker())
-                  ); */
-              ?>
 
           </div>
           <div class="headersearch">
