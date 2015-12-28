@@ -13,7 +13,7 @@
 			</div>
 			<div class="col-md-12 utext">
 				<a href="#">
-					<span> Книги, учебники, статьи, фильмы, музыка, клипы ...</span>
+					<span> Персонализированный путь обучения кыргызского языка. По этапно интерактивно и понятно</span>
 				</a>
 			</div>
 			<div class="col-md-12 text-button grey">
@@ -28,15 +28,15 @@
 			<h4>Полезное</h4>
 			<hr class="white">
 			<div class=" col-md-12 ">
-				<center><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful2.png" class="" /></a></center>
+				<center><a href="http://tili.kg/category/useful"><img src="<?php echo get_template_directory_uri(); ?>/images/useful2.png" class="" /></a></center>
 			</div>
 			<div class="col-md-12 utext">
-				<a href="#">
-					<span> Книги, учебники, статьи, фильмы, музыка, клипы ...</span>
+				<a href="http://tili.kg/category/useful">
+					<span> Книги, учебники, статьи, фильмы, музыка, клипы и многое другое для изучающих кыргызхский язык.</span>
 				</a>
 			</div>
 			<div class="col-md-12 text-button">
-				<a href="#">
+				<a href="http://tili.kg/category/useful">
 	        Переход в раздел
 				</a>
 			</div>
@@ -48,15 +48,15 @@
 			<h4>Первые 200 слов</h4>
 			<hr class="white">
 			<div class=" col-md-12 ">
-				<center><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful3.png" class="" /></a></center>
+				<center><a href="http://tili.kg/top200/"><img src="<?php echo get_template_directory_uri(); ?>/images/useful3.png" class="" /></a></center>
 			</div>
 			<div class="col-md-12 utext">
 				<a href="#">
-					<span> Книги, учебники, статьи, фильмы, музыка, клипы ...</span>
+					<span> Первые слова с картинками, озвученные диктором. Подойдет как детям так и взрослым.</span>
 				</a>
 			</div>
 			<div class="col-md-12 text-button">
-				<a href="#">
+				<a href="http://tili.kg/top200/">
 	        Выучить слова
 				</a>
 			</div>
@@ -91,13 +91,13 @@
 			<hr class="grey">
 			<div class="apps-content">
 				<div class="col-md-4">
-					<a href="#" class="glow"><img src="/wp-content/themes/TiLi/images/gplay-banner.png" alt="google play" /></a>
+					<a href="http://play.google.com/store/search?q=pub:Tili.kg" class="glow"><img src="/wp-content/themes/TiLi/images/gplay-banner.png" alt="google play" /></a>
 				</div>
 				<div class="col-md-4">
-					<a href="#" class="glow"><img src="/wp-content/themes/TiLi/images/appstore-banner.png" alt="google play" /></a>
+					<a href="http://itunes.apple.com/us/app/tili.kg/id528317649?mt=8" class="glow"><img src="/wp-content/themes/TiLi/images/appstore-banner.png" alt="google play" /></a>
 				</div>
 				<div class="col-md-4">
-					<a href="#" class="glow"><img src="/wp-content/themes/TiLi/images/chrome-banner.png" alt="google play" /></a>
+					<a href="https://chrome.google.com/webstore/detail/%D0%BA%D0%B8%D1%80%D0%B3%D0%B8%D0%B7%D1%81%D0%BA%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D1%8C/hojggilcgbfgflnmnjldhbdpomafihfd" class="glow"><img src="/wp-content/themes/TiLi/images/chrome-banner.png" alt="google play" /></a>
 				</div>
 				<div class="col-md-12">
 					<a href="#" class="all-apps"> Все приложения</a>
@@ -116,13 +116,13 @@
 			<h3>Мы в социальных сетях</h3>
 			<div class="socia-content">
 					<div class="col-md-2 ">
-						<img src="/wp-content/themes/TiLi/images/icons/fb-icon.png" alt="google play" />
+						<a href="https://www.facebook.com/tili.kg/"><img src="/wp-content/themes/TiLi/images/icons/fb-icon.png" alt="google play" /></a>
 					</div>
 					<div class="col-md-2">
-						<img src="/wp-content/themes/TiLi/images/icons/gplus-icon.png" alt="google play" />
+						<a href="https://www.facebook.com/tili.kg/"><img src="/wp-content/themes/TiLi/images/icons/gplus-icon.png" alt="google play" /> </a>
 					</div>
 					<div class="col-md-2">
-						<img src="/wp-content/themes/TiLi/images/icons/fb-icon.png" alt="google play" />
+						<a href="https://www.facebook.com/tili.kg/">	<img src="/wp-content/themes/TiLi/images/icons/fb-icon.png" alt="google play" /></a>
 					</div>
 	</div>
 

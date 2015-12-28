@@ -1188,10 +1188,7 @@ background-image: url('images/header-bg.jpg');
     .navbar-toggle{
           float: left;
     }
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
-  background: none;
 
-}
 
 .navbar-default .navbar-toggle:focus .icon-bar,.navbar-default .navbar-toggle:hover .icon-bar{
   background: white;
@@ -1362,11 +1359,6 @@ background: white;
   border: none;
 }
 
-.navbar-header .navbar-toggle {
-width: 44px;
-height: 37px;
-background: url('images/icons/close1.png') no-repeat 9px;
-}
 
 .navbar-header .collapsed {
 background-image: none;
@@ -1620,6 +1612,11 @@ a.all-apps:hover{
 
 /* Menu start*/
 
+
+.navbar-header .navbar-toggle:hover .icon-bar{
+  background: none !important;
+}
+
 /*Style for curent page */
 .current-menu-item{
 
@@ -1630,17 +1627,48 @@ button.navbar-toggle
 
 }
 
-button.navbar-toggle .icon-bar, button.navbar-toggle .icon-bar:hover
+.navbar-header button.navbar-toggle .icon-bar, button.navbar-toggle .icon-bar:hover
 {
-background: transparent !important;
+background: none !important;
 }
-/*closed menu*/
-button.collapsed{
+
+
+.navbar-default .navbar-toggle:focus, .navbar-default button.collapsed /*, .navbar-default .navbar-toggle:hover*/
+{
+  background: none;
 
 }
-button.collapsed .icon-bar{
+
+.navbar-header .navbar-toggle,
+.navbar-header .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+width: 44px;
+height: 37px;
+background: url('images/icons/close.png') no-repeat 9px;
+}
+
+
+/*closed menu*/
+.navbar-header  button.collapsed,.navbar-header  button.collapsed:hover {
+background: none;
+
+}
+
+.navbar-header button.collapsed:hover .icon-bar{
+  background: #00aeef !important;
+}
+.navbar-header  button.collapsed .icon-bar{
 background: white !important;
 }
+
+.navbar-default button.collapsed:focus {
+  background: none;
+}
+
+
+
+
+
 
 
 /*Menu End*/
