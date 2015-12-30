@@ -1514,6 +1514,10 @@ div.grey a{
   padding-top: 50px;
   margin-top: 36px;
 }
+.apps-content div{
+  margin-bottom: 20px;
+}
+
 .apps-content a{
   display: block;
 }
@@ -1556,7 +1560,7 @@ a.all-apps:hover{
 
 /* contact form  footer mainpage */
 .main-contacts{
-  background: url("images/conact-bg.jpg") repeat-x;
+  background: url("images/conact-bg.jpg") repeat;
   min-height: 470px;
   color: white;
   padding-top: 60px;

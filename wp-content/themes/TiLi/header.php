@@ -45,9 +45,9 @@
                   <span class="icon-bar"></span>
                 </button>
 
-                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili<span class="green">.kg</span> <span class="grey hidden-xs">Все для изучения Киргизского языка!</span></a></h1>
+                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili<span class="green">.kg</span> <span class="grey hidden-xs hidden-sm">Все для изучения Киргизского языка!</span></a></h1>
                 <div class="collapse navbar-collapse " id="navbar-collapse">
-                    
+
                     <!-- <ul class="nav navbar-nav">
                        <li class="iconhome dropdown"><a href="/">Главная</a></li>
 
@@ -83,7 +83,7 @@
                      ?>
                   </div>
               </div>
-              <div class="col-md-3 .col-sm-3 col-xs-4 pull-right">
+              <div class="col-md-3 .col-sm-3 col-xs-6 pull-right">
                 <div class="login">
                  <?php
                  if ( is_user_logged_in() ) {?>
@@ -109,8 +109,8 @@
 
           </div>
           <div class="headersearch">
-            <div class="col-md-2 col-sm-1">&nbsp; </div>
-            <div class="searchform col-md-8 col-sm-10 col-xs-10">
+            <div class="col-md-2 col-sm-1 hidden-xs">&nbsp; </div>
+            <div class="searchform col-md-8 col-sm-10 col-xs-12">
               <label> <h1>Кыргызско <-> Русский словарь</h1></label>
               <form id="mdform" onsubmit="location.href = '/dict/#'+document.getElementById('stxt').value;  return false;">
                   <div class="">
@@ -129,7 +129,7 @@
 
 
             </div>
-            <div class="col-md-2 col-sm-1 ">&nbsp; </div>
+            <div class="col-md-2 col-sm-1 hidden-xs ">&nbsp; </div>
           </div>
 
 
