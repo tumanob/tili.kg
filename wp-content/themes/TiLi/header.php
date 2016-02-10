@@ -45,31 +45,12 @@
                   <span class="icon-bar"></span>
                 </button>
 
+<!--  the stop of merging  -->
+
                 <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili<span class="green">.kg</span> <span class="grey hidden-xs hidden-sm">Все для изучения Киргизского языка!</span></a></h1>
+
                 <div class="collapse navbar-collapse " id="navbar-collapse">
 
-                    <!-- <ul class="nav navbar-nav">
-                       <li class="iconhome dropdown"><a href="/">Главная</a></li>
-
-                       <li class="dropdown iconslovar">
-                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                             Словарь<span class="caret"></span>
-                         </a>
-                         <ul class="dropdown-menu">
-                           <li><a href="/dict/dlist/">cловари от а до я</a></li>
-                           <li><a href="/dict/glossary/">глосарий</a></li>
-                         </ul>
-                       </li>
-                        <li class="iconuse"><a href="/category/useful">Полезное</a></li>
-                        <li class="iconapps "><a href="/">Приложения</a></li>
-                        <li class="iconlove"><a href="#">Благодарности</a></li>
-                        <li class="iconhelp"><a href="#">Как помочь проекту?</a></li>
-                        <li class="iconmail"><a href="#">Контакты</a></li>
-                        <li role="separator" class="divider"></li>
-
-
-                     </ul>
--->
                      <?php
                           wp_nav_menu( array(
                              'menu'              => 'primary',
@@ -83,6 +64,8 @@
                      ?>
                   </div>
               </div>
+
+
               <div class="col-md-3 .col-sm-3 col-xs-6 pull-right">
                 <div class="login">
                  <?php
@@ -104,10 +87,10 @@
 
           </div>
 
-
-
-
           </div>
+
+
+
           <div class="headersearch">
             <div class="col-md-2 col-sm-1 hidden-xs">&nbsp; </div>
             <div class="searchform col-md-8 col-sm-10 col-xs-12">
@@ -127,18 +110,9 @@
                 </div>
                 <div id="float_chars_icon"><img src="<?php bloginfo('template_url'); ?>/images/character.gif" border="0"/></div>
 
-
             </div>
             <div class="col-md-2 col-sm-1 hidden-xs ">&nbsp; </div>
           </div>
-
-
-            <!--
-            <form id="" action="<?php bloginfo('url'); ?>" method="get">
-                 <input placeholder="Введите слово для поиска в словаре" type="text" />
-                 <input type="submit" class="sbtn" value="Перевод" onClick="//location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;"/>
-            </form>
-            -->
 
       </nav>
 

@@ -12,10 +12,10 @@
 
 {%block menu%}
 
-                <a href="/">Главная</a> |
-                <a href="/dict/dlist/">Словари от А до Я</a> |
-                <a href="/dict/glossary/">Глоссарий</a> |
-               <a href="/dict/add/" class="addword-menu"><img src="/dict/assets/images/button-addword.gif"></a> 
+                <a href="/">Главная</a>
+                <a href="/dict/dlist/">Словари от А до Я</a>
+                <a href="/dict/glossary/">Глоссарий</a>
+                <a href="/#">200 первых слов</a>
 
 
 {%endblock%}
@@ -42,25 +42,14 @@
                 </div>
 
             </div>
-        <div class="rsidebar col-xs-12 col-md-4 col-sm-4" >
-            <div class=" col-xs-12 col-sm-12 col-md-12">
-                       <div class="apps col-xs-12 col-sm-6 col-md-4 hidden-xs">
-                           <a href="https://chrome.google.com/webstore/detail/%D0%BA%D0%B8%D1%80%D0%B3%D0%B8%D0%B7%D1%81%D0%BA%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D1%8C/hojggilcgbfgflnmnjldhbdpomafihfd"  id="install-button" class="android" onclick="chrome.webstore.install(); return false;" style="margin-top: -8px; right: 525px;"><img class="aligncenter" src="/banners/chromead.png" alt="Добавить расширение в хром." style="height: 60px;"/></a>
+        <div class="rsidebar col-xs-12 col-md-4 col-sm-4" style="background:red; ">
+            right sidebar widget<br><br><br>
 
-                           <script>
-                           if (chrome.app.isInstalled) {
-                             document.getElementById('install-button').style.display = 'none';
-                           }
-                           </script>
-                       </div>
-                        <div class="apps col-xs-12 col-sm-12 col-md-12">
-                            <a href="http://play.google.com/store/search?q=pub:Tili.kg" target="_blank" class="android"><img class="aligncenter" src="/banners/get-from-gp.png" alt="Установить словарь на телефон Android." /></a>
-                        </div>
-                        <div class="apps col-xs-12 col-sm-12 col-md-12">
-                             <a href="http://itunes.apple.com/us/app/tili.kg/id528317649?mt=8" target="_blank" class="iosapp"><img class="aligncenter" src="/banners/app-store.png" alt="Установить словарь на iPhone." /></a>
-                        </div>
+            <a href="/dict/add/" class="addword-menu"><img src="/dict/assets/images/button-addword.gif"></a>
+
+
                  </div>
-            </div>
+
 
     </div>
 

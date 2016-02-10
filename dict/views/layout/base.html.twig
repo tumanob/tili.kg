@@ -13,7 +13,7 @@
     <script src="{{asset('/assets/js/jquery.caret.js')}}"></script>
     <script src="{{asset('/assets/js/character.js')}}"></script>
     <script src="{{asset('/assets/js/jquery-ui.min.js')}}"></script>
-    <script src="{{asset('/assets/js/jquery.ba-bbq.min.js')}}"></script>
+  <!--  <script src="{{asset('/assets/js/jquery.ba-bbq.min.js')}}"></script>-->
     <script src="/wp-content/themes/TiLi/bootstrap/js/bootstrap.min.js"></script>
     <script src="/wp-content/themes/TiLi/js/typeahead.bundle.js"></script>
     <script src="/wp-content/themes/TiLi/js/index.js"></script>
@@ -29,24 +29,30 @@
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/style.css')}}" />
     <link rel="stylesheet" type="text/css" href="/wp-content/themes/TiLi/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto|Roboto+Mono">
+
     {%endblock%}
 	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/hojggilcgbfgflnmnjldhbdpomafihfd">
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
 </head>
 <body class="dict">
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<div id="topmenu">
-        <nav class="navbar navbar-default navbar-tili" role="navigation" style="margin-top:0px;">
+  <div id="topmenu">
+    <nav class="navbar navbar-default navbar-tili" role="navigation" style="margin-top:0px;">
 
-        <div class="container-fluid topbluebox">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
+    <div class="container-fluid topbluebox">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header" style=" width: 100%;">
+
+       <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
+        <div class="row topcenter">
+          <div class="col-md-8 col-sm-6 col-xs-6 logo-static">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
               <span class="sr-only">Меню</span>
               <span class="icon-bar"></span>
@@ -55,62 +61,40 @@
             </button>
 
            <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
-            <div class="row topcenter">
-              <div class="col-md-8 col-sm-6 col-xs-6">
                 {%block logo%}{%endblock%}
-              </div>
-              <div class="col-md-3 .col-sm-3 col-xs-4 pull-right">
-                <div class="login">
-                    {%if is_logged_in() %}
-                      Добро пожаловать <b>{{user.user_login}}</b> | <a href="/wp-login.php?action=logout">Выйти</a>
-                    {% else %}
-                      <a href="http://tili.kg/wp-login.php">Войти</a> | <a href="http://tili.kg/wp-login.php?action=register">Регистрация</a>
-                    {%endif%}
+
+                <div class="collapse navbar-collapse " id="navbar-collapse">
+
+                    <!--<ul id="menu-glavnoe" class="bmenu nav navbar-nav"><li id="menu-item-443" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-443"><a href="http://kt.dev/">Главная</a></li><li id="menu-item-444" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-444"><a href="http://kt.dev/supporters/">Нас поддержали</a></li><li id="menu-item-446" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-446"><a href="http://kt.dev/category/thanks/">Благодарности</a></li><li id="menu-item-449" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449"><a href="http://kt.dev/pozhelaniya/">Пожелания</a></li><li id="menu-item-465" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-465"><a href="http://kt.dev/novosti/">новости</a></li><li id="menu-item-466" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-466"><a href="http://kt.dev/gchrome/">Расширения для браузера Google Chrome</a></li><li id="menu-item-467" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-467"><a href="http://kt.dev/category/useful/">Полезное</a></li></ul>
+-->
                 </div>
               </div>
-            </div>
-
-          </div>
-         <div class="collapse navbar-collapse " id="navbar-collapse">
-              <div class="menulogo">
-                 <center><img src="http://tili.kg/wp-content/themes/TiLi/images/logo.png" /> </center>
-              </div>
-               <ul class="nav navbar-nav">
-                 <li class="iconhome dropdown"><a href="/">Главная</a></li>
-                 <li role="separator" class="divider"></li>
-                 <li class="dropdown iconslovar">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                       Словарь<span class="caret"></span>
-                   </a>
-                   <ul class="dropdown-menu">
-                     <li><a href="/dict/dlist/">cловари от а до я</a></li>
-                     <li><a href="/dict/glossary/">глосарий</a></li>
-                   </ul>
-                 </li>
-                  <li class="iconuse"><a href="/category/useful">Полезное</a></li>
-                  <li class="iconapps "><a href="/">Приложения</a></li>
-                  <li class="iconlove"><a href="#">Благодарности</a></li>
-                  <li class="iconhelp"><a href="#">Как помочь проекту?</a></li>
-                  <li class="iconmail"><a href="#">Контакты</a></li>
-                  <li role="separator" class="divider"></li>
 
 
-               </ul>
+              <div class="col-md-3 .col-sm-3 col-xs-6 pull-right">
+                <div class="login">
+                    {%if is_logged_in() %}
+                      Добро пожаловать <b>{{user.user_login}}</b>  <a href="/wp-login.php?action=logout" class="login-i">Выйти</a>
+                    {% else %}
+                      <a href="http://tili.kg/wp-login.php" class="login-i">Войти</a>  <a href="http://tili.kg/wp-login.php?action=register" class="reg-i">Регистрация</a>
+                    {%endif%}
+                  </div>
+               </div>
+             </div>
+
+           </div>
+
+           </div>
 
 
-            </div>
-
-
-
-          </div>
           <div class="headersearch">
-            <div class="searchform">
-
+            <div class="col-md-2 col-sm-1 hidden-xs">&nbsp; </div>
+            <div class="searchform col-md-8 col-sm-10 col-xs-12">
+              <label> <h1>Кыргызско <-> Русский словарь</h1></label>
               <form id="mdform" onsubmit="location.href = '/dict/#'+document.getElementById('stxt').value;  return false;">
                   <div class="">
-                    <span class="isearch">&nbsp;</span>
-                    <input placeholder="Введите слово для поиска в словаре" type="text" id="stxt"  class="stxt col-md-12 col-sm-12 col-xs-12" required="">
-                    <input type="submit" class="sbtn col-md-2 col-sm-2 col-xs-3" value="Найти" />
+                    <input type="text" id="stxt"  class="stxt col-md-10 col-sm-10 col-xs-10 searchtext" required="">
+                    <input type="submit" class="sbtn" value="Найти" />
                   </div>
                 </form>
                 <div id="float_chars_block">
@@ -120,15 +104,24 @@
                     <span title="Ctrl+Alt+у">ү</span>
                     <div style="clear:both"></div>
                 </div>
+                <div id="float_chars_icon"><img src="/wp-content/themes/TiLi/images/character.gif" border="0"/></div>
+
+
             </div>
+            <div class="col-md-2 col-sm-1 hidden-xs ">&nbsp; </div>
           </div>
       </nav>
 </div>
+
+<!-- header wp  end-->
 <div id="site" class="dict-content">
+
   <div id="header" class="row">
+
     <div id="mainmenu-old" class="dbcontent">
 
-            <div class=" col-xs-12 col-sm-6 col-md-6">
+            <div class="dmenu col-xs-12 col-sm-6 col-md-6">
+
               {%block menu%}
               {%endblock%}
             </div>
@@ -166,18 +159,19 @@
       <div id="sidebar"></div>
       {%endblock%}
   </div>
-  <div class="empty">
-  </div>
+
+<!-- start wp footer part -->
+  <div class="empty">  </div>
 </div>
 
 <div id="footer">
 	<div class="inner row">
 
                   <div class="copyright  col-xs-4 col-md-2 col-sm-3">
-                    <h3>TILI.KG</h3>
-                    &copy; Все права защищены. <br/>
+                    <h3><a href="#">Tili<span class="green">.kg</span></a></h3>
+                       Все права защищены. <br/>
                   </div>
-                  <div class="col-xs-12 col-md-4 col-sm-4">
+                  <div class="col-xs-8 col-md-4 col-sm-5">
                       <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="300" height="75"	id="20050.swf" align="middle">
                       <param name="allowScriptAccess" value="sameDomain">
                       <param name="movie"
@@ -187,11 +181,11 @@
                       <embed src="http://tili.kg/banners/20050.swf" quality="high" bgcolor="#ffffff" width="300" height="75" name="20050.swf" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
                       </object>
                   </div>
-                  <div class="col-xs-12 col-md-5 col-sm-5 sorosfooter">
+                  <div class="col-xs-12 col-md-5 col-sm-4 sorosfooter">
                       <a href="http://tili.kg/thanks" class="pull-left"><img height="60" src="/banners/soroskg.png"></a>
                       Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан».
                   </div>
-                   <div class="netkg col-xs-4 col-md-1 col-sm-4">
+                   <div class="netkg col-xs-4 col-md-1 col-sm-6 hidden-xs hidden-sm">
                            <!-- WWW.NET.KG , code for http://tili.kg -->
                            <script language="javascript" type="text/javascript">
                             java="1.0";

@@ -1,6 +1,7 @@
 
     <div class="empty"></div>
 </div>
+
 <div id="footer">
 	<div class="inner row">
 

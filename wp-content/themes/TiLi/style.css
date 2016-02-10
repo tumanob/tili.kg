@@ -450,11 +450,12 @@ line-height:0px;
 
 .post  .sub{ padding-left: 15px;}
 .post h1 {
-   /* font-family: Segoe Script;*/
     font-size: 22px;
     margin-bottom: 5px;
     text-shadow: 1px 1px 0 #fff;
     padding-left: 15px;
+    margin: 10px !important;
+    margin-bottom: 26px !important;
 }
 
 .post h2 {  font-size: 17px; }
@@ -473,18 +474,19 @@ line-height:0px;
 }
 
 .post .sub {
-    font-size: 11px;
+    font-size: 16px;
     color: #888;
     margin-bottom: 6px;
 }
 
 .post .sub a {
-    color: #888;
+    color: #01aab3;
 }
 
 .post .date {
-    font-size: 10px;
+    font-size: 16px;
     margin-right: 4px;
+        color: #01aab3;
 }
 
 .post .categories {
@@ -570,23 +572,24 @@ line-height:0px;
 }
 
 .catlist, #mainmenu {
-    background: #e3e8ec;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    background: none;
     padding: 5px;
-    border: 1px solid #00bbf8;
-
+    /*border-bottom: 1px solid #01aab3;
+    */
 }
 
 #mainmenu
 {
     margin-bottom: 20px;
 }
-.catlist h1{
- color:#1596D2;
+.catlist h1,.post h1{
+ /*color:#01aab3;*/
  margin-top: 0px;
  margin-bottom: 0px;
-
+ font-family: Roboto;
+ font-weight: 100;
+  margin-left: 20px;
+  font-size: 31px;
 }
 
 .catlist ul li, #mainmenu a {
@@ -893,6 +896,17 @@ float: left;
 
 /* bootstrap changes*/
 
+.btn-info, .btn-info:hover{
+    color: #fff;
+    background-color: #00aeef;
+    border-color: #0690BA;
+}
+.btn-info:hover{
+  background-color: rgba(0, 174, 239, 0.76);
+  border-color: #0690BA;
+}
+
+
 .logo-static{
   z-index: 10000000000;
 }
@@ -943,25 +957,25 @@ float: left;
 .btn.btn-download{
 background: none;
 /*padding: 12px;*/
-border: 2px solid #5bc0de;
-color: #5bc0de;
+border: 2px solid #00aeef;
+color: #00aeef;
 border-radius: 10px;
 
 }
 
 .btn.btn-download .btn-primary
 {
-	background:#5bc0de;
-	border: 1px solid #5bc0de;
+	background:#00aeef;
+	border: 1px solid #00aeef;
 }
 
 .btn.btn-download:hover {
-border: 2px solid #2EA92E;
-color: #2EA92E;
+border: 2px solid #01aab3;
+color: #01aab3;
 }
 
 .btn.btn-download:hover .btn-primary {
-    background:#5bc0de;
+    background:#00aeef;
 
 }
 
@@ -1564,7 +1578,13 @@ a.all-apps:hover{
   min-height: 470px;
   color: white;
   padding-top: 60px;
+
 }
+
+.main-contacts .center-block{
+  max-width: 1100px;
+}
+/*max-width: 1100px;*/
 
 .main-contacts input, .main-contacts textarea{
   background: #202936;
@@ -1676,3 +1696,15 @@ background: white !important;
 
 
 /*Menu End*/
+
+
+/*dict*/
+
+.dmenu a{
+
+  font-size: 18px;
+  margin:3px 5px;
+  text-decoration: underline;
+  display: block;
+  float: left;
+}
