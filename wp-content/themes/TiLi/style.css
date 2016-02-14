@@ -1708,3 +1708,9 @@ background: white !important;
   display: block;
   float: left;
 }
+
+
+.tt-cursor{
+  /*border-bottom: 1px solid #ссс;*/
+  background: #00aeef ;
+}
