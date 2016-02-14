@@ -1,0 +1,5 @@
+.idea/
+.DS_Store
+*.gz
+*.sql
+config.php
