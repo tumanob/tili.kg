@@ -19,10 +19,15 @@ function findWord(autoshow) {
     inRequest = true;
     $.get("search-word/" + encodeURIComponent(keyword), function (data) {
         var tmp = "";
-        for (var x in data['w']) {
-            tmp = tmp + "<div class=\"wl\"><a href=\"/dict/#"+data['w'][x]+"\"  onClick=\"showWord('" + data['w'][x] + "');  return false;\">" + data['w'][x] + "</a></div>";
+        if (data['w'].length > 1) {
+          tmp = "<h3>Похожие слова: </h3><br />";
         }
-        $("#result").html(tmp);
+
+        for (var i = 1; i < data['w'].length; i++) {
+            var item = data['w'][i];
+            tmp += "<div class=\"wl\"><a href=\"/dict/#" + item + "\"  onClick=\"showWord('" + item + "');  return false;\">" + item + "</a></div>";
+        }
+        $("#similars").html(tmp);
         $("#query_stat").html(data.s);
 
         inRequest = false;

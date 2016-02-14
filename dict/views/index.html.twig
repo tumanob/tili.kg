@@ -7,62 +7,41 @@
     <script type="text/javascript" src="{{asset('/assets/js/picture.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/js/tags.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/js/index.js')}}"></script>
-
 {%endblock%}
 
 {%block menu%}
-
-                
-                <a href="/dict/dlist/">Словари от А до Я</a>
-                <a href="/dict/glossary/">Глоссарий</a>
-                <a href="/#">200 первых слов</a>
-
-
+    <a href="/dict/dlist/">Словари от А до Я</a>
+    <a href="/dict/glossary/">Глоссарий</a>
+    <a href="/#">200 первых слов</a>
 {%endblock%}
 
 {%block content%}
-
-
     <div class="content-text">
         <div id="content" class=" col-xs-12 col-md-8 col-sm-8" >
+            <p id="dic_content" >
+                <img src="assets/images/kt-dict.jpg" alt="Онлайн словарь" style="margin:40px 0 10px 160px;" />
+            </p>
 
+            <div id="not-found">
+                <img src="{{asset('/assets/images/noword-man.gif')}}" alt="Слово не найдено" />
+                <div>
+                    Если вы знаете как переводится  <span>слово</span><br />
+                    вы можете помочь расширить наш словарь<br />
 
-                <p id="dic_content" >
-                    <img src="assets/images/kt-dict.jpg" alt="Онлайн словарь" style="margin:40px 0 10px 160px;" />
-                </p>
-
-                <div id="not-found">
-                    <img src="{{asset('/assets/images/noword-man.gif')}}" alt="Слово не найдено" />
-                    <div>
-                        Если вы знаете как переводится  <span>слово</span><br />
-                        вы можете помочь расширить наш словарь<br />
-
-                        <a class="addword" href="{{asset('/add')}}">&nbsp;</a>
-                    </div>
+                    <a class="addword" href="{{asset('/add')}}">&nbsp;</a>
                 </div>
-
             </div>
-        <div class="rsidebar col-xs-12 col-md-4 col-sm-4" style="background:red; ">
-            right sidebar widget<br><br><br>
-
-            <a href="/dict/add/" class="addword-menu"><img src="/dict/assets/images/button-addword.gif"></a>
-
-
-                 </div>
-
-
-    </div>
-
-
-
-
-
-
-
         </div>
-
-
+        <div class="rsidebar col-xs-12 col-md-4 col-sm-4">
+            <div id="similars"></div>
+            <br />
+            <div class="pull-left">
+              <a href="/dict/add/" class="addword-menu"><img src="/dict/assets/images/button-addword.gif"></a>
+            </div>
+        </div>
     </div>
+  </div>
+</div>
 
 
 
