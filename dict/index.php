@@ -64,7 +64,7 @@ $app->get('/search-word/{kw}', function ($kw) use ($app) {
     /* @var \Doctrine\DBAL\Connection $db */
     $db = $app['db'];
     $list = $db->fetchAll(
-        "SELECT distinct keyword FROM dict_kw WHERE `keyword` LIKE ? ORDER BY keyword LIMIT 20",
+        "SELECT distinct keyword FROM dict_kw WHERE `published` = 1 AND `keyword` LIKE ? ORDER BY keyword LIMIT 20",
         array($kw . '%')
     );
 
@@ -82,7 +82,12 @@ $app->get('/', function () use ($app) {
 
 
 $app->get('/show-word/{word}', function ($word) use ($app) {
-    $sql = "SELECT dict_kw.dictid,dict_kw.id, keyword, name, value FROM dict_kw INNER JOIN dict_d ON dict_kw.dictid = dict_d.id WHERE keyword LIKE ? LIMIT 20";
+    $sql = "SELECT
+        dict_kw.dictid, dict_kw.id, keyword, name, value
+      FROM dict_kw
+      INNER JOIN dict_d ON dict_kw.dictid = dict_d.id
+      WHERE published = 1 AND keyword LIKE ? LIMIT 20";
+
     $list = $app['db']->fetchAll($sql, array($word));
 
     $ids = array();
@@ -168,7 +173,7 @@ $app->get('/glossary/{id}/{blahblah}', function ($id, $blahblah) use (&$app) {
             'SELECT k.*, d.id as dictid FROM dict_tags_keys tk
             INNER JOIN dict_kw k ON tk.key_id = k.id
             INNER JOIN dict_d d ON k.dictid = d.id
-            WHERE tk.tag_id = ?',
+            WHERE published = 1 AND tk.tag_id = ?',
             array($id)
         );
 
@@ -224,7 +229,7 @@ $app->get('/d{id}/', function ($id) use ($app) {
     $result = '';
 
     $result = $app['db']->fetchAll(
-        "SELECT keyword, id, dictid, SUBSTRING(value,1,120)as value FROM dict_kw WHERE `dictid`= ? ORDER BY RAND() LIMIT " . LIMIT,
+        "SELECT keyword, id, dictid, SUBSTRING(value,1,120)as value FROM dict_kw WHERE published = 1 AND `dictid`= ? ORDER BY RAND() LIMIT " . LIMIT,
         array($id)
     );
 
@@ -323,7 +328,11 @@ $app->get('/d{id}/{let}/p{pageid}', function ($id, $let, $pageid) use ($app) {
     $copyright = $result[0]['copyright'];
 
     $result = $app['db']->fetchAll(
-        "SELECT keyword,id,dictid,SUBSTRING(value,1,120)as value FROM dict_kw WHERE `keyword` LIKE ? AND `dictid` = ?",
+        "SELECT
+          keyword, id, dictid, SUBSTRING(value,1,120) as value
+          FROM dict_kw
+          WHERE
+            published = 1 AND `keyword` LIKE ? AND `dictid` = ?",
         array($let . '%', $id)
     );
     $count = count($result);
@@ -379,7 +388,9 @@ $app->get('/d{id}/show/{word}', function ($id, $word) use ($app) {
     //echo $word; // show parameters
 
     $list = $app['db']->fetchAll(
-        "SELECT dict_kw.id, keyword, name, value FROM dict_kw INNER JOIN dict_d ON dict_kw.dictid = dict_d.id WHERE keyword LIKE ? AND `dictid`= ?",
+        "SELECT dict_kw.id, keyword, name, value
+        FROM dict_kw INNER JOIN dict_d ON dict_kw.dictid = dict_d.id
+        WHERE published = 1 AND keyword LIKE ? AND `dictid`= ?",
         array($word, $id)
     ); // removed %  to  show the same keyword
 
@@ -706,7 +717,7 @@ $app->get('/api/glossary/{id}', function ($id) use (&$app) {
             FROM dict_tags_keys tk
             INNER JOIN dict_kw k ON tk.key_id = k.id
             INNER JOIN dict_d d ON k.dictid = d.id
-            WHERE tk.tag_id = ?',
+            WHERE tk.tag_id = ? AND k.published = 1',
             array($id)
         );
 
@@ -735,7 +746,7 @@ $app->get('/api/word/{word}', function ($word) use (&$app) {
         "SELECT keyword, value, name as dictname
         FROM dict_kw
          INNER JOIN dict_d ON dict_kw.dictid = dict_d.id
-        WHERE keyword = ?",
+        WHERE published = 1 AND keyword = ?",
         array($word)
     );
 
@@ -752,7 +763,7 @@ $app->get('/api/search/{word}', function ($word) use (&$app) {
         "SELECT keyword, value, name as dictname
         FROM dict_kw
          INNER JOIN dict_d ON dict_kw.dictid = dict_d.id
-        WHERE keyword LIKE ?
+        WHERE keyword LIKE ? AND published = 1
         LIMIT 50
         ",
         array($word . '%')
