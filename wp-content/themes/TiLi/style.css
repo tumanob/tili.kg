@@ -1690,9 +1690,41 @@ background: white !important;
 }
 
 
+/*   useful category
+--------------------------*/
+
+.category .post .image-container img{
+  float: none;
+  background: #fff;
+border: 0px solid #ccc;
+padding: 0px;
+margin-right: 0px;
+
+}
 
 
+.useful-content-container{
+  margin: 10px 0;
+}
 
+.newuseful .useful-content-container{
+
+  min-height: 110px;
+}
+
+.catlist .category-menu-useful{
+    text-align: center;
+}
+
+.catlist .category-menu-useful .menu li a
+{
+
+  font-size: 24px;
+  margin: 5px 10px;
+}
+.useful-category .useful-content-container{
+  min-height: 60px;
+}
 
 
 /*Menu End*/
