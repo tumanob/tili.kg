@@ -16,79 +16,79 @@ msgstr "Спасибо за обновление! WordPress %s делает ва
 
 #. translators: 1: WP_Term class name, WP_Comment class name, WP_Network class
 #. name
-#: wp-admin/about.php:177
+#: wp-admin/about.php:189
 msgid "New %1$s, %2$s, and %3$s objects make interacting with terms, comments, and networks more predictable and intuitive in code."
 msgstr "Новые объекты %1$s, %2$s и %3$s делают взаимодействие с элементами, комментариями и сетями на уровне кода более простым и понятным."
 
 #. translators: WP_Comment_Query class name
-#: wp-admin/about.php:170
+#: wp-admin/about.php:182
 msgid "Comment queries now have cache handling to improve performance. New arguments in %s make crafting robust comment queries simpler."
 msgstr "Запросы комментариев теперь поддерживают кеширование. С помощью новых аргументов %s можно создавать более гибкие запросы."
 
-#: wp-admin/about.php:174
+#: wp-admin/about.php:186
 msgid "Term, comment, and network objects"
 msgstr "Объекты элементов и комментариев"
 
-#: wp-admin/about.php:167
+#: wp-admin/about.php:179
 msgid "Comment query improvements"
 msgstr "Улучшения в запросах комментариев"
 
-#: wp-admin/about.php:156
+#: wp-admin/about.php:168
 msgid "Term meta"
 msgstr "Метаданные для элементов"
 
 #. translators: 1: add_term_meta() docs link, 2: get_term_meta() docs link, 3:
 #. update_term_meta() docs link
-#: wp-admin/about.php:159
+#: wp-admin/about.php:171
 msgid "Terms now support metadata, just like posts. See %1$s, %2$s, and %3$s for more information."
 msgstr "Элементы таксономий теперь поддерживают метаданные, как и записи. См. %1$s, %2$s и %3$s."
 
 #. translators: WordPress REST API plugin link
-#: wp-admin/about.php:148
+#: wp-admin/about.php:160
 msgid "Infrastructure is the first part of a multi-stage rollout for the REST API. Inclusion of core endpoints is targeted for an upcoming release. To get a sneak peek of the core endpoints, and for more information on extending the REST API, check out the official %s plugin."
 msgstr "Инфраструктура — первый из запланированных этапов интеграции REST API. Интеграция точек входа запланирована на одну из будущих версий. Чтобы посмотреть точки входа ядра и узнать больше о расширении REST API, установите плагин %s."
 
-#: wp-admin/about.php:131
+#: wp-admin/about.php:143
 msgid "Infrastructure for the REST API has been integrated into core, marking a new era in developing with WordPress. The REST API serves to provide developers with a path forward for building and extending RESTful APIs on top of WordPress."
 msgstr "В ядро интегрирована инфраструктура REST API, что означает новую эру в разработке для WordPress. REST API позволяет разработчикам создавать и расширять приложения с использованием RESTful API на основе WordPress."
 
-#: wp-admin/about.php:129
+#: wp-admin/about.php:141
 msgid "REST API infrastructure"
 msgstr "Инфраструктура REST API"
 
-#: wp-admin/about.php:118
+#: wp-admin/about.php:130
 msgid "In addition to post embeds, WordPress 4.4 also adds support for five new oEmbed providers: Cloudup, Reddit&nbsp;Comments, ReverbNation, Speaker&nbsp;Deck, and VideoPress."
 msgstr "Помимо вставки записей, WordPress 4.4 поддерживает вставку объектов с пяти новых сервисов oEmbed: Cloudup, Reddit, ReverbNation, Speaker&nbsp;Deck и VideoPress."
 
-#: wp-admin/about.php:117
+#: wp-admin/about.php:129
 msgid "Even more embed providers"
 msgstr "Ещё больше провайдеров объектов"
 
-#: wp-admin/about.php:104
+#: wp-admin/about.php:116
 msgid "Now you can embed your posts on other sites, even other WordPress sites. Simply drop a post URL into the editor and see an instant embed preview, complete with the title, excerpt, and featured image if you&#8217;ve set one. We&#8217;ll even include your site icon and links for comments and sharing."
 msgstr "Теперь можно добавлять ваши записи на другие сайты, включая сайты под управлением WordPress. Просто вставьте URL записи в редактор, и вы увидите карточку записи, включая заголовок, фрагмент текста и миниатюру (если есть). Там также будут иконка сайта, ссылка на комментарии и варианты вставки на другие сайты."
 
-#: wp-admin/about.php:90
+#: wp-admin/about.php:102
 msgid "WordPress now takes a smarter approach to displaying appropriate image sizes on any device, ensuring a perfect fit every time. You don&#8217;t need to do anything to your theme, it just works."
 msgstr "WordPress выбирает наиболее подходящие для того или иного устройства размеры изображений, в соответствии с разрешением экрана. Тему оформления менять не нужно, всё работает и так."
 
-#: wp-admin/about.php:103
+#: wp-admin/about.php:115
 msgid "Embed your WordPress content"
 msgstr "Вставка материалов"
 
-#: wp-admin/about.php:89
+#: wp-admin/about.php:101
 msgid "Responsive images"
 msgstr "Адаптивные изображения"
 
-#: wp-admin/about.php:67
+#: wp-admin/about.php:79
 msgid "Twenty Sixteen was built to look great on any device. A fluid grid design, flexible header, fun color schemes, and more, will make your content shine."
 msgstr "Twenty Sixteen прекрасно выглядит на любом устройстве. Растяжимая сетка, гибкий заголовок, цветовые схемы и аккуратное оформление представят ваши материалы в лучшем виде."
 
-#: wp-admin/about.php:66
+#: wp-admin/about.php:78
 msgid "Our newest default theme, Twenty Sixteen, is a modern take on a classic blog design."
 msgstr "Наша новая тема, Twenty Sixteen, — современная версия классического дизайна для блога."
 
-#: wp-admin/about.php:59
+#: wp-admin/about.php:71
 msgid "Twenty Sixteen"
 msgstr "Twenty Sixteen"
 
@@ -112,7 +112,7 @@ msgid "Welcome to %s. This is your first post. Edit or delete it, then start blo
 msgstr "Добро пожаловать на сайт %s. Это ваша первая запись. Отредактируйте или удалите её, затем пишите!"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:214
+#: wp-admin/about.php:226
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "В <strong>версии %s</strong> решена проблема с безопасностью."
 
@@ -129,15 +129,15 @@ msgstr "Аватар можно изменить на сайте <a href=\"%s\">
 msgid "Profile Picture"
 msgstr "Аватар"
 
-#: wp-admin/about.php:211
+#: wp-admin/about.php:223
 msgid "Maintenance and Security Releases"
 msgstr "Технические обновления безопасности"
 
-#: wp-admin/about.php:208
+#: wp-admin/about.php:220
 msgid "Security Releases"
 msgstr "Обновления безопасности"
 
-#: wp-admin/about.php:205
+#: wp-admin/about.php:217
 msgid "Maintenance Releases"
 msgstr "Технические обновления"
 
@@ -317,7 +317,7 @@ msgstr "Файлы в каталоге %s выполняются автомат�
 msgid "You are not allowed to manage these items."
 msgstr "Вам не разрешено редактировать эти элементы."
 
-#: wp-admin/widgets.php:431
+#: wp-admin/widgets.php:436
 msgid "This will clear all items from the inactive widgets list. You will not be able to restore any customizations."
 msgstr "Эта функция удалит все элементы из списка неактивных виджетов. Вы не сможете вернуть сделанные изменения."
 
@@ -333,7 +333,7 @@ msgstr "Список пользователей"
 msgid "One of the selected users is not a member of this site."
 msgstr "Один из выбранных пользователей не является участником сайта."
 
-#: wp-admin/widgets.php:423
+#: wp-admin/widgets.php:426
 msgid "Clear Inactive Widgets"
 msgstr "Очистить неактивные виджеты"
 
@@ -981,7 +981,7 @@ msgstr "В ответ автору %s."
 msgid "You&rsquo;re using the auto-generated password for your account. Would you like to change it?"
 msgstr "Вы используете автоматически созданный пароль для учётной записи. Хотите сменить его?"
 
-#: wp-admin/users.php:360
+#: wp-admin/users.php:361
 msgid "You have specified this user for removal:"
 msgstr "Вы указали следующего пользователя для удаления:"
 
@@ -1557,11 +1557,11 @@ msgstr "Главное меню"
 msgid "Enter the location on the server where the public and private keys are located. If a passphrase is needed, enter that in the password field above."
 msgstr "Введите местоположение открытого и закрытого ключей на сервере. Если требуется кодовая фраза, введите её в поле для пароля выше."
 
-#: wp-admin/users.php:266
+#: wp-admin/users.php:267
 msgid "What should be done with content owned by these users?"
 msgstr "Что нужно сделать с записями этих пользователей?"
 
-#: wp-admin/users.php:419
+#: wp-admin/users.php:420
 msgid "%s user deleted."
 msgid_plural "%s users deleted."
 msgstr[0] "%s пользователь удалён."
@@ -1575,7 +1575,7 @@ msgstr[0] "%d медиафайл перемещён в корзину."
 msgstr[1] "%d медиафайла перемещены в корзину."
 msgstr[2] "%d медиафайлов перемещены в корзину."
 
-#: wp-admin/users.php:241
+#: wp-admin/users.php:242
 msgid "You have specified these users for deletion:"
 msgstr "Вы указали следующих пользователей для удаления:"
 
@@ -1993,7 +1993,7 @@ msgstr "Вы авторизованы только в текущем брауз�
 msgid "Log Out Everywhere"
 msgstr "Завершить все сессии"
 
-#: wp-admin/about.php:65
+#: wp-admin/about.php:77
 msgid "Introducing Twenty Sixteen"
 msgstr "Встречайте Twenty Sixteen"
 
@@ -2491,15 +2491,15 @@ msgstr "&laquo;Удалить&raquo; &#8212; позволяет удалить �
 msgid "Delete brings you to the Delete Users screen for confirmation, where you can permanently remove a user from your site and delete their content. You can also delete multiple users at once by using Bulk Actions."
 msgstr "&laquo;Удалить&raquo; &#8212; вызывает экран с подтверждением, где можно навсегда удалить с сайта как самого пользователя, так и созданные им записи. Можно также удалить сразу нескольких пользователей с помощью меню &laquo;Действия&raquo;."
 
-#: wp-admin/includes/ms.php:1055 wp-admin/users.php:270
+#: wp-admin/includes/ms.php:1055 wp-admin/users.php:271
 msgid "Delete all content."
 msgstr "Удалить всё содержимое"
 
-#: wp-admin/includes/ms.php:1057 wp-admin/users.php:272
+#: wp-admin/includes/ms.php:1057 wp-admin/users.php:273
 msgid "Attribute all content to:"
 msgstr "Связать всё содержимое:"
 
-#: wp-admin/users.php:264
+#: wp-admin/users.php:265
 msgid "What should be done with content owned by this user?"
 msgstr "Что нужно сделать с записями этого пользователя?"
 
@@ -2783,7 +2783,7 @@ msgstr "Показать предыдущую тему"
 msgid "Show next theme"
 msgstr "Показать следующую тему"
 
-#: wp-admin/widgets.php:498
+#: wp-admin/widgets.php:504
 msgid "Add Widget"
 msgstr "Добавить виджет"
 
@@ -3822,23 +3822,23 @@ msgstr "В столбце <strong>&laquo;В ответ на&raquo;</strong> со
 msgid "Used: %1$s%% of %2$s"
 msgstr "Занято: %1$s%% из %2$s"
 
-#: wp-admin/users.php:250
+#: wp-admin/users.php:251
 msgid "ID #%1$s: %2$s <strong>The current user will not be deleted.</strong>"
 msgstr "ID #%1$s: %2$s <strong>Текущий пользователь не будет удалён.</strong>"
 
-#: wp-admin/users.php:252 wp-admin/users.php:376
+#: wp-admin/users.php:253 wp-admin/users.php:377
 msgid "ID #%1$s: %2$s"
 msgstr "ID #%1$s: %2$s"
 
-#: wp-admin/users.php:372
+#: wp-admin/users.php:373
 msgid "ID #%1$s: %2$s <strong>The current user will not be removed.</strong>"
 msgstr "ID #%1$s: %2$s <strong>Текущий пользователь не будет удалён.</strong>"
 
-#: wp-admin/users.php:374
+#: wp-admin/users.php:375
 msgid "ID #%1$s: %2$s <strong>You don't have permission to remove this user.</strong>"
 msgstr "ID #%1$s: %2$s <strong>У вас нет прав на удаление этого пользователя.</strong>"
 
-#: wp-admin/users.php:234
+#: wp-admin/users.php:235
 msgid "Please select an option."
 msgstr "Пожалуйста, выберите вариант."
 
@@ -4220,11 +4220,11 @@ msgstr "Ошибка конфигурации"
 msgid "Revert to the <strong>Browser Uploader</strong> by clicking the link below the drag and drop box."
 msgstr "Можно переключиться на <strong>загрузчик браузера</strong>, нажав ссылку под областью перетаскивания."
 
-#: wp-admin/users.php:425
+#: wp-admin/users.php:426
 msgid "New user created. <a href=\"%s\">Edit user</a>"
 msgstr "Новый пользователь создан. <a href=\"%s\">Редактировать</a>"
 
-#: wp-admin/users.php:417
+#: wp-admin/users.php:418
 msgid "User deleted."
 msgstr "Пользователь удалён."
 
@@ -4990,12 +4990,12 @@ msgid "Contributing Developers"
 msgstr "Помощники по разработке"
 
 #. translators: %s: Codex URL
-#: wp-admin/about.php:231
+#: wp-admin/about.php:55 wp-admin/about.php:59 wp-admin/about.php:243
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "Дополнительную информацию можно найти в <a href=\"%s\">заметке о релизе</a>."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:219
+#: wp-admin/about.php:231
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "В <strong>версии %1$s</strong> исправлена %2$s ошибка."
@@ -5004,7 +5004,7 @@ msgstr[2] "В <strong>версии %1$s</strong> исправлены %2$s ош�
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:223
+#: wp-admin/about.php:235
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "В <strong>версии %1$s</strong> решена проблема с безопасностью и исправлена %2$s ошибка."
@@ -5013,7 +5013,7 @@ msgstr[2] "В <strong>версии %1$s</strong> решена проблема �
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:227
+#: wp-admin/about.php:53 wp-admin/about.php:57 wp-admin/about.php:239
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "В <strong>версии %1$s</strong> решены несколько проблем с безопасностью и исправлена %2$s ошибка."
@@ -5028,20 +5028,23 @@ msgstr "Добро пожаловать в консоль WordPress! Этот э
 msgid "What&#8217;s New"
 msgstr "Что нового"
 
-#: wp-admin/about.php:204
+#: wp-admin/about.php:216
 msgid "Maintenance Release"
 msgstr "Техническое обновление"
 
-#: wp-admin/about.php:207
+#: wp-admin/about.php:219
 msgid "Security Release"
 msgstr "Обновление безопасности"
 
-#: wp-admin/about.php:210
+#: wp-admin/about.php:52 wp-admin/about.php:222
 msgid "Maintenance and Security Release"
-msgstr "Техническое обновление безопасности"
+msgid_plural "Maintenance and Security Releases"
+msgstr[0] "Техническое обновление безопасности"
+msgstr[1] "Технические обновления безопасности"
+msgstr[2] "Технические обновления безопасности"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:216
+#: wp-admin/about.php:228
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "В <strong>версии %s</strong> решены несколько проблем с безопасностью."
 
@@ -5053,7 +5056,7 @@ msgstr "На этом экране можно выбрать структуру 
 msgid "Welcome to WordPress %1$s. <a href=\"%2$s\">Learn more</a>."
 msgstr "Добро пожаловать в WordPress %1$s. <a href=\"%2$s\">Узнать больше</a>."
 
-#: wp-admin/about.php:189
+#: wp-admin/about.php:201
 msgid "Return to Updates"
 msgstr "Вернуться на страницу &laquo;Обновления&raquo;"
 
@@ -5341,11 +5344,11 @@ msgstr "Похоже, для вызова функции add_meta_box() был �
 msgid "Welcome to WordPress %s"
 msgstr "Добро пожаловать в WordPress %s"
 
-#: wp-admin/about.php:189
+#: wp-admin/about.php:201
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "Вернуться на страницу &laquo;Консоль&raquo; &rarr; &laquo;Обновления&raquo;"
 
-#: wp-admin/about.php:192
+#: wp-admin/about.php:204
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Перейти на страницу &laquo;Консоль&raquo; &rarr; &laquo;Главная&raquo;"
 
@@ -5357,7 +5360,7 @@ msgstr "WordPress развивается силами международной
 msgid "Core Developers"
 msgstr "Разработчики ядра"
 
-#: wp-admin/about.php:125
+#: wp-admin/about.php:137
 msgid "Under the Hood"
 msgstr "Под капотом"
 
@@ -5570,7 +5573,7 @@ msgstr "Внимание:"
 #. translators: %s: search keywords
 #: wp-admin/edit-comments.php:197 wp-admin/edit-tags.php:311
 #: wp-admin/edit.php:307 wp-admin/link-manager.php:78 wp-admin/plugins.php:515
-#: wp-admin/upload.php:224 wp-admin/users.php:480
+#: wp-admin/upload.php:224 wp-admin/users.php:481
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Результаты поиска &laquo;%s&raquo;"
 
@@ -5632,7 +5635,7 @@ msgid "Role"
 msgstr "Роль"
 
 #: wp-admin/includes/dashboard.php:406 wp-admin/includes/dashboard.php:408
-#: wp-admin/users.php:487
+#: wp-admin/users.php:488
 msgid "Search Users"
 msgstr "Поиск пользователей"
 
@@ -5662,7 +5665,7 @@ msgid "All Users"
 msgstr "Все пользователи"
 
 #: wp-admin/menu.php:220 wp-admin/menu.php:222 wp-admin/user-edit.php:194
-#: wp-admin/users.php:474
+#: wp-admin/users.php:475
 msgctxt "user"
 msgid "Add New"
 msgstr "Добавить нового"
@@ -5704,16 +5707,16 @@ msgstr "Пользователь добавлен."
 msgid "Add Existing User"
 msgstr "Добавить существующего пользователя"
 
-#: wp-admin/users.php:300 wp-admin/users.php:308 wp-admin/users.php:335
-#: wp-admin/users.php:343
+#: wp-admin/users.php:301 wp-admin/users.php:309 wp-admin/users.php:336
+#: wp-admin/users.php:344
 msgid "You can&#8217;t remove users."
 msgstr "Вы не можете удалять пользователей."
 
-#: wp-admin/users.php:433
+#: wp-admin/users.php:434
 msgid "Changed roles."
 msgstr "Роли изменены."
 
-#: wp-admin/users.php:444
+#: wp-admin/users.php:445
 msgid "User removed from this site."
 msgstr "Пользователь удалён с этого сайта."
 
@@ -5725,7 +5728,7 @@ msgstr[0] "Доступны обновления <span class=\"count\">(%s)</spa
 msgstr[1] "Доступны обновления <span class=\"count\">(%s)</span>"
 msgstr[2] "Доступны обновления <span class=\"count\">(%s)</span>"
 
-#: wp-admin/includes/ms.php:1085 wp-admin/users.php:286
+#: wp-admin/includes/ms.php:1085 wp-admin/users.php:287
 msgid "Confirm Deletion"
 msgstr "Подтвердить удаление"
 
@@ -6032,7 +6035,7 @@ msgstr "<strong>Случайно:</strong> Показывать разные и�
 msgid "Layout"
 msgstr "Разметка"
 
-#: wp-admin/users.php:239
+#: wp-admin/users.php:240
 msgid "You have specified this user for deletion:"
 msgstr "Вы указали следующего пользователя для удаления:"
 
@@ -6057,7 +6060,7 @@ msgstr "Нельзя удалить плагин, пока он активен �
 msgid "This plugin may be active on other sites in the network."
 msgstr "Этот плагин может быть активным на других сайтах сети."
 
-#: wp-admin/user-edit.php:196 wp-admin/users.php:476
+#: wp-admin/user-edit.php:196 wp-admin/users.php:477
 msgctxt "user"
 msgid "Add Existing"
 msgstr "Добавить существующего"
@@ -6670,7 +6673,7 @@ msgid "Home: %s"
 msgstr "Главная: %s"
 
 #: wp-admin/import.php:57 wp-admin/includes/network.php:105
-#: wp-admin/includes/network.php:122 wp-admin/users.php:234
+#: wp-admin/includes/network.php:122 wp-admin/users.php:235
 msgid "ERROR:"
 msgstr "ОШИБКА:"
 
@@ -7047,7 +7050,7 @@ msgstr "Используйте закладку, чтобы вставить т�
 msgid "&mdash; No role for this site &mdash;"
 msgstr "&mdash; Для этого сайта роли нет &mdash;"
 
-#: wp-admin/users.php:357
+#: wp-admin/users.php:358
 msgid "Remove Users from Site"
 msgstr "Удалить пользователей с сайта"
 
@@ -7187,23 +7190,23 @@ msgstr "Удаление пользователей с этого экрана �
 msgid "You can&#8217;t delete that user."
 msgstr "Вы не можете удалить этого пользователя."
 
-#: wp-admin/users.php:362
+#: wp-admin/users.php:363
 msgid "You have specified these users for removal:"
 msgstr "Вы указали следующих пользователей для удаления:"
 
-#: wp-admin/users.php:384
+#: wp-admin/users.php:385
 msgid "Confirm Removal"
 msgstr "Подтвердите удаление"
 
-#: wp-admin/users.php:386
+#: wp-admin/users.php:387
 msgid "There are no valid users selected for removal."
 msgstr "Не выбраны пользователи для удаления."
 
-#: wp-admin/users.php:447
+#: wp-admin/users.php:448
 msgid "You can't remove the current user."
 msgstr "Нельзя удалить текущего пользователя."
 
-#: wp-admin/users.php:448
+#: wp-admin/users.php:449
 msgid "Other users have been removed."
 msgstr "Другие пользователи были удалены."
 
@@ -7519,7 +7522,7 @@ msgstr "Вы уверены, что хотите удалить эти файл�
 msgid "Inactive:"
 msgstr "Неактивен:"
 
-#: wp-admin/about.php:192
+#: wp-admin/about.php:204
 msgid "Go to Dashboard"
 msgstr "Перейти на страницу &laquo;Консоль&raquo;"
 
@@ -8641,31 +8644,31 @@ msgstr "Вы не можете редактировать этого польз�
 msgid "You can&#8217;t delete users."
 msgstr "Вы не можете удалять пользователей."
 
-#: wp-admin/users.php:231
+#: wp-admin/users.php:232
 msgid "Delete Users"
 msgstr "Удалить пользователей"
 
-#: wp-admin/users.php:288
+#: wp-admin/users.php:289
 msgid "There are no valid users selected for deletion."
 msgstr "Не выбраны пользователи для удаления."
 
-#: wp-admin/users.php:429
+#: wp-admin/users.php:430
 msgid "New user created."
 msgstr "Новый пользователь создан."
 
-#: wp-admin/users.php:436
+#: wp-admin/users.php:437
 msgid "The current user&#8217;s role must have user editing capabilities."
 msgstr "Текущий пользователь должен иметь возможность редактирования пользователей."
 
-#: wp-admin/users.php:437
+#: wp-admin/users.php:438
 msgid "Other user roles have been changed."
 msgstr "Роли других пользователей были изменены."
 
-#: wp-admin/users.php:440
+#: wp-admin/users.php:441
 msgid "You can&#8217;t delete the current user."
 msgstr "Вы не можете удалить текущего пользователя."
 
-#: wp-admin/users.php:441
+#: wp-admin/users.php:442
 msgid "Other users have been deleted."
 msgstr "Другие пользователи были удалены."
 
