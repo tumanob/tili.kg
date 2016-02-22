@@ -40,7 +40,7 @@
 
 										<div class="catlist">
 
-											<h1><a href="<?php echo esc_url( get_category_link( $category->cat_ID ) ); ?>" > <?php echo $category->name;?> </a></h1>
+											<h1><a href="<?php echo esc_url( get_category_link( $category->cat_ID ) ); ?>" id="cat<?php echo $category->cat_ID; ?>" > <?php echo $category->name;?> </a></h1>
 										</div>
 
 										<?php $the_query = new WP_Query( array('posts_per_page'=>20,'cat'=> $category->cat_ID )); ?>
