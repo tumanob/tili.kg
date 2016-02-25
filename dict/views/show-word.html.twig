@@ -1,6 +1,6 @@
 {% extends 'layout/layout.html.twig'%}
 
-{%block title%} {{result['0']['keyword']}} - Слово из  {{result['0']['name']}} {%endblock%}
+{%block title%} Перевод слова "{{result['0']['keyword']}}" из словаря {{result['0']['name']}} {%endblock%}
 {% block styles%}
         {{parent()}}
         <style type="text/css">
@@ -68,7 +68,7 @@
     <div class="dcontent">
     {% for item in result %}
         <div class="gddictname">
-            <h1 class="gdword">{{item.keyword}}</h1>
+            <h1 class="gdword">Перевод для слова <span>"{{item.keyword}}"</span></h1>
             {{item.name}}
             <div class="clear"></div>
         </div>

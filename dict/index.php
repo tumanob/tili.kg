@@ -76,8 +76,18 @@ $app->get('/search-word/{kw}', function ($kw) use ($app) {
     return json_response(array("w" => $word_list));
 })->bind('searchword')->convert('kw', $wordFilter);
 
+/* Home page */
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html.twig', array('uri' => $app['request']->getUri()));
+
+
+
+    return $app['twig']->render(
+        'index.html.twig',
+        array(
+          'uri' => $app['request']->getUri(),
+          'newwords' => $app['db']->fetchAll('SELECT * FROM `dict_kw` WHERE `published` = 1 ORDER BY `ctime` DESC LIMIT 10  '),
+          )
+        );
 });
 
 

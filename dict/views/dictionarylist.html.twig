@@ -1,6 +1,6 @@
 {% extends 'layout/layout.html.twig'%}
 
-{%block title%}Кыргызко-Русский словарь Юдахина, Русско-Кыргызский словарь Юдахина, Русско-кыргызский словарь Компьютерных терминов, Словари от А до Я | Tili.kg{%endblock%}
+{%block title%}Список словарей  Кыргызко - Русские и Русско-Кыргызские на  Tili.kg{%endblock%}
 
 
 {%block content%}
@@ -12,7 +12,7 @@
     <br/>
 
     {% for item in result %}
-            <div class="dict-block col-xs-12 col-sm-6 col-md-6"><a href="{{asset('/')}}d{{item.id}}/">{{item.name}}</a></div>
+            <div class="dict-block col-xs-12 col-sm-6 col-md-6"><a href="{{asset('/')}}d{{item.id}}/">{{item.name}} <br/><span> (В словаре {{item.wordcount}} слов)</span></a></div>
     {% endfor %}
 
 

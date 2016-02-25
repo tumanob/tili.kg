@@ -5,6 +5,7 @@ var lastQuery = false;
 
 
 function findWord(autoshow) {
+
     if (autoshow == 'undefined') {
         autoshow = false;
     }
@@ -74,6 +75,7 @@ function showWord(id) {
     removeDialogs();
 
     $.get("show-word/" + encodeURIComponent(id), function (data) {
+        $('#dic_content').html(''); // clean content area before populate
         $("#dic_content").html(data);
         window.location.hash = '#' + id;
 

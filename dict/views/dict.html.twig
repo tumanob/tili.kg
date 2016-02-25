@@ -1,6 +1,6 @@
 {% extends 'layout/layout.html.twig'%}
 
-{%block title%} {{title}}  {%endblock%}
+{%block title%} Алфавитный словарь {{title}}  {%endblock%}
 
 {%block content%}
 
@@ -38,7 +38,7 @@
     <br/>
         {% if result %}
             {% for item in result %}
-                <div class="keywords col-xs-12 col-sm-6 col-md-6" >
+                <div class="dkeywords col-xs-12 col-sm-6 col-md-6" >
                     <a href="{{asset('/')}}d{{id}}/show/{{item.keyword}}">{{item.keyword}}</a>
                     {{item.value|raw}}
                 </div>
@@ -53,7 +53,7 @@
                     {% if pagination|length > 0 %}
                       <a href="{{app.request.uri}}/../p{{item.value}}"> {{item.value}} </a>
                      {% else %}
-                      <a href="{{app.request.uri}}p{{item.value}}"> {{item.value}} </a> 
+                      <a href="{{app.request.uri}}p{{item.value}}"> {{item.value}} </a>
 
                     {%endif%}
 

@@ -20,12 +20,31 @@
     font-weight: bold;
 }
 .addword {
-    background: no-repeat url("../../assets/images/button-addtrans.gif");
-    width: 163px;
-    height: 26px;
+
     display: block;
     margin-top: 20px;
     cursor: pointer;
+    border: 0px solid #ccc;
+    background: #00aeef;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 10px;
+    color: white;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.addword:hover
+{
+  -webkit-transform: translateY(-3px);
+  -ms-transform: translateY(-3px);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+#new_form{
+  margin: 0px 0px 50px 50px;
 }
 
 #not-found .addword {
@@ -129,11 +148,9 @@ span.delete-image {
 .tags {margin-top: 5px;}
 
 .glossary-entry {
-    float:left;
     margin: 0px;
-    width: 165px;
+    /*width: 165px;*/
     min-height: 155px;
-
     padding: 10px;
     overflow: hidden;
 }
@@ -143,9 +160,13 @@ span.delete-image {
   margin: 0px;
 }
 
+.glossary-entry a{
+  display: block;
+}
+
 .glossary-word-item{
-  border: 1px solid #CAD8F3;;
-  border-radius: 5px;
+  border: 1px solid #01AAB3;
+  border-radius: 3px;
   margin: 0px;
 }
 
@@ -172,3 +193,127 @@ span.delete-image {
     width: 610px;
     margin-top: 50px;
 }
+
+
+/*widget part
+_________________*/
+
+.contentBlock {
+    background: #fff;
+    border: solid 1px #e1e1e1;
+    padding: 15px;
+    word-wrap: break-word;
+    margin: 10px 0px;
+}
+
+.contentBlock .imgBlock {
+    margin: -15px;
+    margin-bottom: 0;
+}
+
+.contentBlock .blockBody {
+    display: block;
+    padding: 0px 0 15px 0;
+    position: relative;
+}
+
+.contentBlock h2, .contentBlock .figure {
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+
+  }
+
+  .contentBlock p {
+    color: #494949;
+    line-height: 22px;
+    margin-bottom: 0;
+}
+
+
+.contentBlock .readMore{
+    background: #dbf3fd;
+    border-top: solid 1px #e1e1e1;
+    font-style: italic;
+    margin: -15px;
+    margin-top: 0;
+    text-align: center;
+}
+
+.contentBlock .readMore a{
+    display: inline-block;
+    line-height: 25px;
+    padding: 5px;
+}
+
+
+.contentBlock:after{
+   clear: both;
+}
+
+.contentBlock .imgBlock img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.statBlock
+{
+  text-align: center;
+}
+
+
+.statBlock a
+{
+  text-decoration: none;
+  font-size: 26px;
+}
+
+
+.statBlock span.big
+{
+  font-size: 56px;
+    font-weight: bold;
+    display: block;
+}
+.statBlock span.alt {
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+  }
+
+  .rsidebar .addword{
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+.widget_words li a
+{
+    font-size: 16px;
+}
+#content{
+  padding: 0;
+}
+
+.dict-block a {
+  text-decoration: none;
+  min-height: 120px;
+}
+.dict-block a span{
+  font-size: 16px;
+  color: #01AAB3;
+  text-decoration: none;
+}
+
+.dkeywords{
+  min-height: 40px;
+      overflow: hidden;
+      padding: 5px 10px;
+}
+.dkeywords a
+{    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .gdword span{
+      color: #01AAB3;
+  }

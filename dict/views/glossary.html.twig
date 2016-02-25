@@ -1,6 +1,6 @@
 {% extends 'layout/layout.html.twig'%}
 
-{%block title%}Глоссарий - Русско-Кыргызский словарь и Кыргызско-Русский словарь онлайн - Онлайн сөздүк | Tili.kg {%endblock%}
+{%block title%}Глоссарий - слова из Русско - Кыргызского словаря разбитые на категории и Кыргызско-Русский словарь онлайн - Онлайн сөздүк | Tili.kg {%endblock%}
 
 {%block scripts%}
     {{parent()}}
@@ -24,33 +24,36 @@
             {%endif%}
         {% endfor %}
     </div>
+      <br>
+      <div class="alert alert-success col-xs-12 col-sm-12 col-md-12" role="alert">
+            <h4>Глоссарий это разбитые на категории слова из Русско - Кыргызского словаря. Мы постарались выбрать самые полезные и употребялемые слова.</h4>
+      </div>
 
     <div id="glossary">
         {% for tag in tags %}
-        <div class="glossary-entry col-xs-12 col-sm-4 col-md-3">
+        <div class="glossary-entry col-xs-12 col-sm-4 col-md-4">
+          <a href="{{asset('/glossary/' ~ tag.id ~ '/' ~ tag.tag)}}">
           <div class="glossary-item">
             <h2 class="title">
-                <a href="{{asset('/glossary/' ~ tag.id ~ '/' ~ tag.tag)}}">
                     {{tag.tag}}
-                </a>
             </h2>
             <div class="image">
-                <a href="{{asset('/glossary/' ~ tag.id ~ '/' ~ tag.tag)}}">
                     <img src="{{asset('/assets/images/tag/' ~ tag.id ~ '.jpg')}}" alt="{{tag.tag}}" />
-                </a>
-
-                </div>
+                  </div>
             </div>
+            </a>
         </div>
         {% endfor %}
         {% if words is defined %}
         {% for word in words %}
         <div class="glossary-entry word-entry col-xs-12 col-sm-6 col-md-4">
+
           <div class="glossary-word-item">
+          <a href="{{asset('/d' ~ word.dictid ~ '/show/' ~ word.keyword)}}">
             <h2 class="title">
-                <a href="{{asset('/d' ~ word.dictid ~ '/show/' ~ word.keyword)}}">
+
                     {{word.keyword}}
-                </a>
+
             </h2>
             <div class="image">
                 <ul>
@@ -58,18 +61,18 @@
                 {% for pic in pics %}
                     {% if pic.word == word.keyword and not found %}
                     <li>
-                        <a href="{{asset('/d' ~ word.dictid ~ '/show/' ~ word.keyword)}}">
+
                             <img src="{{pic.thumbnail}}" alt="{{word.keyword}}" />
-                        </a>
+
                     </li>
 		    {% set found = true %}
                     {% endif %}
                 {% endfor %}
 		{% if not found %}
                     <li>
-                        <a href="{{asset('/d' ~ word.dictid ~ '/show/' ~ word.keyword)}}">
+
                             <img width="110" height="110" src="{{asset('/assets/images/noimage.gif')}}" alt="{{word.keyword}}" />
-                        </a>
+
                     </li>
 		{% endif %}
                 </ul>
@@ -77,7 +80,9 @@
             <div class="word-value">
                 {{word.value|raw}}
             </div>
+            </a>
             </div>
+
         </div>
         {% endfor %}
         {% endif %}
