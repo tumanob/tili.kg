@@ -79,7 +79,8 @@ $app->get('/search-word/{kw}', function ($kw) use ($app) {
 /* Home page */
 $app->get('/', function () use ($app) {
 
-
+//echo "111".$_SERVER["QUERY_STRING"];
+//die;
 
     return $app['twig']->render(
         'index.html.twig',
@@ -154,6 +155,7 @@ $app->get('/show-word/{word}', function ($word) use ($app) {
             'user' => wp_get_current_user(),
             'tags' => $tags,
             'alltags' => $tagTree,
+            'keyword' =>$word,
         )
     );
 

@@ -5,7 +5,7 @@
         {{parent()}}
         <style type="text/css">
             .picture-area {
-                float: right;
+                /*float: right;*/
                 width: 210px;
             }
         </style>
@@ -68,14 +68,19 @@
     <div class="dcontent">
     {% for item in result %}
         <div class="gddictname">
-            <h1 class="gdword">Перевод для слова <span>"{{item.keyword}}"</span></h1>
+            <a href="/dict/#{{item.keyword}}"><h1 class="gdword">Перевод для слова <span>"{{item.keyword}}"</span></h1></a>
             {{item.name}}
             <div class="clear"></div>
         </div>
-        {% include 'partial/tags.html.twig' with {'item': item, 'user': user, 'tags': tags} %}
-        {% include 'partial/add-tag.html.twig' with {'item': item, 'user': user, 'tags': tags} %}
+        <div class="row">
+          <div class="col-xs-6 col-sm-4 col-md-3">
+              {% include 'partial/tags.html.twig' with {'item': item, 'user': user, 'tags': tags} %}
+              {% include 'partial/add-tag.html.twig' with {'item': item, 'user': user, 'tags': tags} %}
+            </div>
+          <div class="col-xs-6 col-sm-4 col-md-3">  {% include 'partial/pictures.html.twig' with {'pictures': pictures} %}</div>
+        </div>
         <div class="gdarticle">
-            {% include 'partial/pictures.html.twig' with {'pictures': pictures} %}
+
             <input type="hidden" id="keyword" value="{{item.keyword}}" />
             {{item.value|raw}}
             <div id="disqus_thread"></div>

@@ -77,6 +77,7 @@ function showWord(id) {
     $.get("show-word/" + encodeURIComponent(id), function (data) {
         $('#dic_content').html(''); // clean content area before populate
         $("#dic_content").html(data);
+
         window.location.hash = '#' + id;
 
         // Tooltips
@@ -86,8 +87,8 @@ function showWord(id) {
         }, function() {
             tip.hide(); //Скрыть подсказку
         }).mousemove(function(e) {
-            var mousex = e.pageX - 200; //Получаем координаты по оси X
-            var mousey = e.pageY + 20; // Получаем координаты по оси Y
+            var mousex = e.pageX ;//- 200; //Получаем координаты по оси X
+            var mousey = e.pageY ;//+ 20; // Получаем координаты по оси Y
             var tipWidth = tip.width(); //Вычисляем длину подсказки
             var tipHeight = tip.height(); // Вычисляем ширину подсказки
             //Определяем дистанцию от правого края окна браузера до блока, содержащего подсказку

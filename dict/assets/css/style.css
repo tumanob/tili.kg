@@ -73,21 +73,32 @@
 
 .add-pic {
 	display: block;
-	margin: 2px;
-	padding: 5px;
-	height: 34px;
-	width: 110px;
-	color: transparent;
-	border: none;
-	background: no-repeat url("../../assets/images/add-image.gif");
+	margin: 0px;
+  padding: 4px 10px;
+  background-color: #01aab3;
+	color: #fff;
+  border-radius: 5px;
+  border: 1px solid #25767A;
 }
+
+.tags-area
+{
+  display: block;
+  margin: 0px;
+  padding: 4px 10px;
+  background-color: #01aab3;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid #25767A;
+}
+
 span.delete-image {
     vertical-align: top;
 }
 .tag-add {
     cursor: pointer;
     text-decoration: underline;
-    color: #0066cc;
+    color: #fff;
 }
 .tag-parent-item, .tag-child-item, .remove-tag {
     cursor: pointer;
@@ -145,7 +156,7 @@ span.delete-image {
 .tag-add, span.tag {
     float: left; display: block; margin-right: 10px;
 }
-.tags {margin-top: 5px;}
+.tags {margin-top: 0px;}
 
 .glossary-entry {
     margin: 0px;
