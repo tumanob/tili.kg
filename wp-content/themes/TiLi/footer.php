@@ -1,10 +1,24 @@
 
+
+
     <div class="empty"></div>
 </div>
 
 
-
 <div id="footer">
+
+
+  <div class="main-contacts  1hidden-xs 1hidden-sm" style="z-index:100000;">
+    <div class="center-block col-md-8" style="float: none;" >
+      <?php
+      // Use shortcodes for contact form
+        echo do_shortcode( '[contact-form-7 id="464" title="form1"]' );
+
+      ?>
+    </div>
+  </div>
+
+
 	<div class="inner row">
 
                   <div class="copyright  col-xs-4 col-md-2 col-sm-3">

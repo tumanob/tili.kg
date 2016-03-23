@@ -139,7 +139,7 @@
 </div>
 
 </div>
-
+<!--
 <div class="main-contacts col-md-12 1hidden-xs 1hidden-sm">
 	<div class="center-block col-md-8" style="float: none;" >
 		<?php
@@ -148,7 +148,7 @@
 
 		?>
 	</div>
-
+-->
 
 </div>
 
