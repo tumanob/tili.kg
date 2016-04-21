@@ -2,6 +2,7 @@
 	<div id="wrapper">
 		<div class="catlist">
 			<h1><?php echo single_cat_title(); ?></h1>
+			<hr class="grey"></hr>
 			<?php //wp_nav_menu(array('menu'=>'categories')); ?>
 		</div>
 		<div class="posts row">

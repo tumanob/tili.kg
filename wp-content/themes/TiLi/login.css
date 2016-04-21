@@ -2,12 +2,12 @@
 /*html {background:#17272d url(../images/pbd-body.jpg) 0 0 repeat-x;}*/
 html {background:#17272d; }
 
-body.login {border-top-color:#dff4fc;}	/* Top bar background color */
-.login p#backtoblog a:link, .login p#backtoblog a:visited {color:#17272d;}	/* Link effects in top bar */
-.login p#backtoblog a:hover, .login p#backtoblog a:active {color:#17272d;text-decoration:underline;}	/* Rollover link effects in top bar */
+body.login {background: #414751 url('images/header-bg.jpg') repeat 0px -70px; min-height: 810px;}	/* Top bar background color */
+.login p#backtoblog a:link, .login p#backtoblog a:visited {color:#dcdcdc;}	/* Link effects in top bar */
+.login p#backtoblog a:hover, .login p#backtoblog a:active {color:#dcdcdc;text-decoration:underline;}	/* Rollover link effects in top bar */
 
 
-h1 a {
+.login h1 a {
 background: url(images/logo.png) no-repeat top center;
 width: 326px;
 height: 67px;
@@ -64,11 +64,83 @@ text-shadow: none;
 }
 
 
-.login #nav a, .login #backtoblog a{color:black !important;}
+.login #nav a, .login #backtoblog a{color: #dcdcdc;}
 
 #nav {
-text-shadow: rgba(255, 255, 255, 1) 0 1px 0;
+text-shadow: none;
 margin: 0 0 0 16px;
 padding: 16px 16px 0;
 font-size: 23px;
+}
+
+
+.login form{
+    background: none;
+
+}
+
+
+
+#loginza h2{
+  color: #dcdcdc;
+}
+
+#login form p.submit{
+  width: 100%;
+min-height: 54px;
+}
+
+#login form p.submit #wp-submit{
+width:100%;
+height: 62px;
+margin: 30px 0px;
+  font: 30px 'Roboto',Arial, Helvetica, sans-serif;
+
+}
+
+.login form .input, .login form input[type=checkbox], .login input[type=text]{
+  border: 1px solid #5f656c;
+  background-color: #181F2C;
+  color: #ccc;
+}
+
+#loginza{
+  height: 160px;
+}
+
+#login{
+      padding: 50px 0 0;
+}
+
+.login form{
+  padding: 26px 24px 0px;
+}
+
+#backtoblog
+{display: none;}
+
+.login #nav a{
+display: block;
+width: 39%;
+float: left;
+border: 1px solid #fff;
+color: #fff;
+padding: 10px;
+text-align: center;
+margin: 5px;
+font: 16px 'Roboto',Arial, Helvetica, sans-serif;
+}
+
+.login #nav a:hover{
+border: 1px solid #00a0d2;
+}
+
+#login label{
+  color: #fff;
+}
+
+.login #login_error, .login .message
+{
+      background-color: #2A303C;
+      color: white;
 }

@@ -7,94 +7,146 @@
     <script type="text/javascript" src="{{asset('/assets/js/picture.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/js/tags.js')}}"></script>
     <script type="text/javascript" src="{{asset('/assets/js/index.js')}}"></script>
-
 {%endblock%}
 
 {%block menu%}
-    <div class="menu row">
-
-                <div class="dict-searchblock col-xs-12 col-md-6 col-sm-6" style="">
-            			<div class="searchform dict ">
-                            <form action="http://tili.kg" method="get">
-                                <div id="float_chars_block">
-                                                                     	<span title="Ctrl+Alt+н">ң</span>
-                                                                    	<span title="Ctrl+Alt+о">ө</span>
-                                                                       <span title="Ctrl+Alt+у">ү</span>
-                                                                       <div style="clear:both"></div>
-                                                               </div>
-                                 <input name="keyword" type="text" class="stxt" id="keyword" value="Введите слово для перевода" autocomplete="off" onfocus="javascript: if(this.value == 'Введите слово для перевода') this.value = '';" onblur="javascript: if(this.value == '') { this.value = 'Введите слово для перевода';}">
-
-                                 <input type="submit" class="sbtn" value="Перевод" onclick="showWord(document.getElementById('keyword').value);
-                                  return false;">
-
-                                <div id="result" style="overflow: auto;"></div>
-                            </form>
-
-                         </div>
-                </div>
-            <div class="menu-items col-xs-12 col-md-6 col-sm-6">
-                <a href="/">Главная</a> |
-                <a href="/dict/dlist/">Словари от А до Я</a> |
-                <a href="/dict/glossary/">Глоссарий</a> |
-               <!-- <a href="/dict/add/" class="addword-menu"><img src="/dict/assets/images/button-addword.gif"></a> -->
-            </div>
-    </div>
+    <a href="/dict/dlist/">Словари от А до Я</a>
+    <a href="/dict/glossary/">Глоссарий</a>
+    <a href="/top200/">200 первых слов</a>
 {%endblock%}
 
 {%block content%}
-
-
     <div class="content-text">
         <div id="content" class=" col-xs-12 col-md-8 col-sm-8" >
+            <div id="dic_content" >
+                <!-- <img src="assets/images/kt-dict.jpg" alt="Онлайн словарь" style="margin:40px 0 10px 160px;" />
+                -->
 
-
-                <p id="dic_content" >
-                    <img src="assets/images/kt-dict.jpg" alt="Онлайн словарь" style="margin:40px 0 10px 160px;" />
-                </p>
-
-                <div id="not-found">
-                    <img src="{{asset('/assets/images/noword-man.gif')}}" alt="Слово не найдено" />
-                    <div>
-                        Если вы знаете как переводится  <span>слово</span><br />
-                        вы можете помочь расширить наш словарь<br />
-
-                        <a class="addword" href="{{asset('/add')}}">&nbsp;</a>
+                <!-- content top 100% -->
+                <div class="contentBlock col-xs-12 col-md-12 col-sm-12" style="border:0px;">
+                    <div class="imgBlock responsive_hide_on_smartphone">
+                      <a href="#"><img src="assets/images/banner-tili-dict.jpg" alt="" class="alignnone size-full wp-image-54166" title=""></a>
                     </div>
+                    <div class="readMore" style="background: #ADEDF0;">
+                        <a href="https://global.oup.com/education/500-words/">
+                            О словаре и команде
+                        </a>
+                    </div>
+              </div>
+
+              <div class="col-xs-12 col-md-12 col-sm-12">
+                <!-- content left top widget-->
+                <div class="contentBlock col-xs-12 col-md-6 col-sm-6">
+                    <div class="blockBody">
+                        <h2><a href="#" style="color: #CF2300;">Ищем волонтеров</a></h2>
+                        <p>У нас много идей и нам нужны те кто хочет стать частью команды.</p>
+                    </div>
+
+              </div>
+
+              <!-- content right top widget-->
+              <div class="contentBlock col-xs-12 col-md-6 col-sm-6">
+                  <div class="blockBody">
+                      <h2><a href="https://global.oup.com/education/500-words/">Разработчикам</a></h2>
+                      <p>Api Словаря, исходные коды и все то что может вам понадобиться ...</p>
+                  </div>
+
+                  </div>
+              </div>
+
+            <!-- content left bottom widget-->
+            <div class="col-xs-12 col-md-6 col-sm-6">
+            <div class="contentBlock ">
+                <div class="blockBody">
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/videoseries?list=PLc2e-A1OjfB9GMtAbKetNkquJXtbI_zLP" frameborder="0" allowfullscreen></iframe>
                 </div>
 
-            </div>
-        <div class="rsidebar col-xs-12 col-md-4 col-sm-4" >
-            <div class=" col-xs-12 col-sm-12 col-md-12">
-                       <div class="apps col-xs-12 col-sm-6 col-md-4 hidden-xs">
-                           <a href="https://chrome.google.com/webstore/detail/%D0%BA%D0%B8%D1%80%D0%B3%D0%B8%D0%B7%D1%81%D0%BA%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D1%8C/hojggilcgbfgflnmnjldhbdpomafihfd"  id="install-button" class="android" onclick="chrome.webstore.install(); return false;" style="margin-top: -8px; right: 525px;"><img class="aligncenter" src="/banners/chromead.png" alt="Добавить расширение в хром." style="height: 60px;"/></a>
+          </div>
+          </div>
 
-                           <script>
-                           if (chrome.app.isInstalled) {
-                             document.getElementById('install-button').style.display = 'none';
-                           }
-                           </script>
-                       </div>
-                        <div class="apps col-xs-12 col-sm-12 col-md-12">
-                            <a href="http://play.google.com/store/search?q=pub:Tili.kg" target="_blank" class="android"><img class="aligncenter" src="/banners/get-from-gp.png" alt="Установить словарь на телефон Android." /></a>
-                        </div>
-                        <div class="apps col-xs-12 col-sm-12 col-md-12">
-                             <a href="http://itunes.apple.com/us/app/tili.kg/id528317649?mt=8" target="_blank" class="iosapp"><img class="aligncenter" src="/banners/app-store.png" alt="Установить словарь на iPhone." /></a>
-                        </div>
-                 </div>
-            </div>
-
-    </div>
+          <!-- content right bottom widget-->
+          <div class="col-xs-12 col-md-6 col-sm-6">
+          <div class="contentBlock ">
 
 
+              <div class="blockBody">
+                  <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Ftili.kg&amp;width=295&amp;height=258&amp;show_faces=true&amp;colorscheme=light&amp;stream=false&amp;border_color&amp;header=false" scrolling="no" frameborder="0" style="overflow:hidden; width:100%; height:224px;" allowTransparency="true"></iframe>
+              </div>
 
-
-
-
-			
+        </div>
         </div>
 
 
+            </div>
+
+            <div id="not-found">
+                <img src="{{asset('/assets/images/noword-man.gif')}}" alt="Слово не найдено" />
+                <div>
+                    Если вы знаете как переводится  <span>слово</span><br />
+                    вы можете помочь расширить наш словарь<br />
+
+                    <a class="addword" href="{{asset('/add')}}">&nbsp;</a>
+                </div>
+            </div>
+        </div>
+        <div class="rsidebar col-xs-12 col-md-4 col-sm-4">
+            <div id="similars"></div>
+            <br />
+            <div class="col-xs-12 col-sm-12 col-md-12">
+            <center>
+              <a href="/dict/add/" class="addword-menu addword">
+                Добавить своё слово
+              </a>
+            </center>
+            </div>
+
+            <div class="main_right_widget col-xs-12 col-sm-12 col-md-12">
+            <div class="contentBlock statBlock" style="background-color:#00aaad;">
+              <a href="http://tili.kg/dict/" style="color:white;">
+                Больше <span class="big">100,000</span> Слов и Переводов <span class="alt">В НАШЕМ СЛОВАРЕ</span>
+                </a>
+            </div>
+
+            <!-- <h3>полезности</h3> -->
+
+              <div class="contentBlock">
+
+
+              <div class="blockBody">
+                  <h2><a href="#">Новые слова </a></h2>
+                  <p style="font-size: 12px;">Добавили пользователи сайта. </p>
+
+                  <ul class="widget_words">
+                    {% for newword in newwords %}
+                      <li class="col-xs-6 col-sm-12 col-md-6" ><a  href="/dict/#{{newword.keyword}}"> {{newword.keyword}}</a></li>
+                    {% endfor %}
+                  </ul>
+                  <div style="clear:both;"> </div>
+              </div>
+
+              <div class="readMore">
+                  <a href="/dict/add/">
+                    Добавь свое слово
+                  </a>
+                  |
+                  <a href="#">
+                    Зачем добавлять?
+                  </a>
+              </div>
+            </div>
+
+
+
+            </div>
+        </div>
     </div>
+
+  </div>
+
+
+  </div>
+
+</div>
 
 
 

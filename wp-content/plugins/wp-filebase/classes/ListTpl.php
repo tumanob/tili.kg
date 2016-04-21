@@ -25,7 +25,7 @@ class WPFB_ListTpl {
 		return $tpls;
 	}
 	
-	function WPFB_ListTpl($tag=null, $data=null) {
+	function __construct($tag=null, $data=null) {
 		if(!empty($data)) {
 			$vars = array_keys(get_class_vars(get_class($this)));
 			foreach($vars as $var)
@@ -56,6 +56,9 @@ class WPFB_ListTpl {
 
 		if(empty($uid)) $uid = uniqid();
 		$str = str_replace('%uid%', $uid, $str);
+		
+		// TODO: add doc
+		$str = str_replace('%search_term%', empty($_GET['wpfb_s']) ? '' : esc_html(stripslashes($_GET['wpfb_s'])), $str);
 		
 		
 		$count = 0;
@@ -226,7 +229,7 @@ class WPFB_ListTpl {
 		$footer = $this->ParseHeaderFooter($this->footer, $uid);		
 		$is_datatable = strpos($footer, ").dataTable(")!==false;
 		
-		// TODO: no page_limit when dataTable?
+		// TODO: no page_limit when dataTable? 
 		// hide pagenav when using datatable
 		$this->current_list->hide_pagenav = $this->current_list->hide_pagenav || $is_datatable;
 		
@@ -274,5 +277,5 @@ class WPFB_ListTpl {
 		update_option(WPFB_OPT_NAME.'_list_tpls', $tpls);
 	}
 	
-	function GetTitle() { return __(__(esc_html(WPFB_Output::Filename2Title($this->tag))), WPFB); }
+	function GetTitle() { return __(__(esc_html(WPFB_Output::Filename2Title($this->tag))),'wp-filebase'); }
 }

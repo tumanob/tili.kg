@@ -3,26 +3,32 @@ var inRequest = false;
 var keyword = false;
 var lastQuery = false;
 
+
 function findWord(autoshow) {
+
     if (autoshow == 'undefined') {
         autoshow = false;
     }
     if (inRequest) return false;
 
-    keyword = $("#keyword").val();
+    keyword = $("#stxt").val();
 
-    if (keyword == lastQuery) return false;
-
-    if (keyword < 1) return false;
+    if (keyword == lastQuery && keyword.length < 1) {
+        return false;
+    }
 
     inRequest = true;
     $.get("search-word/" + encodeURIComponent(keyword), function (data) {
-        eval("data=" + data);
         var tmp = "";
-        for (var x in data['w']) {
-            tmp = tmp + "<div class=\"wl\"><a href=\"/dict/#"+data['w'][x]+"\"  onClick=\"showWord('" + data['w'][x] + "');  return false;\">" + data['w'][x] + "</a></div>";
+        if (data['w'].length > 1) {
+          tmp = "<h3>Похожие слова: </h3><br />";
         }
-        $("#result").html(tmp);
+
+        for (var i = 1; i < data['w'].length; i++) {
+            var item = data['w'][i];
+            tmp += "<div class=\"wl\"><a href=\"/dict/#" + item + "\"  onClick=\"showWord('" + item + "');  return false;\">" + item + "</a></div>";
+        }
+        $("#similars").html(tmp);
         $("#query_stat").html(data.s);
 
         inRequest = false;
@@ -33,7 +39,7 @@ function findWord(autoshow) {
         }
         if (data['w'].length == 0) {
             $('#dic_content').empty();
-            var word = $('#keyword').val();
+            var word = $('#stxt').val();
             $('#not-found span').text(word);
             var ref = $('#not-found a').attr('href');
             var pos = ref.indexOf('#');
@@ -48,18 +54,30 @@ function findWord(autoshow) {
     });
 }
 
+function removeDialogs() {
+    if ($('#add-picture').length ) {
+        try {
+            $('#add-picture').dialog('destroy');
+            $('#add-picture').remove();
+        } catch (ignored) {}
+    }
+    if ($('#add-tag-dialog').length) {
+        try {
+            $('#add-tag-dialog').dialog('destroy');
+            $('#add-tag-dialog').remove();
+        } catch (ignored) {}
+    }
+}
+
 function showWord(id) {
     imageSearchStart = 0;
 
-    $('#add-picture').dialog('destroy');
-    $('#add-picture').remove();
-    $('#add-picture').remove();
-    $('#add-tag-dialog').dialog('destroy');
-    $('#add-tag-dialog').remove();
-    $('#add-tag-dialog').remove();
+    removeDialogs();
 
     $.get("show-word/" + encodeURIComponent(id), function (data) {
+        $('#dic_content').html(''); // clean content area before populate
         $("#dic_content").html(data);
+
         window.location.hash = '#' + id;
 
         // Tooltips
@@ -69,8 +87,8 @@ function showWord(id) {
         }, function() {
             tip.hide(); //Скрыть подсказку
         }).mousemove(function(e) {
-            var mousex = e.pageX - 200; //Получаем координаты по оси X
-            var mousey = e.pageY + 20; // Получаем координаты по оси Y
+            var mousex = e.pageX ;//- 200; //Получаем координаты по оси X
+            var mousey = e.pageY ;//+ 20; // Получаем координаты по оси Y
             var tipWidth = tip.width(); //Вычисляем длину подсказки
             var tipHeight = tip.height(); // Вычисляем ширину подсказки
             //Определяем дистанцию от правого края окна браузера до блока, содержащего подсказку
@@ -99,7 +117,6 @@ $(document).ready(function () {
 
     $('#ajaxBusy').css({
         display:"none"
-
     });
 
     // Ajax activity indicator bound
@@ -107,56 +124,34 @@ $(document).ready(function () {
     $(document).ajaxStart(function () {
         $('#ajaxBusy').show();
     }).ajaxStop(function () {
-            $('#ajaxBusy').hide();
-        });
+        $('#ajaxBusy').hide();
+    });
 
-    $("#keyword").keyup(function () {
-        var length = $('#keyword').val().length;
+    $("#stxt").keyup(function () {
+        var length = $('#stxt').val().length;
         if (length > 1) {
             clearTimeout(timer);
             timer = setTimeout(findWord, 1500);
         }
-		
-		   });
+    });
 
-   // $("#keyword").focus();
-
-    var hash = window.location.hash;
-    if (hash) {
-        hash = hash.replace('#', '');
-        $("#keyword").val(hash);
-        findWord(true);
-    }
-
-    $(window).bind("hashchange", function (e) {
-        // In jQuery 1.4, use e.getState( "url" );
-        var url = $.bbq.getState("url");
+    var hashSearch = function() {
         var hash = window.location.hash;
         if (hash) {
             hash = hash.replace('#', '');
-            $("#keyword").val(hash);
+            $("#stxt").val(hash);
             findWord(true);
         }
-    });
+    }
 
-    $('#keyword').focusout(function(){
-       // setTimeout($('#result').delay(10000), 2000);
-      $('#result').delay(400).hide(200); // hide podskazka
-    });
-    $('#keyword').focusin(function(){
+    $(window).bind("hashchange", hashSearch);
 
-      $('#result').show(); // hide podskazka
-        });
+    $('#stxt').focusout(function(){
+        $('#result').delay(400).hide(200);
+    });
+    $('#stxt').focusin(function(){
+        $('#result').show();
+    });
 
     $(window).trigger("hashchange");
-
-    $(window).bind('scroll', function () {
-        if ($(window).scrollTop() > 150) {
-            $('#mainmenu').addClass('fixed');
-        } else {
-            $('#mainmenu').removeClass('fixed');
-        }
-    });
-
-
 });

@@ -63,4 +63,47 @@ static function ParseIniFileSize($val) {
 	return $bytes;
 }
 
+static function IsUtf8($string)
+{
+        return preg_match('%(?:
+        [\xC2-\xDF][\x80-\xBF]        # non-overlong 2-byte
+        |\xE0[\xA0-\xBF][\x80-\xBF]               # excluding overlongs
+        |[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}      # straight 3-byte
+        |\xED[\x80-\x9F][\x80-\xBF]               # excluding surrogates
+        |\xF0[\x90-\xBF][\x80-\xBF]{2}    # planes 1-3
+        |[\xF1-\xF3][\x80-\xBF]{3}                  # planes 4-15
+        |\xF4[\x80-\x8F][\x80-\xBF]{2}    # plane 16
+        )+%xs', $string);
+}
+
+
+static function GetFileTypeStats()
+{
+	global $wpdb;
+
+
+	$stats = get_transient('wpfb_file_type_stats');
+	if( $stats )
+		return $stats;
+
+	$stats = array();
+
+	$results = $wpdb->get_results("
+		SELECT LOWER(SUBSTRING_INDEX(file_name,'.',-1)) as ext, COUNT(file_id) as cnt
+		FROM `$wpdb->wpfilebase_files`
+		WHERE LENGTH(SUBSTRING_INDEX(file_name,'.',-1)) < 10
+		GROUP by LOWER(SUBSTRING_INDEX(file_name,'.',-1)) ORDER BY `cnt` DESC LIMIT 40"
+      , OBJECT_K);
+
+	foreach($results as $r) {
+		$stats[$r->ext] = 0+$r->cnt;
+	}
+
+	set_transient('wpfb_file_type_stats', $stats, 24*HOUR_IN_SECONDS); // should (must) be on daily-base!
+
+	wpfb_call('ExtensionLib', 'SendStatistics');
+
+	return $stats;
+}
+
 }

@@ -293,28 +293,16 @@ static function FileType2Ext($type)
 	}
 }
 
-// returns true if the download should not be streamed in the browser
-static function ShouldSendDLHeader($file_path, $file_type)
+private static function isInlineViewable($file_type)
 {
-	if(WPFB_Core::$settings->force_download)
-		return true;
-	
-	$file_name = basename($file_path);
-	$request_path = parse_url($_SERVER['REQUEST_URI']);
-	$request_path = urldecode($request_path['path']);
-	$request_file_name = basename($request_path);
-	if($file_name == $request_file_name)
-		return false;
-		
 	// types that can be viewed in the browser
 	static $media = array('audio', 'image', 'text', 'video', 'application/pdf', 'application/x-shockwave-flash');	
 	foreach($media as $m)
 	{
-		$p = strpos($file_type, $m);
-		if($p !== false && $p == 0)
-			return false;
+		if(strpos($file_type, $m) === 0)
+			return true;
 	}	
-	return true;
+	return false;	
 }
 
 // returns true if range download should be supported for the specified file/file type
@@ -333,14 +321,30 @@ static function ShouldSendRangeHeader($file_path, $file_type)
 	}	
 	return true;
 }
+	public static function ParseRangeHeader($file_size) {
+		$begin = 0;
+		$end = $file_size-1;
 
-// this is the cool function which sends the file!
+		$http_range = isset($_SERVER['HTTP_RANGE']) ? $_SERVER['HTTP_RANGE'] : '';
+		if(!empty($http_range) && strpos($http_range, 'bytes=') !== false && strpos($http_range, ',') === false) // multi-range not supported (yet)!
+		{
+			$range = array_map('trim',explode('-', trim(substr($http_range, 6))));
+			if(is_numeric($range[0])) {
+				$begin = 0 + $range[0];
+				if(is_numeric($range[1])) $end = 0 + $range[1];
+			} else {
+				$begin = $file_size - $range[1]; // format "-x": last x bytes
+			}
+		}
+		return array($begin, $end);
+}
+
 static function SendFile($file_path, $args=array())
 {
 	$defaults = array(
 		'bandwidth' => 0,
 		'etag' => null,
-		'force_download' => false,
+		'force_download' => WPFB_Core::$settings->force_download,
 		'cache_max_age' => 0,
 		'md5_hash' => null,
 		'filename' => null
@@ -426,58 +430,53 @@ static function SendFile($file_path, $args=array())
 	}
 	
 	if(!($fh = @fopen($file_path, 'rb')))
-		wp_die(__('Could not read file!', WPFB));
+		wp_die(__('Could not read file!','wp-filebase'));
 		
-	$begin = 0;
-	$end = $size-1;
 
-	$http_range = isset($_SERVER['HTTP_RANGE']) ? $_SERVER['HTTP_RANGE'] : '';
-	if(!empty($http_range) && strpos($http_range, 'bytes=') !== false && strpos($http_range, ',') === false) // multi-range not supported (yet)!
-	{
-		$range = array_map('trim',explode('-', trim(substr($http_range, 6))));
-		if(is_numeric($range[0])) {
-			$begin = 0 + $range[0];
-			if(is_numeric($range[1])) $end = 0 + $range[1];
-		} else {
-			$begin = $size - $range[1]; // format "-x": last x bytes
-		}
-	} else
-		$http_range = '';
-	
-	if($begin > 0 || $end < ($size-1))
+	list($begin, $end) = self::ParseRangeHeader($size);
+
+	if($begin > 0 || $end < ($size-1)) {
 		header('HTTP/1.0 206 Partial Content');
-	else
+		header("Content-Range: bytes $begin-$end/$size");
+	} else
 		header('HTTP/1.0 200 OK');
 		
 	$length = ($end-$begin+1);
 	WPFB_Download::AddTraffic($length);
 	
 	
-	if(WPFB_Download::ShouldSendRangeHeader($file_path, $file_type))
+	if(self::ShouldSendRangeHeader($file_path, $file_type))
 		header("Accept-Ranges: bytes");
 	
+	$request_file_name = basename(urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)));	
+	
+	$filename_set = !empty($filename);
+	if(!$filename_set)
+		$filename = basename($file_path);
+	
 	// content headers
-	if(!empty($force_download) || WPFB_Download::ShouldSendDLHeader($file_path, $file_type) || !empty($filename)) {
-		header("Content-Disposition: attachment; filename=\"" . (empty($filename) ? basename($file_path) : $filename) . "\"");
+	if($force_download) {
+		header("Content-Disposition: attachment; filename=\"$filename\"");
 		header("Content-Description: File Transfer");
+	} elseif($filename != $request_file_name) {
+		header("Content-Disposition: inline; filename=\"$filename\"");
 	}
 	header("Content-Length: " . $length);
-	if(!empty($http_range))
-		header("Content-Range: bytes $begin-$end/$size");
+
 	
 	// clean up things that are not needed for download
 	@session_write_close(); // disable blocking of multiple downloads at the same time
-	global $wpdb;
-	if(!empty($wpdb->dbh) && is_resource($wpdb->dbh))
-		@mysql_close($wpdb->dbh);
-	else
-		@mysql_close();
-	
+        if(function_exists('mysql_close')) {
+            global $wpdb;
+            if(!empty($wpdb->dbh) && is_resource($wpdb->dbh))
+                    @mysql_close($wpdb->dbh);
+            else
+                    @mysql_close();
+        }
+
 	@ob_flush();
-   @flush();
+        @flush();
 	
-	//if(WPFB_Core::$settings->dl_destroy_session)
-//		@session_destroy();
 	
 	// ready to send the file!
 	
@@ -496,8 +495,7 @@ static function SendFile($file_path, $args=array())
 		$buffer_size = (int)(1024 * min($bandwidth, 64));
 
 		// convert kib/s => bytes/ms
-		$bandwidth *= 1024;
-		$bandwidth /= 1000;
+		$bandwidth *= 1024 / 1000;
 
 		$cur = $begin;
 		
@@ -535,6 +533,8 @@ static function getHttpStreamContentLength($s)
 }
 static function SideloadFile($url, $dest_path, $progress_bar_or_callback=null)
 {
+	if(WP_DEBUG_LOG) error_log("WPFB: SideloadFile $url to $dest_path");
+	
 	$is_local = parse_url($url,PHP_URL_SCHEME) === 'file' && is_readable($url);	
 	$rh = @fopen($url, 'rb'); // read binary
 	if($rh === false)

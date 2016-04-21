@@ -24,12 +24,12 @@ loginza_load_jquery();
 <script src="//%loginza_host%/js/widget-2.0.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-    	$('#loginform').prepend('<div style="color:red;">%loginza_error%</div><div style="width:359px;" id="loginza"><h2 style="margin-left: -25px;width: 450px;">Вы можете войти используя свой аккаунт:</h2></div>');
-    	$('#registerform').prepend('<div style="color:red;">%loginza_error%</div><div style="width:359px;" id="loginza"><h2 style="margin-left: -25px;width: 450px;">Вы можете войти используя свой аккаунт:</h2></div>');
+    	$('#loginform').prepend('<div style="color:red;">%loginza_error%</div><div style="width:359px;" id="loginza"><h2 style="margin-left: -25px;width: 450px;">Войти с помощью:</h2></div>');
+    	$('#registerform').prepend('<div style="color:red;">%loginza_error%</div><div style="width:359px;" id="loginza"><h2 style="margin-left: -25px;width: 450px;">Войти с помощью:</h2></div>');
     });
 
 	var widget_id = '%api_id%';
-    
+
     // влключаем iframe-виджет
     LOGINZA.Widget.setFrameMode();
     LOGINZA.Widget.Params.token_url = '%returnto_url%';

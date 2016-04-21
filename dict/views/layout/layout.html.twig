@@ -2,19 +2,20 @@
 {% extends 'layout/base.html.twig' %}
 
 {%block logo%}
-<h1><a href="/"><img width="234" height="91" alt="KG TiLi" id="logo" src="/wp-content/themes/TiLi/images/logo.png"></a></h1>
+  <h1 id="logotext"><a href="/">Tili<span class="green">.kg</span> <span class="grey hidden-xs hidden-sm">Все для изучения Киргизского языка!</span></a></h1>
 {%endblock%}
 
 {%block menu%}
-    <a href="/">Главная</a> |
-    <a href="/dict">Онлайн Словарь</a> |
-    <a href="/dict/dlist/">Словари от А до Я</a> |
-    <a href="/dict/glossary/">Глоссарий</a> |
+    <a href="/dict/">Словарь</a>
+    <a href="/dict/dlist/">Словари от А до Я</a>
+    <a href="/dict/glossary/">Глоссарий</a>
+    <a href="/top200/">200 первых слов</a>
 
-
-    <a href="/dict/add/" class="addword-menu"><img src="/dict/assets/images/button-addword.gif"></a>
+    <a href="/dict/add/" class="addword-menu addword">
+      Добавить своё слово в словарь
+    </a>
 {%endblock%}
-		
+
 {%block content%}
 
 {%endblock%}

@@ -5,10 +5,13 @@ static $sample_file = null;
 static $sample_cat = null;
 static $protected_tags = array('default','single','excerpt','filebrowser','filepage','filepage_excerpt');
 
-static function InitClass() {
+
+static function Display()
+{
 	global $user_identity;
+
 	wpfb_loadclass('File', 'Category');
-	
+
 	self::$sample_file = new WPFB_File(array(
 		'file_id' => 0,
 		'file_name' => 'example.pdf',
@@ -23,7 +26,7 @@ static function InitClass() {
 		'file_hits' => 3,
 		'file_added_by' => wp_get_current_user()->ID
 	));
-	
+
 	self::$sample_cat = new WPFB_Category(array(
 		'cat_id' => 0,
 		'cat_name' => 'Example Category',
@@ -31,32 +34,26 @@ static function InitClass() {
 		'cat_folder' => 'example',
 		'cat_num_files' => 0, 'cat_num_files_total' => 0
 	));
-	
+
 	self::$sample_file->Lock();
 	self::$sample_cat->Lock();
-}
-
-static function Display()
-{
-	global $wpdb, $user_ID, $user_identity;
 	
 	wpfb_loadclass('Admin', 'Output', 'TplLib', 'ListTpl');
 	
-	WPFB_Core::PrintJS();
+	 wpfb_call('Output', 'PrintJS');
 	
 	$_POST = stripslashes_deep($_POST);
 	$_GET = stripslashes_deep($_GET);	
 	$action = (!empty($_POST['action']) ? $_POST['action'] : (!empty($_GET['action']) ? $_GET['action'] : ''));
-	$clean_uri = remove_query_arg(array('message', 'action', 'file_id', 'cat_id', 'deltpl', 'hash_sync' /* , 's'*/)); // keep search keyword
-	
+
 	// security	nonce
 	if(!empty($action) && $action != 'edit' && !check_admin_referer($action.'-'.$_REQUEST['type'],'wpfb-tpl-nonce'))
 		wp_die(__('Cheatin&#8217; uh?'));		
 
 	if($action == 'add' || $action == 'update')
 	{
-		if(empty($_POST['type'])) wp_die(__('Type missing!', WPFB));		
-		if(empty($_POST['tpltag'])) wp_die(__('Please enter a template tag.', WPFB));	
+		if(empty($_POST['type'])) wp_die(__('Type missing!','wp-filebase'));		
+		if(empty($_POST['tpltag'])) wp_die(__('Please enter a template tag.','wp-filebase'));	
 		
 		$type = $_POST['type'];
 		$for_cat = ($type == 'cat');
@@ -143,7 +140,7 @@ function WPFB_PreviewTpl(ta, ty)
 		type: 'POST',
 		url: '<?php echo WPFB_Core::$ajax_url ?>',
 		data: {
-			action: "tpl-sample",
+			wpfb_action: "tpl-sample",
 			tpl: tplc,
 			type: ty
 		},
@@ -187,32 +184,33 @@ jQuery(document).ready( function() {
 		default:
 ?>
 <div class="wrap">
-<h2><?php _e('Templates',WPFB); ?>
+<h2><?php _e('Embed Templates','wp-filebase'); ?>
 <?php if(empty(WPFB_Core::$settings->disable_css) && current_user_can('edit_themes')) { ?>
-	<a href="<?php echo admin_url('admin.php?page=wpfilebase_css'); ?>" class="add-new-h2"><?php _e('Edit Stylesheet',WPFB); ?></a>
+	<a href="<?php echo admin_url('admin.php?page=wpfilebase_css'); ?>" class="add-new-h2"><?php _e('Edit Stylesheet','wp-filebase'); ?></a>
 <?php } ?>	
 	<a href="<?php echo add_query_arg('iframe-preview',(int)empty($_GET['iframe-preview'])); ?>" class="add-new-h2">iframe preview</a>
 </h2>
+<p><?php _e('You can embed files into posts or pages using the file embed templates. File list templates use file embed templates and category embed templates.','wp-filebase'); ?></p>
 <div id="wpfb-tabs">
 	<ul class="wpfb-tab-menu">
-		<li><a href="#file"><?php _e('Files', WPFB) ?></a></li>
-		<li><a href="#cat"><?php _e('Categories') ?></a></li>
-		<li><a href="#list"><?php _e('File List', WPFB) ?></a></li>
+		<li><a href="#file"><?php _e('File','wp-filebase') ?></a></li>
+		<li><a href="#cat"><?php _e('Category') ?></a></li>
+		<li><a href="#list"><?php _e('File List','wp-filebase') ?></a></li>
 	</ul>
 	
 	<div id="file" class="wrap">
-	<p><?php _e('Templates used for single embedded files or file lists.',WPFB); ?></p>
+	<p><?php _e('Templates used for single embedded files or file lists.','wp-filebase'); ?></p>
 	<?php self::TplsTable('file'); ?>
 	</div>
 	
-	<div id="cat" class="wrap">
-	<p><?php _e('These templates can be used for categories.',WPFB); ?></p>
-	<?php self::TplsTable('cat'); ?>
-	</div>
-	
 	<div id="list" class="wrap">
-	<p><?php _e('A list-template consists of header, footer and file template. It can optionally have a category template to list sub-categories.',WPFB); ?></p>
+	<p><?php _e('A list-template consists of header, footer and file template. It can optionally have a category template to list sub-categories.','wp-filebase'); ?></p>
 	<?php self::TplsTable('list'); ?>
+	</div>
+    
+	<div id="cat" class="wrap">
+	<p><?php _e('These templates are used by the file list templates.','wp-filebase'); ?></p>
+	<?php self::TplsTable('cat'); ?>
 	</div>
 
 	
@@ -220,8 +218,8 @@ jQuery(document).ready( function() {
 	</div>
 </div> <!-- tabs -->
 
-<form action="<?php echo remove_query_arg(array('action','type','tpl')) ?>" method="post" onsubmit="return confirm('<?php _e('This will reset all File, Category and List Templates! Are your sure?', WPFB) ?>');"><p>
-	<input type="submit" name="reset-tpls" value="<?php _e('Reset all Templates to default', WPFB) ?>" class="button" />
+<form action="<?php echo remove_query_arg(array('action','type','tpl')) ?>" method="post" onsubmit="return confirm('<?php _e('This will reset all File, Category and List Templates! Are your sure?','wp-filebase') ?>');"><p>
+	<input type="submit" name="reset-tpls" value="<?php _e('Reset all Templates to default','wp-filebase') ?>" class="button" />
 </p></form>
 
 </div>
@@ -278,7 +276,7 @@ static function TplsTable($type, $exclude=array(), $include=array()) {
 			<div class="entry-content wpfilebase-tpl-preview">
 				<div id="tpl-preview_<?php echo $tpl_tag ?>">
 					<?php if(!empty($_GET['iframe-preview'])) { ?>					
-					<iframe src="<?php echo WPFB_Core::PluginUrl("tpl-preview.php?type=$type&tag=$tpl_tag"); ?>" style="width:100%;height:220px;"></iframe>
+					<iframe src="<?php echo admin_url("admin.php?wpfilebase-screen=tpl-preview&type=$type&tag=$tpl_tag"); ?>" style="width:100%;height:220px;"></iframe>
 					<?php } else {
 						$table_found = !$list && (strpos($tpl_src, '<table') !== false);
 						if(!$list && !$table_found && strpos($tpl_src, '<tr') !== false) {
@@ -322,7 +320,7 @@ static function TplForm($type, $tpl_tag=null)
 		$tpl = $new ? new WPFB_ListTpl() : WPFB_ListTpl::Get($tpl_tag);
 	}
 ?>
-<h2><?php _e($new?'Add Template' : 'Edit Template', WPFB);
+<h2><?php $new?_e('Add Template', 'wp-filebase') : _e('Edit Template', 'wp-filebase');
 		if(!empty($tpl_tag)) echo ' '.self::TplTitle($tpl_tag);  ?></h2>
 <form action="<?php echo remove_query_arg(array('action','type','tpl')).'#'.$type ?>" method="post">
 	<?php wp_nonce_field(($new?'add':'update').'-'.$type, 'wpfb-tpl-nonce'); ?>
@@ -330,32 +328,32 @@ static function TplForm($type, $tpl_tag=null)
 	<input type="hidden" name="type" value="<?php echo $type; ?>" />	
 	<?php if($new) {?>
 	<p>
-		<label for="tpltag"><?php _e('Template Tag (a single word to describe the template):', WPFB) ?></label>
+		<label for="tpltag"><?php _e('Template Tag (a single word to describe the template):','wp-filebase') ?></label>
 		<input type="text" name="tpltag" value="<?php if(!empty($_POST['tpltag'])) echo esc_attr($_POST['tpltag']); ?>" tabindex="1" maxlength="20" />
 	</p>
 	<?php } else { ?><input type="hidden" name="tpltag" value="<?php echo esc_attr($tpl_tag); ?>" /><?php }
 	if($list) {?>
 <table class="form-table">
 	<tr class="form-field">
-		<th scope="row" valign="top"><label for="tpl-list-header"><?php _e('Header', WPFB) ?></label></th>
+		<th scope="row" valign="top"><label for="tpl-list-header"><?php _e('Header','wp-filebase') ?></label></th>
 		<td width="100%">
 			<textarea id="tpl-list-header" name="tpl-list-header" cols="70" rows="<?php echo (max(2, count(explode("\n",$tpl->header)))+3); ?>" wrap="off" class="codepress html wpfilebase-tpledit" onkeyup="WPFB_PreviewTpl(this, '<?php echo $type ?>')" onchange="WPFB_PreviewTpl(this, '<?php echo $type ?>')"><?php echo htmlspecialchars($tpl->header) ?></textarea><br />
 		</td>
 	</tr>	
 	<tr class="form-field">
-		<th scope="row" valign="top"><label for="tpl-list-cat-tpl"><?php _e('Category Template', WPFB) ?></label></th>
+		<th scope="row" valign="top"><label for="tpl-list-cat-tpl"><?php _e('Category Template','wp-filebase') ?></label></th>
 		<td width="">
 			<select id="tpl-list-cat-tpl" name="tpl-list-cat-tpl" onchange="WPFB_PreviewTpl(this, '<?php echo $type ?>')"><?php echo WPFB_Admin::TplDropDown('cat', $tpl->cat_tpl_tag); ?></select>
 		</td>
 	</tr>
 	<tr class="form-field">
-		<th scope="row" valign="top"><label for="tpl-list-file-tpl"><?php _e('File Template', WPFB) ?></label></th>
+		<th scope="row" valign="top"><label for="tpl-list-file-tpl"><?php _e('File Template','wp-filebase') ?></label></th>
 		<td>
 			<select id="tpl-list-file-tpl" name="tpl-list-file-tpl" onchange="WPFB_PreviewTpl(this, '<?php echo $type ?>')"><?php echo WPFB_Admin::TplDropDown('file', $tpl->file_tpl_tag); ?></select>
 		</td>
 	</tr>
 	<tr class="form-field">
-		<th scope="row" valign="top"><label for="tpl-list-footer"><?php _e('Footer', WPFB) ?></label></th>
+		<th scope="row" valign="top"><label for="tpl-list-footer"><?php _e('Footer','wp-filebase') ?></label></th>
 		<td>
 			<textarea id="tpl-list-footer" name="tpl-list-footer" cols="70" rows="<?php echo (max(2, count(explode("\n",$tpl->footer)))+3); ?>" wrap="off" class="codepress html wpfilebase-tpledit" onkeyup="WPFB_PreviewTpl(this, '<?php echo $type ?>')" onchange="WPFB_PreviewTpl(this, '<?php echo $type ?>')"><?php echo htmlspecialchars($tpl->footer) ?></textarea><br />
 		</td>
@@ -364,13 +362,13 @@ static function TplForm($type, $tpl_tag=null)
 </table>
 	<?php } else { ?>
 	<p>
-		<?php _e('Template Code:', WPFB) ?><br />
+		<?php _e('Template Code:','wp-filebase') ?><br />
 		<textarea id="<?php echo $code_id ?>" cols="70" rows="<?php echo (max(2, count(explode("\n",$tpl_code)))+3); ?>" wrap="off" name="tplcode" class="codepress html wpfilebase-tpledit" onkeyup="WPFB_PreviewTpl(this, '<?php echo $type ?>')" onchange="WPFB_PreviewTpl(this, '<?php echo $type ?>')"><?php echo htmlspecialchars($tpl_code) ?></textarea><br />
 		<?php wpfb_loadclass('Models'); echo WPFB_Models::TplFieldsSelect($code_id, false, $cat) ?>
 	</p>
 	<?php } ?>
 			
-	<p class="submit"><input type="submit" name="submit" class="button-primary" value="<?php echo esc_attr__($new?'Add Template':'Submit Template Changes', WPFB) ?>" /></p>
+	<p class="submit"><input type="submit" name="submit" class="button-primary" value="<?php echo esc_attr__($new?'Add Template':'Submit Template Changes','wp-filebase') ?>" /></p>
 </form>
 
 <div class="entry-content wpfilebase-tpl-preview">
@@ -388,6 +386,6 @@ static function TplForm($type, $tpl_tag=null)
 
 static function TplTitle($tpl_tag)
 {
- 	return __(__(esc_html(WPFB_Output::Filename2Title($tpl_tag))), WPFB);
+ 	return __(__(esc_html(WPFB_Output::Filename2Title($tpl_tag))),'wp-filebase');
 }
 }

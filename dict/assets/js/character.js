@@ -53,7 +53,8 @@ jQuery(document).ready(function() {
         //if($FCB.is(':visible'))$FCB.hide();
         var cur_offset = jQuery(this).offset();
         var pos = {left:cur_offset.left, top:cur_offset.top-30};
-        if(!$FCB.is(':visible'))$FCB.css(pos).show();
+      //  if(!$FCB.is(':visible'))$FCB.css(pos).show();
+          if(!$FCB.is(':visible'))$FCB.show();
     })
     .bind('mousedown', function() {
         bufVal = jQuery.trim(this.value);

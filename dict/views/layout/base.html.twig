@@ -7,73 +7,151 @@
     <meta name="generator" content="KTili Team Generates this :)">
     <meta name='loginza-verification' content='c087f9ee270d394785e1e56953635ffe' />
     {%endblock%}
-    
+
     {%block scripts%}
-    <script src="{{asset('/assets/js/jquery-1.4.1.js')}}"></script>
+    <script src="{{asset('/assets/js/jquery-1.11.3.min.js')}}"></script>
     <script src="{{asset('/assets/js/jquery.caret.js')}}"></script>
     <script src="{{asset('/assets/js/character.js')}}"></script>
-    <script src="{{asset('/assets/js/jquery-ui-1.8.21.custom.min.js')}}"></script>
-    <script src="{{asset('/assets/js/jquery.ba-bbq.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('/assets/js/jquery.lightbox-0.5.min.js')}}"></script>
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+    <script src="{{asset('/assets/js/jquery-ui.min.js')}}"></script>
+    <script src="/wp-content/themes/TiLi/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/wp-content/themes/TiLi/js/typeahead.bundle.js"></script>
+    <script src="/wp-content/themes/TiLi/js/index.js"></script>
 
-       {lang: 'ru'}
-    </script>
+    <script type="text/javascript" src="{{asset('/assets/js/jquery.lightbox-0.5.min.js')}}"></script>
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">{lang: 'ru'}</script>
+
     {%endblock%}
-    
+
     {%block styles%}
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/smoothness/jquery-ui-1.8.21.custom.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/jquery.lightbox-0.5.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/style.css')}}" />
-    <link rel="stylesheet" type="text/css" href="/wp-content/themes/TiLi/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto|Roboto+Mono">
+
     {%endblock%}
 	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/hojggilcgbfgflnmnjldhbdpomafihfd">
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
 </head>
 <body class="dict">
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+  <div id="topmenu">
+    <nav class="navbar navbar-default navbar-tili" role="navigation" style="margin-top:0px;">
 
-<div id="site" class="dict-content">
-  <div id="header" class="row">
-      <div class="logoimg col-xs-12 col-sm-4 col-md-4">
-          {%block logo%}{%endblock%}
-          <div class="login">
-              {%if is_logged_in() %}
-                Добро пожаловать <b>{{user.user_login}}</b> | <a href="/wp-login.php?action=logout">Выйти</a>
-              {% else %}
-                <a href="http://tili.kg/wp-login.php">Войти</a> | <a href="http://tili.kg/wp-login.php?action=register">Регистрация</a>
-              {%endif%}
-          </div>
-      </div>
-      <div class=" col-xs-12 col-sm-6 col-md-8">
-            <div class="apps col-xs-12 col-sm-6 col-md-4 hidden-xs">
-                <a href="https://chrome.google.com/webstore/detail/%D0%BA%D0%B8%D1%80%D0%B3%D0%B8%D0%B7%D1%81%D0%BA%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D1%8C/hojggilcgbfgflnmnjldhbdpomafihfd"  id="install-button" class="android" onclick="chrome.webstore.install(); return false;" style="margin-top: -8px; right: 525px;"><img class="aligncenter" src="/banners/chromead.png" alt="Добавить расширение в хром." style="height: 60px;"/></a>
+    <div class="container-fluid topbluebox">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header" style=" width: 100%;">
 
-                <script>
-                if (chrome.app.isInstalled) {
-                  document.getElementById('install-button').style.display = 'none';
-                }
-                </script>
+       <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
+        <div class="row topcenter">
+          <div class="col-md-8 col-sm-6 col-xs-6 logo-static">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+              <span class="sr-only">Меню</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+           <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
+                {%block logo%}{%endblock%}
+                <div class="collapse navbar-collapse" id="navbar-collapse">
+                  <ul id="menu-glavnoe" class="bmenu nav navbar-nav">
+                    <li id="menu-item-443" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home menu-item-443"><a href="http://tili.kg/">Главная</a></li>
+                    <li id="menu-item-444" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-444"><a href="http://tili.kg/supporters/">Нас поддержали</a></li>
+                    <li id="menu-item-446" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-446"><a href="http://tili.kg/category/thanks/">Благодарности</a></li>
+                    <li id="menu-item-449" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449"><a href="http://tili.kg/pozhelaniya/">Пожелания</a></li>
+                    <li id="menu-item-465" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-465"><a href="http://tili.kg/novosti/">новости</a></li>
+                    <li id="menu-item-466" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-466"><a href="http://tili.kg/gchrome/">Расширения для браузера Google Chrome</a></li>
+                    <li id="menu-item-467" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-467"><a href="http://tili.kg/category/useful/">Полезное</a></li>
+                  </ul>
+                </div>
+              </div>
+
+
+              <div class="col-md-3 .col-sm-3 col-xs-6 pull-right">
+                <div class="login">
+                    {%if is_logged_in() %}
+                      Добро пожаловать <b>{{user.user_login}}</b>  <a href="/wp-login.php?action=logout" class="login-i">Выйти</a>
+                    {% else %}
+                      <a href="http://tili.kg/wp-login.php" class="login-i">Войти</a>  <a href="http://tili.kg/wp-login.php?action=register" class="reg-i">Регистрация</a>
+                    {%endif%}
+                  </div>
+               </div>
+             </div>
+
+           </div>
+
+           </div>
+
+
+          <div class="headersearch">
+            <div class="col-md-2 col-sm-1 hidden-xs">&nbsp; </div>
+            <div class="searchform col-md-8 col-sm-10 col-xs-12">
+              <label> <h1>Кыргызско <-> Русский словарь</h1></label>
+              <form id="mdform" onsubmit="location.href = '/dict/#'+document.getElementById('stxt').value;  return false;">
+                  <div class="">
+                    <input type="text" id="stxt"  class="stxt col-md-10 col-sm-10 col-xs-10 searchtext" required="">
+                    <input type="submit" class="sbtn" value="Найти" />
+                  </div>
+                </form>
+                <div id="float_chars_block">
+                  <!--  <div class="close">x</div> -->
+                    <span title="Ctrl+Alt+н">ң</span>
+                    <span title="Ctrl+Alt+о">ө</span>
+                    <span title="Ctrl+Alt+у">ү</span>
+                    <div style="clear:both"></div>
+                </div>
+                <div id="float_chars_icon"><img src="/wp-content/themes/TiLi/images/character.gif" border="0"/></div>
+
+
             </div>
-             <div class="apps col-xs-12 col-sm-6 col-md-4">
-                 <a href="http://play.google.com/store/search?q=pub:Tili.kg" target="_blank" class="android"><img class="aligncenter" src="/banners/get-from-gp.png" alt="Установить словарь на телефон Android." /></a>
-             </div>
-             <div class="apps col-xs-12 col-sm-6 col-md-4">
-                  <a href="http://itunes.apple.com/us/app/tili.kg/id528317649?mt=8" target="_blank" class="iosapp"><img class="aligncenter" src="/banners/app-store.png" alt="Установить словарь на iPhone." /></a>
-             </div>
-      </div>
+            <div class="col-md-2 col-sm-1 hidden-xs ">&nbsp; </div>
+          </div>
+      </nav>
+</div>
 
-      </div>
-      <div id="mainmenu">
+<!-- header wp  end-->
+<div id="site" class="dict-content">
+
+  <div id="header" class="row">
+
+    <div id="mainmenu-old" class="dbcontent">
+
+            <div class="dmenu col-xs-12 col-sm-6 col-md-6">
+
               {%block menu%}
               {%endblock%}
-      </div>
+            </div>
+            <div class=" col-xs-12 col-sm-6 col-md-6">
+                  <div class="apps col-xs-12 col-sm-6 col-md-4 hidden-xs">
+                      <a href="https://chrome.google.com/webstore/detail/%D0%BA%D0%B8%D1%80%D0%B3%D0%B8%D0%B7%D1%81%D0%BA%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D1%8C/hojggilcgbfgflnmnjldhbdpomafihfd"  id="install-button" class="android" onclick="chrome.webstore.install(); return false;" style="margin-top: -8px; right: 525px;">
+                        <img class="aligncenter" src="/banners/chromead.png" alt="Добавить расширение в хром." style=""/>
+                      </a>
+
+                      <script>
+                      if (chrome.app.isInstalled) {
+                        document.getElementById('install-button').style.display = 'none';
+                      }
+                      </script>
+                  </div>
+                   <div class="apps col-xs-12 col-sm-4 col-md-4">
+                       <a href="http://play.google.com/store/search?q=pub:Tili.kg" target="_blank" class="android"><img class="aligncenter" src="/banners/get-from-gp.png" alt="Установить словарь на телефон Android." /></a>
+                   </div>
+                   <div class="apps col-xs-12 col-sm-4 col-md-4">
+                        <a href="http://itunes.apple.com/us/app/tili.kg/id528317649?mt=8" target="_blank" class="iosapp"><img class="aligncenter" src="/banners/app-store.png" alt="Установить словарь на iPhone." /></a>
+                   </div>
+            </div>
+    </div>
+
+
+  </div>
+
   <div id="wrapper">
       {%block content%}
       <div id="content">
@@ -84,79 +162,87 @@
       <div id="sidebar"></div>
       {%endblock%}
   </div>
-  <div class="empty">
-  </div>
+
+<!-- start wp footer part -->
+  <div class="empty">  </div>
 </div>
+
 <div id="footer">
-  <div class="inner row">
-
-             <div class="copyright  col-xs-12 col-md-6 col-sm-6">&copy; Все права защищены. Информацию без разрешения не красть</div>
-            <div class=" col-xs-6 col-md-4 col-sm-3">
-                <div class="sbut">
-                    <div class="fb-like" data-href="http://tili.kg/" data-send="false" data-layout="button_count" data-width="170" data-show-faces="false" data-font="verdana"></div>
-                </div>
-                <div class="sbut">
-                    <div class="g-plusone" data-size="medium"></div>
-                </div>
-                <div class="sbut">
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                </div>
-            </div>
-             <div class="netkg col-xs-6 col-md-2 col-sm-3">
-                     <!-- WWW.NET.KG , code for http://tili.kg -->
-                     <script language="javascript" type="text/javascript">
-                      java="1.0";
-                      java1=""+"refer="+escape(document.referrer)+"&amp;page="+escape(window.location.href);
-                      document.cookie="astratop=1; path=/";
-                      java1+="&amp;c="+(document.cookie?"yes":"now");
-                     </script>
-                     <script language="javascript1.1" type="text/javascript">
-                      java="1.1";
-                      java1+="&amp;java="+(navigator.javaEnabled()?"yes":"now");
-                     </script>
-                     <script language="javascript1.2" type="text/javascript">
-                      java="1.2";
-                      java1+="&amp;razresh="+screen.width+'x'+screen.height+"&amp;cvet="+
-                      (((navigator.appName.substring(0,3)=="Mic"))?
-                      screen.colorDepth:screen.pixelDepth);
-                     </script>
-                     <script language="javascript1.3" type="text/javascript">java="1.3"</script>
-                     <script language="javascript" type="text/javascript">
-                      java1+="&amp;jscript="+java+"&amp;rand="+Math.random();
-                      document.write("<a href='http://www.net.kg/stat.php?id=1670&amp;fromsite=1670' target='_blank'>"+
-                      "<img src='http://www.net.kg/img.php?id=1670&amp;"+java1+
-                      "' border='0' alt='WWW.NET.KG' width='88' height='31' /></a>");
-                     </script>
-                     <noscript>
-                      <a href='http://www.net.kg/stat.php?id=1670&amp;fromsite=1670' target='_blank'><img
-                       src="http://www.net.kg/img.php?id=1670" border='0' alt='WWW.NET.KG' width='88'
-                       height='31' /></a>
-                     </noscript>
-                     <!-- /WWW.NET.KG -->
-
-                 </div>
+  <div class="main-contacts  1hidden-xs 1hidden-sm" style="z-index:100000;">
+    <div class="center-block col-md-8" style="float: none;" >
+        <div role="form" class="wpcf7" id="wpcf7-f464-o2" lang="ru-RU" dir="ltr">
+        <div class="screen-reader-response"></div>
+        <form action="/#wpcf7-f464-o2" method="post" class="wpcf7-form" novalidate="novalidate">
+        <div style="display: none;">
+        <input type="hidden" name="_wpcf7" value="464">
+        <input type="hidden" name="_wpcf7_version" value="4.3.1">
+        <input type="hidden" name="_wpcf7_locale" value="ru_RU">
+        <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f464-o2">
+        <input type="hidden" name="_wpnonce" value="3a57367a9b">
+        </div>
+        <h4>У вас появились пожелания/вопросы/предложения?</h4>
+        <div class="col-md-6"> <span class="wpcf7-form-control-wrap your-name"><input type="text" name="your-name" value="Ваше имя" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" data-cip-id="cIPJQ342845640"></span> </div>
+        <div class="col-md-6"><span class="wpcf7-form-control-wrap your-email"><input type="email" name="your-email" value="Ваш e-mail" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" data-cip-id="cIPJQ342845641"></span> </div>
+        <div class="col-md-12"> <span class="wpcf7-form-control-wrap your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false">Сообщение</textarea></span> </div>
+        <div class="button-send col-md-12 "><input type="submit" value="Отправить" class="wpcf7-form-control wpcf7-submit"><img class="ajax-loader" src="http://tili.dev/wp-content/plugins/contact-form-7/images/ajax-loader.gif" alt="Отправка..." style="visibility: hidden;"></div>
+        <div class="wpcf7-response-output wpcf7-display-none"></div></form></div>
+    </div>
   </div>
 
+	<div class="inner row">
 
-    <div class="partners row">
-           <div class="col-xs-12 col-md-6 col-sm-6">
-               <a href="http://tili.kg/thanks" class="pull-left"><img height="60" src="/banners/soroskg.png"></a>
-               Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан».
-           </div>
-           <div class="col-xs-12 col-md-6 col-sm-6">
-               <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="300" height="75"	id="20050.swf" align="middle">
-               	<param name="allowScriptAccess" value="sameDomain">
-               	<param name="movie"
-               	value="/banners/20050.swf">
-               	<param name="quality" value="high">
-               	<param name="bgcolor" value="#ffffff">
-               	<embed src="/banners/20050.swf" quality="high" bgcolor="#ffffff" width="300" height="75" name="20050.swf" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
-               	</object>
-           </div>
+                  <div class="copyright  col-xs-4 col-md-2 col-sm-3">
+                    <h3><a href="#">Tili<span class="green">.kg</span></a></h3>
+                       Все права защищены. <br/>
+                  </div>
+                  <div class="col-xs-8 col-md-4 col-sm-5">
+                      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="300" height="75"	id="20050.swf" align="middle">
+                      <param name="allowScriptAccess" value="sameDomain">
+                      <param name="movie"
+                      value="http://tili.kg/banners/20050.swf">
+                      <param name="quality" value="high">
+                      <param name="bgcolor" value="#ffffff">
+                      <embed src="http://tili.kg/banners/20050.swf" quality="high" bgcolor="#ffffff" width="300" height="75" name="20050.swf" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+                      </object>
+                  </div>
+                  <div class="col-xs-12 col-md-5 col-sm-4 sorosfooter">
+                      <a href="http://tili.kg/thanks" class="pull-left"><img height="60" src="/banners/soroskg.png"></a>
+                      Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан».
+                  </div>
+                   <div class="netkg col-xs-4 col-md-1 col-sm-6 hidden-xs hidden-sm">
+                           <!-- WWW.NET.KG , code for http://tili.kg -->
+                           <script language="javascript" type="text/javascript">
+                            java="1.0";
+                            java1=""+"refer="+escape(document.referrer)+"&amp;page="+escape(window.location.href);
+                            document.cookie="astratop=1; path=/";
+                            java1+="&amp;c="+(document.cookie?"yes":"now");
+                           </script>
+                           <script language="javascript1.1" type="text/javascript">
+                            java="1.1";
+                            java1+="&amp;java="+(navigator.javaEnabled()?"yes":"now");
+                           </script>
+                           <script language="javascript1.2" type="text/javascript">
+                            java="1.2";
+                            java1+="&amp;razresh="+screen.width+'x'+screen.height+"&amp;cvet="+
+                            (((navigator.appName.substring(0,3)=="Mic"))?
+                            screen.colorDepth:screen.pixelDepth);
+                           </script>
+                           <script language="javascript1.3" type="text/javascript">java="1.3"</script>
+                           <script language="javascript" type="text/javascript">
+                            java1+="&amp;jscript="+java+"&amp;rand="+Math.random();
+                            document.write("<a href='http://www.net.kg/stat.php?id=1670&amp;fromsite=1670' target='_blank'>"+
+                            "<img src='http://www.net.kg/img.php?id=1670&amp;"+java1+
+                            "' border='0' alt='WWW.NET.KG' width='88' height='31' /></a>");
+                           </script>
+                           <noscript>
+                            <a href='http://www.net.kg/stat.php?id=1670&amp;fromsite=1670' target='_blank'><img
+                             src="http://www.net.kg/img.php?id=1670" border='0' alt='WWW.NET.KG' width='88'
+                             height='31' /></a>
+                           </noscript>
+                           <!-- /WWW.NET.KG -->
+
+                       </div>
     </div>
-
-
 </div>
 
 

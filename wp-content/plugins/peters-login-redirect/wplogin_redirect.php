@@ -4,8 +4,11 @@ Plugin Name: Peter's Login Redirect
 Plugin URI: http://www.theblog.ca/wplogin-redirect
 Description: Redirect users to different locations after logging in. Define a set of rules for specific users, user with specific roles, users with specific capabilities, and a blanket rule for all other users. This is all managed in Settings > Login/logout redirects.
 Author: Peter Keung
-Version: 2.8.2
+Version: 2.9.0
+Text Domain: peters-login-redirect
 Change Log:
+2015-09-25  2.9.0: Update translation text domain in order to support translate.wordpress.org translation system
+2015-08-03  2.8.3: Add new URL variable "userslug" to match author URLs
 2014-09-06  2.8.2: Translation string fix.
 2014-08-03  2.8.1: Support the deletion of rules referencing deleted user, roles, or levels.
 2014-07-06  2.8.0: Improved management interface to add specific Edit and Delete buttons per rule, and removed limit around number of rules.
@@ -50,7 +53,7 @@ As of version 2.5.0 of this plugin and higher, all redirect settings are configu
 add_action( 'init', 'rul_textdomain' );
 function rul_textdomain()
 {
-	load_plugin_textdomain( 'peterloginrd', PLUGINDIR . '/' . dirname( plugin_basename(__FILE__) ), dirname( plugin_basename(__FILE__) ) );
+	load_plugin_textdomain( 'peters-login-redirect', PLUGINDIR . '/' . dirname( plugin_basename(__FILE__) ), dirname( plugin_basename(__FILE__) ) );
 }
 
 global $wpdb;
@@ -58,7 +61,7 @@ global $rul_db_addresses;
 global $rul_version;
 // Name of the database table that will hold group information and moderator rules
 $rul_db_addresses = $wpdb->prefix . 'login_redirects';
-$rul_version = '2.8.2';
+$rul_version = '2.9.0';
 
 // A global variable that we will add to on the fly when $rul_local_only is set to equal 1
 $rul_allowed_hosts = array();
@@ -183,6 +186,11 @@ class rulRedirectFunctionCollection
                     // Returns the current user's username (only use this if you know they're logged in)
                     case 'username':
                         $variable_value = rawurlencode( $user->user_login );
+                        break;
+                    // Returns the current user's author slug aka nickname as used in URLs
+                    // sanitize_title should not be required here since it was already done on insert
+                    case 'userslug':
+                        $variable_value = $user->user_nicename;
                         break;
                     // Returns the URL of the WordPress files; see http://codex.wordpress.org/Function_Reference/network_site_url
                     case 'siteurl':
@@ -567,11 +575,11 @@ function rul_register( $before = '<li>', $after = '</li>', $give_echo = true ) {
     
 	if ( ! is_user_logged_in() ) {
 		if ( get_option('users_can_register') )
-			$link = $before . '<a href="' . site_url('wp-login.php?action=register', 'login') . '">' . __('Register', 'peterloginrd') . '</a>' . $after;
+			$link = $before . '<a href="' . site_url('wp-login.php?action=register', 'login') . '">' . __('Register', 'peters-login-redirect') . '</a>' . $after;
 		else
 			$link = '';
 	} else {
-        $link = $before . '<a href="' . redirect_to_front_page('', '', $current_user) . '">' . __('Site Admin', 'peterloginrd') . '</a>' . $after;;
+        $link = $before . '<a href="' . redirect_to_front_page('', '', $current_user) . '">' . __('Site Admin', 'peters-login-redirect') . '</a>' . $after;;
 	}
     
     if ($give_echo) {
@@ -693,7 +701,7 @@ if( is_admin() )
             if( ! username_exists( $typeValue ) )
             {
                 $success = false;
-                $error_message = '<p><strong>****' .__('ERROR: Non-existent username submitted ','peterloginrd') .'****</strong></p>';
+                $error_message = '<p><strong>****' .__('ERROR: Non-existent username submitted ','peters-login-redirect') .'****</strong></p>';
             }
         }
         elseif( $type == 'role' )
@@ -703,7 +711,7 @@ if( is_admin() )
             if( ! isset($rul_existing_rolenames[$typeValue]) )
             {
                 $success = false;
-                $error_message = '<p><strong>****' .__('ERROR: Non-existent role submitted ','peterloginrd') .'****</strong></p>';
+                $error_message = '<p><strong>****' .__('ERROR: Non-existent role submitted ','peters-login-redirect') .'****</strong></p>';
             }
         }
         elseif( $type == 'level' )
@@ -714,7 +722,7 @@ if( is_admin() )
             if( ! isset( $rul_existing_levelnames[$typeValue] ) )
             {
                 $success = false;
-                $error_message = '<p><strong>****' .__('ERROR: Non-existent level submitted ','peterloginrd') .'****</strong></p>';
+                $error_message = '<p><strong>****' .__('ERROR: Non-existent level submitted ','peters-login-redirect') .'****</strong></p>';
             }
         }
 
@@ -731,7 +739,7 @@ if( is_admin() )
         if( trim( $typeValue ) == '' )
         {
             $success = false;
-            $error_message = '<p><strong>****' . sprintf( __('ERROR: Empty %s submitted ','peterloginrd' ), $type ) . '****</strong></p>';
+            $error_message = '<p><strong>****' . sprintf( __('ERROR: Empty %s submitted ','peters-login-redirect' ), $type ) . '****</strong></p>';
         }
         return array( 'success' => $success, 'error_message' => $error_message );
     }
@@ -760,7 +768,7 @@ if( is_admin() )
                 if( !$address && !$address_logout )
                 {
                     $rul_submit_success = false;
-                    $rul_process_submit = '<p><strong>****' . sprintf( __( 'ERROR: Non-local or invalid URL submitted for %s %s','peterloginrd' ), $type, $typeValue ) . '****</strong></p>';
+                    $rul_process_submit = '<p><strong>****' . sprintf( __( 'ERROR: Non-local or invalid URL submitted for %s %s','peters-login-redirect' ), $type, $typeValue ) . '****</strong></p>';
                 }
                 else
                 {
@@ -786,14 +794,14 @@ if( is_admin() )
                     if( !$rul_update_rule )
                     {
                         $rul_submit_success = false;
-                        $rul_process_submit = '<p><strong>****' . sprintf( __('ERROR: Unknown error adding %s-specific redirect for %s %s','peterloginrd' ), $type, $type, $typeValue ) . '****</strong></p>';
+                        $rul_process_submit = '<p><strong>****' . sprintf( __('ERROR: Unknown error adding %s-specific redirect for %s %s','peters-login-redirect' ), $type, $type, $typeValue ) . '****</strong></p>';
                     }
                 }
             }
 
             if( $rul_submit_success )
             {
-                $rul_process_submit = '<p>' . sprintf( __( 'Successfully added %s-specific redirect rule for %s', 'peterloginrd' ), $type, $typeValue ) . '</p>';
+                $rul_process_submit = '<p>' . sprintf( __( 'Successfully added %s-specific redirect rule for %s', 'peters-login-redirect' ), $type, $typeValue ) . '</p>';
             }
         }
                 
@@ -822,7 +830,7 @@ if( is_admin() )
                 if( !$address && !$address_logout )
                 {
                     $rul_submit_success = false;
-                    $rul_process_submit = '<p><strong>****' . sprintf( __( 'ERROR: Non-local or invalid URL submitted for %s %s','peterloginrd' ), $type, $typeValue ) . '****</strong></p>';
+                    $rul_process_submit = '<p><strong>****' . sprintf( __( 'ERROR: Non-local or invalid URL submitted for %s %s','peters-login-redirect' ), $type, $typeValue ) . '****</strong></p>';
                 }
                 else
                 {
@@ -851,14 +859,14 @@ if( is_admin() )
                     if( !$rul_update_rule )
                     {
                         $rul_submit_success = false;
-                        $rul_process_submit = '<p><strong>****' . sprintf( __('ERROR: Unknown error editing %s-specific redirect for %s %s','peterloginrd' ), $type, $type, $typeValue ) . '****</strong></p>';
+                        $rul_process_submit = '<p><strong>****' . sprintf( __('ERROR: Unknown error editing %s-specific redirect for %s %s','peters-login-redirect' ), $type, $type, $typeValue ) . '****</strong></p>';
                     }
                 }
             }
 
             if( $rul_submit_success )
             {
-                $rul_process_submit = '<p>' . sprintf( __( 'Successfully edited %s-specific redirect rule for %s', 'peterloginrd' ), $type, $typeValue ) . '</p>';
+                $rul_process_submit = '<p>' . sprintf( __( 'Successfully edited %s-specific redirect rule for %s', 'peters-login-redirect' ), $type, $typeValue ) . '</p>';
             }
         }
                 
@@ -886,13 +894,13 @@ if( is_admin() )
                 if( !$rul_update_rule )
                 {
                     $rul_submit_success = false;
-                    $rul_process_submit = '<p><strong>****' . sprintf( __('ERROR: Unknown error deleting %s-specific redirect for %s %s','peterloginrd' ), $type, $type, $typeValue ) . '****</strong></p>';
+                    $rul_process_submit = '<p><strong>****' . sprintf( __('ERROR: Unknown error deleting %s-specific redirect for %s %s','peters-login-redirect' ), $type, $type, $typeValue ) . '****</strong></p>';
                 }
             }
 
             if( $rul_submit_success )
             {
-                $rul_process_submit = '<p>' . sprintf( __( 'Successfully deleted %s-specific redirect rule for %s', 'peterloginrd' ), $type, $typeValue ) . '</p>';
+                $rul_process_submit = '<p>' . sprintf( __( 'Successfully deleted %s-specific redirect rule for %s', 'peters-login-redirect' ), $type, $typeValue ) . '</p>';
             }
         }
 
@@ -927,11 +935,11 @@ if( is_admin() )
             
             if( $update === false )
             {
-                $rul_process_submit .= '<p><strong>****' .__('ERROR: Unknown database problem removing URL for &#34;all other users&#34; ','peterloginrd') .'****</strong></p>';
+                $rul_process_submit .= '<p><strong>****' .__('ERROR: Unknown database problem removing URL for &#34;all other users&#34; ','peters-login-redirect') .'****</strong></p>';
             }
             else
             {
-                $rul_process_submit .= '<p>'.__('Successfully removed URL for &#34;all other users&#34; ','peterloginrd') .'</p>';
+                $rul_process_submit .= '<p>'.__('Successfully removed URL for &#34;all other users&#34; ','peters-login-redirect') .'</p>';
             }
         }
         
@@ -942,7 +950,7 @@ if( is_admin() )
             
             if( ( '' != $address && !$address_safe ) || ( '' != $address_logout && !$address_safe_logout ) )
             {
-                $rul_process_submit .= '<p><strong>****' .__('ERROR: Non-local or invalid URL submitted ','peterloginrd') .'****</strong></p>';
+                $rul_process_submit .= '<p><strong>****' .__('ERROR: Non-local or invalid URL submitted ','peters-login-redirect') .'****</strong></p>';
             }
             
             else
@@ -955,11 +963,11 @@ if( is_admin() )
 
                 if( $update === false )
                 {
-                    $rul_process_submit .= '<p><strong>****' .__('ERROR: Unknown database problem updating URL for &#34;all other users&#34; ','peterloginrd') .'****</strong></p>';
+                    $rul_process_submit .= '<p><strong>****' .__('ERROR: Unknown database problem updating URL for &#34;all other users&#34; ','peters-login-redirect') .'****</strong></p>';
                 }
                 else
                 {
-                    $rul_process_submit .= '<p>'.__('Successfully updated URL for &#34;all other users&#34;','peterloginrd') .'</p>';
+                    $rul_process_submit .= '<p>'.__('Successfully updated URL for &#34;all other users&#34;','peters-login-redirect') .'</p>';
                 }
             }
         }
@@ -998,10 +1006,10 @@ if( is_admin() )
             
             if ( $update === false )
             {
-                $rul_process_submit .= '<p><strong>****' . __( 'ERROR: Unknown database problem removing URL for &#34;post-registration&#34; ','peterloginrd') .'****</strong></p>';
+                $rul_process_submit .= '<p><strong>****' . __( 'ERROR: Unknown database problem removing URL for &#34;post-registration&#34; ','peters-login-redirect') .'****</strong></p>';
             }
             else {
-                $rul_process_submit .= '<p>' . __( 'Successfully removed URL for &#34;post-registration&#34; ', 'peterloginrd' ) .'</p>';
+                $rul_process_submit .= '<p>' . __( 'Successfully removed URL for &#34;post-registration&#34; ', 'peters-login-redirect' ) .'</p>';
             }
         }
         
@@ -1011,7 +1019,7 @@ if( is_admin() )
 
             if( ( '' != $address && !$address_safe ) )
             {
-                $rul_process_submit .= '<p><strong>****' . __( 'ERROR: Non-local or invalid URL submitted ', 'peterloginrd' ) . '****</strong></p>';
+                $rul_process_submit .= '<p><strong>****' . __( 'ERROR: Non-local or invalid URL submitted ', 'peters-login-redirect' ) . '****</strong></p>';
             }
             
             else
@@ -1024,11 +1032,11 @@ if( is_admin() )
 
                 if( $update === false )
                 {
-                    $rul_process_submit .= '<p><strong>****' .__('ERROR: Unknown database problem updating URL for &#34;post-registration&#34; ','peterloginrd') .'****</strong></p>';
+                    $rul_process_submit .= '<p><strong>****' .__('ERROR: Unknown database problem updating URL for &#34;post-registration&#34; ','peters-login-redirect') .'****</strong></p>';
                 }
                 else
                 {
-                    $rul_process_submit .= '<p>'.__('Successfully updated URL for &#34;post-registration&#34;','peterloginrd') .'</p>';
+                    $rul_process_submit .= '<p>'.__('Successfully updated URL for &#34;post-registration&#34;','peters-login-redirect') .'</p>';
                 }
             }
         }
@@ -1054,7 +1062,7 @@ if( is_admin() )
         }
         update_option( 'rul_settings', $rul_settings );
         $rul_process_submit = '<div id="message" class="updated fade">';
-        $rul_process_submit .= '<p>' . __( 'Successfully updated plugin settings', 'peterloginrd' ) . '</p>';
+        $rul_process_submit .= '<p>' . __( 'Successfully updated plugin settings', 'peters-login-redirect' ) . '</p>';
         $rul_process_submit .= '</div>';
         return $rul_process_submit;
     }
@@ -1203,10 +1211,10 @@ if( is_admin() )
                     $rul_usernamevalues .= '<tr>';
                     $rul_usernamevalues .= '<td><p><input type="hidden" name="rul_username" value="' . $rul_value . '" /> ' . $rul_value . '</p></td>';
                     $rul_usernamevalues .= '<td>';
-                    $rul_usernamevalues .= '<p>' . __('Login URL', 'peterloginrd' ) . '<br /><input type="text" size="90" maxlength="500" name="rul_username_address" value="' . $rul_url . '" /></p>';
-                    $rul_usernamevalues .= '<p>' . __('Logout URL', 'peterloginrd' ) . '<br /><input type="text" size="60" maxlength="500" name="rul_username_logout" value="' . $rul_url_logout . '" /></p>';
+                    $rul_usernamevalues .= '<p>' . __('Login URL', 'peters-login-redirect' ) . '<br /><input type="text" size="90" maxlength="500" name="rul_username_address" value="' . $rul_url . '" /></p>';
+                    $rul_usernamevalues .= '<p>' . __('Logout URL', 'peters-login-redirect' ) . '<br /><input type="text" size="60" maxlength="500" name="rul_username_logout" value="' . $rul_url_logout . '" /></p>';
                     $rul_usernamevalues .= '</td>';
-                    $rul_usernamevalues .= '<td><p><input name="rul_username_edit" type="submit" value="' . __( 'Edit', 'peterloginrd' ) . '" /> <input type="submit" name="rul_username_delete" value="' . __( 'Delete', 'peterloginrd' ) . '" /></p></td>';
+                    $rul_usernamevalues .= '<td><p><input name="rul_username_edit" type="submit" value="' . __( 'Edit', 'peters-login-redirect' ) . '" /> <input type="submit" name="rul_username_delete" value="' . __( 'Delete', 'peters-login-redirect' ) . '" /></p></td>';
                     $rul_usernamevalues .= '</tr>';
                     $rul_usernamevalues .= '</form>';
                     
@@ -1221,10 +1229,10 @@ if( is_admin() )
                     $rul_rolevalues .= '<tr>';
                     $rul_rolevalues .= '<td><p><input type="hidden" name="rul_role" value="' . $rul_value . '" /> ' . $rul_value . '</p></td>';
                     $rul_rolevalues .= '<td>';
-                    $rul_rolevalues .= '<p>' . __('Login URL', 'peterloginrd' ) . '<br /><input type="text" size="90" maxlength="500" name="rul_role_address" value="' . $rul_url . '" /></p>';
-                    $rul_rolevalues .= '<p>' . __('Logout URL', 'peterloginrd' ) . '<br /><input type="text" size="60" maxlength="500" name="rul_role_logout" value="' . $rul_url_logout . '" /></p>';
+                    $rul_rolevalues .= '<p>' . __('Login URL', 'peters-login-redirect' ) . '<br /><input type="text" size="90" maxlength="500" name="rul_role_address" value="' . $rul_url . '" /></p>';
+                    $rul_rolevalues .= '<p>' . __('Logout URL', 'peters-login-redirect' ) . '<br /><input type="text" size="60" maxlength="500" name="rul_role_logout" value="' . $rul_url_logout . '" /></p>';
                     $rul_rolevalues .= '</td>';
-                    $rul_rolevalues .= '<td><p><input name="rul_role_edit" type="submit" value="' . __( 'Edit', 'peterloginrd' ) . '" /> <input type="submit" name="rul_role_delete" value="' . __( 'Delete', 'peterloginrd' ) . '" /></p></td>';
+                    $rul_rolevalues .= '<td><p><input name="rul_role_edit" type="submit" value="' . __( 'Edit', 'peters-login-redirect' ) . '" /> <input type="submit" name="rul_role_delete" value="' . __( 'Delete', 'peters-login-redirect' ) . '" /></p></td>';
                     $rul_rolevalues .= '</tr>';
                     $rul_rolevalues .= '</form>';
                     
@@ -1238,11 +1246,11 @@ if( is_admin() )
                     $rul_levelvalues .= '<tr>';
                     $rul_levelvalues .= '<td><p><input type="hidden" name="rul_level" value="' . $rul_value . '" /> ' . $rul_value . '</p></td>';
                     $rul_levelvalues .= '<td>';
-                    $rul_levelvalues .= '<p>' . __('Login URL', 'peterloginrd' ) . '<br /><input type="text" size="90" maxlength="500" name="rul_level_address" value="' . $rul_url . '" /></p>';
-                    $rul_levelvalues .= '<p>' . __('Logout URL', 'peterloginrd' ) . '<br /><input type="text" size="60" maxlength="500" name="rul_level_logout" value="' . $rul_url_logout . '" /></p>';
+                    $rul_levelvalues .= '<p>' . __('Login URL', 'peters-login-redirect' ) . '<br /><input type="text" size="90" maxlength="500" name="rul_level_address" value="' . $rul_url . '" /></p>';
+                    $rul_levelvalues .= '<p>' . __('Logout URL', 'peters-login-redirect' ) . '<br /><input type="text" size="60" maxlength="500" name="rul_level_logout" value="' . $rul_url_logout . '" /></p>';
                     $rul_levelvalues .= '</td>';
                     $rul_levelvalues .= '<td><p><input name="rul_level_order" type="text" size="2" maxlength="2" value="' . $rul_order . '" /></td>';
-                    $rul_levelvalues .= '<td><p><input name="rul_level_edit" type="submit" value="' . __( 'Edit', 'peterloginrd' ) . '" /> <input type="submit" name="rul_level_delete" value="' . __( 'Delete', 'peterloginrd' ) . '" /></p></td>';
+                    $rul_levelvalues .= '<td><p><input name="rul_level_edit" type="submit" value="' . __( 'Edit', 'peters-login-redirect' ) . '" /> <input type="submit" name="rul_level_delete" value="' . __( 'Delete', 'peters-login-redirect' ) . '" /></p></td>';
                     $rul_levelvalues .= '</tr>';
                     $rul_levelvalues .= '</form>';
 
@@ -1265,13 +1273,13 @@ if( is_admin() )
         }
 ?>
     <div class="wrap">
-        <h2><?php _e('Manage redirect rules', 'peterloginrd' ); ?></h2>
+        <h2><?php _e('Manage redirect rules', 'peters-login-redirect' ); ?></h2>
         <?php print $rul_process_submit; ?>
-        <p><?php _e('Define custom URLs to which different users, users with specific roles, users with specific levels, and all other users will be redirected upon login.', 'peterloginrd' ); ?></p>
-        <p><?php _e('Define a custom URL to which all users will be redirected upon logout', 'peterloginrd' ); ?></p>
-        <p><?php _e('Note that you can use the syntax <strong>[variable]username[/variable]</strong> in your URLs so that the system will build a dynamic URL upon each login, replacing that text with the users username.', 'peterloginrd' ); ?></p>
+        <p><?php _e('Define custom URLs to which different users, users with specific roles, users with specific levels, and all other users will be redirected upon login.', 'peters-login-redirect' ); ?></p>
+        <p><?php _e('Define a custom URL to which all users will be redirected upon logout', 'peters-login-redirect' ); ?></p>
+        <p><?php _e('Note that you can use the syntax <strong>[variable]username[/variable]</strong> in your URLs so that the system will build a dynamic URL upon each login, replacing that text with the users username.', 'peters-login-redirect' ); ?></p>
 
-        <h3><?php _e('Specific users', 'peterloginrd' ); ?></h3>
+        <h3><?php _e('Specific users', 'peters-login-redirect' ); ?></h3>
         <?php
             if( $rul_usernamevalues )
             {
@@ -1282,18 +1290,18 @@ if( is_admin() )
         ?>
             
         <form name="rul_username_add_form" action="<?php print '?page=' . basename(__FILE__); ?>" method="post">
-            <p><?php _e('Add:', 'peterloginrd' ); ?> 
+            <p><?php _e('Add:', 'peters-login-redirect' ); ?> 
                 <select name="rul_username" >
-                    <option value="-1"><?php _e('Select a username', 'peterloginrd' ); ?></option>
+                    <option value="-1"><?php _e('Select a username', 'peters-login-redirect' ); ?></option>
                     <?php print rul_returnusernames($rul_usernames_existing); ?>
                 </select>
-                <br /><?php _e('URL:', 'peterloginrd' ); ?> <input type="text" size="90" maxlength="500" name="rul_username_address" />
-                <br /><?php _e('Logout URL:', 'peterloginrd' ); ?> <input type="text" size="90" maxlength="500" name="rul_username_logout" />
+                <br /><?php _e('URL:', 'peters-login-redirect' ); ?> <input type="text" size="90" maxlength="500" name="rul_username_address" />
+                <br /><?php _e('Logout URL:', 'peters-login-redirect' ); ?> <input type="text" size="90" maxlength="500" name="rul_username_logout" />
             </p>
-            <p class="submit"><input type="submit" name="rul_username_submit" value="<?php _e('Add username rule', 'peterloginrd' ); ?>" /></p>
+            <p class="submit"><input type="submit" name="rul_username_submit" value="<?php _e('Add username rule', 'peters-login-redirect' ); ?>" /></p>
         </form>
             
-        <h3><?php _e('Specific roles', 'peterloginrd' ); ?></h3>
+        <h3><?php _e('Specific roles', 'peters-login-redirect' ); ?></h3>
         <?php
             if( $rul_rolevalues )
             {
@@ -1304,18 +1312,18 @@ if( is_admin() )
         ?>
 
         <form name="rul_role_add_form" action="<?php print '?page=' . basename(__FILE__); ?>" method="post">
-            <p><?php _e('Add:', 'peterloginrd' ); ?> 
+            <p><?php _e('Add:', 'peters-login-redirect' ); ?> 
                 <select name="rul_role" >
-                    <option value="-1"><?php _e('Select a role', 'peterloginrd' ); ?></option>
+                    <option value="-1"><?php _e('Select a role', 'peters-login-redirect' ); ?></option>
                     <?php print rul_returnroleoptions($rul_roles_existing); ?>
                 </select>
-                <br /><?php _e('URL:', 'peterloginrd' ); ?>  <input type="text" size="90" maxlength="500" name="rul_role_address" />
-                <br /><?php _e('Logout URL:', 'peterloginrd' ); ?>  <input type="text" size="90" maxlength="500" name="rul_role_logout" />
+                <br /><?php _e('URL:', 'peters-login-redirect' ); ?>  <input type="text" size="90" maxlength="500" name="rul_role_address" />
+                <br /><?php _e('Logout URL:', 'peters-login-redirect' ); ?>  <input type="text" size="90" maxlength="500" name="rul_role_logout" />
             </p>
-            <p class="submit"><input type="submit" name="rul_role_submit" value="<?php _e( 'Add role rule', 'peterloginrd' ); ?>" /></p>
+            <p class="submit"><input type="submit" name="rul_role_submit" value="<?php _e( 'Add role rule', 'peters-login-redirect' ); ?>" /></p>
         </form> 
  
-        <h3><?php _e('Specific levels', 'peterloginrd' ); ?></h3>
+        <h3><?php _e('Specific levels', 'peters-login-redirect' ); ?></h3>
         <?php
             if( $rul_levelvalues )
             {
@@ -1324,7 +1332,7 @@ if( is_admin() )
                 <tr>
                     <th></th>
                     <th></th>
-                    <th><?php _e('Order', 'peterloginrd' ); ?></th>
+                    <th><?php _e('Order', 'peters-login-redirect' ); ?></th>
                     <th></th>
                 </tr>
         <?php
@@ -1334,87 +1342,87 @@ if( is_admin() )
         ?>
 
         <form name="rul_level_add_form" action="<?php print '?page=' . basename(__FILE__); ?>" method="post">
-            <p><?php _e('Add:', 'peterloginrd' ); ?> 
+            <p><?php _e('Add:', 'peters-login-redirect' ); ?> 
                 <select name="rul_level" >
-                    <option value="-1"><?php _e('Select a level', 'peterloginrd' ); ?></option>
+                    <option value="-1"><?php _e('Select a level', 'peters-login-redirect' ); ?></option>
                     <?php print rul_returnleveloptions($rul_levels_existing); ?>
                 </select>
-                <br /><?php _e('Order:', 'peterloginrd' ); ?> <input type="text" size="2" maxlength="2" name="rul_level_order" />
-                <br /><?php _e('URL:', 'peterloginrd' ); ?> <input type="text" size="90" maxlength="500" name="rul_level_address" />
-                <br /><?php _e('Logout URL:', 'peterloginrd' ); ?> <input type="text" size="90" maxlength="500" name="rul_level_logout" />
+                <br /><?php _e('Order:', 'peters-login-redirect' ); ?> <input type="text" size="2" maxlength="2" name="rul_level_order" />
+                <br /><?php _e('URL:', 'peters-login-redirect' ); ?> <input type="text" size="90" maxlength="500" name="rul_level_address" />
+                <br /><?php _e('Logout URL:', 'peters-login-redirect' ); ?> <input type="text" size="90" maxlength="500" name="rul_level_logout" />
             </p>
-            <p class="submit"><input type="submit" name="rul_level_submit" value="<?php _e('Add level rule', 'peterloginrd' ); ?>" /></p>
+            <p class="submit"><input type="submit" name="rul_level_submit" value="<?php _e('Add level rule', 'peters-login-redirect' ); ?>" /></p>
         </form> 
         
-        <h3><?php _e( 'All other users', 'peterloginrd' ); ?></h3>
+        <h3><?php _e( 'All other users', 'peters-login-redirect' ); ?></h3>
         <form name="rul_allform" action="<?php '?page=' . basename(__FILE__); ?>" method="post">
-            <p><?php _e('URL:', 'peterloginrd' ) ?> <input type="text" size="90" maxlength="500" name="rul_all" value="<?php print $rul_allvalue; ?>" /></p>
-            <p><?php _e('Logout URL:', 'peterloginrd' ) ?> <input type="text" size="90" maxlength="500" name="rul_all_logout" value="<?php print $rul_allvalue_logout; ?>" /></p>
-            <p class="submit"><input type="submit" name="rul_allupdatesubmit" value="<?php _e('Update', 'peterloginrd' ); ?>" /> <input type="submit" name="rul_alldeletesubmit" value="<?php _e('Delete', 'peterloginrd' ); ?>" /></p>
+            <p><?php _e('URL:', 'peters-login-redirect' ) ?> <input type="text" size="90" maxlength="500" name="rul_all" value="<?php print $rul_allvalue; ?>" /></p>
+            <p><?php _e('Logout URL:', 'peters-login-redirect' ) ?> <input type="text" size="90" maxlength="500" name="rul_all_logout" value="<?php print $rul_allvalue_logout; ?>" /></p>
+            <p class="submit"><input type="submit" name="rul_allupdatesubmit" value="<?php _e('Update', 'peters-login-redirect' ); ?>" /> <input type="submit" name="rul_alldeletesubmit" value="<?php _e('Delete', 'peters-login-redirect' ); ?>" /></p>
         </form>
         
         <hr />
         
-        <h3><?php _e( 'Post-registration', 'peterloginrd' ); ?></h3>
+        <h3><?php _e( 'Post-registration', 'peters-login-redirect' ); ?></h3>
         <form name="rul_registerform" action="<?php '?page=' . basename(__FILE__); ?>" method="post">
-            <p><?php _e( 'URL:', 'peterloginrd' ) ?> <input type="text" size="90" maxlength="500" name="rul_register" value="<?php print $rul_registervalue; ?>" /></p>
-            <p class="submit"><input type="submit" name="rul_registerupdatesubmit" value="<?php _e( 'Update', 'peterloginrd' ); ?>" /> <input type="submit" name="rul_registerdeletesubmit" value="<?php _e( 'Delete', 'peterloginrd' ); ?>" /></p>
+            <p><?php _e( 'URL:', 'peters-login-redirect' ) ?> <input type="text" size="90" maxlength="500" name="rul_register" value="<?php print $rul_registervalue; ?>" /></p>
+            <p class="submit"><input type="submit" name="rul_registerupdatesubmit" value="<?php _e( 'Update', 'peters-login-redirect' ); ?>" /> <input type="submit" name="rul_registerdeletesubmit" value="<?php _e( 'Delete', 'peters-login-redirect' ); ?>" /></p>
         </form>
         
         <hr />
         
-        <h3><?php _e( 'Customize plugin settings', 'peterloginrd' ); ?></h3>
+        <h3><?php _e( 'Customize plugin settings', 'peters-login-redirect' ); ?></h3>
         <form name="rul_settingsform" action="<?php print '?page=' . basename(__FILE__); ?>" method="post">
         <table class="widefat">
         <tr>
             <td>
-                <p><strong><?php _e( 'Redirect restrictions', 'peterloginrd' ); ?></strong></p>
+                <p><strong><?php _e( 'Redirect restrictions', 'peters-login-redirect' ); ?></strong></p>
             </td>
             <td>
                 <select name="rul_local_only">
-                    <option value="1"<?php if( 1 == $rul_settings['rul_local_only'] ) print ' selected="selected"'; ?>><?php _e( 'Any http or https URL', 'peterloginrd' ); ?></option>
-                    <option value="2"<?php if( 2 == $rul_settings['rul_local_only'] ) print ' selected="selected"'; ?>><?php _e( 'Any URL', 'peterloginrd' ); ?></option>
-                    <option value="3"<?php if( 3 == $rul_settings['rul_local_only'] ) print ' selected="selected"'; ?>><?php _e( 'Any URL on the same domain', 'peterloginrd' ); ?></option>
+                    <option value="1"<?php if( 1 == $rul_settings['rul_local_only'] ) print ' selected="selected"'; ?>><?php _e( 'Any http or https URL', 'peters-login-redirect' ); ?></option>
+                    <option value="2"<?php if( 2 == $rul_settings['rul_local_only'] ) print ' selected="selected"'; ?>><?php _e( 'Any URL', 'peters-login-redirect' ); ?></option>
+                    <option value="3"<?php if( 3 == $rul_settings['rul_local_only'] ) print ' selected="selected"'; ?>><?php _e( 'Any URL on the same domain', 'peters-login-redirect' ); ?></option>
                 </select>
             </td>
         </tr>
         <tr>
             <td>
-                <p><strong><?php _e( 'Allow a POST or GET &#34;redirect_to&#34; variable to take redirect precedence', 'peterloginrd' ); ?></strong></p>
+                <p><strong><?php _e( 'Allow a POST or GET &#34;redirect_to&#34; variable to take redirect precedence', 'peters-login-redirect' ); ?></strong></p>
             </td>
             <td>
                 <select name="rul_allow_post_redirect_override">
-                    <option value="1"<?php if( $rul_settings['rul_allow_post_redirect_override'] ) print ' selected="selected"'; ?>><?php _e( 'Yes', 'peterloginrd' ); ?></option>
-                    <option value="0"<?php if( !$rul_settings['rul_allow_post_redirect_override'] ) print ' selected="selected"'; ?>><?php _e( 'No', 'peterloginrd' ); ?></option>
+                    <option value="1"<?php if( $rul_settings['rul_allow_post_redirect_override'] ) print ' selected="selected"'; ?>><?php _e( 'Yes', 'peters-login-redirect' ); ?></option>
+                    <option value="0"<?php if( !$rul_settings['rul_allow_post_redirect_override'] ) print ' selected="selected"'; ?>><?php _e( 'No', 'peters-login-redirect' ); ?></option>
                 </select>
             </td>
         </tr>
         <tr>
             <td>
-                <p><strong><?php _e( 'Allow a POST or GET &#34;redirect_to&#34; logout variable to take redirect precedence', 'peterloginrd' ); ?></strong></p>
+                <p><strong><?php _e( 'Allow a POST or GET &#34;redirect_to&#34; logout variable to take redirect precedence', 'peters-login-redirect' ); ?></strong></p>
             </td>
             <td>
                 <select name="rul_allow_post_redirect_override_logout">
-                    <option value="1"<?php if( $rul_settings['rul_allow_post_redirect_override_logout'] ) print ' selected="selected"'; ?>><?php _e( 'Yes', 'peterloginrd' ); ?></option>
-                    <option value="0"<?php if( !$rul_settings['rul_allow_post_redirect_override_logout'] ) print ' selected="selected"'; ?>><?php _e( 'No', 'peterloginrd' ); ?></option>
+                    <option value="1"<?php if( $rul_settings['rul_allow_post_redirect_override_logout'] ) print ' selected="selected"'; ?>><?php _e( 'Yes', 'peters-login-redirect' ); ?></option>
+                    <option value="0"<?php if( !$rul_settings['rul_allow_post_redirect_override_logout'] ) print ' selected="selected"'; ?>><?php _e( 'No', 'peters-login-redirect' ); ?></option>
                 </select>
             </td>
         </tr>
         
         <tr>
             <td>
-                <p><strong><?php print sprintf( __( 'Use external redirect file. Set this to &#34;Yes&#34; if you are using a plugin such as Gigya that bypasses the regular WordPress redirect process (and allows only one fixed redirect URL). Then, set the redirect URL in the other plugin to %s', 'peterloginrd' ), '<br />http://www.yoursite.com/wp-content/plugins/peters-login-redirect/wplogin_redirect_control.php' ); ?></strong></p>
+                <p><strong><?php print sprintf( __( 'Use external redirect file. Set this to &#34;Yes&#34; if you are using a plugin such as Gigya that bypasses the regular WordPress redirect process (and allows only one fixed redirect URL). Then, set the redirect URL in the other plugin to %s', 'peters-login-redirect' ), '<br />http://www.yoursite.com/wp-content/plugins/peters-login-redirect/wplogin_redirect_control.php' ); ?></strong></p>
             </td>
             <td>
                 <select name="rul_use_redirect_controller">
-                    <option value="1"<?php if( $rul_settings['rul_use_redirect_controller'] ) print ' selected="selected"'; ?>><?php _e( 'Yes', 'peterloginrd' ); ?></option>
-                    <option value="0"<?php if( !$rul_settings['rul_use_redirect_controller'] ) print ' selected="selected"'; ?>><?php _e( 'No', 'peterloginrd' ); ?></option>
+                    <option value="1"<?php if( $rul_settings['rul_use_redirect_controller'] ) print ' selected="selected"'; ?>><?php _e( 'Yes', 'peters-login-redirect' ); ?></option>
+                    <option value="0"<?php if( !$rul_settings['rul_use_redirect_controller'] ) print ' selected="selected"'; ?>><?php _e( 'No', 'peters-login-redirect' ); ?></option>
                 </select>
             </td>
         </tr>
         <tr>
             <td>
-                <p><strong><?php _e( 'Permission level required to edit redirect URLs', 'peterloginrd' ); ?></strong></p>
+                <p><strong><?php _e( 'Permission level required to edit redirect URLs', 'peters-login-redirect' ); ?></strong></p>
             </td>
             <td>
                 <select name="rul_required_capability">
@@ -1435,7 +1443,7 @@ if( is_admin() )
             </td>
         </tr>
         </table>
-        <p class="submit"><input name="rul_settingssubmit" type="submit" value="<?php _e( 'Update', 'peterloginrd' ); ?>" /></p>
+        <p class="submit"><input name="rul_settingssubmit" type="submit" value="<?php _e( 'Update', 'peters-login-redirect' ); ?>" /></p>
         </form>
     </div>
 <?php

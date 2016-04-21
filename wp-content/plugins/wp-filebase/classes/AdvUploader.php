@@ -19,7 +19,7 @@
 	
 	function GetAjaxAuthData($json=false)
 	{
-		$frontend = !is_admin() && !defined('WPFB_EDITOR_PLUGIN');
+		$frontend = !is_admin();
 		$dat = array(
 			"auth_cookie" => (is_ssl() ? @$_COOKIE[SECURE_AUTH_COOKIE] : @$_COOKIE[AUTH_COOKIE]),
 			"logged_in_cookie" => @$_COOKIE[LOGGED_IN_COOKIE],
@@ -30,7 +30,7 @@
 		return $json ? trim(json_encode($dat),'{}') : $dat;
 	}
 	
-	function WPFB_AdvUploader($form_url, $is_edit=false)
+	function __construct($form_url, $is_edit=false)
 	{
 		$this->form_url = $form_url;
 		$this->id = uniqid();
@@ -48,11 +48,18 @@
 /* <![CDATA[ */
 
 
+
+jQuery(document).ready(function () {
+	jQuery('#file_display_name,#file_version' ).keyup(function() { jQuery(this).data('keyUpTriggered', true); });
+});
+
 function fileQueued(fileObj) {
 	jQuery('#file-upload-progress').show().html('<div class="progress"><div class="percent">0%</div><div class="bar" style="width: 30px"></div></div><div class="filename original"> ' + fileObj.name + '</div>');
 
 	jQuery('.progress', '#file-upload-progress').show();
 	jQuery('.filename', '#file-upload-progress').show();
+
+	jQuery('#file_thumbnail_preview').hide();
 
 	jQuery("#media-upload-error").empty();
 	jQuery('.upload-flash-bypass').hide();
@@ -60,10 +67,19 @@ function fileQueued(fileObj) {
 	jQuery('#file-submit').prop('disabled', true);
 	jQuery('#cancel-upload').show().prop('disabled', false);
 
+	/* parse file name and fill display name and version */
+		jQuery.ajax({url:wpfbConf.ajurl, data:{wpfb_action: 'parse-filename', filename:fileObj.name},
+			success: (function(data){
+				var d = jQuery('#file_display_name'), v = jQuery('#file_version');
+				d.data('keyUpTriggered')||d.val(data.title);
+				v.data('keyUpTriggered')||v.val(data.version);
+			})
+		});
+
 	 /* delete already uploaded temp file */
 	if(jQuery('#file_flash_upload').val() != '0') {
-		jQuery.ajax({type: 'POST', async: true, url:"<?php echo esc_attr( WPFB_Core::PluginUrl('wpfb-async-upload.php') ); ?>",
-		data: {<?php echo $this->GetAjaxAuthData(true) ?> , "delupload": jQuery('#file_flash_upload').val()},
+		jQuery.ajax({type: 'POST', async: true, url:"<?php echo esc_attr( WPFB_Core::$ajax_url_public ); ?>",
+		data: {<?php echo $this->GetAjaxAuthData(true) ?> , "wpfb_action": "upload", "delupload": jQuery('#file_flash_upload').val()},
 		success: (function(data){})
 		});
 		jQuery('#file_flash_upload').val(0);
@@ -88,25 +104,32 @@ function uploadSuccess(fileObj, serverData) {
 		wpFileError(fileObj, serverData);
 		return;
 	}
+
+	jQuery('#file_thumbnail_wrap').hide();
+	jQuery('#file_thumbnail_preview').hide();
 	
 	var file_obj = jQuery.parseJSON(serverData);
+
+	if(file_obj && file_obj.nonce) {
+		jQuery('#wpfb-file-nonce').val(file_obj.nonce);
+	}
+
+	jQuery('#file-upload-progress').html('<strong class="crunching">' + '<?php _e('%s uploaded.','wp-filebase') ?>'.replace(/%s/g, file_obj.file_display_name ? file_obj.file_display_name : file_obj.name) + '</strong>');
 	
 	if(file_obj && 'undefined' != typeof(file_obj.file_id)) {		
 		jQuery('#file_form_action').val("updatefile");
 		jQuery('#file_id').val(file_obj.file_id);
+
 		
 		if(file_obj.file_thumbnail) {
-			jQuery('#file_thumbnail_wrap').show();
-			jQuery('#file_thumbnail_wrap').children('img').attr('src', file_obj.file_thumbnail_url);
-			jQuery('#file_thumbnail_name').html(file_obj.file_thumbnail);
-		} else {
-			jQuery('#file_thumbnail_wrap').hide();
+			jQuery('#file_thumbnail_wrap').show().children('img').attr('src', file_obj.file_thumbnail_url);
+			jQuery('#file_thumbnail_name').html(file_obj.file_thumbnail);			
+			jQuery('#file_thumbnail_preview').show().css("background-image", 'url(\''+file_obj.file_thumbnail_url+'\')');
 		}
 		
 		jQuery('#file_display_name').val(file_obj.file_display_name);
 		jQuery('#file_version').val(file_obj.file_version);
-		
-		jQuery('#wpfb-file-nonce').val(file_obj.nonce);
+
 	} else {
 		jQuery('#file_flash_upload').val(serverData);
 	}

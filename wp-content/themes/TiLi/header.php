@@ -6,8 +6,13 @@
     <title><?php bloginfo('name'); ?> <?php wp_title(); ?></title>
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
     <?php wp_head(); ?>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jquery.caret.js"></script>
+    <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/typeahead.bundle.js"></script>
     <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/character.js"></script>
+    <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:100,400|Roboto+Mono">
+
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
            {lang: 'ru'}
            </script>
@@ -23,73 +28,96 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div id="site">
-	<div id="header" class="row">
-		<div class="logoimg col-xs-12 col-sm-6 col-md-4">
-            <h1><a href="<?php bloginfo('url'); ?>"><img src="<?php bloginfo('template_url'); ?>/images/logo.png" width="234" height="91" alt="KG TiLi" /></a></h1>
-            <div class="login">
-             <?php
-             if ( is_user_logged_in() ) {?>
-                  	Добро пожаловать <?php global $current_user;
-                     get_currentuserinfo();
-                     echo "<b>".$current_user->user_login . "</b>\n";
+  <div id="topmenu">
+        <nav class="navbar navbar-default navbar-tili" role="navigation" style="margin-top:0px;">
+
+        <div class="container-fluid topbluebox">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+
+           <!--  <span class="navbar-brand hidden-xs"> Меню</span> -->
+            <div class="row topcenter">
+              <div class="col-md-8 col-sm-6 col-xs-6 logo-static">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                  <span class="sr-only">Меню</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+
+<!--  the stop of merging  -->
+
+                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili<span class="green">.kg</span> <span class="grey hidden-xs hidden-sm">Все для изучения Киргизского языка!</span></a></h1>
+
+                <div class="collapse navbar-collapse " id="navbar-collapse">
+
+                     <?php
+                          wp_nav_menu( array(
+                             'menu'              => 'primary',
+                             'theme_location'    => 'primary',
+                             'depth'             => 2,
+                             'container'         => 'false',
+                             'container_class'   => '',
+                             'container_id'      => '',
+                             'menu_class'        => 'bmenu nav navbar-nav' )
+                         );
                      ?>
-                     | <a href="/wp-login.php?action=logout">Выйти</a>
+                  </div>
+              </div>
 
-               <?php }
-             else {?>
-                 	<a href="http://tili.kg/wp-login.php">Войти</a> | <a href="http://tili.kg/wp-login.php?action=register">Регистрация</a>
-             <?php }
-             ?>
-             </div>
-        </div>
-        <div class="searchform col-xs-12 col-md-8">
-          <div id="float_chars_block">
-            <!--  <div class="close">x</div> -->
-              <span title="Ctrl+Alt+н">ң</span>
-              <span title="Ctrl+Alt+о">ө</span>
-              <span title="Ctrl+Alt+у">ү</span>
-              <div style="clear:both"></div>
+
+              <div class="col-md-3 .col-sm-3 col-xs-6 pull-right">
+                <div class="login">
+                 <?php
+                 if ( is_user_logged_in() ) {?>
+                      	Добро пожаловать <?php global $current_user;
+                         get_currentuserinfo();
+                         echo "<b>".$current_user->user_login . "</b>\n";
+                         ?>
+                         | <a href="/wp-login.php?action=logout">Выйти</a>
+
+                   <?php }
+                 else {?>
+                     	<a href="http://tili.kg/wp-login.php" class="login-i">Войти</a>  <a href="http://tili.kg/wp-login.php?action=register" class="reg-i">Регистрация</a>
+                 <?php }
+                 ?>
+                 </div>
+              </div>
+            </div>
+
           </div>
-          <div id="float_chars_icon"><img src="<?php bloginfo('template_url'); ?>/images/character.gif" border="0"/></div>
 
-            <form action="<?php bloginfo('url'); ?>" method="get">
-                 <input name="" type="text" class="stxt" id="stxt" value="Введите слово для поиска в словаре" onFocus="javascript: if(this.value == 'Введите слово для поиска в словаре') this.value = '';" onBlur="javascript: if(this.value == '') { this.value = 'Введите слово для поиска в словаре';}" />
-                 <input type="submit" class="sbtn" value="Перевод" onClick="location.href = '<?php bloginfo('url'); ?>/dict/#'+document.getElementById('stxt').value;  return false;"/>
-            </form>
-            <div id="topmenu">
-         					<nav class="navbar navbar-default" role="navigation" style="margin-top:0px;">
-         					<div class="container-fluid">
-         						<!-- Brand and toggle get grouped for better mobile display -->
-         						<div class="navbar-header">
-         							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-         								<span class="sr-only"><?php _e('Toggle navigation', 'china-theme'); ?></span>
-         								<span class="icon-bar"></span>
-         								<span class="icon-bar"></span>
-         								<span class="icon-bar"></span>
-         							</button>
-
-         						</div>
-
-         								<?php
-         										wp_nav_menu( array(
-         												'menu'              => 'primary',
-         												'theme_location'    => 'primary',
-         												'depth'             => 2,
-         												'container'         => 'div',
-         												'container_class'   => 'collapse navbar-collapse',
-         								'container_id'      => 'bs-example-navbar-collapse-1',
-         												'menu_class'        => 'nav navbar-nav',
-         												'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
-         												'walker'            => new wp_bootstrap_navwalker())
-         										);
-         								?>
-
-         						</div>
-         				</nav>
-         </div>
-        </div>
+          </div>
 
 
 
+          <div class="headersearch">
+            <div class="col-md-2 col-sm-1 hidden-xs">&nbsp; </div>
+            <div class="searchform col-md-8 col-sm-10 col-xs-12">
+              <label> <h1>Кыргызско <-> Русский словарь</h1></label>
+              <form id="mdform" onsubmit="location.href = '/dict/#'+document.getElementById('stxt').value;  return false;">
+                  <div class="">
+                    <input type="text" id="stxt"  class="stxt col-md-10 col-sm-10 col-xs-10 searchtext" required="">
+                    <input type="submit" class="sbtn" value="Найти" />
+                  </div>
+                </form>
+                <div id="float_chars_block">
+                  <!--  <div class="close">x</div> -->
+                    <span title="Ctrl+Alt+н">ң</span>
+                    <span title="Ctrl+Alt+о">ө</span>
+                    <span title="Ctrl+Alt+у">ү</span>
+                    <div style="clear:both"></div>
+                </div>
+                <div id="float_chars_icon"><img src="<?php bloginfo('template_url'); ?>/images/character.gif" border="0"/></div>
+
+            </div>
+            <div class="col-md-2 col-sm-1 hidden-xs ">&nbsp; </div>
+          </div>
+
+      </nav>
+
+</div>
+
+<div id="site">
+	<div id="header">
 	</div>
