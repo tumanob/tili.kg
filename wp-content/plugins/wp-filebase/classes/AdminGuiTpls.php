@@ -5,10 +5,13 @@ static $sample_file = null;
 static $sample_cat = null;
 static $protected_tags = array('default','single','excerpt','filebrowser','filepage','filepage_excerpt');
 
-static function InitClass() {
+
+static function Display()
+{
 	global $user_identity;
+
 	wpfb_loadclass('File', 'Category');
-	
+
 	self::$sample_file = new WPFB_File(array(
 		'file_id' => 0,
 		'file_name' => 'example.pdf',
@@ -23,7 +26,7 @@ static function InitClass() {
 		'file_hits' => 3,
 		'file_added_by' => wp_get_current_user()->ID
 	));
-	
+
 	self::$sample_cat = new WPFB_Category(array(
 		'cat_id' => 0,
 		'cat_name' => 'Example Category',
@@ -31,24 +34,18 @@ static function InitClass() {
 		'cat_folder' => 'example',
 		'cat_num_files' => 0, 'cat_num_files_total' => 0
 	));
-	
+
 	self::$sample_file->Lock();
 	self::$sample_cat->Lock();
-}
-
-static function Display()
-{
-	global $wpdb, $user_ID, $user_identity;
 	
 	wpfb_loadclass('Admin', 'Output', 'TplLib', 'ListTpl');
 	
-	WPFB_Core::PrintJS();
+	 wpfb_call('Output', 'PrintJS');
 	
 	$_POST = stripslashes_deep($_POST);
 	$_GET = stripslashes_deep($_GET);	
 	$action = (!empty($_POST['action']) ? $_POST['action'] : (!empty($_GET['action']) ? $_GET['action'] : ''));
-	$clean_uri = remove_query_arg(array('message', 'action', 'file_id', 'cat_id', 'deltpl', 'hash_sync' /* , 's'*/)); // keep search keyword
-	
+
 	// security	nonce
 	if(!empty($action) && $action != 'edit' && !check_admin_referer($action.'-'.$_REQUEST['type'],'wpfb-tpl-nonce'))
 		wp_die(__('Cheatin&#8217; uh?'));		
@@ -187,16 +184,17 @@ jQuery(document).ready( function() {
 		default:
 ?>
 <div class="wrap">
-<h2><?php _e('Templates','wp-filebase'); ?>
+<h2><?php _e('Embed Templates','wp-filebase'); ?>
 <?php if(empty(WPFB_Core::$settings->disable_css) && current_user_can('edit_themes')) { ?>
 	<a href="<?php echo admin_url('admin.php?page=wpfilebase_css'); ?>" class="add-new-h2"><?php _e('Edit Stylesheet','wp-filebase'); ?></a>
 <?php } ?>	
 	<a href="<?php echo add_query_arg('iframe-preview',(int)empty($_GET['iframe-preview'])); ?>" class="add-new-h2">iframe preview</a>
 </h2>
+<p><?php _e('You can embed files into posts or pages using the file embed templates. File list templates use file embed templates and category embed templates.','wp-filebase'); ?></p>
 <div id="wpfb-tabs">
 	<ul class="wpfb-tab-menu">
-		<li><a href="#file"><?php _e('Files','wp-filebase') ?></a></li>
-		<li><a href="#cat"><?php _e('Categories') ?></a></li>
+		<li><a href="#file"><?php _e('File','wp-filebase') ?></a></li>
+		<li><a href="#cat"><?php _e('Category') ?></a></li>
 		<li><a href="#list"><?php _e('File List','wp-filebase') ?></a></li>
 	</ul>
 	
@@ -205,14 +203,14 @@ jQuery(document).ready( function() {
 	<?php self::TplsTable('file'); ?>
 	</div>
 	
-	<div id="cat" class="wrap">
-	<p><?php _e('These templates can be used for categories.','wp-filebase'); ?></p>
-	<?php self::TplsTable('cat'); ?>
-	</div>
-	
 	<div id="list" class="wrap">
 	<p><?php _e('A list-template consists of header, footer and file template. It can optionally have a category template to list sub-categories.','wp-filebase'); ?></p>
 	<?php self::TplsTable('list'); ?>
+	</div>
+    
+	<div id="cat" class="wrap">
+	<p><?php _e('These templates are used by the file list templates.','wp-filebase'); ?></p>
+	<?php self::TplsTable('cat'); ?>
 	</div>
 
 	
@@ -278,7 +276,7 @@ static function TplsTable($type, $exclude=array(), $include=array()) {
 			<div class="entry-content wpfilebase-tpl-preview">
 				<div id="tpl-preview_<?php echo $tpl_tag ?>">
 					<?php if(!empty($_GET['iframe-preview'])) { ?>					
-					<iframe src="<?php echo admin_url("?wpfilebase-screen=tpl-preview&type=$type&tag=$tpl_tag"); ?>" style="width:100%;height:220px;"></iframe>
+					<iframe src="<?php echo admin_url("admin.php?wpfilebase-screen=tpl-preview&type=$type&tag=$tpl_tag"); ?>" style="width:100%;height:220px;"></iframe>
 					<?php } else {
 						$table_found = !$list && (strpos($tpl_src, '<table') !== false);
 						if(!$list && !$table_found && strpos($tpl_src, '<tr') !== false) {

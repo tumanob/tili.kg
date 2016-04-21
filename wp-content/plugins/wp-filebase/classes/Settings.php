@@ -19,9 +19,13 @@ static function Schema()
 	if($upload_path_base == '' || $upload_path_base == '/')
 		$upload_path_base = 'wp-content/uploads';
 		
-	$last_sync_time	= intval(get_option(WPFB_OPT_NAME.'_cron_sync_time'));
-	$last_sync_time = ($last_sync_time > 0) ? (" (".sprintf( __('Last cron sync on %1$s at %2$s.','wp-filebase'), date_i18n( get_option( 'date_format'), $last_sync_time ), date_i18n( get_option( 'time_format'), $last_sync_time ) ).")") : '';
-		
+	$sync_stats	= (get_option('wpfilebase_cron_sync_stats'));
+	wpfb_loadclass('Output');
+	$last_sync_time =  (!empty($sync_stats)) ? ("<br> (".
+		sprintf( __('Last cron sync %s ago took %s and used %s of RAM.','wp-filebase'), human_time_diff($sync_stats['t_start']), human_time_diff($sync_stats['t_start'], $sync_stats['t_end']), WPFB_Output::FormatFilesize($sync_stats['mem_peak']) )
+		." "
+		.(($next=wp_next_scheduled(WPFB.'_cron')) ? sprintf( __('Next cron sync scheduled in %s.','wp-filebase'), human_time_diff(time(), $next) ) : "")
+		.")") : '';
 	
 	$list_tpls = array_keys(wpfb_call('ListTpl','GetAll'));
 	$list_tpls = empty($list_tpls) ? array() : array_combine($list_tpls, $list_tpls);
@@ -43,7 +47,7 @@ static function Schema()
 	
 	// common
 	'upload_path'			=> array('default' => $upload_path_base . '/filebase', 'title' => __('Upload Path','wp-filebase'), 'desc' => __('Path where all files are stored. Relative to WordPress\' root directory.','wp-filebase'), 'type' => 'text', 'class' => 'code', 'size' => 65),
-	'thumbnail_size'		=> array('default' => 120, 'title' => __('Thumbnail size'), 'desc' => __('The maximum side of the image is scaled to this value.','wp-filebase'), 'type' => 'number', 'class' => 'num', 'size' => 8),
+	'thumbnail_size'		=> array('default' => 300, 'title' => __('Thumbnail size'), 'desc' => __('The maximum side of the image is scaled to this value.','wp-filebase'), 'type' => 'number', 'class' => 'num', 'size' => 8),
 	'thumbnail_path'		=> array('default' => '', 'title' => __('Thumbnail Path','wp-filebase'), 'desc' => __('Thumbnails can be stored at a different path than the actual files. Leave empty to use the default upload path. The directory specified here CANNOT be inside the upload path!','wp-filebase'), 'type' => 'text', 'class' => 'code', 'size' => 65),
 	
 	'base_auto_thumb'		=> array('default' => true, 'title' => __('Auto-detect thumbnails','wp-filebase'), 'type' => 'checkbox', 'desc' => __('Images are considered as thumbnails for files with the same name when syncing. (e.g `file.jpg` &lt;=&gt; `file.zip`)','wp-filebase')),
@@ -111,7 +115,7 @@ static function Schema()
 	'range_download'		=> array('default' => true, 'title' => __('Send HTTP-Range header','wp-filebase'), 'type' => 'checkbox', 'desc' => __('Allows users to pause downloads and continue later. In addition download managers can use multiple connections at the same time.','wp-filebase')),
 	'hide_links'			=> array('default' => false, 'title' => __('Hide download links','wp-filebase'), 'type' => 'checkbox', 'desc' => sprintf(__('File download links wont be displayed in the browser\'s status bar. You should enable \'%s\' to make it even harder to find out the URL.','wp-filebase'), __('Always force download','wp-filebase'))),
 	'ignore_admin_dls'		=> array('default' => true, 'title' => __('Ignore downloads by admins','wp-filebase'), 'type' => 'checkbox', 'desc' => sprintf(__('Download by an admin user does not increase hit counter. <a href="%s" class="button" onclick="alert(\'Sure?\');" style="vertical-align: baseline;">Reset All Hit Counters to 0</a>'),esc_attr(admin_url('admin.php?page=wpfilebase_manage&action=reset-hits')))),
-	'hide_inaccessible'		=> array('default' => true, 'title' => __('Hide inaccessible files and categories','wp-filebase'), 'type' => 'checkbox', 'desc' => __('If enabled files tagged <i>For members only</i> will not be listed for guests or users whith insufficient rights.','wp-filebase')),
+	'hide_inaccessible'		=> array('default' => false, 'title' => __('Hide inaccessible files and categories','wp-filebase'), 'type' => 'checkbox', 'desc' => __('If enabled files tagged <i>For members only</i> will not be listed for guests or users whith insufficient rights.','wp-filebase')),
 	'inaccessible_msg'		=> array('default' => __('You are not allowed to access this file!','wp-filebase'), 'title' => __('Inaccessible file message','wp-filebase'), 'type' => 'text', 'size' => 65, 'desc' => (__('This message will be displayed if users try to download a file they cannot access','wp-filebase').'. '.__('You can enter a URL to redirect users.','wp-filebase'))),
 	'inaccessible_redirect'	=> array('default' => false, 'title' => __('Redirect to login','wp-filebase'), 'type' => 'checkbox', 'desc' => __('Guests trying to download inaccessible files are redirected to the login page if this option is enabled.','wp-filebase')),
 	'cat_inaccessible_msg'	=> array('default' => __('Access to category denied!','wp-filebase'), 'title' => __('Inaccessible category message','wp-filebase'), 'type' => 'text', 'size' => 65, 'desc' => (__('This message will be displayed if users try to access a category without permission.','wp-filebase'))),
@@ -142,7 +146,7 @@ static function Schema()
 	'admin_bar'	=> array('default' => true, 'title' => __('Add WP-Filebase to admin menu bar','wp-filebase'), 'type' => 'checkbox', 'desc' => __('Display some quick actions for file management in the admin menu bar.','wp-filebase')),
 	//'file_context_menu'	=> array('default' => true, 'title' => '', 'type' => 'checkbox', 'desc' => ''),
 	
-	'cron_sync'	=> array('default' => false, 'title' => __('Automatic Sync','wp-filebase'), 'type' => 'checkbox', 'desc' => __('Schedules a cronjob to hourly synchronize the filesystem and the database.','wp-filebase').$last_sync_time),
+	'cron_sync'	=> array('default' => true, 'title' => __('Automatic Sync','wp-filebase'), 'type' => 'checkbox', 'desc' => __('Schedules a cronjob to hourly synchronize the filesystem and the database.','wp-filebase').$last_sync_time),
 	
 	'remove_missing_files'	=> array('default' => false, 'title' => __('Remove Missing Files','wp-filebase'), 'type' => 'checkbox', 'desc' => __('Missing files are removed from the database during sync','wp-filebase')),
 	

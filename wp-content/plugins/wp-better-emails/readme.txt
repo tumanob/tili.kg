@@ -1,11 +1,11 @@
 === WP Better Emails ===
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=7Q49VJQNRCQ8E&lc=FR&item_name=ArtyShow&item_number=wp%2dbetter%2demails&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
-Tags: email, emails, html emails, templates, notification, wp_mail, wpmu, multisite
+Tags: email, emails, email template, email templates, emails templates, html template, html emails, html template, templates, notification, wp_mail, wpmu, multisite, wpmandrill, mandrill, wordpress email, worpress email template
 Requires at least: 2.8
-Tested up to: 4.1
-Stable tag: 0.2.8
+Tested up to: 4.4.1
+Stable tag: 0.3
 
-Adds a customizable good looking HTML template to all WP default text/plain emails and lets you set
+Adds a customizable good looking HTML email template to all WP default text/plain emails and lets you set
  a custom sender name and email address.
 
 == Description ==
@@ -29,9 +29,10 @@ replaced when sending the email.
 
 = Example usages : =
 
+* Brand your emails to your website or client website
 * Add some ads/sponsored links to every email sent with wordpress
 * Include some banners to promote a special event or feature of your website
-* Brand your emails to your website or client website
+
 
 = Internationalization =
 
@@ -57,6 +58,11 @@ WP Better Emails is currently available in :
 
 I'm looking for translators to extend to other languages. If you have translated the plugin in your language or want to,
 please let me know : wpbetteremails [ at ] helloni.co
+
+= Support =
+
+This plugin is free and developed on my spare time. Please consider reading the [FAQ](https://wordpress.org/plugins/wp-better-emails/faq/) and the [support guide](https://wordpress.org/support/topic/support-guide-read-me-before-posting?replies=1) before posting new topics. Many of them have already been resolved.
+
 
 = Contributing =
 
@@ -128,6 +134,14 @@ The key of the array `sponsored_link` will be a new tag (`%sponsored_link%`) you
 The example above is taking sponsored links as an additinonal content but you can imagine anything like including lastest posts, a quote of the day or whatever.
 You can place this function in your functions.php theme file or in a plugin.
 
+= Do you provide hooks to alter some WP Better Emails behaviors? =
+
+* wpbe_html_body (filter) will let you apply your own logic on HTML emails
+* wpbe_plaintext_body (filter) will let you apply your own logic on plain text emails
+* wpbe_convert_line_breaks (filter) will let remove line breaks conversion
+* wpbe_convert_urls (filter) will let you remove links conversion
+
+
 == Screenshots ==
 
 1. The default template provided with WP Better Emails. Tested on many email clients like Gmail, Yahoo!, Live/Hotmail, etc.
@@ -137,6 +151,14 @@ You can place this function in your functions.php theme file or in a plugin.
 5. Help tab with information about available tags.
 
 == Changelog ==
+
+= 0.3 =
+
+* Add proper multisite support: options are saved network wide
+* Remove strip_tags from message as it deletes password retrieve link from lost password email (see: https://wordpress.org/support/topic/password-reset-url-in-plain-version-password-reset-emails-not-showing?replies=3)
+* Improve from name and email, they are only set when default email is used
+* Fix help tab link
+* Add new filters to control converting line breaks to `br` tags and URls to links
 
 = 0.2.8 =
 
