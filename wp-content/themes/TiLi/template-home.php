@@ -1,6 +1,5 @@
 <?php /* Template Name: Homepage */ ?>
 
-
 <?php get_header(); ?>
 <div class="dbcontent-main">
 	<div class=" ulist">
@@ -120,12 +119,6 @@
 					<div class="col-xs-4 col-sm-4 col-md-2  ">
 						<a href="https://www.facebook.com/tili.kg/"><img src="/wp-content/themes/TiLi/images/icons/fb-icon.png" alt="google play" /></a>
 					</div>
-					<div class="col-xs-4 col-sm-4 col-md-2 ">
-						<a href="https://www.facebook.com/tili.kg/"><img src="/wp-content/themes/TiLi/images/icons/gplus-icon.png" alt="google play" /> </a>
-					</div>
-					<div class="col-xs-4 col-sm-4 col-md-2 ">
-						<a href="https://www.facebook.com/tili.kg/">	<img src="/wp-content/themes/TiLi/images/icons/fb-icon.png" alt="google play" /></a>
-					</div>
 					<!-- Add the extra clearfix for only the required viewport -->
 					<div class="clearfix"></div>
 	</div>
@@ -139,16 +132,6 @@
 </div>
 
 </div>
-<!--
-<div class="main-contacts col-md-12 1hidden-xs 1hidden-sm">
-	<div class="center-block col-md-8" style="float: none;" >
-		<?php
-		// Use shortcodes for contact form
-			echo do_shortcode( '[contact-form-7 id="464" title="form1"]' );
-
-		?>
-	</div>
--->
 
 </div>
 
