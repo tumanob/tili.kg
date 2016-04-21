@@ -26,17 +26,15 @@
                        Все права защищены. <br/>
                   </div>
                   <div class="col-xs-8 col-md-4 col-sm-5">
-                      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="300" height="75"	id="20050.swf" align="middle">
-                      <param name="allowScriptAccess" value="sameDomain">
-                      <param name="movie"
-                      value="http://tili.kg/banners/20050.swf">
-                      <param name="quality" value="high">
-                      <param name="bgcolor" value="#ffffff">
-                      <embed src="http://tili.kg/banners/20050.swf" quality="high" bgcolor="#ffffff" width="300" height="75" name="20050.swf" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
-                      </object>
+                    <!--/* OpenX Interstitial or Floating DHTML Tag v2.8.11 */-->
+                      <script type='text/javascript'><!--//<![CDATA[
+                       var ox_u = 'http://openx.hm.kg/www/delivery/al.php?zoneid=19&target=_blank&layerstyle=geocities&align=right&padding=2&closetext=%5BClose%5D';
+                       if (document.context) ox_u += '&context=' + escape(document.context);
+                       document.write("<scr"+"ipt type='text/javascript' src='" + ox_u + "'></scr"+"ipt>");
+                      //]]>--></script>
                   </div>
                   <div class="col-xs-12 col-md-5 col-sm-4 sorosfooter">
-                      <a href="http://tili.kg/thanks" class="pull-left"><img height="60" src="/banners/soroskg.png"></a>
+                      <a href="http://tili.kg/thanks" class="pull-left" title="Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан»."><img height="60" src="/banners/soroskg.png"></a>
                       Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан».
                   </div>
                    <div class="netkg col-xs-4 col-md-1 col-sm-6 hidden-xs hidden-sm">
