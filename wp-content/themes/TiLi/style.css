@@ -1746,3 +1746,8 @@ margin-right: 0px;
   /*border-bottom: 1px solid #ссс;*/
   background: #00aeef ;
 }
+/* contact form 7 plugin styles override*/
+div.wpcf7-validation-errors{
+  border:0px !important;
+
+}
