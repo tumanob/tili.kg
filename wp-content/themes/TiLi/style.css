@@ -739,7 +739,7 @@ p {
 }
 
 .gdarticle {
-    margin: 0 0 30px 20px;
+    margin: 0 0 30px 45px;
     font-size: 20px;
 
 }
@@ -845,9 +845,15 @@ p {
 
 
 .dlist1{
-    margin-left: -15px;
+
     font-weight: bold;
     font-size: 18px;
+    background-color:#313944;
+    padding: 5px 8px;
+    color:white;
+    margin: 4px 6px 5px -38px;
+    display: block;
+    float: left;
 }
 .wcolor2{
     color:maroon;
@@ -1736,9 +1742,17 @@ margin-right: 0px;
 
   font-size: 18px;
   margin:3px 5px;
-  text-decoration: underline;
+  text-decoration: initial;
   display: block;
   float: left;
+  background-color: #01aab3;
+  padding: 8px;
+  color: white;
+}
+
+#dic_content h1{
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 
@@ -1749,5 +1763,24 @@ margin-right: 0px;
 /* contact form 7 plugin styles override*/
 div.wpcf7-validation-errors{
   border:0px !important;
+
+}
+
+.picture-area .img-wrap{
+ position: relative;
+}
+
+.picture-area .img-wrap img{
+
+  max-height: 100%;
+     max-width: 100%;
+     width: auto;
+     height: auto;
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     margin: auto;
 
 }

@@ -62,7 +62,11 @@
     float: left;
     margin: 2px;
     height: 120px;
+    width: 120px;
     overflow: hidden;
+    border:2px solid #01aab3;
+    background:#dadada;
+
 }
 
 #image-search-next {
@@ -73,31 +77,37 @@
 
 .add-pic {
 	display: block;
-	margin: 0px;
+	margin: 2px;
   padding: 4px 10px;
-  background-color: #01aab3;
-	color: #fff;
-  border-radius: 5px;
-  border: 1px solid #25767A;
+  background-color: #dadada;
+	color: #01aab3;
+  border-radius: 0px;
+  border: 1px solid #dadada;
+  width:120px;
+  height:120px;
+  font-size:50px;
+
 }
+
+.add-pic-text{font-size:11px;}
 
 .tags-area
 {
   display: block;
   margin: 0px;
-  padding: 4px 10px;
-  background-color: #01aab3;
+  padding:8px;
+  background-color: #313944;
   color: #fff;
-  border-radius: 5px;
-  border: 1px solid #25767A;
 }
+
+
 
 span.delete-image {
     vertical-align: top;
 }
 .tag-add {
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: initial;
     color: #fff;
 }
 .tag-parent-item, .tag-child-item, .remove-tag {
@@ -105,7 +115,7 @@ span.delete-image {
 }
 .tag-child-list {display: none; padding-left: 10px;}
 
-#add-tag-dialog span, span.tag {
+#add-tag-dialog span{
     color: #000000;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -153,9 +163,19 @@ span.delete-image {
 
 }
 
-.tag-add, span.tag {
+.tag-add {
     float: left; display: block; margin-right: 10px;
+
 }
+
+span.tag {
+    float: left; display: block; margin-right: 10px;
+    background:#01aab3;
+    padding:4px 8px;
+    font-size:12px;
+
+}
+
 .tags {margin-top: 0px;}
 
 .glossary-entry {
@@ -327,4 +347,8 @@ _________________*/
 
   .gdword span{
       color: #01AAB3;
+  }
+
+  #similars{
+    padding-left: 15px;
   }

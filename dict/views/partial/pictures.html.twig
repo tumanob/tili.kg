@@ -1,5 +1,4 @@
 <div class="picture-area">
-    <input type="button" class="add-pic" id="image-search-add-with-results" value="Добавить картинку" />
 
     <div class="pics">
         {% for pic in pictures %}
@@ -13,10 +12,12 @@
         </div>
         {% else %}
         <div class="add-pic-div">
-            <input type="button" class="add-pic" value="Добавить картинку" />
+            <input type="button" class="add-pic add-pic-text" value="Добавить картинку" />
         </div>
         {% endfor %}
     </div>
+    <input type="button" class="add-pic" id="image-search-add-with-results" value="+" />
+
 
     <div id="add-picture" style="display: none;">
         <div>
