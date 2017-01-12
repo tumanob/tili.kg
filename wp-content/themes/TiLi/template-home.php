@@ -5,18 +5,18 @@
 	<div class=" ulist">
 
 		<div class="col-xs-12 col-sm-4 col-md-4 uitem">
-			<h4>Курс языка</h4>
+			<h4>Курсы кыргызского</h4>
 			<hr class="grey">
 			<div class=" col-md-12 ">
-				<center><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/useful1.png" /></a></center>
+				<center><a href="http://tili.kg/category/useful/courses"><img src="<?php echo get_template_directory_uri(); ?>/images/useful1.png" /></a></center>
 			</div>
 			<div class="col-md-12 utext">
-				<a href="#">
-					<span> Персонализированный путь обучения кыргызского языка. По этапно интерактивно и понятно</span>
+				<a href="http://tili.kg/category/useful/courses">
+					<span> Персонализированный путь обучения кыргызского языка. Каталог доступных курсов.</span>
 				</a>
 			</div>
 			<div class="col-md-12 text-button grey">
-				<a href="#" class="">
+				<a href="http://tili.kg/category/useful/courses" class="">
 	        Начать обучение
 				</a>
 			</div>
@@ -31,7 +31,7 @@
 			</div>
 			<div class="col-md-12 utext">
 				<a href="http://tili.kg/category/useful">
-					<span> Книги, учебники, статьи, фильмы, музыка, клипы и многое другое для изучающих кыргызхский язык.</span>
+					<span> Книги, учебники, статьи, фильмы, музыка, клипы и многое другое для изучающих кыргызский язык.</span>
 				</a>
 			</div>
 			<div class="col-md-12 text-button">
@@ -99,7 +99,7 @@
 					<a href="https://chrome.google.com/webstore/detail/%D0%BA%D0%B8%D1%80%D0%B3%D0%B8%D0%B7%D1%81%D0%BA%D0%BE-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D0%BB%D0%BE%D0%B2%D0%B0%D1%80%D1%8C/hojggilcgbfgflnmnjldhbdpomafihfd" class="glow"><img src="/wp-content/themes/TiLi/images/chrome-banner.png" alt="google play" /></a>
 				</div>
 				<div class="col-xs-6 col-sm-12 col-md-12">
-					<a href="#" class="all-apps"> Все приложения</a>
+					<a href="http://tili.kg/category/useful/apps" class="all-apps"> Все приложения</a>
 				</div>
 				<!-- Add the extra clearfix for only the required viewport -->
   			<div class="clearfix visible-xs-block"></div>
@@ -116,9 +116,16 @@
 			<hr class="grey">
 			<h3>Мы в социальных сетях</h3>
 			<div class="socia-content">
+				<div class="col-xs-4 col-sm-4 col-md-2  ">
+					<a href="https://www.youtube.com/c/tilikg-edu"><img src="/wp-content/themes/TiLi/images/icons/ytube-icon.png" alt="google play" /></a>
+				</div>
 					<div class="col-xs-4 col-sm-4 col-md-2  ">
 						<a href="https://www.facebook.com/tili.kg/"><img src="/wp-content/themes/TiLi/images/icons/fb-icon.png" alt="google play" /></a>
 					</div>
+					<div class="">
+						<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Ftili.kg&amp;width=295&amp;height=258&amp;show_faces=true&amp;colorscheme=light&amp;stream=false&amp;border_color&amp;header=false" scrolling="no" frameborder="0" style="/*margin-left: -160px; border:none; */overflow:hidden; width:295px; height:258px;" allowTransparency="true"></iframe>
+					</div>
+
 					<!-- Add the extra clearfix for only the required viewport -->
 					<div class="clearfix"></div>
 	</div>

@@ -11,7 +11,7 @@
 											<?php the_title(); ?>
 									</div>
 									<div class="useful-button col-xs-12 col-md-12 col-sm-12">
-										<a href="<?php the_permalink() ?>" rel="bookmark" class="btn btn-info btn-sm col-xs-12 col-md-12 col-sm-12"> Скачать</a>
+										<a href="<?php the_permalink() ?>" rel="bookmark" class="btn btn-info btn-sm col-xs-12 col-md-12 col-sm-12"> Смотреть</a>
 
 									</div>
 							</div>

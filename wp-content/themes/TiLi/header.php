@@ -47,7 +47,7 @@
 
 <!--  the stop of merging  -->
 
-                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili<span class="green">.kg</span> <span class="grey hidden-xs hidden-sm">Все для изучения Киргизского языка!</span></a></h1>
+                <h1 id="logotext"><a href="<?php bloginfo('url'); ?>">Tili<span class="green">.kg</span> <span class="grey hidden-xs hidden-sm">Все для изучения Кыргызского языка!</span></a></h1>
 
                 <div class="collapse navbar-collapse " id="navbar-collapse">
 

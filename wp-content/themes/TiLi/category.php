@@ -12,13 +12,15 @@
                 <div class="row">
                     <div class="col-xs-5 col-md-4 col-sm-4">
                        <a href="<?php the_permalink() ?>" rel="bookmark" class="col-xs-8 col-md-12 col-sm-12" style="padding: 0px;"><?php the_post_thumbnail('thumb'); ?></a>
-                          <div class="sub col-xs-12 col-md-12 col-sm-12"> <span class="categories">Рубрика: <?php the_category(', ') ?></span></div>
 
                     </div>
                     <div class="col-xs-7 col-md-8 col-sm-8">
                          <?php //the_excerpt(); ?>
+
                         <h2><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-                        <a href="<?php the_permalink() ?>" rel="bookmark" class="btn btn-info btn-sm col-xs-12 col-md-12 col-sm-12"> Скачать</a>
+											<!--	<div class="sub col-xs-12 col-md-12 col-sm-12"> <span class="categories"><?php the_category(',') ?></span></div> -->
+
+                        <a href="<?php the_permalink() ?>" rel="bookmark" class="btn btn-info btn-sm col-xs-12 col-md-12 col-sm-12"> Смотреть</a>
 
                     </div>
                 </div>

@@ -12,7 +12,7 @@
     <div class="center-block col-md-8" style="float: none;" >
       <?php
       // Use shortcodes for contact form
-        echo do_shortcode( '[contact-form-7 id="464" title="form1"]' );
+        echo do_shortcode( '[contact-form-7 id="447" title="form1"]' );
 
       ?>
     </div>
@@ -34,7 +34,7 @@
                       //]]>--></script>
                   </div>
                   <div class="col-xs-12 col-md-5 col-sm-4 sorosfooter">
-                      <a href="http://tili.kg/thanks" class="pull-left" title="Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан»."><img height="60" src="/banners/soroskg.png"></a>
+                      <a href="http://soros.kg/" class="pull-left" title="Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан»."><img height="60" src="/banners/soroskg.png"></a>
                       Сайт создан при содействии  Информационной программы Фонда «Сорос-Кыргызстан».Мнения, выраженные на сайте, не обязательно отражают точку зрения Фонда «Сорос-Кыргызстан».
                   </div>
                    <div class="netkg col-xs-4 col-md-1 col-sm-6 hidden-xs hidden-sm">
